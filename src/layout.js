@@ -1,61 +1,52 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ScrollToTop from "./js/component/scrollToTop";
-import { Home } from "./js/views/home";
-import { Personajes } from "./js/views/personajes";
-import { Personaje } from "./js/views/personaje";
-import { Planetas } from "./js/views/planetas";
-import { Planeta } from "./js/views/planeta";
-import { Login } from "./js/views/login";
-import injectContext from "./js/store/appContext";
-import { Navbar } from "./js/component/navbar";
-import { Footer } from "./js/component/footer";
-import "./styles/layout.css"
+import ScrollToTop from "./js/component/ScrollToTop";
+import injectContext from "./js/store/AppContext";
+import { Navbar } from "./js/component/Navbar";
+import { Footer } from "./js/component/Footer";
+import { Home } from "./js/views/Home";
+import { Login } from "./js/views/Login";
+import { Bienvenida } from "./js/views/Bienvenida";
+import { GeneradorDocumentos } from "./js/views/GeneradorDocumentos";
+import { PoderMunicipal } from "./js/views/PoderMunicipal";
+import { PoderSii } from "./js/views/PoderSii";
+import "./styles/Layout.css"
 
-//create your first component
 const Layout = () => {
-	//the basename is used when your project is published in a subdirectory and not in the root of the domain
-	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div className="central">
+		<div className="Main">
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
-					<Navbar />
-					<Switch>
+					<Navbar className="Navbar"/>
+					<Switch className="Switch">
 						<Route exact path="/">
 							<Home />
 						</Route>
-						<Route exact path="/home">
+						<Route exact path="/Home">
 							<Home />
 						</Route>
-						<Route exact path="/personajes">
-							<Personajes />
-						</Route>
-						<Route exact path="/personaje/:new_id">
-							<Personaje />
-						</Route>
-						<Route exact path="/personaje">
-							<Personaje />
-						</Route>
-						<Route exact path="/planetas">
-							<Planetas />
-						</Route>
-						<Route exact path="/planeta">
-							<Planeta />
-						</Route>
-						<Route exact path="/planeta/:new_id">
-							<Planeta />
-						</Route>
-						<Route exact path="/login">
+						<Route exact path="/Login">
 							<Login />
+						</Route>
+						<Route exact path="/Bienvenida">
+							<Bienvenida />
+						</Route>
+						<Route exact path="/GeneradorDocumentos">
+							<GeneradorDocumentos />
+						</Route>
+						<Route exact path="/PoderSii">
+							<PoderSii />
+						</Route>
+						<Route exact path="/PoderMunicipal">
+							<PoderMunicipal />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
 					</Switch>
-					<Footer />
+					<Footer className="Footer"/>
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>

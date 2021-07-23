@@ -1,5 +1,27 @@
-.central {
-	background-color: black;
+body {
+	box-sizing: border-box;
+}
+
+.Main {
 	height: 100vh;
-	width: 100vw;
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: 2fr 17fr 1fr;
+	grid-template-areas:
+		"Navbar"
+		"Switch"
+		"Footer";
+	background-color: rgb(255, 255, 255);
+}
+
+.Navbar {
+	grid-area: "Navbar";
+}
+
+.Switch {
+	grid-area: "Switch";
+}
+
+.Footer {
+	grid-area: "Footer";
 }

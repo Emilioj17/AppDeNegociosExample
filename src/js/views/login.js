@@ -1,30 +1,37 @@
 import React from "react";
+import "../../styles/Login.css";
 import { Link } from "react-router-dom";
-import "../../styles/personaje.css";
-var regex2="[a-zA-Z0-9]{5,}";
 
-export const Login = (props) => {
-    return (
-        <div className="d-flex justify-content-center">
-            <div className="container m-sm-3 m-md-5 p-3 p-md-5" style={{ minHeight: "400px" }}>
-                <div className="p-2 pb-4" style={{color: "rgba(255, 255, 255, 0.61)", textShadow: "2px 2px 2px #050505"}}><h2>Ingresa a tu Cuenta</h2></div>
-                <form>
-                    <div className="mb-3 text-white">
-                        <label for="exampleInputEmail1" className="form-label">Direccion de Correo</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-                        <div id="emailHelp" className="form-text">Nunca compartiremos tu correo. Debe tener formato valido</div>
-                    </div>
-                    <div className="mb-3">
-                        <label for="exampleInputPassword1" className="form-label text-white">Clave</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" pattern={regex2} />
-                        <div id="emailHelp" className="form-text">Minimo 5 carácteres. Letras y/o Numeros. Mayusuculas y/o Minusuculas.</div>
-                    </div>
-                    <div className="d-flex justify-content-center p-2">
-                        <button type="submit" className="btn btn-warning">Ingresar</button>
-                    </div>
-                    <div className="form-text d-flex justify-content-center"><Link to="#" className="p-2">Crear Cuenta</Link><Link to="#" className="p-2">Recuperar Cuenta</Link></div>
-                </form>
-            </div>
-        </div>
-	);
+export const Login = () => {
+	return (
+		<div className="container-fluid">
+			<div className="row todo">
+				<div className="sideNav col-8 text-white bg-dark d-flex justify-content-center align-items-center">
+					<div>
+						<h2>
+							DeNegocios.cl
+							<br /> Haz Inicio de Sesión
+						</h2>
+						<p>Haz login o Registrate.</p>
+					</div>
+				</div>
+				<div className="princialMain col-4 d-flex justify-content-center align-items-center">
+					<form>
+						<div className="form-group m-2">
+							<label>Usuario</label>
+							<input type="text" className="form-control" placeholder="Usuario" />
+						</div>
+						<div className="form-group m-2">
+							<label>Clave</label>
+							<input type="password" className="form-control" placeholder="Clave" />
+						</div>
+						<div className="m-4">
+							<Link to="/Bienvenida"><button type="button" className="btn btn-black m-2">Login</button></Link>
+							<button type="button" className="btn btn-secondary m-2">Register</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	)
 };
