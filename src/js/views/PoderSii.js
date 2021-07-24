@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { jsPDF } from "jspdf";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Hora from "../component/Hora"
+import Formulario from "../component/formulario"
 
 export const PoderSii = () => {
   const [img, setImg] = useState("#")
@@ -9,17 +10,8 @@ export const PoderSii = () => {
   const [rutRep, setRutRep] = useState("")
   const [nomEmp, setNomEmp] = useState("")
   const [rutEmp, setRutEmp] = useState("")
-
-  const handler = (event) => {
-    const imgInp = event.target.files[0]
-    if (imgInp){
-      setImg(URL.createObjectURL(imgInp))
-    }
-    console.log(imgInp);
-  }
   
-  const handler2 = () => {
-    
+  const handler2 = () => {    
     const doc = new jsPDF();
     doc.setFont("arial");
     doc.setFontSize(10)
@@ -80,43 +72,18 @@ export const PoderSii = () => {
   }
 
   return (
-    <div className="container py-5 d-flex justify-content-center">
-        <div className="col-5 bg-secondary p-5 rounded">
-          <form runat="server">
-            <div className="form-group m-2">
-              <label className="float-start m-1">Nombre Representante</label>
-              <input type="text" className="form-control m-1" onChange={(event) => { setNomRep(event.target.value) }} placeholder="Ingresa Nombre Representante"/>
-            </div>
-            <div className="form-group m-2">
-              <label className="float-start m-1">Rut Representante</label>
-              <input type="text" className="form-control m-1" onChange={(event) => { setRutRep(event.target.value) }} placeholder="Ingresa Rut Representante"/>
-            </div>
-            <div className="form-group m-2">
-              <label className="float-start m-1">Nombre de la Empresa</label>
-              <input type="text" className="form-control m-1" onChange={(event) => { setNomEmp(event.target.value) }} placeholder="Ingresa Nombre Empresa"/>
-            </div>
-            <div className="form-group m-2">
-              <label className="float-start m-1">Rut de la Empresa</label>
-              <input type="text" className="form-control m-1" onChange={(event) => { setRutEmp(event.target.value) }} placeholder="Ingresa Rut Empresa"/>
-            </div>
-            <div className="form-group m-2">
-              <label className="float-start m-1">Elige Nacionalidad</label>
-              <select class="form-control m-1" id="exampleFormControlSelect1">
-                <option>Chileno</option>
-                <option>Extranjero</option>
-              </select>
-            </div>
-          </form>
-          <div className="form-group m-2">
-            <label className="float-start m-1">Sube Cédula de Identidad</label>
-            <input className="form-control m-1" accept="image/*" type='file' id="imgInp" onChange={handler} />
-          </div>
-          <button type="button" className="btn btn-primary mt-5" onClick={handler2}>Descargar Documento</button>
-        </div>
-      <div className="col-5 bg-secondary p-5 rounded" >
-          <h2>Cédula de Identidad</h2>
-          <img id="blah" src={img} alt="Sube una Cedula y Previsualizala" style={{height:"400px"}}/>
-        </div>
-    </div>
+    <Fragment>
+      <div className="container-fluid">
+        <Formulario
+          img={img}
+          setImg={setImg}
+          setNomRep={setNomRep}
+          setRutRep={setRutRep}
+          setNomEmp={setNomEmp}
+          setRutEmp={setRutEmp}
+        />
+        <button type="button" className="btn btn-primary mt-5" onClick={handler2}>Descargar Documento</button>
+      </div>
+    </Fragment>
   )
 }
