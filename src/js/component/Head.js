@@ -1,11 +1,12 @@
 import React from 'react';
 
-const Head = () => {
+const Head = ({ contenido }) => {
+    const [titulo, subtitulo] = contenido;
     return (
         <div className="callout primary">
             <div className="row column">
-            <h1>Bienvenido al Generador de Documentos</h1>
-            <p className="lead">Elige una opción, y genera tus documentos.</p>
+                <h1>{titulo}</h1>
+                <p className="lead">{subtitulo}</p>
             </div>
         </div>
     );

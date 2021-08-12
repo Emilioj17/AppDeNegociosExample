@@ -4,6 +4,7 @@ import injectContext from "./js/store/AppContext";
 import { Login } from "./js/views/Login";
 import GeneradorDocumentos from "./js/views/GeneradorDocumentos";
 import Navbar from "./js/component/Navbar";
+import 'foundation-sites/dist/css/foundation.min.css';
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
@@ -11,28 +12,28 @@ const Layout = () => {
 	return (
 		<div className="off-canvas-wrapper">
 			<div className="off-canvas-wrapper-inner" data-off-canvas-wrapper>
-				<Navbar />
-				<div className="off-canvas-content" data-off-canvas-content>
-					<div className="title-bar hide-for-large">
-						<div className="title-bar-left">
-							<button className="menu-icon" type="button" data-open="my-info" />
-							<span className="title-bar-title">DeNegocios.cl</span>
-						</div>
+				<BrowserRouter basename={basename}>
+					<Navbar />
+					<div className="off-canvas-content" data-off-canvas-content>
+						<div className="title-bar hide-for-large">
+							<div className="title-bar-left">
+								<button className="menu-icon" type="button" data-open="my-info" />
+								<span className="title-bar-title">DeNegocios.cl</span>
+							</div>
+						</div>	
+						<Switch className="Switch">
+							<Route exact path="/">
+								<Login />
+							</Route>
+							<Route exact path="/GeneradorDocumentos">
+								<GeneradorDocumentos />
+							</Route>
+							<Route>
+								<h1>Not found!</h1>
+							</Route>
+						</Switch>
 					</div>
-					<BrowserRouter basename={basename}>
-							<Switch className="Switch">
-								<Route exact path="/">
-									<Login />
-								</Route>
-								<Route exact path="/GeneradorDocumentos">
-									<GeneradorDocumentos />
-								</Route>
-								<Route>
-									<h1>Not found!</h1>
-								</Route>
-							</Switch>
-					</BrowserRouter>
-				</div>
+				</BrowserRouter>
 			</div>
 		</div>
 	);

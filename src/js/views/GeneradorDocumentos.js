@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { useState } from 'react';
 import '../../styles/App.css';
 import cedula from "../../img/cedula.jpg";
-import Head from "../component/GeneradorDocumentos/Head";
+import Head from "../component/Head";
 import Opciones from "../component/GeneradorDocumentos/Opciones";
 import Formulario from "../component/GeneradorDocumentos/Formulario";
 import { PoderSII } from "../Helper/GeneradorDocumentos/PoderSII";
@@ -60,11 +60,12 @@ const GeneradorDocumentos = () => {
       });
       setImg(cedula);
     }
-
+    
+    const titulosHead = ["Bienvenido al Generador de Documentos", "Elige una opción, y genera tus documentos."]
 
     return (
         <Fragment>
-            <Head />
+            <Head contenido={titulosHead}/>
             <Opciones opcion={opcion} setOpcion={setOpcion}/>
             <hr />
             {alert?(<div className="callout alert text-center">Todos los Datos son Necesarios</div>):null}

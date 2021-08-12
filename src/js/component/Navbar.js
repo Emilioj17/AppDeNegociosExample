@@ -1,5 +1,5 @@
 import React from 'react';
-import imagen from "../../img/gif.gif";
+import { Link } from "react-router-dom";
 import "../../styles/App.css";
 
 const Navbar = () => {
@@ -9,7 +9,13 @@ const Navbar = () => {
             <br />
             <h5>DeNegocios.cl</h5>
             <br />
-            <img src={imagen} alt="" />
+            <ul className="vertical menu" data-responsive-menu="drilldown medium-accordion" style={{maxWidth: '250px'}}>
+                <li><Link to="/">Inicio</Link></li>
+                <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
+                <li><Link to="#">Direccion Tributaria</Link></li>
+                <li><Link to="#">Contabilidad</Link></li>
+                <li><Link to="#">Administración</Link></li>
+            </ul>
             </div>
         </div>
     );
