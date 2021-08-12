@@ -1,27 +1,39 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import injectContext from "./js/store/AppContext";
-import { Home } from "./js/views/Home";
 import { Login } from "./js/views/Login";
+import GeneradorDocumentos from "./js/views/GeneradorDocumentos";
+import Navbar from "./js/component/Navbar";
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div className="Main">
-			<BrowserRouter basename={basename}>
-					<Switch className="Switch">
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/Login">
-							<Login />
-						</Route>
-						<Route>
-							<h1>Not found!</h1>
-						</Route>
-					</Switch>
-			</BrowserRouter>
+		<div className="off-canvas-wrapper">
+			<div className="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+				<Navbar />
+				<div className="off-canvas-content" data-off-canvas-content>
+					<div className="title-bar hide-for-large">
+						<div className="title-bar-left">
+							<button className="menu-icon" type="button" data-open="my-info" />
+							<span className="title-bar-title">DeNegocios.cl</span>
+						</div>
+					</div>
+					<BrowserRouter basename={basename}>
+							<Switch className="Switch">
+								<Route exact path="/">
+									<Login />
+								</Route>
+								<Route exact path="/GeneradorDocumentos">
+									<GeneradorDocumentos />
+								</Route>
+								<Route>
+									<h1>Not found!</h1>
+								</Route>
+							</Switch>
+					</BrowserRouter>
+				</div>
+			</div>
 		</div>
 	);
 };

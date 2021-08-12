@@ -1,0 +1,18 @@
+.off-canvas-wrapper-inner,
+.off-canvas-wrapper,
+.numbero {
+	height: 100%;
+}
+
+.ImagenCedula {
+	text-align: center;
+	margin: 0 auto;
+	padding-bottom: 10px;
+}
+
+.Prueba {
+	background-color: rgb(240, 229, 229);
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
