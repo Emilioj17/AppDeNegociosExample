@@ -15,12 +15,6 @@ const Layout = () => {
 				<BrowserRouter basename={basename}>
 					<Navbar />
 					<div className="off-canvas-content" data-off-canvas-content>
-						<div className="title-bar hide-for-large">
-							<div className="title-bar-left">
-								<button className="menu-icon" type="button" data-open="my-info" />
-								<span className="title-bar-title">DeNegocios.cl</span>
-							</div>
-						</div>	
 						<Switch className="Switch">
 							<Route exact path="/">
 								<Login />
