@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import injectContext from "./js/store/AppContext";
 import { Login } from "./js/views/Login";
 import GeneradorDocumentos from "./js/views/GeneradorDocumentos";
+import DireccionTributaria from "./js/views/DireccionTributaria";
+import Contabilidad from "./js/views/Contabilidad";
 import Navbar from "./js/component/Navbar";
 import 'foundation-sites/dist/css/foundation.min.css';
 
@@ -17,10 +19,16 @@ const Layout = () => {
 					<div className="off-canvas-content" data-off-canvas-content>
 						<Switch className="Switch">
 							<Route exact path="/">
-								<Login />
+								<GeneradorDocumentos />
 							</Route>
 							<Route exact path="/GeneradorDocumentos">
 								<GeneradorDocumentos />
+							</Route>
+							<Route exact path="/DireccionTributaria">
+								<DireccionTributaria />
+							</Route>
+							<Route exact path="/Contabilidad">
+								<Contabilidad />
 							</Route>
 							<Route>
 								<h1>Not found!</h1>

@@ -61,7 +61,7 @@ const GeneradorDocumentos = () => {
       setImg(cedula);
     }
     
-    const titulosHead = ["Bienvenido al Generador de Documentos", "Elige una opción, y genera tus documentos."]
+  const titulosHead = ["Bienvenido al Generador de Documentos", "Elige una opción, y genera tus documentos."];
 
     return (
         <Fragment>

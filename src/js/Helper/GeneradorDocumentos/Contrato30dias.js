@@ -28,26 +28,26 @@ export const Contrato30dias = (datos, img) => {
     doc.text(10, 85, splitTitle2);
     doc.setFont("arial", "normal");
     doc.setFontSize(12);
-    var text3 = "EL SUBARRENDATARIO, declara que los espacios mencionados tendrán como destino Oficina Administrativa, quedando expresamente prohibido introducir en la propiedad material inflamables, explosivo, corrosivo o de cualquier índole que pudiera causarle daño o deterioro, siendo de su exclusiva responsabilidad todo perjuicio a la propiedad o a terceros provocados por tales circunstancias."
+    var text3 = "EL SUBARRENDATARIO, declara que los espacios mencionados tendrán como destino Oficina Administrativa, quedando expresamente prohibido introducir en la propiedad material inflamable, explosivo, corrosivo o de cualquier índole que pudiera causarle daño o deterioro, siendo de su exclusiva responsabilidad todo perjuicio a la propiedad o a terceros provocados por tales circunstancias."
     var splitTitle3 = doc.splitTextToSize(text3, 190);
     doc.text(10, 106, splitTitle3);
     var text4 = "El espacio se arrienda en el estado en que se encuentra, el que es conocido por el SUBARRENDATARIO."
     var splitTitle4 = doc.splitTextToSize(text4, 190);
     doc.text(10, 127, splitTitle4);
-    var text5 = "Se comprenden los muebles, artefactos eléctricos, y todas las especies incorporadas al inmueble que forman un solo cuerpo con él, depropiedad absoluta del “SUB ARRENDADOR”, por lo que no podrá efectuar mejoras o modificaciones en las instalaciones, así comotambién no podrá instalar muebles, o cualquier artículo que cambie la actual fisionomía de los espacios."
+    var text5 = "Se comprenden los muebles, artefactos eléctricos, y todas las especies incorporadas al inmueble que forman un solo cuerpo con él, de propiedad absoluta del “SUB ARRENDADOR”, por lo que no podrá efectuar mejoras o modificaciones en las instalaciones, así como también no podrá instalar muebles, o cualquier artículo que cambie la actual fisionomía de los espacios."
     var splitTitle5 = doc.splitTextToSize(text5, 190);
     doc.text(10, 133, splitTitle5);
     doc.setFont("arial", "bold");
     doc.text("Señalar que el subarriendo solo será para EFECTOS TRIBUTARIOS Y COMERCIALES.", 10, 155);
     doc.setFont("arial", "normal");
     doc.text("Forman parte de los servicios ofrecidos, los siguientes:", 10, 162);
-    var text6 = "1. Dirección Tributaria: Se entiende dirección tributaria, ya que el cliente podrá utilizar la dirección individualizada en la primera clausula , para efectuar el inicio de actividades, cambio de domicilio ante el Servicio de Impuestos Internos (SII), para obtener así el Rut de su empresa, o para timbrar documentos que se refieran a su giro (facturas exentas, con IVA, boletas, etc.)."
+    var text6 = "1. Dirección Tributaria: Se entiende dirección tributaria, ya que el cliente podrá utilizar la dirección individualizada en la primera clausula, para efectuar el inicio de actividades, cambio de domicilio ante el Servicio de Impuestos Internos (SII), para obtener así el Rut de su empresa, o para timbrar documentos que se refieran a su giro (facturas exentas, con IVA, boletas, etc.)."
     var splitTitle6 = doc.splitTextToSize(text6, 160);
     doc.text(40, 169, splitTitle6);
     var text7 = "2. Dirección Comercial: Se entiende dirección comercial, ya que el cliente podrá obtener su patente municipal.";
     var splitTitle7 = doc.splitTextToSize(text7, 160);
     doc.text(40, 195, splitTitle7);
-    var text8 = "3. Recepción de correspondencia: Esta prestación consiste en recibir la correspondencia del cliente, la que se guardaráen una carpeta personal, dándosele aviso mediante correo electrónico para su posterior retiro. La empresa no se hace responsable del contenido y el deterioro de la correspondencia y/o encomienda, si así fuera el caso."
+    var text8 = "3. Recepción de correspondencia: Esta prestación consiste en recibir la correspondencia del cliente, la que se guardará en una carpeta personal, dándosele aviso mediante correo electrónico para su posterior retiro. La empresa no se hace responsable del contenido y el deterioro de la correspondencia y/o encomienda, si así fuera el caso."
     var splitTitle8 = doc.splitTextToSize(text8, 160);
     doc.text(40, 207, splitTitle8);
     var text9 = "Sin perjuicio de lo anterior, queda expresamente prohibido al cliente utilizar el domicilio con otro propósito que no sea el descrito anteriormente, es decir, sólo como dirección tributaria y/o comercial. En consecuencia, el domicilio de la oficina NO podrá ser utilizado de ninguna manera para la obtención de créditos bancarios, financieros y/o comerciales, o de cualquier otra índole."
@@ -58,7 +58,7 @@ export const Contrato30dias = (datos, img) => {
     doc.text("2° RENTA", 10, 255);
     doc.line(10, 256, 30, 256);
     doc.setFont("arial", "normal");
-    var text10 = "Las partes fijan la renta mensual de sub arriendo por la oficina en $9.900 (nueve mil novecientos pesos) la que deberá ser pagada anticipadamente entre los días 1 y 5 De cada mes en la recepción ubicada en el interior de la oficina, mediante transferencia bancaria odinero efectivo."
+    var text10 = "Las partes fijan la renta mensual de sub arriendo por la oficina en $9.900 (nueve mil novecientos pesos) la que deberá ser pagada anticipadamente entre los días 1 y 5 De cada mes en la recepción ubicada en el interior de la oficina, mediante transferencia bancaria o dinero efectivo."
     var splitTitle10 = doc.splitTextToSize(text10, 190);
     doc.text(10, 262, splitTitle10);
 
@@ -80,15 +80,15 @@ export const Contrato30dias = (datos, img) => {
     doc.text("3° PLAZO", 10, 80);
     doc.line(10, 81, 30, 81);
     doc.setFont("arial", "normal");
-    var text2 = `El presente contrato empezó a regir el día ${fecha} y durará 1 mes de corrido. No obstante lo anteriormente señalado, este contrato se renovará sucesiva y automáticamente en período iguales al contratado, si ninguna de las partes da aviso a la otra con a lo menos 15 días de anticipación a la fecha de su vencimiento, por medio escrito, su deseo de poner término al presente contrato, e informando término de giro o cambio de domicilio ante Servicio de Impuestos Internos.`
+    var text2 = `El presente contrato empezó a regir el día ${fecha} y durará 1 mes de corrido. No obstante lo anteriormente señalado, este contrato se renovará sucesiva y automáticamente en períodos iguales al contratado, si ninguna de las partes da aviso a la otra con a lo menos 15 días de anticipación a la fecha de su vencimiento, por medio escrito, su deseo de poner término al presente contrato, e informando término de giro o cambio de domicilio ante Servicio de Impuestos Internos.`
     var splitTitle2 = doc.splitTextToSize(text2, 190);
     doc.text(10, 88, splitTitle2);
     doc.setFont("arial", "bold");
-    var text3 = "El Cliente puede rescindir contrato antes de lo anteriormente estipulado, es decir el cliente podrá dejar el contrato de arriendoantes del plazo de 2 meses. Para ello deberá dar aviso a través de correo a contacto@denegocios.cl y/o a soporte@denegocios.cl de que ya no utilizará nuestro domicilio y seguir las indicaciones que se le entregarán en dicho momento.";
+    var text3 = "El Cliente puede rescindir contrato antes de lo anteriormente estipulado, es decir el cliente podrá dejar el contrato de arriendo antes del plazo de 2 meses. Para ello deberá dar aviso a través de correo a contacto@denegocios.cl y/o a soporte@denegocios.cl de que ya no utilizará nuestro domicilio y seguir las indicaciones que se le entregarán en dicho momento.";
     var splitTitle3 = doc.splitTextToSize(text3, 190);
     doc.text(10, 115, splitTitle3);
     doc.setFont("arial", "normal");
-    var text3b = "Se deja constancia que este contrato si bien entra en rigor en la fecha indicada, el pago correspondiente comenzará a partir de los 30 díasdesde la fecha de firma. Es decir, el cliente tendrá 30 días desde la fecha de firma y de corrido, libres de todo pago.";
+    var text3b = "Se deja constancia que este contrato si bien entra en rigor en la fecha indicada, el pago correspondiente comenzará a partir de los 30 días desde la fecha de firma. Es decir, el cliente tendrá 30 días desde la fecha de firma y de corrido, libres de todo pago.";
     var splitTitle3b = doc.splitTextToSize(text3b, 190);
     doc.text(10, 135, splitTitle3b);
     doc.setFont("arial", "bold");
