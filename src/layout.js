@@ -19,7 +19,7 @@ const Layout = () => {
 					<div className="off-canvas-content" data-off-canvas-content>
 						<Switch className="Switch">
 							<Route exact path="/">
-								<GeneradorDocumentos />
+								<Login />
 							</Route>
 							<Route exact path="/GeneradorDocumentos">
 								<GeneradorDocumentos />

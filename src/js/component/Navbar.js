@@ -11,7 +11,7 @@ const Navbar = () => {
                     <h5>DeNegocios.cl</h5>
                     <br />
                     <ul className="vertical menu" style={{maxWidth: '250px'}}>
-                        <li><Link to="#">Inicio</Link></li>
+                        <li><Link to="/">Inicio</Link></li>
                         <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
                         <li><Link to="#">Direccion Tributaria</Link></li>
                         <li><Link to="#">Contabilidad</Link></li>
@@ -24,7 +24,7 @@ const Navbar = () => {
                 <h5>DeNegocios.cl</h5>
                 <br />
                 <ul style={{maxWidth: '250px'}}>
-                    <li><Link to="#">Inicio</Link></li>
+                    <li><Link to="/">Inicio</Link></li>
                     <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
                     <li><Link to="#">Direccion Tributaria</Link></li>
                     <li><Link to="#">Contabilidad</Link></li>

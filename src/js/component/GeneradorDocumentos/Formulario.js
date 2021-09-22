@@ -27,7 +27,7 @@ const Formulario = ({ img, setImg, datos, setDatos }) => {
         <div className="row">
             <div className="medium-6 columns">
             <label>Nombre Representante
-                    <input type="text" placeholder="Nombre Completo Chacarero Hamburguesa" value={datos.nombre} name="nombre" onChange={(e)=>Handler(e)}/>
+                    <input type="text" placeholder="Nombre Completo" value={datos.nombre} name="nombre" onChange={(e)=>Handler(e)}/>
             </label>
             <label>Rut de Representante Legal
                 <input type="text" placeholder="17.123.123-K" value={datos.rut} name="rut" onChange={(e)=>Handler(e)}/>
