@@ -58,7 +58,7 @@ export const ContratoAnual = (datos, img) => {
     doc.text("2° RENTA", 10, 255);
     doc.line(10, 256, 30, 256);
     doc.setFont("arial", "normal");
-    var text10 = "Las partes fijan la renta anual de sub arriendo por la oficina en $100.00 (cien mil pesos) la que deberá ser pagada anticipadamente entre los días 1 y 5 De cada año en la recepción ubicada en el interior de la oficina, mediante transferencia bancaria o dinero efectivo."
+    var text10 = "Las partes fijan la renta anual de sub arriendo por la oficina en $100.000 (cien mil pesos) la que deberá ser pagada anticipadamente entre los días 1 y 5 De cada año en la recepción ubicada en el interior de la oficina, mediante transferencia bancaria o dinero efectivo."
     var splitTitle10 = doc.splitTextToSize(text10, 190);
     doc.text(10, 262, splitTitle10);
 
