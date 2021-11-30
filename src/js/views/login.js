@@ -23,7 +23,7 @@ export const Login = () => {
 							<input type="submit" className="button expanded" Value="Ingresar" disabled/>
 						</p>
 						<p className="text-center">
-							<a href="#">Olvidaste tu clave?</a>
+							<a href="/Recuperar">Olvidaste tu clave?</a>
 						</p>
 					</form>
 				</div>

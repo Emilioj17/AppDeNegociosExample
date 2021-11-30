@@ -15,7 +15,7 @@ const Navbar = () => {
                         <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
                         <li><Link to="#">Direccion Tributaria</Link></li>
                         <li><Link to="#">Contabilidad</Link></li>
-                        <li><Link to="#">Administración</Link></li>
+                        <li><Link to="/Administracion">Administración</Link></li>
                     </ul>
                 </div>
             </div>
@@ -28,7 +28,7 @@ const Navbar = () => {
                     <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
                     <li><Link to="#">Direccion Tributaria</Link></li>
                     <li><Link to="#">Contabilidad</Link></li>
-                    <li><Link to="#">Administración</Link></li>
+                    <li><Link to="/Administracion">Administración</Link></li>
                 </ul>
             </div>
         </Fragment>
