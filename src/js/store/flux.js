@@ -1,21 +1,132 @@
-const getState = ({ getStore, setStore }) => {
+const getState = ({ getStore, getActions, setStore  }) => {
 	return {
 		store: {
-			personajesFavoritos: []
+			usuarios: null,
+			usuario: null,
+			response: null
 		},
 		actions: {
-			deleteFavoritos: nombre => {
-				const store = getStore();
-				setStore({ personajesFavoritos: store.personajesFavoritos.filter(elemento => elemento !== nombre) });
-				return "Hola desde deleteFavoritos";
+			getUsuarios:  async () => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/usuario", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        //"Authorization": "Bearer " + store.token
+                    }
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            usuarios: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: "usuarios " + error.message
+                        })
+                    });
 			},
+			
+			getUsuario: async (id) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/usuario/" + id, {
+                    method: "GET",
+                    header: {
+                        "Content-Type": "application/json",
+                        //"Authorization": "Bearer " + store.token
+                    }
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            usuario: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: "usuario " + error.message
+                        })
+                    });
+			},
+			
+			setUsuario: async (nombre, apellido, correo, clave, tipo, estado) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/usuario", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "nombre": nombre,
+                        "apellido": apellido,
+                        "correo": correo,
+                        "clave": clave,
+                        "tipo": tipo,
+                        "estado": estado
+                    })
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            response: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: error.message
+                        })
+                    });
+            },
 
-			saveFavoritos: nombre => {
-				const store = getStore();
-				setStore({ personajesFavoritos: [...store.personajesFavoritos, nombre] });
-				console.log(store)
-				return "Hola desde saveFavoritos";
-			}
+			editUsuario: async (id, nombre, apellido, correo, clave, tipo, estado) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/usuario/" + id, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        //"Authorization": "Bearer " + store.token
+                    },
+                    body: JSON.stringify({
+                        "nombre": nombre,
+                        "apellido": apellido,
+                        "correo": correo,
+                        "clave": clave,
+                        "tipo": tipo,
+                        "estado": estado
+                    })
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            response: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: error.message
+                        })
+                    });
+			},
+			
+			deleteUsuario: async (id) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/usuario/" + id, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        //"Authorization": "Bearer " + store.token
+                    }
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            response: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: error.message
+                        })
+                    });
+			},
+			
+
 		}
 	};
 };
