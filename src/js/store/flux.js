@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore  }) => {
 	return {
 		store: {
-			usuarios: null,
+			usuarios: "null",
 			usuario: null,
 			response: null
 		},
