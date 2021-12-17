@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+// Este formulario es del Generador de Documentos
+
 const Formulario = ({ img, setImg, datos, setDatos }) => {
     const [fecha, setFecha] = useState(false);
     const handlerImg = (event) => {
