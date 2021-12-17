@@ -4,10 +4,10 @@ import React from 'react';
 
 const Formulario = () => {
     return (
-        <div className="row text-center">
+        <div className="row">
             <div className="columns">
                 <form className="log-in-form">
-                    <h4 className="text-center">Ingresa los Datos solicitados para crear un Usuario</h4>
+                    <h4 className="text-left">Ingresa los Datos solicitados para crear un Usuario</h4>
                     <label>
                         Nombre
                         <input type="text" placeholder="Solo primer Nombre" />
