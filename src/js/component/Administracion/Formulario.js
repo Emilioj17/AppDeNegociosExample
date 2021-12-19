@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from "../../store/AppContext";
 
 // Este formulario es de Administracion
 
-const Formulario = ({ setCrear }) => {
-    const Handler = (event) => {
+const Formulario = ({ setCrear, accion, usuarioActivo }) => {
+    const { store, actions } = useContext(Context);
+    const [datos, setDatos] = useState({
+        nombre: "",
+        apellido: "",
+        correo: "",
+        clave: "",
+        tipo: ""
+      });
+
+    const HandlerCancelar = (event) => {
         setCrear(false)
+    };
+
+    const HanlderCrear = (event) => {
+        setCrear(false)
+    };
+
+    const HandlerModificacionDatos = (event) => {
+        setDatos({ ...datos, [event.target.name]: event.target.value })
+    };
+
+    const HandlerModificar = (event) => {
+        actions.editUsuario(usuarioActivo, datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
     };
 
     return (
@@ -14,40 +36,33 @@ const Formulario = ({ setCrear }) => {
                     <h4 className="text-left">Ingresa los Datos solicitados para crear un Usuario</h4>
                     <label>
                         Nombre
-                        <input type="text" placeholder="Solo primer Nombre" />
+                        <input type="text" placeholder="Solo primer Nombre" value={datos.nombre} name="nombre" onChange={(e)=>HandlerModificacionDatos(e)}/>
                     </label>
                     <label>
                         Apellido
-                        <input type="text" placeholder="Solo primer Apellido" />
+                        <input type="text" placeholder="Solo primer Apellido" value={datos.apellido} name="apellido" onChange={(e)=>HandlerModificacionDatos(e)}/>
                     </label>
                     <label>
                         Email
-                        <input type="email" placeholder="correo@denegocios.cl" />
+                        <input type="email" placeholder="correo@denegocios.cl" value={datos.correo} name="correo" onChange={(e)=>HandlerModificacionDatos(e)}/>
                     </label>
                     <label>
                         Clave
-                        <input type="password" placeholder="Clave" />
+                        <input type="password" placeholder="Clave" value={datos.clave} name="clave" onChange={(e)=>HandlerModificacionDatos(e)}/>
                     </label>
                     <div className="">
                         <label className="">Elige Tipo</label>
-                        <select className="" id="exampleFormControlSelect1" name="tipo">
+                        <select className="" id="exampleFormControlSelect1" name="tipo" value={datos.tipo} name="tipo" onChange={(e)=>HandlerModificacionDatos(e)}>
                         <option selected>Elige una opción...</option>
                         <option value="Administrador">Administrador</option>
                         <option value="Vendedor">Vendedor</option>
                         <option value="Cobranza">Cobranza</option>
                         </select>
                     </div>
-                    <div className="">
-                        <label className="">Elige Estado</label>
-                        <select className="" id="exampleFormControlSelect1" name="estado">
-                        <option selected>Elige una opción...</option>
-                        <option value="Activo">Activo</option>
-                        <option value="Inactivo">Inactivo</option>
-                        </select>
-                    </div>
                     <p>
-                        <input type="btn" className="button expanded" Value="Crear Usuario" />
-                        <input type="btn" className="button expanded alert" Value="Cancelar" onClick={(e)=>Handler(e)}/>
+                        {(accion==="crear")?(<input type="btn" className="button expanded" Value="Crear Usuario" />):null}
+                        {(accion==="modificar")?(<input type="btn" className="button expanded" Value="Modificar Usuario" onClick={(e)=>HandlerModificar(e)}/>):null}
+                        <input type="btn" className="button expanded alert" Value="Cancelar" onClick={(e)=>HandlerCancelar(e)}/>
                     </p>
                 </form>
             </div>

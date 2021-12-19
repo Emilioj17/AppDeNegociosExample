@@ -48,7 +48,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     });
 			},
 			
-			setUsuario: async (nombre, apellido, correo, clave, tipo, estado) => {
+			setUsuario: async (nombre, apellido, correo, clave, tipo) => {
                 const store = getStore();
                 fetch("http://127.0.0.1:5000/api/usuario", {
                     method: "POST",
@@ -60,8 +60,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
                         "apellido": apellido,
                         "correo": correo,
                         "clave": clave,
-                        "tipo": tipo,
-                        "estado": estado
+                        "tipo": tipo
                     })
                 }).then((response) => response.json())
                     .then((data) => {
@@ -76,7 +75,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     });
             },
 
-			editUsuario: async (id, nombre, apellido, correo, clave, tipo, estado) => {
+			editUsuario: async (id, nombre, apellido, correo, clave, tipo) => {
                 const store = getStore();
                 fetch("http://127.0.0.1:5000/api/usuario/" + id, {
                     method: "PUT",
@@ -89,8 +88,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
                         "apellido": apellido,
                         "correo": correo,
                         "clave": clave,
-                        "tipo": tipo,
-                        "estado": estado
+                        "tipo": tipo
                     })
                 }).then((response) => response.json())
                     .then((data) => {

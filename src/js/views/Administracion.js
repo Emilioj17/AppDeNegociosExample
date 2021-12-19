@@ -12,6 +12,7 @@ const Administracion = () => {
 	const [listaUsuarios, setListaUsuarios] = useState([""]);
 	const { store, actions } = useContext(Context);
 	const [usuarioActivo, setUsuarioActivo] = useState(null);
+	const [accion, setAccion] = useState(null);
 	const titulosHead = ["Bienvenido a Administracion DeNegocios.cl", "Aquí puedes Crear, Borrar o Editar un Usuario."];
 	
 
@@ -33,8 +34,8 @@ const Administracion = () => {
 	return (
 		<Fragment>
 			<Head contenido={titulosHead} />
-			{(crear) ? null : (<Usuarios listaUsuarios={listaUsuarios} setCrear={setCrear} usuarioActivo={usuarioActivo} setUsuarioActivo={setUsuarioActivo}/>)}
-			{(crear) ? (<Formulario setCrear={setCrear} />) : null}
+			{(crear) ? null : (<Usuarios listaUsuarios={listaUsuarios} setCrear={setCrear} usuarioActivo={usuarioActivo} setUsuarioActivo={setUsuarioActivo} setAccion={setAccion}/>)}
+			{(crear) ? (<Formulario setCrear={setCrear} accion={accion} usuarioActivo={usuarioActivo} />) : null}
 			<h2>El usuario Activo es {usuarioActivo}</h2>
 		</Fragment>
 	)
