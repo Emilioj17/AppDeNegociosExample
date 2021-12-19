@@ -2,7 +2,11 @@ import React from 'react';
 
 // Este formulario es de Administracion
 
-const Formulario = () => {
+const Formulario = ({ setCrear }) => {
+    const Handler = (event) => {
+        setCrear(false)
+    };
+
     return (
         <div className="row">
             <div className="columns">
@@ -42,7 +46,8 @@ const Formulario = () => {
                         </select>
                     </div>
                     <p>
-                        <input type="btn" className="button expanded" Value="Crear Usuario"/>
+                        <input type="btn" className="button expanded" Value="Crear Usuario" />
+                        <input type="btn" className="button expanded alert" Value="Cancelar" onClick={(e)=>Handler(e)}/>
                     </p>
                 </form>
             </div>

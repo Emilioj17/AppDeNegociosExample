@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import injectContext from "./js/store/AppContext";
 import { Login } from "./js/views/Login";
 import { Recuperar } from "./js/views/Recuperar";
-import { Administracion } from "./js/views/Administracion";
+import Administracion from "./js/views/Administracion";
 import GeneradorDocumentos from "./js/views/GeneradorDocumentos";
 import DireccionTributaria from "./js/views/DireccionTributaria";
 import Contabilidad from "./js/views/Contabilidad";

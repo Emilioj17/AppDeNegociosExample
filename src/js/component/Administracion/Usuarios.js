@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from "../../store/AppContext";
 
-const Usuarios = ({ usuariosActivos, setCrear }) => {
+export const Usuarios = ({ listaUsuarios, setCrear, usuarioActivo, setUsuarioActivo }) => {
+    const { store, actions } = useContext(Context);
 
     const DivUsuarios = () => {
-        const Activos = usuariosActivos.map((usuario, index) => {
+        const HandlerActivo = (event) => {
+            setUsuarioActivo(event.target.id)
+        };
+
+        const Activos = listaUsuarios.map((usuario, index) => {
             return (
                 <div className="form-check" key={index}>
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id={usuario[2]}/>
+                    <input className="form-check-input" type="radio" name="flexRadioDefault" id={usuario[2]} onClick={(e)=>HandlerActivo(e)}/>
                     <label className="form-check-label" htmlFor={usuario[2]}>
                         Nombre: {usuario[0]} {usuario[1]} | Tipo: {usuario[3]} | Correo: {usuario[4]}
                     </label>
@@ -36,6 +42,14 @@ const Usuarios = ({ usuariosActivos, setCrear }) => {
         )
     }
 
+    const HandlerBorrar = (event) => {
+        actions.deleteUsuario(usuarioActivo)
+    };
+
+    const HandlerCrear = (event) => {
+        setCrear(true)
+    };
+
     return (
         <div className="row text-center">
             <DivUsuarios />
@@ -44,14 +58,14 @@ const Usuarios = ({ usuariosActivos, setCrear }) => {
                     <a className="button primary" name="Modificar">Modificar</a>
                 </div>
                 <div className="column">
-                    <a className="button alert" name="Borrar">Borrar</a>
+                    <a className="button alert" name="Borrar" onClick={(e)=>HandlerBorrar(e)}>Borrar</a>
                 </div>
                 <div className="column">
-                    <a className="button primary" name="Crear" onClick={(e) => setCrear("YY")}>Crear Usuario</a>
+                    <a className="button primary" name="Crear" onClick={(e)=>HandlerCrear(e)}>Crear Usuario</a>
                 </div>
                 </div>
             </div>
     );
 }
- 
+
 export default Usuarios;

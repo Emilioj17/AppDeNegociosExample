@@ -106,13 +106,13 @@ const getState = ({ getStore, getActions, setStore  }) => {
 			},
 			
 			deleteUsuario: async (id) => {
-                const store = getStore();
-                fetch("http://127.0.0.1:5000/api/usuario/" + id, {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json",
+                //const store = getStore();
+                fetch("http://127.0.0.1:5000/api/usuarios/" + id, {
+                    method: "DELETE" //,
+                    //headers: {
+                    //    "Content-Type": "application/json",
                         //"Authorization": "Bearer " + store.token
-                    }
+                    //}
                 }).then((response) => response.json())
                     .then((data) => {
                         setStore({

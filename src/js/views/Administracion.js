@@ -5,12 +5,13 @@ import '../../styles/App.css';
 import Formulario from "../component/Administracion/Formulario";
 import Usuarios from "../component/Administracion/Usuarios";
 
-export const Administracion = () => {
+const Administracion = () => {
 	const [usuarios, setUsuarios] = useState([""]);
-	const { crear, setCrear } = useState("XX");
-	let usuariosActivosx = [];
-	const [usuariosActivos, setUsuariosActivos] = useState([""]);
+	const [ crear, setCrear ] = useState(false);
+	let listaUsuariosX = [];
+	const [listaUsuarios, setListaUsuarios] = useState([""]);
 	const { store, actions } = useContext(Context);
+	const [usuarioActivo, setUsuarioActivo] = useState(null);
 	const titulosHead = ["Bienvenido a Administracion DeNegocios.cl", "Aquí puedes Crear, Borrar o Editar un Usuario."];
 	
 
@@ -23,20 +24,20 @@ export const Administracion = () => {
 
 	useEffect(() => {
 		for (let x = 0; usuarios.length > x; x++) {
-			usuariosActivosx.push([usuarios[x].nombre, usuarios[x].apellido, usuarios[x].id, usuarios[x].tipo, usuarios[x].correo])
+			listaUsuariosX.push([usuarios[x].nombre, usuarios[x].apellido, usuarios[x].id, usuarios[x].tipo, usuarios[x].correo])
 		}
-		setUsuariosActivos(usuariosActivosx)
+		setListaUsuarios(listaUsuariosX)
 		
 	}, [usuarios])
 
 	return (
 		<Fragment>
 			<Head contenido={titulosHead} />
-			{(crear==="XX") ? null : (<Usuarios
-				usuariosActivos={usuariosActivos}
-				setCrear={setCrear}
-			/>)}
-			{(crear==="XX") ? (<Formulario />) : null}
+			{(crear) ? null : (<Usuarios listaUsuarios={listaUsuarios} setCrear={setCrear} usuarioActivo={usuarioActivo} setUsuarioActivo={setUsuarioActivo}/>)}
+			{(crear) ? (<Formulario setCrear={setCrear} />) : null}
+			<h2>El usuario Activo es {usuarioActivo}</h2>
 		</Fragment>
 	)
 };
+
+export default Administracion;
