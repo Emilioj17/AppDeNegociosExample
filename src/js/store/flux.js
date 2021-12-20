@@ -48,7 +48,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     });
 			},
 			
-			setUsuario: async (nombre, apellido, correo, clave, tipo) => {
+			crearUsuario: async (nombre, apellido, correo, clave, tipo) => {
                 const store = getStore();
                 fetch("http://127.0.0.1:5000/api/usuario", {
                     method: "POST",
@@ -75,9 +75,9 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     });
             },
 
-			editUsuario: async (id, nombre, apellido, correo, clave, tipo) => {
+			editarUsuario: async (id, nombre, apellido, correo, clave, tipo) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/usuario/" + id, {
+                fetch("http://127.0.0.1:5000/api/usuarios/" + id, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     });
 			},
 			
-			deleteUsuario: async (id) => {
+			borrarUsuario: async (id) => {
                 //const store = getStore();
                 fetch("http://127.0.0.1:5000/api/usuarios/" + id, {
                     method: "DELETE" //,

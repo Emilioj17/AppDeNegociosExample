@@ -43,7 +43,7 @@ export const Usuarios = ({ listaUsuarios, setCrear, usuarioActivo, setUsuarioAct
     }
 
     const HandlerBorrar = (event) => {
-        actions.deleteUsuario(usuarioActivo)
+        actions.borrarUsuario(usuarioActivo)
     };
 
     const HandlerCrear = (event) => {

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from "react-router-dom";
 import "../../styles/App.css";
+import imagen from "../../img/gif2.gif";
 
 const Navbar = () => {
     return (
@@ -17,6 +18,13 @@ const Navbar = () => {
                         <li><Link to="#">Contabilidad</Link></li>
                         <li><Link to="/Administracion">Administración</Link></li>
                     </ul>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <img src={imagen} alt="" className="float-right"/>
                 </div>
             </div>
             <div className="numbero row column show-for-small-only">

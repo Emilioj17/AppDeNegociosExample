@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Context } from "../../store/AppContext";
+import { useHistory } from 'react-router';
 
 // Este formulario es de Administracion
 
@@ -11,14 +12,16 @@ const Formulario = ({ setCrear, accion, usuarioActivo }) => {
         correo: "",
         clave: "",
         tipo: ""
-      });
+    });
+    let history = useHistory();
 
     const HandlerCancelar = (event) => {
         setCrear(false)
     };
 
-    const HanlderCrear = (event) => {
-        setCrear(false)
+    const HandlerCrear = (event) => {
+        actions.crearUsuario(datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
+        history.push("/");
     };
 
     const HandlerModificacionDatos = (event) => {
@@ -26,14 +29,16 @@ const Formulario = ({ setCrear, accion, usuarioActivo }) => {
     };
 
     const HandlerModificar = (event) => {
-        actions.editUsuario(usuarioActivo, datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
+        actions.editarUsuario(usuarioActivo, datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
+        history.push("/");
     };
 
     return (
         <div className="row">
             <div className="columns">
                 <form className="log-in-form">
-                    <h4 className="text-left">Ingresa los Datos solicitados para crear un Usuario</h4>
+                    {(accion==="crear")?(<input type="btn" className="button expanded" Value="Crear Usuario" />):null}
+                    <h4 className="text-left">Ingresa los Datos solicitados para {(accion==="crear")?"crear":"modificar"} un Usuario</h4>
                     <label>
                         Nombre
                         <input type="text" placeholder="Solo primer Nombre" value={datos.nombre} name="nombre" onChange={(e)=>HandlerModificacionDatos(e)}/>
@@ -60,7 +65,7 @@ const Formulario = ({ setCrear, accion, usuarioActivo }) => {
                         </select>
                     </div>
                     <p>
-                        {(accion==="crear")?(<input type="btn" className="button expanded" Value="Crear Usuario" />):null}
+                        {(accion==="crear")?(<input type="btn" className="button expanded" Value="Crear Usuario" onClick={(e)=>HandlerCrear(e)}/>):null}
                         {(accion==="modificar")?(<input type="btn" className="button expanded" Value="Modificar Usuario" onClick={(e)=>HandlerModificar(e)}/>):null}
                         <input type="btn" className="button expanded alert" Value="Cancelar" onClick={(e)=>HandlerCancelar(e)}/>
                     </p>
