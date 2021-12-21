@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 
 // Este formulario es de Administracion
 
-const Formulario = ({ setCrear, accion, usuarioActivo }) => {
+const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
     const { store, actions } = useContext(Context);
     const [datos, setDatos] = useState({
         nombre: "",
@@ -33,6 +33,25 @@ const Formulario = ({ setCrear, accion, usuarioActivo }) => {
         history.push("/");
     };
 
+    let nombre = "";
+    let apellido = "";
+    let correo = "";
+    let clave = "";
+    let tipo = "";
+
+    if (accion === "modificar") {
+        for (let x = 0; x < usuarios.length; x++) {
+            if (usuarios[x].id == usuarioActivo) {
+                nombre = usuarios[x].nombre;
+                apellido = usuarios[x].apellido;
+                correo = usuarios[x].correo;
+                clave = usuarios[x].clave;
+                tipo = usuarios[x].tipo;
+            }
+        }
+        console.log(tipo);
+    }
+
     return (
         <div className="row">
             <div className="columns">
@@ -41,27 +60,34 @@ const Formulario = ({ setCrear, accion, usuarioActivo }) => {
                     <h4 className="text-left">Ingresa los Datos solicitados para {(accion==="crear")?"crear":"modificar"} un Usuario</h4>
                     <label>
                         Nombre
-                        <input type="text" placeholder="Solo primer Nombre" value={datos.nombre} name="nombre" onChange={(e)=>HandlerModificacionDatos(e)}/>
+                        <input type="text"
+                            placeholder={(accion==="modificar")?(nombre):"Solo primer Nombre"}
+                            value={datos.nombre} name="nombre" onChange={(e) => HandlerModificacionDatos(e)} />
                     </label>
                     <label>
                         Apellido
-                        <input type="text" placeholder="Solo primer Apellido" value={datos.apellido} name="apellido" onChange={(e)=>HandlerModificacionDatos(e)}/>
+                        <input type="text"
+                            placeholder={(accion==="modificar")?(apellido):"Solo primer Apellido"}
+                            value={datos.apellido} name="apellido" onChange={(e) => HandlerModificacionDatos(e)} />
                     </label>
                     <label>
                         Email
-                        <input type="email" placeholder="correo@denegocios.cl" value={datos.correo} name="correo" onChange={(e)=>HandlerModificacionDatos(e)}/>
+                        <input type="email"
+                            placeholder={(accion==="modificar")?(correo):"correo@denegocios.cl"}
+                            value={datos.correo} name="correo" onChange={(e) => HandlerModificacionDatos(e)} />
                     </label>
                     <label>
                         Clave
-                        <input type="password" placeholder="Clave" value={datos.clave} name="clave" onChange={(e)=>HandlerModificacionDatos(e)}/>
+                        <input type="password"
+                            placeholder={(accion==="modificar")?(clave):"Clave"}
+                            value={datos.clave} name="clave" onChange={(e) => HandlerModificacionDatos(e)} />
                     </label>
                     <div className="">
-                        <label className="">Elige Tipo</label>
-                        <select className="" id="exampleFormControlSelect1" name="tipo" value={datos.tipo} name="tipo" onChange={(e)=>HandlerModificacionDatos(e)}>
-                        <option selected>Elige una opción...</option>
-                        <option value="Administrador">Administrador</option>
-                        <option value="Vendedor">Vendedor</option>
-                        <option value="Cobranza">Cobranza</option>
+                        <label className="form-label" htmlFor='tipo'>Elige Tipo de Usuario</label>
+                        <select className="form-select" id="tipo" placeholder={tipo} name="tipo" name="tipo" onChange={(e)=>HandlerModificacionDatos(e)}>
+                            <option selected={(tipo === "Administrador") ? "selected" : ""}>Administrador</option>
+                            <option selected={(tipo === "Vendedor") ? "selected" : ""}>Vendedor</option>
+                            <option selected={(tipo === "Cobranza") ? "selected" : ""}>Cobranza</option>
                         </select>
                     </div>
                     <p>
