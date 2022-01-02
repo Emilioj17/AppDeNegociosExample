@@ -3,7 +3,8 @@ const getState = ({ getStore, getActions, setStore  }) => {
 		store: {
 			usuarios: "null",
 			usuario: null,
-			response: null
+            response: null,
+            direccionTributaria: null,
 		},
 		actions: {
 			getUsuarios:  async () => {

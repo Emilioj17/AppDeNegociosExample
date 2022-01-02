@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from "react-router-dom";
 import "../../styles/App.css";
-import imagen from "../../img/gif2.gif";
 
 const Navbar = () => {
     return (
@@ -14,17 +13,10 @@ const Navbar = () => {
                     <ul className="vertical menu" style={{maxWidth: '250px'}}>
                         <li><Link to="/">Inicio</Link></li>
                         <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
-                        <li><Link to="#">Direccion Tributaria</Link></li>
+                        <li><Link to="/DireccionTributaria">Direccion Tributaria</Link></li>
                         <li><Link to="#">Contabilidad</Link></li>
                         <li><Link to="/Administracion">Administración</Link></li>
                     </ul>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <img src={imagen} alt="" className="float-right"/>
                 </div>
             </div>
             <div className="numbero row column show-for-small-only">
@@ -34,7 +26,7 @@ const Navbar = () => {
                 <ul style={{maxWidth: '250px'}}>
                     <li><Link to="/">Inicio</Link></li>
                     <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
-                    <li><Link to="#">Direccion Tributaria</Link></li>
+                    <li><Link to="/DireccionTributaria">Direccion Tributaria</Link></li>
                     <li><Link to="#">Contabilidad</Link></li>
                     <li><Link to="/Administracion">Administración</Link></li>
                 </ul>
