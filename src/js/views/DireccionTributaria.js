@@ -1,8 +1,18 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext, useState, useEffect } from 'react';
 import Head from "../component/Head";
+import { Context } from "../../js/store/AppContext";
 
 const DireccionTributaria = () => {
-    const titulosHead = ["Bienvenido al Servicio de Direccion Tributaria", "Consulta información respecto a Clientes con este servicio contratado."]
+    const [clientesDt, setClientesDt] = useState({});
+    const { store, actions } = useContext(Context);
+    const titulosHead = ["Bienvenido al Servicio de Direccion Tributaria", "Consulta información respecto a Clientes con este servicio contratado."];
+
+    useEffect(() => {
+		(async () => {
+			actions.getClientesDt();
+			setClientesDt(store.clientesDt);
+		})()
+	}, []);
 
     return (
         <Fragment>

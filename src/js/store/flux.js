@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
 			usuarios: "null",
 			usuario: null,
             response: null,
-            direccionTributaria: null,
+            clientesDt: null,
 		},
 		actions: {
 			getUsuarios:  async () => {
@@ -121,6 +121,28 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     .catch((error) => {
                         setStore({
                             error: error.message
+                        })
+                    });
+            },
+            
+            getClientesDt:  async () => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/clienteDt", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        //"Authorization": "Bearer " + store.token
+                    }
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            clientesDt: data
+                        })
+                        console.log(data);
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: "clientesDT " + error.message
                         })
                     });
 			},
