@@ -7,7 +7,7 @@ import FormularioClienteDt from "../component/DireccionTributaria/FormularioClie
 
 const DireccionTributaria = () => {
     const [nuevoCliente, setNuevoCliente] = useState(false);
-    const [clienteDtSeleccionado, setClienteDtSeleccionado] = useState(null);
+    const [clienteDtBuscado, setClienteDtBuscado] = useState(null);
     const { store, actions } = useContext(Context);
     const { clientesDt } = store;
     const titulosHead = ["Bienvenido al Servicio de Direccion Tributaria", "Consulta información respecto a Clientes con este servicio contratado."];
@@ -34,10 +34,10 @@ const DireccionTributaria = () => {
                     </div>
                     <div className='row'>
                         <div className='grid-x grid-margin-x'>
-                            <Buscador setClienteDt={setClienteDtSeleccionado}/>
+                            <Buscador setClienteDt={setClienteDtBuscado}/>
                         </div>
                     </div>
-                    <ListaClientesDt store={store} clientesDt={clientesDt} clienteDtSeleccionado={clienteDtSeleccionado}/>
+                    <ListaClientesDt store={store} clientesDt={clientesDt} clienteDtBuscado={clienteDtBuscado}/>
                 </Fragment>
             )}
         </Fragment>

@@ -2,7 +2,7 @@ import React, { Fragment, useState, useContext } from 'react';
 import { Context } from "../../store/AppContext";
 import { useHistory } from 'react-router';
 
-const ListaClientesDt = ({ store, clientesDt, clienteDtSeleccionado }) => {
+const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado }) => {
     ///// Arreglar esto. Hay codigo que no me gusta y 1) No me permite filtrar por "secciones" de texto
     /// y 2) No me deja filtrar por mayusculas/minusculas
     return (
@@ -24,7 +24,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtSeleccionado }) => {
                 </thead>
                 <tbody>
                     {(store.clientesDt != null) ? 
-                        ((clienteDtSeleccionado == "" || clienteDtSeleccionado == null) ? (
+                        ((clienteDtBuscado == "" || clienteDtBuscado == null) ? (
                             clientesDt.map((object, i) => 
                                 <tr key={i}>
                                     <td>{object.id}</td>
@@ -39,7 +39,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtSeleccionado }) => {
                                     <td>{object.erpyme}</td>
                                 </tr>)
                         ):(clientesDt.filter(
-                            contact => contact.razon == clienteDtSeleccionado || contact.rut == clienteDtSeleccionado || contact.correo == clienteDtSeleccionado || contact.representante == clienteDtSeleccionado || contact.rutRepresentante == clienteDtSeleccionado).map((object, i) => 
+                            contact => contact.razon == clienteDtBuscado || contact.rut == clienteDtBuscado || contact.correo == clienteDtBuscado || contact.representante == clienteDtBuscado || contact.rutRepresentante == clienteDtBuscado).map((object, i) => 
                                 <tr key={i}>
                                 <td>{object.id}</td>
                                 <td>{object.razon}</td>

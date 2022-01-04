@@ -56,7 +56,6 @@ const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
         <div className="row">
             <div className="columns">
                 <form className="log-in-form">
-                    {(accion==="crear")?(<input type="btn" className="button expanded" Value="Crear Usuario" />):null}
                     <h4 className="text-left">Ingresa los Datos solicitados para {(accion==="crear")?"crear":"modificar"} un Usuario</h4>
                     <label>
                         Nombre
