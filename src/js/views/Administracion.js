@@ -6,22 +6,23 @@ import Formulario from "../component/Administracion/Formulario";
 import Usuarios from "../component/Administracion/Usuarios";
 
 const Administracion = () => {
+	const { store, actions } = useContext(Context);
 	const [usuarios, setUsuarios] = useState([""]);
 	const [ crear, setCrear ] = useState(false);
 	let listaUsuariosX = [];
-	const [listaUsuarios, setListaUsuarios] = useState([""]);
-	const { store, actions } = useContext(Context);
+	const [listaUsuarios, setListaUsuarios] = useState([""]);	
 	const [usuarioActivo, setUsuarioActivo] = useState(null);
 	const [accion, setAccion] = useState(null);
 	const titulosHead = ["Bienvenido a Administracion DeNegocios.cl", "Aquí puedes Crear, Borrar o Editar un Usuario."];
 	
 
 	useEffect(() => {
-		(async () => {
-			actions.getUsuarios();
-			setUsuarios(store.usuarios);
-		})()
+		actions.getUsuarios();
 	}, []);
+
+	useEffect(() => {
+		setUsuarios(store.usuarios)  //Revisar aquí. Se puede hacer mejor esto.
+	});
 
 	useEffect(() => {
 		for (let x = 0; usuarios.length > x; x++) {
