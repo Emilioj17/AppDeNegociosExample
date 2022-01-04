@@ -4,9 +4,11 @@ import { Context } from "../../js/store/AppContext";
 import Buscador from "../component/DireccionTributaria/Buscador";
 import ListaClientesDt from "../component/DireccionTributaria/ListaClientesDt";
 import FormularioClienteDt from "../component/DireccionTributaria/FormularioClienteDt";
+import ClienteSeleccionado from "../component/DireccionTributaria/ClienteSeleccionado";
 
 const DireccionTributaria = () => {
     const [nuevoCliente, setNuevoCliente] = useState(false);
+    const [clienteSeleccionado, setClienteSeleccionado] = useState(false);
     const [clienteDtBuscado, setClienteDtBuscado] = useState(null);
     const { store, actions } = useContext(Context);
     const { clientesDt } = store;
@@ -23,7 +25,9 @@ const DireccionTributaria = () => {
     return (
         <Fragment>
             <Head contenido={titulosHead} />
-            {nuevoCliente ? (<FormularioClienteDt setNuevoCliente={setNuevoCliente}/>) : (
+            {(clienteSeleccionado) ? (<ClienteSeleccionado store={store} clientesDt={clientesDt} setClienteSeleccionado={setClienteSeleccionado}/>) : null}
+            {(nuevoCliente) ? (<FormularioClienteDt setNuevoCliente={setNuevoCliente} />) : null}
+            {(clienteSeleccionado || nuevoCliente) ? null : (
                 <Fragment>
                     <div className='row'>
                         <div className='button-group align-right'>
@@ -37,9 +41,9 @@ const DireccionTributaria = () => {
                             <Buscador setClienteDt={setClienteDtBuscado}/>
                         </div>
                     </div>
-                    <ListaClientesDt store={store} clientesDt={clientesDt} clienteDtBuscado={clienteDtBuscado}/>
-                </Fragment>
-            )}
+                    <ListaClientesDt store={store} clientesDt={clientesDt} clienteDtBuscado={clienteDtBuscado} setClienteSeleccionado={setClienteSeleccionado}/>
+                </Fragment>)
+            }
         </Fragment>
     );
 }

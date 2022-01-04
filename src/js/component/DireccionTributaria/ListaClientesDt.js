@@ -2,9 +2,14 @@ import React, { Fragment, useState, useContext } from 'react';
 import { Context } from "../../store/AppContext";
 import { useHistory } from 'react-router';
 
-const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado }) => {
+const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSeleccionado }) => {
     ///// Arreglar esto. Hay codigo que no me gusta y 1) No me permite filtrar por "secciones" de texto
     /// y 2) No me deja filtrar por mayusculas/minusculas
+
+    const HandlerClick = (event) => {
+        setClienteSeleccionado(true);
+    }
+
     return (
         <div className='row table-scroll'>
             <table className="table hover">
@@ -26,7 +31,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado }) => {
                     {(store.clientesDt != null) ? 
                         ((clienteDtBuscado == "" || clienteDtBuscado == null) ? (
                             clientesDt.map((object, i) => 
-                                <tr key={i}>
+                                <tr key={i} onClick={(e)=>HandlerClick(e)}>
                                     <td>{object.id}</td>
                                     <td>{object.razon}</td>
                                     <td>{object.rut}</td>
@@ -40,7 +45,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado }) => {
                                 </tr>)
                         ):(clientesDt.filter(
                             contact => contact.razon == clienteDtBuscado || contact.rut == clienteDtBuscado || contact.correo == clienteDtBuscado || contact.representante == clienteDtBuscado || contact.rutRepresentante == clienteDtBuscado).map((object, i) => 
-                                <tr key={i}>
+                                <tr key={i} onClick={(e)=>HandlerClick(e)}>
                                 <td>{object.id}</td>
                                 <td>{object.razon}</td>
                                 <td>{object.rut}</td>
