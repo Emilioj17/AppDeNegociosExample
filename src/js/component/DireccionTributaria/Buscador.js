@@ -2,12 +2,16 @@ import React, { useState, useContext } from 'react';
 import { Context } from "../../store/AppContext";
 import { useHistory } from 'react-router';
 
-// Este formulario es de Administracion
 
-const Buscador = () => {
+const Buscador = ({setClienteDt}) => {
+    const HandlerOnChange = (event) => {
+        setClienteDt(event.target.value)
+    };
+
     return (
-        <div className="row">
-            Hola desde Buscador
+        <div className='cell small-10'>
+            <label htmlFor="Buscador">Buscador</label>
+            <input type="text" placeholder="Ingresa tu Busqueda" name="Buscador" onChange={(e)=>HandlerOnChange(e)}/>
         </div>
     );
 }

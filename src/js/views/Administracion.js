@@ -37,7 +37,6 @@ const Administracion = () => {
 			<Head contenido={titulosHead} />
 			{(crear) ? null : (<Usuarios listaUsuarios={listaUsuarios} setCrear={setCrear} usuarioActivo={usuarioActivo} setUsuarioActivo={setUsuarioActivo} setAccion={setAccion}/>)}
 			{(crear) ? (<Formulario setCrear={setCrear} accion={accion} usuarioActivo={usuarioActivo} usuarios={usuarios}/>) : null}
-			<h2>El usuario Activo es {usuarioActivo}</h2>
 		</Fragment>
 	)
 };
