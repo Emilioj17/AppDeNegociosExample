@@ -4,10 +4,17 @@ import { useHistory } from 'react-router';
 
 //Este Formulario es de Direccion Tributaria
 
-const FormularioClienteDt = () => {
+const FormularioClienteDt = ({ setNuevoCliente }) => {
+    const HandlerCerrar = (event) => {
+        setNuevoCliente(false)
+    }
+
     return (
-        <div className='cell small-10'>
-            Hola desde Formulario Cliente Dt
+        <div className="callout" data-closable>
+            <p>You can so totally close this!</p>
+            <button className="close-button" aria-label="Dismiss alert" type="button" data-close onClick={(e)=>HandlerCerrar(e)}>
+                <span aria-hidden="true">×</span>
+            </button>
         </div>
     );
 }
