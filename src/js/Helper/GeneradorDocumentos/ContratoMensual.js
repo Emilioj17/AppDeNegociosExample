@@ -15,7 +15,7 @@ export const ContratoMensual = (datos, img) => {
     doc.text("CONTRATO DE SUBARRIENDO", 100, 25, { align: "center" });
     doc.line(47, 26, 153, 26);
     doc.setFontSize(12);
-    var text1 = `En Santiago de Chile, a ${fecha}, entre don RODRIGO ANDRES ARAYA MONTALVAN, Rut 15.380.582-2, de nacionalidad chilena, domiciliado en Calle Ahumada 254, oficina 806, Comuna de Santiago, por una parte como “SUB ARRENDADOR", y, don(a) ${nombre}, Rut ${rut}, Representante legal de la empresa ${razon}, Rut número ${rutEmpresa}, de nacionalidad ${nacionalidad}, en adelante como el “SUB ARRENDATARIO” quienes han convenido celebrar el siguiente CONTRATO DE SUBARRENDAMIENTO que se regirá por las cláusulas que a continuación se expresan, y en silencio de ellas, por las disposiciones del Código Civil.`
+    var text1 = `En Santiago de Chile, a ${fecha}, entre don DENEGOCIOS.CL SpA, Rut 76.717.904-9, representada legalmente por Emilio Jelves Olivares, Rut 17.011.079-K, domiciliado en Calle Ahumada 254, oficina 806, Comuna de Santiago, como “SUB ARRENDADOR", y, don(a) ${nombre}, Rut ${rut}, Representante legal de la empresa ${razon}, Rut número ${rutEmpresa}, de nacionalidad ${nacionalidad}, como el “SUB ARRENDATARIO” quienes han convenido celebrar el siguiente CONTRATO DE SUBARRENDAMIENTO que se regirá por las cláusulas que a continuación se expresan, y en silencio de ellas, por las disposiciones del Código Civil.`
     var splitTitle1 = doc.splitTextToSize(text1, 190);
     doc.text(10, 40, splitTitle1);
     doc.setFont("arial", "bold");
@@ -146,13 +146,15 @@ export const ContratoMensual = (datos, img) => {
     var splitTitle2 = doc.splitTextToSize(text2, 190);
     doc.text(10, 67, splitTitle2);
     doc.line(10, 102, 90, 102);
-    doc.text("Rodrigo Andres Araya Montalvan", 10, 107);
-    doc.text("15.380.582-2", 10, 112);
-    doc.line(10, 152, 90, 152);
-    doc.text(`${razon}`, 10, 157);
-    doc.text(`${rutEmpresa}`, 10, 162);
-    doc.text(`P.p. ${nombre}`, 10, 167);
-    doc.text(`${rut}`, 10, 172);    
+    doc.text("DeNegocios.cl SpA", 10, 107);
+    doc.text("76.717.904-9", 10, 112);
+    doc.text("P.p Emilio Jelves Olivares", 10,117);
+    doc.text("17.011.079-K", 10,122);
+    doc.line(10, 162, 90, 162);
+    doc.text(`${razon}`, 10, 167);
+    doc.text(`${rutEmpresa}`, 10, 172);
+    doc.text(`P.p. ${nombre}`, 10, 177);
+    doc.text(`${rut}`, 10, 182);
 
     doc.addPage();
     doc.setFont("arial");
