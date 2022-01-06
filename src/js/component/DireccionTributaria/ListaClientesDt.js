@@ -2,11 +2,13 @@ import React, { Fragment, useState, useContext } from 'react';
 import { Context } from "../../store/AppContext";
 import { useHistory } from 'react-router';
 
-const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSeleccionado }) => {
+const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado }) => {
     ///// Arreglar esto. Hay codigo que no me gusta y 1) No me permite filtrar por "secciones" de texto
     /// y 2) No me deja filtrar por mayusculas/minusculas
 
-    const HandlerClick = (event) => {
+    const HandlerClick = (object) => {
+        console.log(object);
+        setClienteDtCliqueado(object);
         setClienteSeleccionado(true);
     }
 
@@ -31,7 +33,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSelecc
                     {(store.clientesDt != null) ? 
                         ((clienteDtBuscado == "" || clienteDtBuscado == null) ? (
                             clientesDt.map((object, i) => 
-                                <tr key={i} onClick={(e)=>HandlerClick(e)}>
+                                <tr key={i} onClick={()=>HandlerClick(object)}>
                                     <td>{object.id}</td>
                                     <td>{object.razon}</td>
                                     <td>{object.rut}</td>
@@ -45,7 +47,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSelecc
                                 </tr>)
                         ):(clientesDt.filter(
                             contact => contact.razon == clienteDtBuscado || contact.rut == clienteDtBuscado || contact.correo == clienteDtBuscado || contact.representante == clienteDtBuscado || contact.rutRepresentante == clienteDtBuscado).map((object, i) => 
-                                <tr key={i} onClick={(e)=>HandlerClick(e)}>
+                                <tr key={i} onClick={()=>HandlerClick(object)}>
                                 <td>{object.id}</td>
                                 <td>{object.razon}</td>
                                 <td>{object.rut}</td>

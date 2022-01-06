@@ -10,6 +10,7 @@ const DireccionTributaria = () => {
     const [nuevoCliente, setNuevoCliente] = useState(false);
     const [clienteSeleccionado, setClienteSeleccionado] = useState(false);
     const [clienteDtBuscado, setClienteDtBuscado] = useState(null);
+    const [clienteDtCliqueado, setClienteDtCliqueado] = useState(null);
     const { store, actions } = useContext(Context);
     const { clientesDt } = store;
     const titulosHead = ["Bienvenido al Servicio de Direccion Tributaria", "Consulta información respecto a Clientes con este servicio contratado."];
@@ -25,7 +26,7 @@ const DireccionTributaria = () => {
     return (
         <Fragment>
             <Head contenido={titulosHead} />
-            {(clienteSeleccionado) ? (<ClienteSeleccionado store={store} clientesDt={clientesDt} setClienteSeleccionado={setClienteSeleccionado}/>) : null}
+            {(clienteSeleccionado) ? (<ClienteSeleccionado store={store} clientesDt={clientesDt} setClienteSeleccionado={setClienteSeleccionado} clienteDtCliqueado={clienteDtCliqueado}/>) : null}
             {(nuevoCliente) ? (<FormularioClienteDt setNuevoCliente={setNuevoCliente} />) : null}
             {(clienteSeleccionado || nuevoCliente) ? null : (
                 <Fragment>
@@ -41,7 +42,7 @@ const DireccionTributaria = () => {
                             <Buscador setClienteDt={setClienteDtBuscado}/>
                         </div>
                     </div>
-                    <ListaClientesDt store={store} clientesDt={clientesDt} clienteDtBuscado={clienteDtBuscado} setClienteSeleccionado={setClienteSeleccionado}/>
+                    <ListaClientesDt store={store} clientesDt={clientesDt} clienteDtBuscado={clienteDtBuscado} setClienteSeleccionado={setClienteSeleccionado} setClienteDtCliqueado={setClienteDtCliqueado}/>
                 </Fragment>)
             }
         </Fragment>
