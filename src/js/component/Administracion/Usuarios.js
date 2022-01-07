@@ -44,6 +44,7 @@ export const Usuarios = ({ listaUsuarios, setCrear, usuarioActivo, setUsuarioAct
 
     const HandlerBorrar = (event) => {
         actions.borrarUsuario(usuarioActivo)
+        setTimeout(() => {window.location.reload()}, 1000);
     };
 
     const HandlerCrear = (event) => {

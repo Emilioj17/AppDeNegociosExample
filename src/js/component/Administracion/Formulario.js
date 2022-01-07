@@ -21,7 +21,9 @@ const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
 
     const HandlerCrear = (event) => {
         actions.crearUsuario(datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
-        history.push("/");
+        //history.push("/Administracion");
+        setTimeout(() => {window.location.reload()}, 1000);
+        //setCrear(false)
     };
 
     const HandlerModificacionDatos = (event) => {
@@ -30,7 +32,8 @@ const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
 
     const HandlerModificar = (event) => {
         actions.editarUsuario(usuarioActivo, datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
-        history.push("/");
+        //history.push("/");
+        setTimeout(() => {window.location.reload()}, 1000);
     };
 
     let nombre = "";

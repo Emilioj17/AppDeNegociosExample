@@ -78,7 +78,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
 
 			editarUsuario: async (id, nombre, apellido, correo, clave, tipo) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/usuarios/" + id, {
+                fetch("http://127.0.0.1:5000/api/usuario/" + id, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -106,7 +106,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
 			
 			borrarUsuario: async (id) => {
                 //const store = getStore();
-                fetch("http://127.0.0.1:5000/api/usuarios/" + id, {
+                fetch("http://127.0.0.1:5000/api/usuario/" + id, {
                     method: "DELETE" //,
                     //headers: {
                     //    "Content-Type": "application/json",
@@ -145,7 +145,171 @@ const getState = ({ getStore, getActions, setStore  }) => {
                             error: "clientesDT " + error.message
                         })
                     });
-			},
+            },
+            
+            crearClienteDt: async (razon, rut, vigente, correo, fono, representante, rutRepresentante, fechaContratacion, erpyme) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/clienteDt", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "razon": razon,
+                        "rut": rut,
+                        "vigente": vigente,
+                        "correo": correo,
+                        "fono": fono,
+                        "representante": representante,
+                        "rutRepresentante": rutRepresentante,
+                        "fechaContratacion": fechaContratacion,
+                        "erpyme": erpyme
+                    })
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            response: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: error.message
+                        })
+                    });
+            },
+
+            editarClienteDt: async (id, razon, rut, vigente, correo, fono, representante, rutRepresentante, fechaContratacion, erpyme) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/clienteDt/" + id, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        //"Authorization": "Bearer " + store.token
+                    },
+                    body: JSON.stringify({
+                        "razon": razon,
+                        "rut": rut,
+                        "vigente": vigente,
+                        "correo": correo,
+                        "fono": fono,
+                        "representante": representante,
+                        "rutRepresentante": rutRepresentante,
+                        "fechaContratacion": fechaContratacion,
+                        "erpyme": erpyme
+                    })
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            response: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: error.message
+                        })
+                    });
+            },
+            
+            crearNota: async (comentario, clienteDtid) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/nota", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "comentario": comentario,
+                        "clienteDtid": clienteDtid,
+                    })
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            response: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: error.message
+                        })
+                    });
+            },
+
+            crearPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, clienteDtid) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/dt" + year, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "mes": mes,
+                        "numeroTransferencia": numeroTransferencia,
+                        "montoPagado": montoPagado,
+                        "montoCobrado": montoCobrado,
+                        "facturaNumero": facturaNumero,
+                        "clienteDtid": clienteDtid,
+                    })
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            response: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: error.message
+                        })
+                    });
+            },
+
+            editarPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, clienteDtid) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/dt" + year + "/" + clienteDtid, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        //"Authorization": "Bearer " + store.token
+                    },
+                    body: JSON.stringify({
+                        "mes": mes,
+                        "numeroTransferencia": numeroTransferencia,
+                        "montoPagado": montoPagado,
+                        "montoCobrado": montoCobrado,
+                        "facturaNumero": facturaNumero
+                    })
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            response: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: error.message
+                        })
+                    });
+            },
+
+            borrarPago: async (year, clienteDtid) => {
+                //const store = getStore();
+                fetch("http://127.0.0.1:5000/api/dt" + year + "/" + clienteDtid, {
+                    method: "DELETE" //,
+                    //headers: {
+                    //    "Content-Type": "application/json",
+                        //"Authorization": "Bearer " + store.token
+                    //}
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            response: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: error.message
+                        })
+                    });
+            },
 			
 
 		}
