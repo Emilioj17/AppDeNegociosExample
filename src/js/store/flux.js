@@ -5,8 +5,10 @@ const getState = ({ getStore, getActions, setStore  }) => {
 			usuario: null,
             response: null,
             clientesDt: null,
+            nota: null,  //Nota especifica al id del ClienteDt seleccionado
 		},
-		actions: {
+        actions: {
+            //Usuarios
 			getUsuarios:  async () => {
                 const store = getStore();
                 fetch("http://127.0.0.1:5000/api/usuario", {
@@ -103,6 +105,8 @@ const getState = ({ getStore, getActions, setStore  }) => {
                         })
                     });
             },
+
+            //Clientes Dt
             
             getClientesDt:  async () => {
                 const store = getStore();
@@ -194,6 +198,28 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     });
             },
             
+            //Notas Clientes Dt
+            getNota:  async (clienteDtid) => {
+                //const store = getStore();
+                fetch("http://127.0.0.1:5000/api/nota/" + clienteDtid, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        //"Authorization": "Bearer " + store.token
+                    }
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            nota: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: "clientesDT " + error.message
+                        })
+                    });
+            },
+
             crearNota: async (comentario, clienteDtid) => {
                 const store = getStore();
                 fetch("http://127.0.0.1:5000/api/nota", {
@@ -217,6 +243,8 @@ const getState = ({ getStore, getActions, setStore  }) => {
                         })
                     });
             },
+
+            //Pagos Clientes Dt
 
             crearPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, clienteDtid) => {
                 const store = getStore();

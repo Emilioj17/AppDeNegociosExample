@@ -1,10 +1,24 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { Context } from "../../store/AppContext";
 import InformacionCliente from "./ClienteSeleccionado/InformacionCliente";
 import Notas from "./ClienteSeleccionado/Notas";
 import Pagos from "./ClienteSeleccionado/Pagos";
 
 
-const ClienteSeleccionado = ({store, clientesD, setClienteSeleccionado, clienteDtCliqueado}) => {
+const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => {
+    const { store, actions } = useContext(Context);
+    const [detectorCambios, setDSetectorCambios] = useState(false);
+
+    useEffect(() => {
+        actions.getNota(clienteDtCliqueado.id);
+    }, []);
+
+    useEffect(() => {
+        actions.getNota(clienteDtCliqueado.id);
+        setDSetectorCambios(false);
+    }, [detectorCambios]);
+
+
     const HandlerCerrar = (event) => {
         setClienteSeleccionado(false)
     }
@@ -25,7 +39,7 @@ const ClienteSeleccionado = ({store, clientesD, setClienteSeleccionado, clienteD
                         <InformacionCliente clienteDtCliqueado={clienteDtCliqueado} />
                     </div>
                     <div className="cell small-6">
-                        <Notas clienteDtCliqueado={clienteDtCliqueado} />
+                        <Notas clienteDtCliqueado={clienteDtCliqueado} setDSetectorCambios={setDSetectorCambios}/>
                     </div>
                     <div className="cell">
                         <Pagos clienteDtCliqueado={clienteDtCliqueado} />

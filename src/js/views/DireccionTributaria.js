@@ -26,7 +26,7 @@ const DireccionTributaria = () => {
     return (
         <Fragment>
             <Head contenido={titulosHead} />
-            {(clienteSeleccionado) ? (<ClienteSeleccionado store={store} clientesDt={clientesDt} setClienteSeleccionado={setClienteSeleccionado} clienteDtCliqueado={clienteDtCliqueado}/>) : null}
+            {(clienteSeleccionado) ? (<ClienteSeleccionado setClienteSeleccionado={setClienteSeleccionado} clienteDtCliqueado={clienteDtCliqueado}/>) : null}
             {(nuevoCliente) ? (<FormularioClienteDt setNuevoCliente={setNuevoCliente} />) : null}
             {(clienteSeleccionado || nuevoCliente) ? null : (
                 <Fragment>
