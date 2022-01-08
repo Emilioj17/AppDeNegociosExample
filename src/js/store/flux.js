@@ -138,7 +138,6 @@ const getState = ({ getStore, getActions, setStore  }) => {
                         setStore({
                             clientesDt: data
                         })
-                        console.log(data);
                     })
                     .catch((error) => {
                         setStore({
@@ -147,7 +146,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     });
             },
             
-            crearClienteDt: async (razon, rut, vigente, correo, fono, representante, rutRepresentante, fechaContratacion, erpyme) => {
+            crearClienteDt: async (razon, rut, correo, fono, representante, rutRepresentante, fechaContratacion, erpyme) => {
                 const store = getStore();
                 fetch("http://127.0.0.1:5000/api/clienteDt", {
                     method: "POST",
@@ -157,13 +156,14 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     body: JSON.stringify({
                         "razon": razon,
                         "rut": rut,
-                        "vigente": vigente,
+                        "rutsinpuntos": "rut", /* Revisar */
+                        "vigente": "true",  /* Revisar */
                         "correo": correo,
                         "fono": fono,
                         "representante": representante,
                         "rutRepresentante": rutRepresentante,
                         "fechaContratacion": fechaContratacion,
-                        "erpyme": erpyme
+                        "erpyme": erpyme   /* Revisar */
                     })
                 }).then((response) => response.json())
                     .then((data) => {

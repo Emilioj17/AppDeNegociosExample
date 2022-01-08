@@ -7,7 +7,6 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSelecc
     /// y 2) No me deja filtrar por mayusculas/minusculas
 
     const HandlerClick = (object) => {
-        console.log(object);
         setClienteDtCliqueado(object);
         setClienteSeleccionado(true);
     }

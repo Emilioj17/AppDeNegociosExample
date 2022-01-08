@@ -86,7 +86,7 @@ const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
                     </label>
                     <div className="">
                         <label className="form-label" htmlFor='tipo'>Elige Tipo de Usuario</label>
-                        <select className="form-select" id="tipo" placeholder={tipo} name="tipo" name="tipo" onChange={(e)=>HandlerModificacionDatos(e)}>
+                        <select className="form-select" id="tipo" placeholder={tipo} name="tipo" onChange={(e)=>HandlerModificacionDatos(e)}>
                             <option selected={(tipo === "Administrador") ? "selected" : ""}>Administrador</option>
                             <option selected={(tipo === "Vendedor") ? "selected" : ""}>Vendedor</option>
                             <option selected={(tipo === "Cobranza") ? "selected" : ""}>Cobranza</option>
