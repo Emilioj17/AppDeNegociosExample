@@ -14,6 +14,7 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
     const [datos, setDatos] = useState({
         razon: "",
         rut: "",
+        vigente: "true",
         correo: "",
         correoSecundario: "",
         correoTerciario: "",
@@ -21,7 +22,7 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
         representante: "",
         rutRepresentante: "",
         fechaContratacion: "",
-        erpyme: "",
+        erpyme: "false",
       });
 
 

@@ -28,27 +28,6 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     });
 			},
 			
-			getUsuario: async (id) => {
-                const store = getStore();
-                fetch("http://127.0.0.1:5000/api/usuario/" + id, {
-                    method: "GET",
-                    header: {
-                        "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
-                    }
-                }).then((response) => response.json())
-                    .then((data) => {
-                        setStore({
-                            usuario: data
-                        })
-                    })
-                    .catch((error) => {
-                        setStore({
-                            error: "usuario " + error.message
-                        })
-                    });
-			},
-			
 			crearUsuario: async (nombre, apellido, correo, clave, tipo) => {
                 const store = getStore();
                 fetch("http://127.0.0.1:5000/api/usuario", {
@@ -146,7 +125,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     });
             },
             
-            crearClienteDt: async (razon, rut, correo, fono, representante, rutRepresentante, fechaContratacion, erpyme) => {
+            crearClienteDt: async (razon, rut, vigente, correo, correoSecundario, correoTerciario, fono, representante, rutRepresentante, fechaContratacion, erpyme) => {
                 const store = getStore();
                 fetch("http://127.0.0.1:5000/api/clienteDt", {
                     method: "POST",
@@ -157,13 +136,15 @@ const getState = ({ getStore, getActions, setStore  }) => {
                         "razon": razon,
                         "rut": rut,
                         "rutsinpuntos": "rut", /* Revisar */
-                        "vigente": "true",  /* Revisar */
+                        "vigente": vigente,
                         "correo": correo,
+                        "correoSecundario": correoSecundario,
+                        "correoTerciario": correoTerciario,
                         "fono": fono,
                         "representante": representante,
                         "rutRepresentante": rutRepresentante,
                         "fechaContratacion": fechaContratacion,
-                        "erpyme": erpyme   /* Revisar */
+                        "erpyme": erpyme
                     })
                 }).then((response) => response.json())
                     .then((data) => {
@@ -178,7 +159,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     });
             },
 
-            editarClienteDt: async (id, razon, rut, vigente, correo, fono, representante, rutRepresentante, fechaContratacion, erpyme) => {
+            editarClienteDt: async (id, razon, rut, vigente, correo, correoSecundario, correoTerciario, fono, representante, rutRepresentante, fechaContratacion, erpyme) => {
                 const store = getStore();
                 fetch("http://127.0.0.1:5000/api/clienteDt/" + id, {
                     method: "PUT",
@@ -189,8 +170,11 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     body: JSON.stringify({
                         "razon": razon,
                         "rut": rut,
+                        "rutsinpuntos": "rut", /* Revisar */
                         "vigente": vigente,
                         "correo": correo,
+                        "correoSecundario": correoSecundario,
+                        "correoTerciario": correoTerciario,
                         "fono": fono,
                         "representante": representante,
                         "rutRepresentante": rutRepresentante,
