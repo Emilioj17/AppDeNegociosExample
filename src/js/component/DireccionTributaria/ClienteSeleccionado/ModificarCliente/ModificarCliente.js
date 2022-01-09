@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { Context } from "../../store/AppContext";
-import { ValidarRut } from "../../Helper/ValidarRut";
+import { Context } from "../../../../store/AppContext";
+import { ValidarRut } from "../../../../Helper/ValidarRut";
 
 //Este Formulario es de Direccion Tributaria (Crear un Nuevo Cliente)
 

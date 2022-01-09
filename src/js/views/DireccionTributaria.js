@@ -6,6 +6,10 @@ import ListaClientesDt from "../component/DireccionTributaria/ListaClientesDt";
 import FormularioClienteDt from "../component/DireccionTributaria/FormularioClienteDt";
 import ClienteSeleccionado from "../component/DireccionTributaria/ClienteSeleccionado";
 
+//Esta es la rama Principal de Direccion Tributaria. Aquí se despliega ListaClientesDt.js y el Buscador.js. Además si
+//se da clic a un elemento de la ListaClientesDt.js se ejecuta ClienteSeleccionado.js. También puedes hacer clic en
+//Nuevo Cliente y se ejecutará FormularioClienteDt.js.
+
 const DireccionTributaria = () => {
     const [nuevoCliente, setNuevoCliente] = useState(false);
     const [clienteSeleccionado, setClienteSeleccionado] = useState(false);
@@ -33,8 +37,8 @@ const DireccionTributaria = () => {
                     <div className='row'>
                         <div className='button-group align-right'>
                             <button className="submit success button" onClick={(e)=>HandlerNuevoCliente(e)}>Nuevo Cliente</button>
-                            <button className="submit button">Filtrar Avanzado</button>
-                            <button className="submit button">Exportar Seleccion</button>
+                            <button className="submit button" disabled>Filtrar Avanzado</button>
+                            <button className="submit button" disabled>Exportar Seleccion</button>
                         </div>
                     </div>
                     <div className='row'>

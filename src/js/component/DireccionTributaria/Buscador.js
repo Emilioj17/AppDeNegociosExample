@@ -1,7 +1,6 @@
-import React, { useState, useContext } from 'react';
-import { Context } from "../../store/AppContext";
-import { useHistory } from 'react-router';
+import React from 'react';
 
+//Aún no permite buscar correctamente. Solo permite busqueda 100% exacta.
 
 const Buscador = ({setClienteDt}) => {
     const HandlerOnChange = (event) => {

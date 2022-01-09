@@ -36,7 +36,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSelecc
                                     <td>{object.id}</td>
                                     <td>{object.razon}</td>
                                     <td>{object.rut}</td>
-                                    <td>{object.correo}</td>
+                                    <td>{object.correo}{object.correoSecundario === "" ? null : (<span>, {object.correoSecundario}</span>)}{object.correoTerciario === "" ? null : (<span>, {object.correoTerciario}</span>)}</td>
                                     <td>{object.fono}</td>
                                     <td>{object.representante}</td>
                                     <td>{object.rutRepresentante}</td>
