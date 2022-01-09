@@ -113,12 +113,14 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
         if (datos.razon.trim() === "" || datos.rut.trim() === "" || datos.representante.trim() === "" || datos.rutRepresentante.trim() === ""
             || datos.fechaContratacion.trim() === "" || datos.erpyme.trim() === "" || datos.correo.trim() === "" || datos.fono.trim() === "") {
             setAlertPrincipal(true);
-        } else if(alertRut || alertRutRepresentante || alertCorreo){
-            setAlertPrincipal(true);
-        }else {
-            setAlertPrincipal(false);
-            actions.crearClienteDt(datos.razon, datos.rut, datos.correo, datos.fono, datos.representante, datos.rutRepresentante, datos.fechaContratacion, datos.erpyme);
-            setTimeout(() => {window.location.reload()}, 1000);
+        } else {
+            if (alertRut || alertRutRepresentante || alertCorreo) {
+                setAlertPrincipal(true);
+            } else {
+                setAlertPrincipal(false);
+                actions.crearClienteDt(datos.razon, datos.rut, datos.vigente, datos.correo, datos.correoSecundario, datos.correoTerciario, datos.fono, datos.representante, datos.rutRepresentante, datos.fechaContratacion, datos.erpyme);
+                setTimeout(() => {window.location.reload()}, 1000);
+            }
         }
         
     };
@@ -138,10 +140,6 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
                     <div className="columns">
                         <form className="log-in-form">
                             <h4 className="text-left">Ingresa los Datos solicitados para crear un Cliente para el Servicio</h4>
-                            {alertPrincipal ? (<div className="callout alert text-center">Por favor, todos los datos deben ser completados</div>) : null}
-                            {alertRut ? (<div className="callout alert text-center">Rut Sociedad Incorrecto</div>) : null}
-                            {alertCorreo?(<div className="callout alert text-center">Correo Incorrecto</div>):null}
-                            {alertRutRepresentante?(<div className="callout alert text-center">Rut Representante Incorrecto</div>):null}
                             <label>
                                 Razon Social
                                 <input type="text"
@@ -209,6 +207,9 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
                     </div>
                 </div>
                 {alertPrincipal ? (<div className="callout alert text-center">Por favor, todos los datos deben ser completados</div>) : null}
+                {alertRut ? (<div className="callout alert text-center">Rut Sociedad Incorrecto</div>) : null}
+                {alertCorreo?(<div className="callout alert text-center">Correo Incorrecto</div>):null}
+                {alertRutRepresentante?(<div className="callout alert text-center">Rut Representante Incorrecto</div>):null}
                 <div className='button-group align-right'>
                     <button className="submit success button" onClick={(e)=> HandlerCrearNuevoCliente(e)}>Crear Cliente</button>
                     <button className="submit warning button" onClick={(e)=> HandlerReset(e)} >Resetar Formulario</button>

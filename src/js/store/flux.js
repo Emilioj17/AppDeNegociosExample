@@ -143,13 +143,12 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     body: JSON.stringify({
                         "razon": razon,
                         "rut": rut,
-                        "rutsinpuntos": "rut", /* Revisar */
                         "vigente": vigente,
                         "correo": correo,
                         "correoSecundario": correoSecundario,
                         "correoTerciario": correoTerciario,
                         "fono": fono,
-                        "representante": representante,
+                        "representante": representante, 
                         "rutRepresentante": rutRepresentante,
                         "fechaContratacion": fechaContratacion,
                         "erpyme": erpyme
@@ -178,7 +177,6 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     body: JSON.stringify({
                         "razon": razon,
                         "rut": rut,
-                        "rutsinpuntos": "rut", /* Revisar */
                         "vigente": vigente,
                         "correo": correo,
                         "correoSecundario": correoSecundario,
