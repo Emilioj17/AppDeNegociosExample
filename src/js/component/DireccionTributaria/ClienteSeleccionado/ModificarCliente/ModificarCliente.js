@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Context } from "../../../../store/AppContext";
 import { ValidarRut } from "../../../../Helper/ValidarRut";
 
-//Este Formulario es de Direccion Tributaria (Crear un Nuevo Cliente)
+//Este Formulario es de Direccion Tributaria (Modificar Cliente Existente)
 
 const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetectorCambios }) => {
     const { store, actions } = useContext(Context);
@@ -11,17 +11,17 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
     const [alertRutRepresentante, setAlertRutRepresentante] = useState(false);
     const [alertCorreo, setAlertCorreo] = useState(false);
     const [datos, setDatos] = useState({
-        razon: "",
-        rut: "",
-        vigente: "true",
-        correo: "",
-        correoSecundario: "",
-        correoTerciario: "",
-        fono: "",
-        representante: "",
-        rutRepresentante: "",
-        fechaContratacion: "",
-        erpyme: "false",
+        razon: null,
+        rut: null,
+        vigente: null,
+        correo: null,
+        correoSecundario: null,
+        correoTerciario: null,
+        fono: null,
+        representante: null,
+        rutRepresentante: null,
+        fechaContratacion: null,
+        erpyme: null,
       });
 
 
@@ -100,6 +100,9 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
     }
 
     const HandlerModificarCliente = (event) => {
+        actions.editarClienteDt(clienteDtCliqueado.id, datos.razon, datos.rut, datos.vigente, datos.correo, datos.correoSecundario, datos.correoTerciario, datos.fono, datos.representante, datos.rutRepresentante, datos.fechaContratacion, datos.erpyme);
+        setDSetectorCambios(true);
+        setTimeout(() => { setModificarCliente(false) }, 500);
     };
 
     const HandlerCompletarDatos = (event) => {

@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
 			usuario: null,
             response: null,
             clientesDt: null,
+            infoClienteDt: null,
             nota: null,  //Notas especificas al id del ClienteDt seleccionado
             pago2019: null,  //Pagos especificos al id del ClienteDt seleccionado
             pago2020: null,  //Pagos especificos al id del ClienteDt seleccionado
@@ -124,6 +125,27 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     .then((data) => {
                         setStore({
                             clientesDt: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: "clientesDT " + error.message
+                        })
+                    });
+            },
+
+            getClienteDt:  async (clienteDtid) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/clienteDt/"+ clienteDtid, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        //"Authorization": "Bearer " + store.token
+                    }
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            infoClienteDt: data
                         })
                     })
                     .catch((error) => {

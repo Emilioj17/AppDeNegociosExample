@@ -7,11 +7,11 @@ import { useHistory } from 'react-router';
 const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
     const { store, actions } = useContext(Context);
     const [datos, setDatos] = useState({
-        nombre: "",
-        apellido: "",
-        correo: "",
-        clave: "",
-        tipo: ""
+        nombre: null,
+        apellido: null,
+        correo: null,
+        clave: null,
+        tipo: null
     });
     let history = useHistory();
 

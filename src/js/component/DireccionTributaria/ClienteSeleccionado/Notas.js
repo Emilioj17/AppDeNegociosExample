@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { Context } from "../../../store/AppContext";
-import { useHistory } from 'react-router';
 
 
 const Notas = ({ clienteDtCliqueado, setDSetectorCambios}) => {
@@ -23,7 +22,6 @@ const Notas = ({ clienteDtCliqueado, setDSetectorCambios}) => {
                     <h4>Notas</h4>
                 </div>
                 <div className="card-section">
-                    ...No hay Notas...
                     <table className="table">
                         <tbody>
                         {(store.nota != null) ? (
@@ -31,7 +29,8 @@ const Notas = ({ clienteDtCliqueado, setDSetectorCambios}) => {
                                 <tr key={i}>
                                     <td>{object.comentario}</td>
                                 </tr>)
-                        ) : (null)}
+                        ) : (<p>No hay Notas...</p>)}
+                        {store.nota=="" ? (<p>No hay Notas...</p>): null}
                         </tbody>
                     </table>
                 </div>

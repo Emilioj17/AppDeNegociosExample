@@ -12,10 +12,13 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
 
     useEffect(() => {
         actions.getNota(clienteDtCliqueado.id);
+        actions.getClienteDt(clienteDtCliqueado.id);
     }, []);
 
     useEffect(() => {
         actions.getNota(clienteDtCliqueado.id);
+        actions.getClienteDt(clienteDtCliqueado.id);
+        actions.getClientesDt();
         setDSetectorCambios(false);
     }, [detectorCambios]);
 
@@ -40,6 +43,7 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
                         <button className="submit success button" onClick={(e)=>HandlerModificarCliente(e)}>Modificar Cliente</button>
                         <button className="submit warning button disabled">Sacar Informe</button>
                     </div>
+                    <h3>{clienteDtCliqueado.razon}</h3>
                     <div className="grid-x">
                         <div className="cell small-6">
                             <InformacionCliente clienteDtCliqueado={clienteDtCliqueado} />
