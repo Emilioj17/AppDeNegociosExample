@@ -4,9 +4,8 @@ import { ValidarRut } from "../../../../Helper/ValidarRut";
 
 //Este Formulario es de Direccion Tributaria (Crear un Nuevo Cliente)
 
-const FormularioClienteDt = ({ setNuevoCliente }) => {
+const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetectorCambios }) => {
     const { store, actions } = useContext(Context);
-    const [correoAdicional, setCorreoAdicional] = useState(false);
     const [alertPrincipal, setAlertPrincipal] = useState(false);
     const [alertRut, setAlertRut] = useState(false);
     const [alertRutRepresentante, setAlertRutRepresentante] = useState(false);
@@ -27,7 +26,7 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
 
 
     const HandlerCerrar = (event) => {
-        setNuevoCliente(false)
+        setModificarCliente(false)
     }
 
     const HandlerValidarRut = (event) => {
@@ -100,35 +99,7 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
         }
     }
 
-    const HandlerReset = () => {
-        setDatos({
-            razon: "",
-            rut: "",
-            correo: "",
-            correoSecundario: "",
-            correoTerciario: "",
-            fono: "",
-            representante: "",
-            rutRepresentante: "",
-            fechaContratacion: "",
-            erpyme: ""
-        });
-    }
-
-    const HandlerCrearNuevoCliente = (event) => {
-        if (datos.razon.trim() === "" || datos.rut.trim() === "" || datos.representante.trim() === "" || datos.rutRepresentante.trim() === ""
-            || datos.fechaContratacion.trim() === "" || datos.erpyme.trim() === "" || datos.correo.trim() === "" || datos.fono.trim() === "") {
-            setAlertPrincipal(true);
-        } else {
-            if (alertRut || alertRutRepresentante || alertCorreo) {
-                setAlertPrincipal(true);
-            } else {
-                setAlertPrincipal(false);
-                actions.crearClienteDt(datos.razon, datos.rut, datos.vigente, datos.correo, datos.correoSecundario, datos.correoTerciario, datos.fono, datos.representante, datos.rutRepresentante, datos.fechaContratacion, datos.erpyme);
-                setTimeout(() => {window.location.reload()}, 1000);
-            }
-        }
-        
+    const HandlerModificarCliente = (event) => {
     };
 
     const HandlerCompletarDatos = (event) => {
@@ -142,65 +113,59 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
                     <span aria-hidden="true">×</span>
                 </button>
                 <div className="row">
-                    {/* Aquí hay un valor que no se solicita, que es el de Vigente. Por default= true */}
                     <div className="columns">
                         <form className="log-in-form">
-                            <h4 className="text-left">Ingresa los Datos solicitados para crear un Cliente para el Servicio</h4>
+                            <h4 className="text-left">Vas a Modificar Informacion de <strong>{clienteDtCliqueado.razon}</strong></h4>
                             <label>
                                 Razon Social
                                 <input type="text"
-                                    placeholder="Razon Social Completa" value={datos.razon} name="razon" onChange={(e)=>HandlerCompletarDatos(e)}/>
+                                    placeholder={clienteDtCliqueado.razon} value={datos.razon} name="razon" onChange={(e)=>HandlerCompletarDatos(e)}/>
                             </label>
                             <label>
                                 Rut
                                 <input type="text"
-                                    placeholder="Rut Sin Puntos" value={datos.rut} name="rut" onChange={(e) => HandlerValidarRut(e)}/>
+                                    placeholder={clienteDtCliqueado.rut} value={datos.rut} name="rut" onChange={(e) => HandlerValidarRut(e)}/>
                             </label>
                             <label>
                                 Correo o email
                                 <input type="text"
-                                    placeholder="Un correo email Completo" name="correo" value={datos.correo} onChange={(e) => HandlerValidarCorreo(e)}/>
+                                    placeholder={clienteDtCliqueado.correo} name="correo" value={datos.correo} onChange={(e) => HandlerValidarCorreo(e)}/>
                             </label>
-                            <div>
-                                <label>Deseas agregar Correos Adionales?</label>
-                                <input type="radio" id="html" name="fav_language" value="No" onClick={()=>setCorreoAdicional(false)}/>
-                                <label htmlFor="html">No</label>
-                                <input type="radio" id="html" name="fav_language" value="Si" onClick={()=>setCorreoAdicional(true)}/>
-                                <label htmlFor="html">Si</label>
-                            </div>
-                            {correoAdicional ? (
-                                <div className='card-divider'>
-                                    <label>
-                                        Correo Secundario
-                                        <input type="text"
-                                            placeholder="Un correo email Completo" name="correoSecundario" value={datos.correoSecundario} onChange={(e) => HandlerValidarCorreo(e)}/>
-                                    </label>
-                                    <label>
-                                        Correo Terciario
-                                        <input type="text"
-                                            placeholder="Un correo email Completo" name="correoTerciario" value={datos.correoTerciario} onChange={(e) => HandlerValidarCorreo(e)}/>
-                                        </label>
-                                </div>
-                            ): null}
-                            
+                            <label>
+                                Correo Secundario
+                                <input type="text"
+                                    placeholder={clienteDtCliqueado.correoSecundario} name="correoSecundario" value={datos.correoSecundario} onChange={(e) => HandlerValidarCorreo(e)}/>
+                            </label>
+                            <label>
+                                Correo Terciario
+                                <input type="text"
+                                    placeholder={clienteDtCliqueado.correoTerciario} name="correoTerciario" value={datos.correoTerciario} onChange={(e) => HandlerValidarCorreo(e)}/>
+                            </label>
                             <label>
                                 Telefono
                                 <input type="text"
-                                    placeholder="Un Número de Telefono" name="fono" value={datos.fono} onChange={(e)=>HandlerCompletarDatos(e)}/>
+                                    placeholder={clienteDtCliqueado.fono} name="fono" value={datos.fono} onChange={(e)=>HandlerCompletarDatos(e)}/>
                             </label>
                             <label>
                                 Representante Legal
                                 <input type="text"
-                                    placeholder="Nombre Completo Representante Legal" name="representante" value={datos.representante} onChange={(e)=>HandlerCompletarDatos(e)}/>
+                                    placeholder={clienteDtCliqueado.representante} name="representante" value={datos.representante} onChange={(e)=>HandlerCompletarDatos(e)}/>
                             </label>
                             <label>
                                 Rut Representante Legal
                                 <input type="text"
-                                    placeholder="Rut sin puntos y con Guión" name="rutRepresentante" value={datos.rutRepresentante} onChange={(e) => HandlerValidarRut(e)}/>
+                                    placeholder={clienteDtCliqueado.rutRepresentante} name="rutRepresentante" value={datos.rutRepresentante} onChange={(e) => HandlerValidarRut(e)}/>
                             </label>
                             <div>
                                 <label htmlFor="start">Fecha de Contratacion</label>
                                 <input type="date" id="start" min="2018-01-01" max="2025-12-31" name="fechaContratacion" onChange={(e) => HandlerCompletarDatos(e)}/>
+                            </div>
+                            <div>
+                                <label className="form-label" htmlFor='vigente'>Está Vigente este Cliente?</label>
+                                <select className="form-select" id="vigente" name="vigente" onChange={(e) => HandlerCompletarDatos(e)}>
+                                    <option value="true">Vigente</option>
+                                    <option value="false" selected>No Vigente</option>
+                                </select>
                             </div>
                             <div>
                                 <label className="form-label" htmlFor='erpyme'>Ya está Ingresado en Erpyme?</label>
@@ -217,8 +182,7 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
                 {alertCorreo?(<div className="callout alert text-center">Correo Incorrecto</div>):null}
                 {alertRutRepresentante?(<div className="callout alert text-center">Rut Representante Incorrecto</div>):null}
                 <div className='button-group align-right'>
-                    <button className="submit success button" onClick={(e)=> HandlerCrearNuevoCliente(e)}>Crear Cliente</button>
-                    <button className="submit warning button" onClick={(e)=> HandlerReset(e)} >Resetar Formulario</button>
+                    <button className="submit success button" onClick={(e)=> HandlerModificarCliente(e)}>Modificar Cliente</button>
                     <button className="submit button" onClick={(e)=>HandlerCerrar(e)}>Cerrar Ventana</button>
                 </div>
             </div>
@@ -226,4 +190,4 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
     );
 }
 
-export default FormularioClienteDt;
+export default ModificarClienteDt;
