@@ -15,7 +15,7 @@ export const Contrato30dias = (datos, img) => {
     doc.text("CONTRATO DE SUBARRIENDO", 100, 25, { align: "center" });
     doc.line(47, 26, 153, 26)
     doc.setFontSize(12)
-    var text1 = `En Santiago de Chile, a ${fecha}, entre don DENEGOCIOS.CL SpA, Rut 76.717.904-9, representada legalmente por Emilio Jelves Olivares, Rut 17.011.079-K, domiciliado en Calle Ahumada 254, oficina 806, Comuna de Santiago, como “SUB ARRENDADOR", y, don(a) ${nombre}, Rut ${rut}, Representante legal de la empresa ${razon}, Rut número ${rutEmpresa}, de nacionalidad ${nacionalidad}, como el “SUB ARRENDATARIO” quienes han convenido celebrar el siguiente CONTRATO DE SUBARRENDAMIENTO que se regirá por las cláusulas que a continuación se expresan, y en silencio de ellas, por las disposiciones del Código Civil.`
+    var text1 = `En Santiago de Chile, a ${fecha}, entre DENEGOCIOS.CL SpA, Rut 76.717.904-9, representada legalmente por Emilio Jelves Olivares, Rut 17.011.079-K, domiciliado en Calle Ahumada 254, oficina 806, Comuna de Santiago, como “SUB ARRENDADOR", y, don(a) ${nombre}, Rut ${rut}, Representante legal de la empresa ${razon}, Rut número ${rutEmpresa}, de nacionalidad ${nacionalidad}, como el “SUB ARRENDATARIO” quienes han convenido celebrar el siguiente CONTRATO DE SUBARRENDAMIENTO que se regirá por las cláusulas que a continuación se expresan, y en silencio de ellas, por las disposiciones del Código Civil.`
     var splitTitle1 = doc.splitTextToSize(text1, 190);
     doc.text(10, 40, splitTitle1);
     doc.setFont("arial", "bold");

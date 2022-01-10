@@ -31,7 +31,7 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
                 </button>
                 <br />
                 <div className='button-group align-right'>
-                    <button className="submit success button">Modificar Cliente</button>
+                    <button className="submit success button" onClick={(e)=>(console.log(clienteDtCliqueado.dt2019ID))}>Modificar Cliente</button>
                     <button className="submit warning button disabled">Sacar Informe</button>
                 </div>
                 <div className="grid-x">

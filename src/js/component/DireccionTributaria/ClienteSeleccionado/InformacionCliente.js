@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
+import { SaldoTotal } from "../../../Helper/SaldoTotal";
 
 
-const InformacionCliente = ({clienteDtCliqueado}) => {
+const InformacionCliente = ({ clienteDtCliqueado }) => {
 
     return (
         <div className="cell small-6">
@@ -19,9 +20,9 @@ const InformacionCliente = ({clienteDtCliqueado}) => {
                         <li>Fecha Contratacion: {clienteDtCliqueado.fechaContratacion}</li>
                         <li>Erpyme: {clienteDtCliqueado.erpyme}</li>
                         <li>Vigente: {clienteDtCliqueado.vigente}</li>
-                        <li>Nacionalidad:</li>
                         <li>Correo: {clienteDtCliqueado.correo}</li>
                         <li>Fono: {clienteDtCliqueado.fono}</li>
+                        <li>Saldo Pendiente: ${SaldoTotal.montoSaldo(clienteDtCliqueado)}</li>
                     </ul>
                 </div>
             </div>

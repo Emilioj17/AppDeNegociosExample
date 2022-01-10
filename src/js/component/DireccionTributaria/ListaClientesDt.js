@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useContext } from 'react';
-import { Context } from "../../store/AppContext";
-import { useHistory } from 'react-router';
+import { SaldoTotal } from "../../Helper/SaldoTotal";
 
 const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado }) => {
     ///// Arreglar esto. Hay codigo que no me gusta y 1) No me permite filtrar por "secciones" de texto
@@ -21,11 +20,12 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSelecc
                         <th scope="col">Rut</th>
                         <th scope="col">Correo</th>
                         <th scope="col">Teléfono</th>
-                        <th scope="col">Representante Legal</th>
-                        <th scope="col">Rut Representante</th>
+                        <th scope="col">Rep Legal</th>
+                        <th scope="col">Rut Rep</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Vigente</th>
                         <th scope="col">Erpyme</th>
+                        <th scope="col">Saldo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +43,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSelecc
                                     <td>{object.fechaContratacion}</td>
                                     <td>{object.vigente}</td>
                                     <td>{object.erpyme}</td>
+                                    <td>${SaldoTotal.montoSaldo(object)}</td>
                                 </tr>)
                         ):(clientesDt.filter(
                             contact => contact.razon == clienteDtBuscado || contact.rut == clienteDtBuscado || contact.correo == clienteDtBuscado || contact.representante == clienteDtBuscado || contact.rutRepresentante == clienteDtBuscado).map((object, i) => 
@@ -57,6 +58,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSelecc
                                 <td>{object.fechaContratacion}</td>
                                 <td>{object.vigente}</td>
                                 <td>{object.erpyme}</td>
+                                <td>${SaldoTotal.montoSaldo(object)}</td>
                             </tr>)))
                     : 
                         (<td colSpan="9" style={{height:"100px", padding:"20px"}}><h2 className="text-center"> - no hay datos -</h2></td>)

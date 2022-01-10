@@ -26,9 +26,9 @@ const Pagos = ({clienteDtCliqueado}) => {
                             <tr key={i}>
                                 <td>2019</td>
                                 <td>{object.mes}</td>
-                                <td>{object.montoCobrado}</td>
-                                <td>{object.montoPagado}</td>
-                                <td>XXX</td>
+                                <td>${object.montoCobrado}</td>
+                                <td>${object.montoPagado}</td>
+                                <td>${object.montoCobrado - object.montoPagado}</td>
                                 <td>{object.numeroTransferencia}</td>
                                 <td>{object.facturaNumero}</td>
                                 <td>01 de Agosto de 2069</td>
@@ -37,9 +37,9 @@ const Pagos = ({clienteDtCliqueado}) => {
                             <tr key={i}>
                                 <td>2020</td>
                                 <td>{object.mes}</td>
-                                <td>{object.montoCobrado}</td>
-                                <td>{object.montoPagado}</td>
-                                <td>XXX</td>
+                                <td>${object.montoCobrado}</td>
+                                <td>${object.montoPagado}</td>
+                                <td>${object.montoCobrado - object.montoPagado}</td>
                                 <td>{object.numeroTransferencia}</td>
                                 <td>{object.facturaNumero}</td>
                                 <td>01 de Agosto de 2069</td>
@@ -48,9 +48,9 @@ const Pagos = ({clienteDtCliqueado}) => {
                             <tr key={i}>
                                 <td>2021</td>
                                 <td>{object.mes}</td>
-                                <td>{object.montoCobrado}</td>
-                                <td>{object.montoPagado}</td>
-                                <td>XXX</td>
+                                <td>${object.montoCobrado}</td>
+                                <td>${object.montoPagado}</td>
+                                <td>${object.montoCobrado - object.montoPagado}</td>
                                 <td>{object.numeroTransferencia}</td>
                                 <td>{object.facturaNumero}</td>
                                 <td>01 de Agosto de 2069</td>
@@ -59,9 +59,9 @@ const Pagos = ({clienteDtCliqueado}) => {
                             <tr key={i}>
                                 <td>2022</td>
                                 <td>{object.mes}</td>
-                                <td>{object.montoCobrado}</td>
-                                <td>{object.montoPagado}</td>
-                                <td>XXX</td>
+                                <td>${object.montoCobrado}</td>
+                                <td>${object.montoPagado}</td>
+                                <td>${object.montoCobrado - object.montoPagado}</td>
                                 <td>{object.numeroTransferencia}</td>
                                 <td>{object.facturaNumero}</td>
                                 <td>01 de Agosto de 2069</td>
