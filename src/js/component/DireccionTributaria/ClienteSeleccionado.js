@@ -58,7 +58,7 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
                                     </div>
                                 </div>
                                 <div className="grid-x">
-                                    <div className='cell small-12 print-yes'>{(store.infoClienteDt != null) ? (<h3>{store.infoClienteDt.razon}</h3>):null}</div>
+                                    <div className='cell small-12 print-yes text-center'>{(store.infoClienteDt != null) ? (<h3>{store.infoClienteDt.razon}</h3>):null}</div>
                                     <div className="cell small-6 no-print">
                                         <InformacionCliente clienteDtCliqueado={clienteDtCliqueado} />
                                     </div>
@@ -66,7 +66,7 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
                                         <InformacionCliente clienteDtCliqueado={clienteDtCliqueado} />
                                     </div>
                                     <div className="cell small-4 print-yes">
-                                        <p>Por favor, realizar sus transferencias y pagos a:</p>
+                                        <p>Por favor, realizar transferencias/pagos a:</p>
                                         <ul>
                                             <li>BANCO ESTADO</li>
                                             <li>Empresa: DeNegocios.cl SpA</li>
