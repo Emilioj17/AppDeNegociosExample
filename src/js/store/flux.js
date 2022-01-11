@@ -282,7 +282,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     .then((data) => {
                         setStore({
                             pago2019: data
-                        })
+                        });
                     })
                     .catch((error) => {
                         setStore({
@@ -314,7 +314,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
 
             getPago2021:  async (clienteDtid) => {
                 //const store = getStore();
-                fetch("http://127.0.0.1:5000/api/dt2021" + clienteDtid, {
+                fetch("http://127.0.0.1:5000/api/dt2021/" + clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -335,7 +335,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
 
             getPago2022:  async (clienteDtid) => {
                 //const store = getStore();
-                fetch("http://127.0.0.1:5000/api/dt2022" + clienteDtid, {
+                fetch("http://127.0.0.1:5000/api/dt2022/" + clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

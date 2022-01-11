@@ -8,7 +8,7 @@ const InformacionCliente = ({ clienteDtCliqueado }) => {
     return (
         <div className="cell small-6">
             <div className="card" style={{width: '99%'}}>
-                <div className="card-divider">
+                <div className="card-divider no-print">
                     <h4>Informacion de Cliente</h4>
                 </div>
                 <div className="card-section">
@@ -20,8 +20,8 @@ const InformacionCliente = ({ clienteDtCliqueado }) => {
                                     <li>Nombre de Representante: {store.infoClienteDt.representante}</li>
                                     <li>Rut Representante: {store.infoClienteDt.rutRepresentante}</li>
                                     <li>Fecha Contratacion: {store.infoClienteDt.fechaContratacion}</li>
-                                    <li>Erpyme: {store.infoClienteDt.erpyme}</li>
-                                    <li>Vigente: {store.infoClienteDt.vigente}</li>
+                                    <li className='no-print'>Erpyme: {store.infoClienteDt.erpyme}</li>
+                                    <li className='no-print'>Vigente: {store.infoClienteDt.vigente}</li>
                                     <li>Correo: {store.infoClienteDt.correo}</li>
                                     <li>Fono: {store.infoClienteDt.fono}</li>
                                     <li>Saldo Pendiente: ${SaldoTotal.montoSaldo(store.infoClienteDt)}</li>

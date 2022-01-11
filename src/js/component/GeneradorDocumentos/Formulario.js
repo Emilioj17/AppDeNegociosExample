@@ -60,7 +60,7 @@ const Formulario = ({ img, setImg, datos, setDatos }) => {
                     <input type="text" placeholder="4 de Agosto de 1588" value={datos.fecha} name="fecha" onChange={(e)=>Handler(e)}/>
                 </label>
             ):null}
-            <div className="Prueba">
+            <div className="Sube-Cedula">
                 <label className="">Sube Cédula de Identidad</label>
                 <input className="" accept="image/*" type='file' id="imgInp" onChange={handlerImg}/>
             </div>

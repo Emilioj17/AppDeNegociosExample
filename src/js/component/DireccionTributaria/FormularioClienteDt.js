@@ -136,7 +136,7 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
     };
 
     return (
-        <div className='row'>
+        <div className='row no-print'>
             <div className="callout" data-closable>
                 <button className="close-button" aria-label="Dismiss alert" type="button" data-close onClick={(e)=>HandlerCerrar(e)}>
                     <span aria-hidden="true">×</span>

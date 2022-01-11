@@ -17,7 +17,7 @@ const Layout = () => {
 		<div className="off-canvas-wrapper">
 			<div className="off-canvas-wrapper-inner" data-off-canvas-wrapper>
 				<BrowserRouter basename={basename}>
-					<Navbar />
+					<Navbar/>
 					<div className="off-canvas-content" data-off-canvas-content>
 						<Switch className="Switch">
 							<Route exact path="/">
