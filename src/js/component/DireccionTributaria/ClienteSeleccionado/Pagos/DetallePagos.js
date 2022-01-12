@@ -6,6 +6,25 @@ import { Context } from "../../../../store/AppContext";
 const ModificarClienteDt = ({setClickPagos}) => {
     const { store, actions } = useContext(Context);
     const [borrarPagos, setBorrarPagos] = useState(false);
+    const [editarPagos, setEditarPagos] = useState(false);
+
+    const ListaDesplegarPagos = (object, i, year) => {
+        return (
+            <tr key={i}>
+                <td>{year}</td>
+                <td>{object.mes}</td>
+                <td>${object.montoCobrado}</td>
+                <td>${object.montoPagado}</td>
+                <td>${object.montoCobrado - object.montoPagado}</td>
+                <td>{object.numeroTransferencia}</td>
+                <td>{object.facturaNumero}</td>
+                <td>01/07/{year}</td>
+                {!borrarPagos && !editarPagos ? (<td></td>) : null}
+                {borrarPagos ? (<td>X</td>) : null}
+                {editarPagos ? (<td>?</td>):null}
+            </tr>
+        )
+    }
 
     const HandlerCerrar = (event) => {
         setClickPagos(false);
@@ -13,6 +32,12 @@ const ModificarClienteDt = ({setClickPagos}) => {
 
     const HandlerBorrarPagos = (event) => {
         borrarPagos ? setBorrarPagos(false) : setBorrarPagos(true);
+        setEditarPagos(false);
+    }
+
+    const HandlerEditarPagos = (event) => {
+        editarPagos ? setEditarPagos(false) : setEditarPagos(true);
+        setBorrarPagos(false);
     }
 
     return (
@@ -35,63 +60,19 @@ const ModificarClienteDt = ({setClickPagos}) => {
                     </thead>
                     <tbody>
                         {(store.pago2019 != null) ? (
-                                store.pago2019.map((object, i) => 
-                                    <tr key={i}>
-                                        <td>2019</td>
-                                        <td>{object.mes}</td>
-                                        <td>${object.montoCobrado}</td>
-                                        <td>${object.montoPagado}</td>
-                                        <td>${object.montoCobrado - object.montoPagado}</td>
-                                        <td>{object.numeroTransferencia}</td>
-                                        <td>{object.facturaNumero}</td>
-                                        <td>01/07/2019</td>
-                                        {borrarPagos ? (<td>X</td>): <td></td>}
-                                    </tr>)
+                                store.pago2019.map((object, i) => ListaDesplegarPagos(object, i, 2019))
                             ) : null
                         }
                         {(store.pago2020 != null) ? (
-                                store.pago2020.map((object, i) => 
-                                    <tr key={i}>
-                                        <td>2020</td>
-                                        <td>{object.mes}</td>
-                                        <td>${object.montoCobrado}</td>
-                                        <td>${object.montoPagado}</td>
-                                        <td>${object.montoCobrado - object.montoPagado}</td>
-                                        <td>{object.numeroTransferencia}</td>
-                                        <td>{object.facturaNumero}</td>
-                                        <td>01/07/2019</td>
-                                        {borrarPagos ? (<td>X</td>): <td></td>}
-                                    </tr>)
+                                store.pago2020.map((object, i) => ListaDesplegarPagos(object, i, 2020))
                             ) : null
                         }
                         {(store.pago2021 != null) ? (
-                                store.pago2021.map((object, i) => 
-                                    <tr key={i}>
-                                        <td>2021</td>
-                                        <td>{object.mes}</td>
-                                        <td>${object.montoCobrado}</td>
-                                        <td>${object.montoPagado}</td>
-                                        <td>${object.montoCobrado - object.montoPagado}</td>
-                                        <td>{object.numeroTransferencia}</td>
-                                        <td>{object.facturaNumero}</td>
-                                        <td>01/07/2019</td>
-                                        {borrarPagos ? (<td>X</td>): <td></td>}
-                                    </tr>)
+                                store.pago2021.map((object, i) => ListaDesplegarPagos(object, i, 2021))
                             ) : null
                         }
                         {(store.pago2022 != null) ? (
-                                store.pago2022.map((object, i) => 
-                                    <tr key={i}>
-                                        <td>2022</td>
-                                        <td>{object.mes}</td>
-                                        <td>${object.montoCobrado}</td>
-                                        <td>${object.montoPagado}</td>
-                                        <td>${object.montoCobrado - object.montoPagado}</td>
-                                        <td>{object.numeroTransferencia}</td>
-                                        <td>{object.facturaNumero}</td>
-                                        <td>01/07/2019</td>
-                                        {borrarPagos ? (<td>X</td>): <td></td>}
-                                    </tr>)
+                                store.pago2022.map((object, i) => ListaDesplegarPagos(object, i, 2022))
                             ) : null
                         }
                     </tbody>
@@ -100,7 +81,7 @@ const ModificarClienteDt = ({setClickPagos}) => {
             </div>
             <div className='button-group align-right'>
                     <button className="submit button">Agregar Pago</button>
-                    <button className="submit button">Editar Pago</button>
+                    <button className="submit button" onClick={(e)=>  HandlerEditarPagos(e)}>Editar Pago</button>
                     <button className="submit button" onClick={(e)=> HandlerBorrarPagos(e)}>Borrar Pago</button>
                     <button className="submit button" onClick={(e)=> HandlerCerrar(e)}>Cerrar</button>
             </div>

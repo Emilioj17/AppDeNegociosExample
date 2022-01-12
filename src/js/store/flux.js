@@ -1,4 +1,17 @@
-const getState = ({ getStore, getActions, setStore  }) => {
+const getState = ({ getStore, getActions, setStore }) => {
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+    function sortByMonth(arr) {
+        //Esta funcion permite ordenar los meses de los pagos. Ver cada getPago2019
+        const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        arr.sort(function (a, b) {
+            console.log("hola desde Flux"+ a.mes);
+            return meses.indexOf(a.mes)
+                 - meses.indexOf(b.mes);
+        });
+      }
+
+
 	return {
 		store: {
 			usuarios: "null",
@@ -280,8 +293,9 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     }
                 }).then((response) => response.json())
                     .then((data) => {
+                        sortByMonth(data)
                         setStore({
-                            pago2019: data
+                            pago2019:data
                         });
                     })
                     .catch((error) => {
@@ -301,9 +315,10 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     }
                 }).then((response) => response.json())
                     .then((data) => {
+                        sortByMonth(data);
                         setStore({
                             pago2020: data
-                        })
+                        });
                     })
                     .catch((error) => {
                         setStore({
@@ -322,6 +337,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     }
                 }).then((response) => response.json())
                     .then((data) => {
+                        sortByMonth(data);
                         setStore({
                             pago2021: data
                         })
@@ -343,6 +359,7 @@ const getState = ({ getStore, getActions, setStore  }) => {
                     }
                 }).then((response) => response.json())
                     .then((data) => {
+                        sortByMonth(data);
                         setStore({
                             pago2022: data
                         })
