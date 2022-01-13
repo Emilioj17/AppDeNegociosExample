@@ -5,6 +5,8 @@ import Buscador from "../component/DireccionTributaria/Buscador";
 import ListaClientesDt from "../component/DireccionTributaria/ListaClientesDt";
 import FormularioClienteDt from "../component/DireccionTributaria/FormularioClienteDt";
 import ClienteSeleccionado from "../component/DireccionTributaria/ClienteSeleccionado";
+import '../../styles/PagosDt.css';
+
 
 //Esta es la rama Principal de Direccion Tributaria. Aquí se despliega ListaClientesDt.js y el Buscador.js. Además si
 //se da clic a un elemento de la ListaClientesDt.js se ejecuta ClienteSeleccionado.js. También puedes hacer clic en

@@ -1,0 +1,38 @@
+.print-yes {
+	display: none;
+}
+
+.DivPrincipal {
+	display: grid;
+	grid-template-columns: 33% 33% 33%;
+	grid-template-rows: 33% 33% 33%;
+}
+
+.DivSecundario {
+	grid-column: 1/4;
+	grid-row: 1/4;
+	z-index: 0;
+}
+
+.DivTerciario {
+	background-color: white;
+	grid-column: 2/3;
+	grid-row: 2/3;
+	z-index: 8;
+}
+
+@media print {
+	.no-print,
+	.no-print * {
+		display: none !important;
+	}
+
+	.yes-print {
+		transform: translate(-240px, 0px) !important;
+		width: 130%;
+	}
+
+	.print-yes {
+		display: inline;
+	}
+}
