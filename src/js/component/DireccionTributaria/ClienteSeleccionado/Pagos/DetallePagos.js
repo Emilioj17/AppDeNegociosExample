@@ -1,5 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Context } from "../../../../store/AppContext";
+import Confirmacion from './Confirmacion';
+import { BsFillTrashFill } from "react-icons/bs";
+import { AiFillEdit } from "react-icons/ai";
 
 //Este Formulario es de Direccion Tributaria (Modificar Cliente Existente)
 
@@ -26,8 +29,8 @@ const ModificarClienteDt = ({setClickPagos}) => {
                 <td>{object.facturaNumero}</td>
                 <td>01/07/{year}</td>
                 {!borrarPagos && !editarPagos ? (<td></td>) : null}
-                {borrarPagos ? (<td>X</td>) : null}
-                {editarPagos ? (<td>?</td>):null}
+                {borrarPagos ? (<td><button><span aria-hidden="true"><BsFillTrashFill/></span></button></td>) : null}
+                {editarPagos ? (<td><AiFillEdit /></td>):null}
             </tr>
         )
     }
@@ -57,8 +60,8 @@ const ModificarClienteDt = ({setClickPagos}) => {
 
     return (
         <div className='DivPrincipal'>
+            <h2 className='DivTitulo'>Detalle de Pagos para {(store.infoClienteDt != null) ? (store.infoClienteDt.razon):null}</h2>
             <div className='DivSecundario'>
-                <h2>Detalle de Pagos para {(store.infoClienteDt != null) ? (store.infoClienteDt.razon):null}</h2>
                 <div className="card-section">
                     <table className="table hover">
                         <thead>
@@ -95,22 +98,14 @@ const ModificarClienteDt = ({setClickPagos}) => {
                             {store.infoClienteDt=="" ? (<tbody><p>No hay Informacion de Pagos...</p></tbody>): null}
                     </table>
                 </div>
-                <div className='button-group align-right'>
-                        <button className="submit button">Agregar Pago</button>
-                        <button className="submit button" onClick={(e)=>  HandlerEditarPagos(e)}>Editar Pago</button>
-                        <button className="submit button" onClick={(e)=> HandlerBorrarPagos(e)}>Borrar Pago</button>
-                        <button className="submit button" onClick={(e)=> HandlerCerrar(e)}>Cerrar</button>
-                </div>
             </div>
-            {editarPagos && pagoSeleccionado.id != null ? (
-                <div className='DivTerciario text-center'>
-                    ¿Estás Seguro que deseas borrar este Pago?
-                    <div className='button-group align-center'>
-                            <button className="submit button">Aceptar</button>
-                            <button className="submit button">Cancelar</button>
-                </div>
+            {borrarPagos && pagoSeleccionado.id != null ? (<Confirmacion pagoSeleccionado={pagoSeleccionado} setPagoSeleccionado={setPagoSeleccionado}/>): null}
+            <div className='button-group align-right DivBotones'>
+                    <button className="submit button">Agregar Pago</button>
+                    <button className="submit button" onClick={(e)=>  HandlerEditarPagos(e)}>Editar Pago</button>
+                    <button className="submit button" onClick={(e)=> HandlerBorrarPagos(e)}>Borrar Pago</button>
+                    <button className="submit button" onClick={(e)=> HandlerCerrar(e)}>Cerrar</button>
             </div>
-            ): null}
         </div>
     )
 
