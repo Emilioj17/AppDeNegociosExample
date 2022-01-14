@@ -53,8 +53,8 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
                                 <div className='grid-x no-print'>
                                     <div className='cell small-6'>{(store.infoClienteDt != null) ? (<h3>{store.infoClienteDt.razon}</h3>):null}</div>
                                     <div className='cell small-6 button-group align-right'>
-                                        <button className="submit success button" onClick={(e)=>HandlerModificarCliente(e)}>Modificar Cliente</button>
-                                        <button className="submit warning button" onClick={(e)=> window.print()}>Sacar Informe</button>
+                                        <button className="submit warning button" onClick={(e)=>HandlerModificarCliente(e)}>Modificar Cliente</button>
+                                        <button className="submit secondary button" onClick={(e)=> window.print()}>Sacar Informe</button>
                                     </div>
                                 </div>
                                 <div className="grid-x">

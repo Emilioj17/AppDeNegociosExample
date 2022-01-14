@@ -10,6 +10,7 @@ const ModificarClienteDt = ({setClickPagos}) => {
     const { store, actions } = useContext(Context);
     const [borrarPagos, setBorrarPagos] = useState(false);
     const [editarPagos, setEditarPagos] = useState(false);
+    const [crearPagos, setCrearPagos] = useState(false);
     const [pagoSeleccionado, setPagoSeleccionado] = useState({
         year: null,
         id: null,
@@ -58,6 +59,12 @@ const ModificarClienteDt = ({setClickPagos}) => {
         setBorrarPagos(false);
     }
 
+    const HandlerCrearPagos = (event) => {
+        crearPagos ? setCrearPagos(false) : setCrearPagos(true);
+        setEditarPagos(false);
+        setBorrarPagos(false);
+    }
+
     return (
         <div className='DivPrincipal'>
             <h2 className='DivTitulo'>Detalle de Pagos para {(store.infoClienteDt != null) ? (store.infoClienteDt.razon):null}</h2>
@@ -99,11 +106,13 @@ const ModificarClienteDt = ({setClickPagos}) => {
                     </table>
                 </div>
             </div>
-            {borrarPagos && pagoSeleccionado.id != null ? (<Confirmacion pagoSeleccionado={pagoSeleccionado} setPagoSeleccionado={setPagoSeleccionado}/>): null}
+            {borrarPagos && pagoSeleccionado.id != null ? (<Confirmacion pagoSeleccionado={pagoSeleccionado} setPagoSeleccionado={setPagoSeleccionado} tipo="borrar" setCrearPagos={setCrearPagos} />) : null}
+            {editarPagos && pagoSeleccionado.id != null ? (<Confirmacion pagoSeleccionado={pagoSeleccionado} setPagoSeleccionado={setPagoSeleccionado} tipo="editar" setCrearPagos={setCrearPagos}/>) : null}
+            {crearPagos ? (<Confirmacion pagoSeleccionado={pagoSeleccionado} setPagoSeleccionado={setPagoSeleccionado} tipo="crear" setCrearPagos={setCrearPagos}/>): null}
             <div className='button-group align-right DivBotones'>
-                    <button className="submit button">Agregar Pago</button>
-                    <button className="submit button" onClick={(e)=>  HandlerEditarPagos(e)}>Editar Pago</button>
-                    <button className="submit button" onClick={(e)=> HandlerBorrarPagos(e)}>Borrar Pago</button>
+                    <button className="submit button success" onClick={(e)=>  HandlerCrearPagos(e)}>Agregar Pago</button>
+                    <button className="submit button warning" onClick={(e)=>  HandlerEditarPagos(e)}>Editar Pago</button>
+                    <button className="submit button alert" onClick={(e)=> HandlerBorrarPagos(e)}>Borrar Pago</button>
                     <button className="submit button" onClick={(e)=> HandlerCerrar(e)}>Cerrar</button>
             </div>
         </div>

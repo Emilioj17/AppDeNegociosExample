@@ -21,7 +21,6 @@
 }
 
 .DivTerciario {
-	background-color: white;
 	grid-column: 2/4;
 	grid-row: 2/4;
 	z-index: 8;

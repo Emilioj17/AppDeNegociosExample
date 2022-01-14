@@ -45,8 +45,8 @@ const Pagos = ({ clienteDtCliqueado, setClickPagos }) => {
                     filtroSaldo={filtroSaldo} />
             </div>
             <div className='button-group align-right no-print'>
-                <button className="submit button" onClick={(e)=>HandlerEditarPagos(e)}>Editar Pagos</button>
-                <button className="submit button">Agregar Pago</button>
+                <button className="submit button warning" onClick={(e)=>HandlerEditarPagos(e)}>Editar Pagos</button>
+                <button className="submit button success">Agregar Pago</button>
             </div>
         </div>
     );
