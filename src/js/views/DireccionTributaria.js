@@ -45,8 +45,11 @@ const DireccionTributaria = () => {
                     </div>
                     <div className='row'>
                         <div className='grid-x grid-margin-x'>
-                            <Buscador setClienteDt={setClienteDtBuscado}/>
-                        </div>
+                            <Buscador setClienteDtBuscado={setClienteDtBuscado} />
+                            <div className='cell small-2 text-right' style={{ margin:"auto"}}>
+                                <a class="clear button secondary">Filtrar</a>
+                            </div>
+                        </div> 
                     </div>
                     <ListaClientesDt store={store} clientesDt={clientesDt} clienteDtBuscado={clienteDtBuscado} setClienteSeleccionado={setClienteSeleccionado} setClienteDtCliqueado={setClienteDtCliqueado}/>
                 </Fragment>)

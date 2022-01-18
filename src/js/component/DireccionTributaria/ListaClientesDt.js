@@ -3,7 +3,6 @@ import { SaldoTotal } from "../../Helper/SaldoTotal";
 
 const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado }) => {
     ///// Arreglar esto. Hay codigo que no me gusta y 1) No me permite filtrar por "secciones" de texto
-    /// y 2) No me deja filtrar por mayusculas/minusculas
 
     const HandlerClick = (object) => {
         setClienteDtCliqueado(object);
@@ -46,7 +45,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSelecc
                                     <td>${SaldoTotal.montoSaldo(object)}</td>
                                 </tr>)
                         ):(clientesDt.filter(
-                            contact => contact.razon == clienteDtBuscado || contact.rut == clienteDtBuscado || contact.correo == clienteDtBuscado || contact.representante == clienteDtBuscado || contact.rutRepresentante == clienteDtBuscado).map((object, i) => 
+                            contact => contact.razon.toLowerCase().includes(clienteDtBuscado.toLowerCase()) || contact.rut.toLowerCase().includes(clienteDtBuscado.toLowerCase()) || contact.correo.toLowerCase().includes(clienteDtBuscado.toLowerCase()) || contact.representante.toLowerCase().includes(clienteDtBuscado.toLowerCase()) || contact.rutRepresentante.toLowerCase().includes(clienteDtBuscado.toLowerCase())).map((object, i) => 
                                 <tr key={i} onClick={()=>HandlerClick(object)}>
                                 <td>{object.id}</td>
                                 <td>{object.razon}</td>

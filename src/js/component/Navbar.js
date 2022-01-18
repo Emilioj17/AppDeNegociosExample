@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { Link } from "react-router-dom";
 import "../../styles/App.css";
+import { GiDinosaurRex } from "react-icons/gi";
+
 
 const Navbar = () => {
     return (
@@ -15,7 +17,7 @@ const Navbar = () => {
                         <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
                         <li><Link to="/DireccionTributaria">Direccion Tributaria</Link></li>
                         <li><Link to="#">Contabilidad</Link></li>
-                        <li><Link to="/Administracion">Administración</Link></li>
+                        <li><Link to="/Administracion"><GiDinosaurRex/>Administración</Link></li>
                     </ul>
                 </div>
             </div>
@@ -28,7 +30,7 @@ const Navbar = () => {
                     <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
                     <li><Link to="/DireccionTributaria">Direccion Tributaria</Link></li>
                     <li><Link to="#">Contabilidad</Link></li>
-                    <li><Link to="/Administracion">Administración</Link></li>
+                    <li><Link to="/Administracion"><GiDinosaurRex/>Administración</Link></li>
                 </ul>
             </div>
         </Fragment>

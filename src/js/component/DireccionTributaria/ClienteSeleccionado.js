@@ -4,7 +4,10 @@ import InformacionCliente from "./ClienteSeleccionado/InformacionCliente";
 import Notas from "./ClienteSeleccionado/Notas";
 import Pagos from "./ClienteSeleccionado/Pagos";
 import ModificarClienteDt from "./ClienteSeleccionado/ModificarCliente/ModificarCliente";
-import DetallePagos from "./ClienteSeleccionado/Pagos/DetallePagos"
+import DetallePagos from "./ClienteSeleccionado/Pagos/DetallePagos";
+import { AiFillPrinter } from "react-icons/ai";
+
+//Este es el Panel Principal tras haber Seleccionado a un Cliente desde ListaClientes.
 
 const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => {
     const { store, actions } = useContext(Context);
@@ -41,6 +44,10 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
         setModificarCliente(true);
     }
 
+    const HandlerEditarPagos = (event) => {
+        setClickPagos(true);
+    }
+
     return (
         <div className='row yes-print'>
             {(modificarCliente) ? (<ModificarClienteDt setModificarCliente={setModificarCliente} clienteDtCliqueado={clienteDtCliqueado} setDSetectorCambios={setDSetectorCambios} />) : null}
@@ -51,10 +58,11 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
                                 </button>
                                 <br className='no-print'/>
                                 <div className='grid-x no-print'>
-                                    <div className='cell small-6'>{(store.infoClienteDt != null) ? (<h3>{store.infoClienteDt.razon}</h3>):null}</div>
+                                    <div className='cell small-6'>{(store.infoClienteDt != null) ? (<h3>{store.infoClienteDt.razon.slice(0, 40)}</h3>):null}</div>
                                     <div className='cell small-6 button-group align-right'>
                                         <button className="submit warning button" onClick={(e)=>HandlerModificarCliente(e)}>Modificar Cliente</button>
-                                        <button className="submit secondary button" onClick={(e)=> window.print()}>Sacar Informe</button>
+                                        <button className="submit button warning" onClick={(e)=>HandlerEditarPagos(e)}>Editar Pagos</button>
+                                        <button className="submit secondary button" onClick={(e)=> window.print()}>Sacar Informe <AiFillPrinter /></button>
                                     </div>
                                 </div>
                                 <div className="grid-x">
@@ -84,12 +92,12 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
                                         <Notas clienteDtCliqueado={clienteDtCliqueado} setDSetectorCambios={setDSetectorCambios}/>
                                     </div>
                                     <div className="cell">
-                                        <Pagos clienteDtCliqueado={clienteDtCliqueado} setClickPagos={setClickPagos}/>
+                                        <Pagos clienteDtCliqueado={clienteDtCliqueado} setClickPagos={setClickPagos} setDSetectorCambios={setDSetectorCambios}/>
                                     </div>
                                 </div>
                             </div>
             )}
-            {clickPagos ? (<DetallePagos setClickPagos={setClickPagos} />):null}
+            {clickPagos ? (<DetallePagos setClickPagos={setClickPagos} setDSetectorCambios={setDSetectorCambios}/>):null}
         </div>
     );
 }

@@ -22,14 +22,22 @@
 
 .DivTerciario {
 	grid-column: 2/4;
-	grid-row: 2/4;
+	grid-row: 1/4;
 	z-index: 8;
+	filter: drop-shadow(0px 4px 8px #000000);
 }
 
 .DivBotones {
 	grid-column: 1/5;
 	grid-row: 5/6;
 	margin-top: 1vh;
+}
+
+.notas {
+	height: 200px;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column-reverse;
 }
 
 @media print {

@@ -13,7 +13,7 @@ const InformacionCliente = ({ clienteDtCliqueado }) => {
                 </div>
                 <div className="card-section">
                         {(store.infoClienteDt != null) ? (
-                                <ul>
+                                <ul className="no-bullet">
                                     <li>Id:{store.infoClienteDt.id}</li>
                                     <li>Razon Social: {store.infoClienteDt.razon}</li>
                                     <li>Rut Empresa: {store.infoClienteDt.rut}</li>

@@ -21,7 +21,7 @@ const Notas = ({ clienteDtCliqueado, setDSetectorCambios}) => {
                 <div className="card-divider">
                     <h4>Notas</h4>
                 </div>
-                <div className="card-section">
+                <div className="card-section notas">
                     <table className="table">
                         <tbody>
                         {(store.nota != null) ? (

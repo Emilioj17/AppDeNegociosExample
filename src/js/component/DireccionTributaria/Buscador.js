@@ -1,10 +1,8 @@
 import React from 'react';
 
-//Aún no permite buscar correctamente. Solo permite busqueda 100% exacta.
-
-const Buscador = ({setClienteDt}) => {
+const Buscador = ({setClienteDtBuscado}) => {
     const HandlerOnChange = (event) => {
-        setClienteDt(event.target.value)
+        setClienteDtBuscado(event.target.value)
     };
 
     return (

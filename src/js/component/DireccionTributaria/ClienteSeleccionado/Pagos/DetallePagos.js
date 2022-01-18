@@ -1,26 +1,27 @@
 import React, { useState, useContext } from 'react';
 import { Context } from "../../../../store/AppContext";
-import Confirmacion from './Confirmacion';
+import BorrarPago from './BorrarPago';
+import IngresoPago from './IngresoPago';
+import EditarPago from './EditarPago';
 import { BsFillTrashFill } from "react-icons/bs";
-import { AiFillEdit } from "react-icons/ai";
+import { AiFillEdit, AiOutlineSmallDash } from "react-icons/ai";
 
 //Este Formulario es de Direccion Tributaria (Modificar Cliente Existente)
 
-const ModificarClienteDt = ({setClickPagos}) => {
+const ModificarClienteDt = ({setClickPagos, setDSetectorCambios}) => {
     const { store, actions } = useContext(Context);
     const [borrarPagos, setBorrarPagos] = useState(false);
     const [editarPagos, setEditarPagos] = useState(false);
     const [crearPagos, setCrearPagos] = useState(false);
+    const [disabled, setDisabled] = useState(false);
     const [pagoSeleccionado, setPagoSeleccionado] = useState({
-        year: null,
-        id: null,
-        mes: null,
-        montoPagado: null,
+        object: null,
+        year: null
     });
 
     const ListaDesplegarPagos = (object, i, year) => {
         return (
-            <tr key={i} id={object.id} onClick={()=>HandlerPagoSeleccionado(object, year)}>
+            <tr key={i} id={object.id} >
                 <td>{year}</td>
                 <td>{object.mes}</td>
                 <td>${object.montoCobrado}</td>
@@ -29,19 +30,18 @@ const ModificarClienteDt = ({setClickPagos}) => {
                 <td>{object.numeroTransferencia}</td>
                 <td>{object.facturaNumero}</td>
                 <td>01/07/{year}</td>
-                {!borrarPagos && !editarPagos ? (<td></td>) : null}
-                {borrarPagos ? (<td><button><span aria-hidden="true"><BsFillTrashFill/></span></button></td>) : null}
-                {editarPagos ? (<td><AiFillEdit /></td>):null}
+                {(!borrarPagos && !editarPagos) || disabled ? (<td><a class="clear button"><AiOutlineSmallDash /></a></td>) : null}
+                {borrarPagos && !disabled ? (<td><a class="clear button" onClick={()=>HandlerPagoSeleccionado(object, year)}><BsFillTrashFill/></a></td>) : null}
+                {editarPagos && !disabled ? (<td><a class="clear button" onClick={()=>HandlerPagoSeleccionado(object, year)}><AiFillEdit /></a></td>):null}
             </tr>
         )
     }
 
     const HandlerPagoSeleccionado = (object, year) => {
+        setDisabled(true);
         setPagoSeleccionado({
-            year: year,
-            id: object.id,
-            mes: object.mes,
-            montoPagado: object.montoPagado
+            object: object,
+            year: year
         })
     }
 
@@ -52,15 +52,18 @@ const ModificarClienteDt = ({setClickPagos}) => {
     const HandlerBorrarPagos = (event) => {
         borrarPagos ? setBorrarPagos(false) : setBorrarPagos(true);
         setEditarPagos(false);
+        setCrearPagos(false);
     }
 
     const HandlerEditarPagos = (event) => {
         editarPagos ? setEditarPagos(false) : setEditarPagos(true);
         setBorrarPagos(false);
+        setCrearPagos(false);
     }
 
     const HandlerCrearPagos = (event) => {
         crearPagos ? setCrearPagos(false) : setCrearPagos(true);
+        setDisabled(true);
         setEditarPagos(false);
         setBorrarPagos(false);
     }
@@ -106,18 +109,17 @@ const ModificarClienteDt = ({setClickPagos}) => {
                     </table>
                 </div>
             </div>
-            {borrarPagos && pagoSeleccionado.id != null ? (<Confirmacion pagoSeleccionado={pagoSeleccionado} setPagoSeleccionado={setPagoSeleccionado} tipo="borrar" setCrearPagos={setCrearPagos} />) : null}
-            {editarPagos && pagoSeleccionado.id != null ? (<Confirmacion pagoSeleccionado={pagoSeleccionado} setPagoSeleccionado={setPagoSeleccionado} tipo="editar" setCrearPagos={setCrearPagos}/>) : null}
-            {crearPagos ? (<Confirmacion pagoSeleccionado={pagoSeleccionado} setPagoSeleccionado={setPagoSeleccionado} tipo="crear" setCrearPagos={setCrearPagos}/>): null}
+            {borrarPagos && pagoSeleccionado.object != null ? (<BorrarPago pagoSeleccionado={pagoSeleccionado} setPagoSeleccionado={setPagoSeleccionado} setDSetectorCambios={setDSetectorCambios} setDisabled={setDisabled}/>) : null}
+            {editarPagos && pagoSeleccionado.object != null ? (<EditarPago pagoSeleccionado={pagoSeleccionado} setPagoSeleccionado={setPagoSeleccionado} setDSetectorCambios={setDSetectorCambios} setDisabled={setDisabled}/>) : null}
+            {crearPagos ? (<IngresoPago setCrearPagos={setCrearPagos} setDisabled={setDisabled} setDSetectorCambios={setDSetectorCambios}/>): null}
             <div className='button-group align-right DivBotones'>
-                    <button className="submit button success" onClick={(e)=>  HandlerCrearPagos(e)}>Agregar Pago</button>
-                    <button className="submit button warning" onClick={(e)=>  HandlerEditarPagos(e)}>Editar Pago</button>
-                    <button className="submit button alert" onClick={(e)=> HandlerBorrarPagos(e)}>Borrar Pago</button>
-                    <button className="submit button" onClick={(e)=> HandlerCerrar(e)}>Cerrar</button>
+                <button className="submit button success" onClick={(e) => HandlerCrearPagos(e)} disabled={disabled ? "true": false}>Agregar Pago</button>
+                    <button className="submit button warning" onClick={(e)=>  HandlerEditarPagos(e)} disabled={disabled ? "true": false}>Editar Pago</button>
+                    <button className="submit button alert" onClick={(e)=> HandlerBorrarPagos(e)} disabled={disabled ? "true": false}>Borrar Pago</button>
+                    <button className="submit button" onClick={(e)=> HandlerCerrar(e)} disabled={disabled ? "true": false}>Cerrar</button>
             </div>
         </div>
     )
-
 }
 
 export default ModificarClienteDt;

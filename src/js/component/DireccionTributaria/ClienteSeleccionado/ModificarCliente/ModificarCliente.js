@@ -122,57 +122,81 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
                             <label>
                                 Razon Social
                                 <input type="text"
-                                    placeholder={clienteDtCliqueado.razon} value={datos.razon} name="razon" onChange={(e)=>HandlerCompletarDatos(e)}/>
+                                    defaultValue={clienteDtCliqueado.razon}
+                                    value={datos.razon}
+                                    placeholder='Puedes cambiar la razon Social'
+                                    name="razon" onChange={(e) => HandlerCompletarDatos(e)} />
                             </label>
                             <label>
                                 Rut
                                 <input type="text"
-                                    placeholder={clienteDtCliqueado.rut} value={datos.rut} name="rut" onChange={(e) => HandlerValidarRut(e)}/>
+                                    defaultValue={clienteDtCliqueado.rut}
+                                    value={datos.rut}
+                                    placeholder='Puedes cambiar el Rut de esta empresa'
+                                    name="rut" onChange={(e) => HandlerValidarRut(e)} />
                             </label>
                             <label>
                                 Correo o email
                                 <input type="text"
-                                    placeholder={clienteDtCliqueado.correo} name="correo" value={datos.correo} onChange={(e) => HandlerValidarCorreo(e)}/>
+                                    defaultValue={clienteDtCliqueado.correo}
+                                    name="correo" value={datos.correo}
+                                    placeholder='Puedes agregar un correo principal'
+                                    onChange={(e) => HandlerValidarCorreo(e)} />
                             </label>
                             <label>
                                 Correo Secundario
                                 <input type="text"
-                                    placeholder={clienteDtCliqueado.correoSecundario} name="correoSecundario" value={datos.correoSecundario} onChange={(e) => HandlerValidarCorreo(e)}/>
+                                    defaultValue={clienteDtCliqueado.correoSecundario}
+                                    name="correoSecundario" value={datos.correoSecundario}
+                                    placeholder='Puedes agregar un correo secundario'
+                                    onChange={(e) => HandlerValidarCorreo(e)} />
                             </label>
                             <label>
                                 Correo Terciario
                                 <input type="text"
-                                    placeholder={clienteDtCliqueado.correoTerciario} name="correoTerciario" value={datos.correoTerciario} onChange={(e) => HandlerValidarCorreo(e)}/>
+                                    defaultValue={clienteDtCliqueado.correoTerciario}
+                                    name="correoTerciario" value={datos.correoTerciario}
+                                    placeholder='Puedes agregar un correo terciario'
+                                    onChange={(e) => HandlerValidarCorreo(e)} />
                             </label>
                             <label>
                                 Telefono
                                 <input type="text"
-                                    placeholder={clienteDtCliqueado.fono} name="fono" value={datos.fono} onChange={(e)=>HandlerCompletarDatos(e)}/>
+                                    defaultValue={clienteDtCliqueado.fono}
+                                    name="fono" value={datos.fono}
+                                    placeholder='Puedes agregar un número de teléfono'
+                                    onChange={(e) => HandlerCompletarDatos(e)} />
                             </label>
                             <label>
                                 Representante Legal
                                 <input type="text"
-                                    placeholder={clienteDtCliqueado.representante} name="representante" value={datos.representante} onChange={(e)=>HandlerCompletarDatos(e)}/>
+                                    defaultValue={clienteDtCliqueado.representante}
+                                    name="representante" value={datos.representante}
+                                    placeholder='Puedes ingresar el Nombre del Representante Legal'
+                                    onChange={(e) => HandlerCompletarDatos(e)} />
                             </label>
                             <label>
                                 Rut Representante Legal
                                 <input type="text"
-                                    placeholder={clienteDtCliqueado.rutRepresentante} name="rutRepresentante" value={datos.rutRepresentante} onChange={(e) => HandlerValidarRut(e)}/>
+                                    defaultValue={clienteDtCliqueado.rutRepresentante}
+                                    name="rutRepresentante" value={datos.rutRepresentante}
+                                    placeholder='Puedes agregar el Rut de un representante legal'
+                                    onChange={(e) => HandlerValidarRut(e)} />
                             </label>
                             <div>
                                 <label htmlFor="start">Fecha de Contratacion</label>
-                                <input type="date" id="start" min="2018-01-01" max="2025-12-31" name="fechaContratacion" onChange={(e) => HandlerCompletarDatos(e)}/>
+                                <input type="date" id="start" min="2018-01-01" max="2025-12-31" defaultValue={clienteDtCliqueado.fechaContratacion} name="fechaContratacion" onChange={(e) => HandlerCompletarDatos(e)}/>
                             </div>
                             <div>
                                 <label className="form-label" htmlFor='vigente'>Está Vigente este Cliente?</label>
-                                <select className="form-select" id="vigente" name="vigente" onChange={(e) => HandlerCompletarDatos(e)}>
+                                <select className="form-select" id="vigente" name="vigente" defaultValue={clienteDtCliqueado.vigente} onChange={(e) => HandlerCompletarDatos(e)}>
                                     <option value="true">Vigente</option>
                                     <option value="false" selected>No Vigente</option>
                                 </select>
                             </div>
                             <div>
                                 <label className="form-label" htmlFor='erpyme'>Ya está Ingresado en Erpyme?</label>
-                                <select className="form-select" id="erpyme" name="erpyme" onChange={(e) => HandlerCompletarDatos(e)}>
+                                <select className="form-select" id="erpyme" name="erpyme" defaultValue={clienteDtCliqueado.erpyme} onChange={(e) => HandlerCompletarDatos(e)}>
                                     <option value="true">Si</option>
                                     <option value="false" selected>No</option>
                                 </select>
