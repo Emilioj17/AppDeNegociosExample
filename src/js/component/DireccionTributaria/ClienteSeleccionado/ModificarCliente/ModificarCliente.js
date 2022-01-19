@@ -110,7 +110,7 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
     };
 
     return (
-        <div className='row'>
+        <div className='row' style={{filter: "drop-shadow(0px 4px 8px #000000)"}}>
             <div className="callout" data-closable>
                 <button className="close-button" aria-label="Dismiss alert" type="button" data-close onClick={(e)=>HandlerCerrar(e)}>
                     <span aria-hidden="true">×</span>
@@ -191,14 +191,14 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
                                 <label className="form-label" htmlFor='vigente'>Está Vigente este Cliente?</label>
                                 <select className="form-select" id="vigente" name="vigente" defaultValue={clienteDtCliqueado.vigente} onChange={(e) => HandlerCompletarDatos(e)}>
                                     <option value="true">Vigente</option>
-                                    <option value="false" selected>No Vigente</option>
+                                    <option value="false">No Vigente</option>
                                 </select>
                             </div>
                             <div>
                                 <label className="form-label" htmlFor='erpyme'>Ya está Ingresado en Erpyme?</label>
                                 <select className="form-select" id="erpyme" name="erpyme" defaultValue={clienteDtCliqueado.erpyme} onChange={(e) => HandlerCompletarDatos(e)}>
                                     <option value="true">Si</option>
-                                    <option value="false" selected>No</option>
+                                    <option value="false">No</option>
                                 </select>
                             </div>
                         </form>

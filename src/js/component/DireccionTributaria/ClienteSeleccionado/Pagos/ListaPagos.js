@@ -19,6 +19,15 @@ const ListaPagos = ({filtroYear, filtroMesInicio, filtroMesTermino, filtroSaldo}
         )
     }
 
+    //Las siguientes lineas permiten hacer filtrado para el Rango de meses. Ojo a que aquí el .filter sobre
+    // el store aplica si o si, no hay una versión de null. Quizás deba cambiar todo a esta forma.
+    let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    let inicio
+    (filtroMesInicio === "" || filtroMesInicio === "Desde este mes...") ? (inicio = 0):(inicio = meses.indexOf(filtroMesInicio))
+    let final
+    (filtroMesTermino === "" || filtroMesTermino === "Hasta este mes...") ? (final = meses.length):(final = meses.indexOf(filtroMesTermino))
+    meses = meses.slice(inicio, final + 1);
+
     return (
         <>
             <table className="table hover">
@@ -39,9 +48,9 @@ const ListaPagos = ({filtroYear, filtroMesInicio, filtroMesTermino, filtroSaldo}
                             (filtroYear == "todos" || filtroYear == "2019") ? (
                                 (filtroSaldo == "todos" || filtroSaldo == "conSaldo") ? (
                                     (filtroSaldo == "todos") ? (
-                                        store.pago2019.map((object, i) => ListaDesplegarPagos(object, i, 2019))
-                                    ) : (store.pago2019.filter(objeto => (objeto.montoCobrado - objeto.montoPagado)>0).map((object, i) => ListaDesplegarPagos(object, i, 2019)))
-                                ) : (store.pago2019.filter(objeto => (objeto.montoCobrado - objeto.montoPagado)==0).map((object, i) => ListaDesplegarPagos(object, i, 2019)))
+                                        store.pago2019.filter(objeto => meses.includes(objeto.mes)).map((object, i) => ListaDesplegarPagos(object, i, 2019))
+                                    ) : (store.pago2019.filter(objeto => meses.includes(objeto.mes)).filter(objeto => (objeto.montoCobrado - objeto.montoPagado)>0).map((object, i) => ListaDesplegarPagos(object, i, 2019)))
+                                ) : (store.pago2019.filter(objeto => meses.includes(objeto.mes)).filter(objeto => (objeto.montoCobrado - objeto.montoPagado)==0).map((object, i) => ListaDesplegarPagos(object, i, 2019)))
                             ) : null
                         ) : null
                         }
@@ -49,9 +58,9 @@ const ListaPagos = ({filtroYear, filtroMesInicio, filtroMesTermino, filtroSaldo}
                             (filtroYear == "todos" || filtroYear == "2020") ? (
                                 (filtroSaldo == "todos" || filtroSaldo == "conSaldo") ? (
                                     (filtroSaldo == "todos") ? (
-                                        store.pago2020.map((object, i) => ListaDesplegarPagos(object, i, 2020))
-                                    ) : (store.pago2020.filter(objeto => (objeto.montoCobrado - objeto.montoPagado)>0).map((object, i) => ListaDesplegarPagos(object, i, 2020)))
-                                ) : (store.pago2020.filter(objeto => (objeto.montoCobrado - objeto.montoPagado)==0).map((object, i) => ListaDesplegarPagos(object, i, 2020)))
+                                        store.pago2020.filter(objeto => meses.includes(objeto.mes)).map((object, i) => ListaDesplegarPagos(object, i, 2020))
+                                    ) : (store.pago2020.filter(objeto => meses.includes(objeto.mes)).filter(objeto => (objeto.montoCobrado - objeto.montoPagado)>0).map((object, i) => ListaDesplegarPagos(object, i, 2020)))
+                                ) : (store.pago2020.filter(objeto => meses.includes(objeto.mes)).filter(objeto => (objeto.montoCobrado - objeto.montoPagado)==0).map((object, i) => ListaDesplegarPagos(object, i, 2020)))
                             ) : null
                         ) : null
                         }
@@ -59,9 +68,9 @@ const ListaPagos = ({filtroYear, filtroMesInicio, filtroMesTermino, filtroSaldo}
                             (filtroYear == "todos" || filtroYear == "2021") ? (
                                 (filtroSaldo == "todos" || filtroSaldo == "conSaldo") ? (
                                     (filtroSaldo == "todos") ? (
-                                        store.pago2021.map((object, i) => ListaDesplegarPagos(object, i, 2021))
-                                    ) : (store.pago2021.filter(objeto => (objeto.montoCobrado - objeto.montoPagado)>0).map((object, i) => ListaDesplegarPagos(object, i, 2021)))
-                                ) : (store.pago2021.filter(objeto => (objeto.montoCobrado - objeto.montoPagado)==0).map((object, i) => ListaDesplegarPagos(object, i, 2021)))
+                                        store.pago2021.filter(objeto => meses.includes(objeto.mes)).map((object, i) => ListaDesplegarPagos(object, i, 2021))
+                                    ) : (store.pago2021.filter(objeto => meses.includes(objeto.mes)).filter(objeto => (objeto.montoCobrado - objeto.montoPagado)>0).map((object, i) => ListaDesplegarPagos(object, i, 2021)))
+                                ) : (store.pago2021.filter(objeto => meses.includes(objeto.mes)).filter(objeto => (objeto.montoCobrado - objeto.montoPagado)==0).map((object, i) => ListaDesplegarPagos(object, i, 2021)))
                             ) : null
                         ) : null
                         }
@@ -69,9 +78,9 @@ const ListaPagos = ({filtroYear, filtroMesInicio, filtroMesTermino, filtroSaldo}
                             (filtroYear == "todos" || filtroYear == "2022") ? (
                                 (filtroSaldo == "todos" || filtroSaldo == "conSaldo") ? (
                                     (filtroSaldo == "todos") ? (
-                                        store.pago2022.map((object, i) => ListaDesplegarPagos(object, i, 2022))
-                                    ) : (store.pago2022.filter(objeto => (objeto.montoCobrado - objeto.montoPagado)>0).map((object, i) => ListaDesplegarPagos(object, i, 2022)))
-                                ) : (store.pago2022.filter(objeto => (objeto.montoCobrado - objeto.montoPagado)==0).map((object, i) => ListaDesplegarPagos(object, i, 2022)))
+                                        store.pago2022.filter(objeto => meses.includes(objeto.mes)).map((object, i) => ListaDesplegarPagos(object, i, 2022))
+                                    ) : (store.pago2022.filter(objeto => meses.includes(objeto.mes)).filter(objeto => (objeto.montoCobrado - objeto.montoPagado)>0).map((object, i) => ListaDesplegarPagos(object, i, 2022)))
+                                ) : (store.pago2022.filter(objeto => meses.includes(objeto.mes)).filter(objeto => (objeto.montoCobrado - objeto.montoPagado)==0).map((object, i) => ListaDesplegarPagos(object, i, 2022)))
                             ) : null
                         ) : null
                         }
