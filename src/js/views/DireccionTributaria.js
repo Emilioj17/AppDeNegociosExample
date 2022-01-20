@@ -7,6 +7,7 @@ import FormularioClienteDt from "../component/DireccionTributaria/FormularioClie
 import ClienteSeleccionado from "../component/DireccionTributaria/ClienteSeleccionado";
 import FiltroListaClientes from '../component/DireccionTributaria/FiltroListaClientes';
 import { IoRefreshSharp } from "react-icons/io5";
+import { ExportTableToExcel } from "../Helper/ExportTableToExcel";
 import '../../styles/PagosDt.css';
 
 
@@ -42,6 +43,10 @@ const DireccionTributaria = () => {
         window.location.reload();
     }
 
+    const HandlerExportarTabla = (event) => {
+        ExportTableToExcel('xlsx')
+    }
+
     return (
         <Fragment>
             <Head contenido={titulosHead} />
@@ -52,7 +57,7 @@ const DireccionTributaria = () => {
                     <div className='row'>
                         <div className='button-group align-right'>
                             <button className="submit success button" onClick={(e)=>HandlerNuevoCliente(e)}>Nuevo Cliente</button>
-                            <button className="submit button" disabled>Exportar Seleccion</button>
+                            <button className="submit button" onClick={(e)=>HandlerExportarTabla(e)}>Exportar Seleccion</button>
                         </div>
                     </div>
                     <div className='row'>

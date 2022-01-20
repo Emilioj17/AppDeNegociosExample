@@ -10,6 +10,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
         setClienteSeleccionado(true);
     }
 
+    //La siguiente funcion despliega la lista de Clientes con sus respectivas Columnas.
     const ListaDesplegarClientes = (objeto, i) => {
         return (
             <tr key={i} onClick={()=>HandlerClick(objeto)}>
@@ -30,6 +31,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
         )
     }
 
+    //Las Siguientes funciones generan los filtros de Busqueda, Vigencia, Erpyme y Saldo.
     const Vigencia = (objeto) => {
         if (filtroVigente == "todo" || filtroVigente == "Selecciona Vigencia..." || filtroVigente == "todos") {
             return objeto
@@ -86,7 +88,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
 
     return (
         <div className='row'>
-            <table className="table hover">
+            <table className="table hover" id="tblData">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>

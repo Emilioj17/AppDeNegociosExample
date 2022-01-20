@@ -5,7 +5,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         //Esta funcion permite ordenar los meses de los pagos. Ver cada getPago2019
         const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
         arr.sort(function (a, b) {
-            console.log("hola desde Flux"+ a.mes);
             return meses.indexOf(a.mes)
                  - meses.indexOf(b.mes);
         });
