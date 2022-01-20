@@ -1,14 +1,87 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Context } from "../../store/AppContext"
 import { SaldoTotal } from "../../Helper/SaldoTotal";
 
-const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado }) => {
+const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado, filtroVigente, filtroErpyme, filtroSaldo }) => {
     const { store, actions } = useContext(Context);
-    ///// Arreglar esto. Hay codigo que no me gusta y 1) No me permite filtrar por "secciones" de texto
 
     const HandlerClick = (object) => {
         setClienteDtCliqueado(object);
         setClienteSeleccionado(true);
+    }
+
+    const ListaDesplegarClientes = (objeto, i) => {
+        return (
+            <tr key={i} onClick={()=>HandlerClick(objeto)}>
+                <td>{objeto.id}</td>
+                <td>{objeto.razon}</td>
+                <td>{objeto.rut}</td>
+                <td>{objeto.correo}{objeto.correoSecundario === "" ? null
+                    : (<span>, {objeto.correoSecundario}</span>)}{objeto.correoTerciario === "" ? null
+                        : (<span>, {objeto.correoTerciario}</span>)}</td>
+                <td>{objeto.fono}</td>
+                <td>{objeto.representante}</td>
+                <td>{objeto.rutRepresentante}</td>
+                <td>{objeto.fechaContratacion}</td>
+                <td>{objeto.vigente}</td>
+                <td>{objeto.erpyme}</td>
+                <td>${SaldoTotal.montoSaldo(objeto)}</td>
+            </tr>
+        )
+    }
+
+    const Vigencia = (objeto) => {
+        if (filtroVigente == "todo" || filtroVigente == "Selecciona Vigencia..." || filtroVigente == "todos") {
+            return objeto
+        } else if (filtroVigente == "Vigente") {
+            if (objeto.vigente == "true") {
+                return objeto
+            }
+        } else if (filtroVigente == "No Vigente") {
+            if (objeto.vigente == "false") {
+                return objeto
+            }
+        }
+    }
+
+    const Erpyme = (objeto) => {
+        if (filtroErpyme == "todo" || filtroErpyme == "Selecciona Erpyme..." || filtroErpyme == "todos") {
+            return objeto
+        } else if (filtroErpyme == "Está en Erpyme") {
+            if (objeto.erpyme == "true") {
+                return objeto
+            }
+        } else if (filtroErpyme == "No está en Erpyme") {
+            if (objeto.erpyme == "false") {
+                return objeto
+            }
+        }
+    }
+
+    const Saldo = (objeto) => {
+        if (filtroSaldo == "todo" || filtroSaldo == "Selecciona Saldo..." || filtroSaldo == "todos") {
+            return objeto
+        } else if (filtroSaldo == "Con Saldo") {
+            if (SaldoTotal.montoSaldo(objeto)>0 || SaldoTotal.montoSaldo(objeto)<0) {
+                return objeto
+            }
+        } else if (filtroSaldo == "Todo Pagado") {
+            if (SaldoTotal.montoSaldo(objeto)==0) {
+                return objeto
+            }
+        }
+    }
+
+    const Busqueda = (objeto) => {
+        if (objeto.razon.toLowerCase().includes(clienteDtBuscado.toLowerCase())
+            || objeto.rut.toLowerCase().includes(clienteDtBuscado.toLowerCase())
+            || objeto.correo.toLowerCase().includes(clienteDtBuscado.toLowerCase())
+            || objeto.representante.toLowerCase().includes(clienteDtBuscado.toLowerCase())
+            || (objeto.id==clienteDtBuscado)
+            || objeto.rutRepresentante.toLowerCase().includes(clienteDtBuscado.toLowerCase())
+        ) {
+            return objeto
+        }
     }
 
     return (
@@ -32,36 +105,9 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
                 <tbody>
                     {(store.clientesDt != null) ? 
                         ((clienteDtBuscado == "" || clienteDtBuscado == null) ? (
-                            store.clientesDt.map((object, i) => 
-                                <tr key={i} onClick={()=>HandlerClick(object)}>
-                                    <td>{object.id}</td>
-                                    <td>{object.razon}</td>
-                                    <td>{object.rut}</td>
-                                    <td>{object.correo}{object.correoSecundario === "" ? null : (<span>, {object.correoSecundario}</span>)}{object.correoTerciario === "" ? null : (<span>, {object.correoTerciario}</span>)}</td>
-                                    <td>{object.fono}</td>
-                                    <td>{object.representante}</td>
-                                    <td>{object.rutRepresentante}</td>
-                                    <td>{object.fechaContratacion}</td>
-                                    <td>{object.vigente}</td>
-                                    <td>{object.erpyme}</td>
-                                    <td>${SaldoTotal.montoSaldo(object)}</td>
-                                </tr>)
-                        ):(store.clientesDt.filter(
-                            contact => contact.razon.toLowerCase().includes(clienteDtBuscado.toLowerCase()) || contact.rut.toLowerCase().includes(clienteDtBuscado.toLowerCase()) || contact.correo.toLowerCase().includes(clienteDtBuscado.toLowerCase()) || contact.representante.toLowerCase().includes(clienteDtBuscado.toLowerCase()) || contact.rutRepresentante.toLowerCase().includes(clienteDtBuscado.toLowerCase())).map((object, i) => 
-                                <tr key={i} onClick={()=>HandlerClick(object)}>
-                                <td>{object.id}</td>
-                                <td>{object.razon}</td>
-                                <td>{object.rut}</td>
-                                <td>{object.correo}</td>
-                                <td>{object.fono}</td>
-                                <td>{object.representante}</td>
-                                <td>{object.rutRepresentante}</td>
-                                <td>{object.fechaContratacion}</td>
-                                <td>{object.vigente}</td>
-                                <td>{object.erpyme}</td>
-                                <td>${SaldoTotal.montoSaldo(object)}</td>
-                            </tr>)))
-                    : 
+                            store.clientesDt.filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => ListaDesplegarClientes(objeto, i))
+                        ):(store.clientesDt.filter(objeto => Busqueda(objeto)).filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => 
+                                ListaDesplegarClientes(objeto, i)))): 
                         (<td colSpan="9" style={{height:"100px", padding:"20px"}}><h2 className="text-center"> - no hay datos -</h2></td>)
                     }
                 </tbody>

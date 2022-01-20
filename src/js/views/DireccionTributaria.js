@@ -6,6 +6,7 @@ import ListaClientesDt from "../component/DireccionTributaria/ListaClientesDt";
 import FormularioClienteDt from "../component/DireccionTributaria/FormularioClienteDt";
 import ClienteSeleccionado from "../component/DireccionTributaria/ClienteSeleccionado";
 import FiltroListaClientes from '../component/DireccionTributaria/FiltroListaClientes';
+import { IoRefreshSharp } from "react-icons/io5";
 import '../../styles/PagosDt.css';
 
 
@@ -37,6 +38,10 @@ const DireccionTributaria = () => {
         filtro ? setFiltro(false) : setFiltro(true);
     }
 
+    const HandlerRecargarPagina = (event) => {
+        window.location.reload();
+    }
+
     return (
         <Fragment>
             <Head contenido={titulosHead} />
@@ -54,12 +59,24 @@ const DireccionTributaria = () => {
                         <div className='grid-x grid-margin-x'>
                             <Buscador setClienteDtBuscado={setClienteDtBuscado} />
                             <div className='cell small-2 text-right' style={{ margin:"auto"}}>
-                                <a class="clear button secondary" onClick={(e)=>HandlerFiltro(e)}>Filtrar</a>
+                                <a class="clear button secondary" onClick={(e) => HandlerFiltro(e)}>Filtrar</a>
+                                <a class="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp/>Recargar</a>
+                                
                             </div>
                         </div> 
                     </div>
-                    {filtro ? (<FiltroListaClientes setFiltro={setFiltro} setFiltroVigente={setFiltroVigente} setFiltroErpyme={setFiltroErpyme} setFiltroSaldo={setFiltroSaldo}/>): null}
-                    <ListaClientesDt clienteDtBuscado={clienteDtBuscado} setClienteSeleccionado={setClienteSeleccionado} setClienteDtCliqueado={setClienteDtCliqueado}/>
+                    {filtro ? (<FiltroListaClientes
+                        setFiltro={setFiltro}
+                        setFiltroVigente={setFiltroVigente}
+                        setFiltroErpyme={setFiltroErpyme}
+                        setFiltroSaldo={setFiltroSaldo} />) : null}
+                    <ListaClientesDt
+                        clienteDtBuscado={clienteDtBuscado}
+                        setClienteSeleccionado={setClienteSeleccionado}
+                        setClienteDtCliqueado={setClienteDtCliqueado}
+                        filtroVigente={filtroVigente}
+                        filtroErpyme={filtroErpyme}
+                        filtroSaldo={filtroSaldo}/>
                 </Fragment>)
             }
         </Fragment>
