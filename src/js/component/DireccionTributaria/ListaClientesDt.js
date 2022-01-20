@@ -1,7 +1,9 @@
 import React, { Fragment, useState, useContext } from 'react';
+import { Context } from "../../store/AppContext"
 import { SaldoTotal } from "../../Helper/SaldoTotal";
 
-const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado }) => {
+const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado }) => {
+    const { store, actions } = useContext(Context);
     ///// Arreglar esto. Hay codigo que no me gusta y 1) No me permite filtrar por "secciones" de texto
 
     const HandlerClick = (object) => {
@@ -10,7 +12,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSelecc
     }
 
     return (
-        <div className='row table-scroll'>
+        <div className='row'>
             <table className="table hover">
                 <thead>
                     <tr>
@@ -30,7 +32,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSelecc
                 <tbody>
                     {(store.clientesDt != null) ? 
                         ((clienteDtBuscado == "" || clienteDtBuscado == null) ? (
-                            clientesDt.map((object, i) => 
+                            store.clientesDt.map((object, i) => 
                                 <tr key={i} onClick={()=>HandlerClick(object)}>
                                     <td>{object.id}</td>
                                     <td>{object.razon}</td>
@@ -44,7 +46,7 @@ const ListaClientesDt = ({ store, clientesDt, clienteDtBuscado, setClienteSelecc
                                     <td>{object.erpyme}</td>
                                     <td>${SaldoTotal.montoSaldo(object)}</td>
                                 </tr>)
-                        ):(clientesDt.filter(
+                        ):(store.clientesDt.filter(
                             contact => contact.razon.toLowerCase().includes(clienteDtBuscado.toLowerCase()) || contact.rut.toLowerCase().includes(clienteDtBuscado.toLowerCase()) || contact.correo.toLowerCase().includes(clienteDtBuscado.toLowerCase()) || contact.representante.toLowerCase().includes(clienteDtBuscado.toLowerCase()) || contact.rutRepresentante.toLowerCase().includes(clienteDtBuscado.toLowerCase())).map((object, i) => 
                                 <tr key={i} onClick={()=>HandlerClick(object)}>
                                 <td>{object.id}</td>

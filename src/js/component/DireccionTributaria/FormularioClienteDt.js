@@ -132,8 +132,17 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
     };
 
     const HandlerCompletarDatos = (event) => {
-        setDatos({ ...datos, [event.target.name]: event.target.value })
-    };
+        if (event.target.name === "razon" || event.target.name === "representante") {
+            var separateWord = event.target.value.toLowerCase().split(' ');
+            for (var i = 0; i < separateWord.length; i++) {
+                separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
+                    separateWord[i].substring(1);
+            }
+            setDatos({ ...datos, [event.target.name]: separateWord.join(' ') })
+        } else {
+            setDatos({ ...datos, [event.target.name]: (event.target.value) })
+        }
+    }
 
     return (
         <div className='row no-print' style={{filter: "drop-shadow(0px 4px 8px #000000)"}}>

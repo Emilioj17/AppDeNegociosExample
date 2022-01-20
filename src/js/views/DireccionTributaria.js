@@ -5,6 +5,7 @@ import Buscador from "../component/DireccionTributaria/Buscador";
 import ListaClientesDt from "../component/DireccionTributaria/ListaClientesDt";
 import FormularioClienteDt from "../component/DireccionTributaria/FormularioClienteDt";
 import ClienteSeleccionado from "../component/DireccionTributaria/ClienteSeleccionado";
+import FiltroListaClientes from '../component/DireccionTributaria/FiltroListaClientes';
 import '../../styles/PagosDt.css';
 
 
@@ -13,12 +14,15 @@ import '../../styles/PagosDt.css';
 //Nuevo Cliente y se ejecutará FormularioClienteDt.js.
 
 const DireccionTributaria = () => {
+    const { store, actions } = useContext(Context);
     const [nuevoCliente, setNuevoCliente] = useState(false);
     const [clienteSeleccionado, setClienteSeleccionado] = useState(false);
     const [clienteDtBuscado, setClienteDtBuscado] = useState(null);
     const [clienteDtCliqueado, setClienteDtCliqueado] = useState(null);
-    const { store, actions } = useContext(Context);
-    const { clientesDt } = store;
+    const [filtro, setFiltro] = useState(false);
+    const [filtroVigente, setFiltroVigente] = useState("todos");
+    const [filtroErpyme, setFiltroErpyme] = useState("todos");
+    const [filtroSaldo, setFiltroSaldo] = useState("todos");
     const titulosHead = ["Bienvenido al Servicio de Direccion Tributaria", "Consulta información respecto a Clientes con este servicio contratado."];
 
     useEffect(() => {
@@ -27,6 +31,10 @@ const DireccionTributaria = () => {
     
     const HandlerNuevoCliente = (event) => {
         setNuevoCliente(true);
+    }
+
+    const HandlerFiltro = (event) => {
+        filtro ? setFiltro(false) : setFiltro(true);
     }
 
     return (
@@ -39,7 +47,6 @@ const DireccionTributaria = () => {
                     <div className='row'>
                         <div className='button-group align-right'>
                             <button className="submit success button" onClick={(e)=>HandlerNuevoCliente(e)}>Nuevo Cliente</button>
-                            <button className="submit button" disabled>Filtrar Avanzado</button>
                             <button className="submit button" disabled>Exportar Seleccion</button>
                         </div>
                     </div>
@@ -47,11 +54,12 @@ const DireccionTributaria = () => {
                         <div className='grid-x grid-margin-x'>
                             <Buscador setClienteDtBuscado={setClienteDtBuscado} />
                             <div className='cell small-2 text-right' style={{ margin:"auto"}}>
-                                <a class="clear button secondary">Filtrar</a>
+                                <a class="clear button secondary" onClick={(e)=>HandlerFiltro(e)}>Filtrar</a>
                             </div>
                         </div> 
                     </div>
-                    <ListaClientesDt store={store} clientesDt={clientesDt} clienteDtBuscado={clienteDtBuscado} setClienteSeleccionado={setClienteSeleccionado} setClienteDtCliqueado={setClienteDtCliqueado}/>
+                    {filtro ? (<FiltroListaClientes setFiltro={setFiltro} setFiltroVigente={setFiltroVigente} setFiltroErpyme={setFiltroErpyme} setFiltroSaldo={setFiltroSaldo}/>): null}
+                    <ListaClientesDt clienteDtBuscado={clienteDtBuscado} setClienteSeleccionado={setClienteSeleccionado} setClienteDtCliqueado={setClienteDtCliqueado}/>
                 </Fragment>)
             }
         </Fragment>
