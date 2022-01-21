@@ -6,7 +6,7 @@ import ListaClientesDt from "../component/DireccionTributaria/ListaClientesDt";
 import FormularioClienteDt from "../component/DireccionTributaria/FormularioClienteDt";
 import ClienteSeleccionado from "../component/DireccionTributaria/ClienteSeleccionado";
 import FiltroListaClientes from '../component/DireccionTributaria/FiltroListaClientes';
-import { IoRefreshSharp } from "react-icons/io5";
+import { IoRefreshSharp, IoEllipsisVerticalSharp } from "react-icons/io5";
 import { ExportTableToExcel } from "../Helper/ExportTableToExcel";
 import '../../styles/PagosDt.css';
 
@@ -25,11 +25,15 @@ const DireccionTributaria = () => {
     const [filtroVigente, setFiltroVigente] = useState("todos");
     const [filtroErpyme, setFiltroErpyme] = useState("todos");
     const [filtroSaldo, setFiltroSaldo] = useState("todos");
+    const [clientesPorPagina, setClientesPorPagina] = useState(false);
     const titulosHead = ["Bienvenido al Servicio de Direccion Tributaria", "Consulta información respecto a Clientes con este servicio contratado."];
 
+    //Este useEffect inicia getClientes, y llama a todo el listado de clientes. Con esto, cuando se abre ListaClientesDt.js que llama al store.clientesDt ya tiene una lista por descargar-
     useEffect(() => {
         actions.getClientesDt();
     }, []);
+
+    //Las siguientes funciones son las que permiten algunas acciones básicas en la página.
     
     const HandlerNuevoCliente = (event) => {
         setNuevoCliente(true);
@@ -45,6 +49,10 @@ const DireccionTributaria = () => {
 
     const HandlerExportarTabla = (event) => {
         ExportTableToExcel('xlsx')
+    }
+
+    const HandlerClientesPorPagina = (event) => {
+        clientesPorPagina ? setClientesPorPagina(false): setClientesPorPagina(true)
     }
 
     return (
@@ -63,10 +71,18 @@ const DireccionTributaria = () => {
                     <div className='row'>
                         <div className='grid-x grid-margin-x'>
                             <Buscador setClienteDtBuscado={setClienteDtBuscado} />
-                            <div className='cell small-2 text-right' style={{ margin:"auto"}}>
+                            <div className='cell small-4 text-right' style={{ margin:"auto"}}>
                                 <a class="clear button secondary" onClick={(e) => HandlerFiltro(e)}>Filtrar</a>
-                                <a class="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp/>Recargar</a>
-                                
+                                <a class="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp />Recargar</a>
+                                <a class="clear button secondary" onClick={(e) => HandlerClientesPorPagina(e)}><IoEllipsisVerticalSharp /></a>
+                                {clientesPorPagina ? (
+                                    <ul className="pagination">
+                                        <li className="current">10</li>
+                                        <li><a>20</a></li>
+                                        <li><a>50</a></li>
+                                        <li><a>99</a></li>
+                                    </ul>
+                                ) : (null)}
                             </div>
                         </div> 
                     </div>
