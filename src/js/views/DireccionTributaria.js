@@ -25,7 +25,8 @@ const DireccionTributaria = () => {
     const [filtroVigente, setFiltroVigente] = useState("todos");
     const [filtroErpyme, setFiltroErpyme] = useState("todos");
     const [filtroSaldo, setFiltroSaldo] = useState("todos");
-    const [clientesPorPagina, setClientesPorPagina] = useState(false);
+    const [botonClientesPorPagina, setBotonClientesPorPagina] = useState(false);
+    const [clientesPorPagina, setClientesPorPagina] = useState(20);
     const titulosHead = ["Bienvenido al Servicio de Direccion Tributaria", "Consulta información respecto a Clientes con este servicio contratado."];
 
     //Este useEffect inicia getClientes, y llama a todo el listado de clientes. Con esto, cuando se abre ListaClientesDt.js que llama al store.clientesDt ya tiene una lista por descargar-
@@ -51,8 +52,13 @@ const DireccionTributaria = () => {
         ExportTableToExcel('xlsx')
     }
 
+    const HandlerBotonClientesPorPagina = (event) => {
+        botonClientesPorPagina ? setBotonClientesPorPagina(false): setBotonClientesPorPagina(true)
+    }
+
     const HandlerClientesPorPagina = (event) => {
-        clientesPorPagina ? setClientesPorPagina(false): setClientesPorPagina(true)
+        console.log(event.target.id);
+        setClientesPorPagina(parseInt(event.target.id))
     }
 
     return (
@@ -74,14 +80,14 @@ const DireccionTributaria = () => {
                             <div className='cell small-4 text-right' style={{ margin:"auto"}}>
                                 <a class="clear button secondary" onClick={(e) => HandlerFiltro(e)}>Filtrar</a>
                                 <a class="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp />Recargar</a>
-                                <a class="clear button secondary" onClick={(e) => HandlerClientesPorPagina(e)}><IoEllipsisVerticalSharp /></a>
-                                {clientesPorPagina ? (
-                                    <ul className="pagination">
-                                        <li className="current">10</li>
-                                        <li><a>20</a></li>
-                                        <li><a>50</a></li>
-                                        <li><a>99</a></li>
-                                    </ul>
+                                <a class="clear button secondary" onClick={(e) => HandlerBotonClientesPorPagina(e)}><IoEllipsisVerticalSharp /></a>
+                                {botonClientesPorPagina ? (
+                                    <div style={{display:"inline"}}>
+                                        <a className="button tiny" id="5" onClick={(e)=> HandlerClientesPorPagina(e)}>5</a>
+                                        <a className="button tiny" id="50" onClick={(e)=> HandlerClientesPorPagina(e)}>50</a>
+                                        <a className="button tiny" id="100" onClick={(e) => HandlerClientesPorPagina(e)}>99</a>
+                                        <a className="button tiny"id="10000" onClick={(e)=> HandlerClientesPorPagina(e)}>Todos</a>
+                                    </div>
                                 ) : (null)}
                             </div>
                         </div> 
@@ -97,7 +103,8 @@ const DireccionTributaria = () => {
                         setClienteDtCliqueado={setClienteDtCliqueado}
                         filtroVigente={filtroVigente}
                         filtroErpyme={filtroErpyme}
-                        filtroSaldo={filtroSaldo}/>
+                        filtroSaldo={filtroSaldo}
+                        clientesPorPagina={clientesPorPagina}/>
                 </Fragment>)
             }
         </Fragment>

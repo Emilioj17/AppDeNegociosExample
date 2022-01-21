@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import ReactPaginate from 'react-paginate';
 import { Context } from "../../store/AppContext"
 import { SaldoTotal } from "../../Helper/SaldoTotal";
 
 //Aquí se genera el Listado de Clientes que se muestra en Dt. Desde DireconTributaria.js se ejecuta el action que llama la info de la bd. Esta lista se guarda en store.clientesDt.
 
-const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado, filtroVigente, filtroErpyme, filtroSaldo }) => {
+const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado, filtroVigente, filtroErpyme, filtroSaldo, clientesPorPagina }) => {
     const { store, actions } = useContext(Context);
+    const items = store.clientesDt;
 
     const HandlerClick = (object) => {
         setClienteDtCliqueado(object);
@@ -88,8 +90,8 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
         }
     }
 
-    return (
-        <div className='row'>
+    const Items = ({ currentItems }) => {
+        return (
             <table className="table hover" id="tblData">
                 <thead>
                     <tr>
@@ -107,15 +109,58 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
                     </tr>
                 </thead>
                 <tbody>
-                    {(store.clientesDt != null) ? 
+                    {(currentItems != null) ? 
                         ((clienteDtBuscado == "" || clienteDtBuscado == null) ? (
-                            store.clientesDt.filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => ListaDesplegarClientes(objeto, i))
-                        ):(store.clientesDt.filter(objeto => Busqueda(objeto)).filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => 
+                            currentItems.filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => ListaDesplegarClientes(objeto, i))
+                        ):(currentItems.filter(objeto => Busqueda(objeto)).filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => 
                                 ListaDesplegarClientes(objeto, i)))): 
                         (<td colSpan="9" style={{height:"100px", padding:"20px"}}><h2 className="text-center"> - no hay datos -</h2></td>)
                     }
                 </tbody>
             </table>
+          );
+    }
+
+    const PaginatedItems = ({ itemsPerPage }) => {
+        // We start with an empty list of items.
+        const [currentItems, setCurrentItems] = useState(null);
+        const [pageCount, setPageCount] = useState(0);
+        // Here we use item offsets; we could also use page offsets
+        // following the API or data you're working with.
+        const [itemOffset, setItemOffset] = useState(0);
+
+        useEffect(() => {
+            // Fetch items from another resources.
+            const endOffset = itemOffset + itemsPerPage;
+            setCurrentItems(items.slice(itemOffset, endOffset));
+            setPageCount(Math.ceil(items.length / itemsPerPage));
+        }, [itemOffset, itemsPerPage]);
+
+        // Invoke when user click to request another page.
+        const handlePageClick = (event) => {
+            const newOffset = (event.selected * itemsPerPage) % items.length;
+            setItemOffset(newOffset);
+        };
+
+        return (
+            <>
+            <Items currentItems={currentItems} />
+            <ReactPaginate
+                breakLabel="..."
+                nextLabel="Siguiente >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< Anterior"
+                renderOnZeroPageCount={null}
+            />
+            </>
+        );
+    }
+
+    return (
+        <div className='row'>
+            {(store.clientesDt != null) ? (<PaginatedItems itemsPerPage={clientesPorPagina} />): null}
         </div>
     );
 }
