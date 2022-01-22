@@ -2,8 +2,10 @@ import React, { useContext, useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import { Context } from "../../store/AppContext"
 import { SaldoTotal } from "../../Helper/SaldoTotal";
+import "../../../styles/Paginator.css";
 
 //Aquí se genera el Listado de Clientes que se muestra en Dt. Desde DireconTributaria.js se ejecuta el action que llama la info de la bd. Esta lista se guarda en store.clientesDt.
+// Respecto al CSS del Paginator, se debió crear un .css adicional solo para setear los colores.
 
 const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado, filtroVigente, filtroErpyme, filtroSaldo, clientesPorPagina }) => {
     const { store, actions } = useContext(Context);
@@ -144,16 +146,19 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
 
         return (
             <>
-            <Items currentItems={currentItems} />
-            <ReactPaginate
-                breakLabel="..."
-                nextLabel="Siguiente >"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel="< Anterior"
-                renderOnZeroPageCount={null}
-            />
+                <Items currentItems={currentItems} />
+                <div className='divPaginator'>
+                    <ReactPaginate
+                    breakLabel="..."
+                    nextLabel="Siguiente >"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={5}
+                    pageCount={pageCount}
+                    previousLabel="< Anterior"
+                    renderOnZeroPageCount={null}
+                    />
+                </div>
+            
             </>
         );
     }

@@ -1,0 +1,23 @@
+.divPaginator {
+	width: 30%;
+	margin: 0 auto;
+}
+
+.divPaginator li {
+	display: inline-block;
+}
+
+.divPaginator li a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+.divPaginator .selected {
+	background-color: rgba(6, 70, 112, 255);
+}
+
+.divPaginator li a:hover:not(.active) {
+	background-color: #ddd;
+}

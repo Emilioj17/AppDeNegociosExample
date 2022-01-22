@@ -76,7 +76,7 @@ const ModificarClienteDt = ({setClickPagos, setDSetectorCambios}) => {
     }
 
     const HandlerBotonFiltrar = (event) => {
-        filtro ? setFiltro(false) : setFiltro(true)
+        filtro ? setFiltro(false) : setFiltro(true);
         setFiltroYear("todos");
         setFiltroMesInicio("Enero");
         setFiltroMesTermino("Diciembre");

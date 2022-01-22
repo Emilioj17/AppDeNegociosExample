@@ -3,9 +3,10 @@ import React from 'react';
 //Esta funcion es la que genera el buscador de clientes. Es bien sencilla, el unico handler que tiene
 // est para asignar lo que se escriba con un onChange.
 
-const Buscador = ({setClienteDtBuscado}) => {
+const Buscador = ({setClienteDtBuscado, setClientesPorPagina}) => {
     const HandlerOnChange = (event) => {
-        setClienteDtBuscado(event.target.value)
+        setClienteDtBuscado(event.target.value);
+        setClientesPorPagina(100000);
     };
 
     return (

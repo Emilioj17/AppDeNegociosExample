@@ -3,22 +3,25 @@ import { FiAlertOctagon } from "react-icons/fi";
 
 //Este Formulario es de Direccion Tributaria (Crear un Nuevo Cliente)
 
-const FiltroListaClientes = ({setFiltro, setFiltroVigente, setFiltroErpyme, setFiltroSaldo}) => {
+const FiltroListaClientes = ({setFiltro, setFiltroVigente, setFiltroErpyme, setFiltroSaldo, setClientesPorPagina}) => {
     const [defectFiltroVigente, setDefectFiltroVigente] = useState("Selecciona Vigencia...");
     const [defectFiltroErpyme, setDefectFiltroErpyme] = useState("Selecciona Erpyme...");
     const [defectFiltroSaldo, setDefectFiltroSaldo] = useState("Selecciona Saldo...");
 
     const HandlerFiltroVigente = (event) => {
+        setClientesPorPagina(100000);
         setFiltroVigente(event.target.value);
         setDefectFiltroVigente(event.target.value);
     }
 
     const HandlerFiltroErpyme = (event) => {
+        setClientesPorPagina(100000);
         setFiltroErpyme(event.target.value);
         setDefectFiltroErpyme(event.target.value);
     }
 
     const HandlerFiltroSaldo = (event) => {
+        setClientesPorPagina(100000);
         setFiltroSaldo(event.target.value);
         setDefectFiltroSaldo(event.target.value);
     }

@@ -76,17 +76,17 @@ const DireccionTributaria = () => {
                     </div>
                     <div className='row'>
                         <div className='grid-x grid-margin-x'>
-                            <Buscador setClienteDtBuscado={setClienteDtBuscado} />
+                            <Buscador setClienteDtBuscado={setClienteDtBuscado} setClientesPorPagina={setClientesPorPagina}/>
                             <div className='cell small-4 text-right' style={{ margin:"auto"}}>
                                 <a class="clear button secondary" onClick={(e) => HandlerFiltro(e)}>Filtrar</a>
                                 <a class="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp />Recargar</a>
                                 <a class="clear button secondary" onClick={(e) => HandlerBotonClientesPorPagina(e)}><IoEllipsisVerticalSharp /></a>
                                 {botonClientesPorPagina ? (
                                     <div style={{display:"inline"}}>
-                                        <a className="button tiny" id="5" onClick={(e)=> HandlerClientesPorPagina(e)}>5</a>
-                                        <a className="button tiny" id="50" onClick={(e)=> HandlerClientesPorPagina(e)}>50</a>
-                                        <a className="button tiny" id="100" onClick={(e) => HandlerClientesPorPagina(e)}>99</a>
-                                        <a className="button tiny"id="10000" onClick={(e)=> HandlerClientesPorPagina(e)}>Todos</a>
+                                        <a className="button tiny" id="5" onClick={(e) => HandlerClientesPorPagina(e)} style={(clientesPorPagina == "5" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>5</a>
+                                        <a className="button tiny" id="50" onClick={(e)=> HandlerClientesPorPagina(e)} style={(clientesPorPagina == "50" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>50</a>
+                                        <a className="button tiny" id="100" onClick={(e) => HandlerClientesPorPagina(e)} style={(clientesPorPagina == "100" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>100</a>
+                                        <a className="button tiny"id="100000" onClick={(e)=> HandlerClientesPorPagina(e)} style={(clientesPorPagina == "100000" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>Todos</a>
                                     </div>
                                 ) : (null)}
                             </div>
@@ -96,7 +96,8 @@ const DireccionTributaria = () => {
                         setFiltro={setFiltro}
                         setFiltroVigente={setFiltroVigente}
                         setFiltroErpyme={setFiltroErpyme}
-                        setFiltroSaldo={setFiltroSaldo} />) : null}
+                        setFiltroSaldo={setFiltroSaldo}
+                        setClientesPorPagina={setClientesPorPagina}/>) : null}
                     <ListaClientesDt
                         clienteDtBuscado={clienteDtBuscado}
                         setClienteSeleccionado={setClienteSeleccionado}
