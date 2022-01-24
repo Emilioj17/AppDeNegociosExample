@@ -1,5 +1,35 @@
+table td {
+	border: 1px dotted silver;
+	word-break: break-all;
+	font-size: 12px;
+}
+
+table th {
+	font-size: 14px;
+}
+
+.representante {
+	width: 120px;
+}
+
+.telefono {
+	width: 70px;
+}
+
+.id {
+	width: 40px;
+}
+
+.rut {
+	width: 85px;
+}
+
+.saldo {
+	width: 80px;
+}
+
 .divPaginator {
-	width: 30%;
+	width: 40%;
 	margin: 0 auto;
 }
 

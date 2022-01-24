@@ -97,17 +97,17 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
             <table className="table hover" id="tblData">
                 <thead>
                     <tr>
-                        <th scope="col">Id</th>
+                        <th className="id" scope="col">Id</th>
                         <th scope="col">Razon Social</th>
-                        <th scope="col">Rut</th>
+                        <th className="rut" scope="col">Rut</th>
                         <th scope="col">Correo</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">Rep Legal</th>
-                        <th scope="col">Rut Rep</th>
+                        <th className="telefono" scope="col">Teléfono</th>
+                        <th className="representante" scope="col">Rep Legal</th>
+                        <th className="rut" scope="col">Rut Rep</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Vigente</th>
                         <th scope="col">Erpyme</th>
-                        <th scope="col">Saldo</th>
+                        <th className="saldo" scope="col">Saldo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -150,11 +150,11 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
                 <div className='divPaginator'>
                     <ReactPaginate
                     breakLabel="..."
-                    nextLabel="Siguiente >"
+                    nextLabel="Next>"
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={5}
                     pageCount={pageCount}
-                    previousLabel="< Anterior"
+                    previousLabel="<Atras"
                     renderOnZeroPageCount={null}
                     />
                 </div>
@@ -165,7 +165,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
 
     return (
         <div className='row'>
-            {(store.clientesDt != null) ? (<PaginatedItems itemsPerPage={clientesPorPagina} />): null}
+            {(store.clientesDt != null) ? (<PaginatedItems itemsPerPage={clientesPorPagina} />) : null}
         </div>
     );
 }
