@@ -6,15 +6,37 @@
 
 .Principal {
 	display: grid;
-	grid-template-columns: 20% 80%;
+	grid-template-columns: 15% 85%;
 	grid-template-rows: 100%;
 }
 
 .NavbarPrincipal {
 	grid-column: 1/2;
+	grid-row: 1/2;
+	z-index: 0;
 }
 
 .SwitchPrincipal {
-	background-color: tomato;
+	grid-column: auto;
+	grid-row: 1/2;
+	z-index: 0;
+}
+
+.SwitchSecundario {
 	grid-column: 1/3;
+	grid-row: 1/2;
+	z-index: 0;
+}
+
+.NavbarCortito {
+	grid-column: 1/3;
+	grid-row: 1/2;
+	z-index: 8;
+	font-size: 33px;
+	text-align: left;
+	color: grey;
+}
+
+.NavbarCortito button {
+	cursor: pointer;
 }

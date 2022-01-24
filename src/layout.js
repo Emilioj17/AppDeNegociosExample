@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import injectContext from "./js/store/AppContext";
 import { Login } from "./js/views/Login";
@@ -11,14 +11,15 @@ import 'foundation-sites/dist/css/foundation.min.css';
 import './styles/App.css';
 
 const Layout = () => {
+	const [witch, setWitch] = useState(true);	
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div className="off-canvas-wrapper">
-			<div className="off-canvas-wrapper-inner Principal" data-off-canvas-wrapper>
+		<div className="">
+			<div className="Principal">
 				<BrowserRouter basename={basename}>
-					<Navbar/>
-					<div className="off-canvas-content SwitchPrincipal" data-off-canvas-content>
+					<Navbar witch={witch} setWitch={setWitch}/>
+					<div className={witch ? ("SwitchPrincipal"): ("SwitchSecundario")}>
 						<Switch className="Switch">
 							<Route exact path="/">
 								<Login />
