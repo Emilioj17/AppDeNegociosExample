@@ -1,10 +1,10 @@
-table td {
+.tablaClientes td {
 	border: 1px dotted silver;
 	word-break: break-all;
 	font-size: 12px;
 }
 
-table th {
+.tablaClientes th {
 	font-size: 14px;
 }
 
@@ -13,7 +13,7 @@ table th {
 }
 
 .telefono {
-	width: 70px;
+	width: 80px;
 }
 
 .id {
@@ -26,6 +26,10 @@ table th {
 
 .saldo {
 	width: 80px;
+}
+
+.fecha {
+	width: 85px;
 }
 
 .divPaginator {

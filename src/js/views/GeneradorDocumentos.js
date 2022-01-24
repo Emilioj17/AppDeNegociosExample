@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useState } from 'react';
-import '../../styles/App.css';
+import '../../styles/GeneradorDocumentos.css';
 import cedula from "../../img/cedula.jpg";
 import Head from "../component/Head";
 import Opciones from "../component/GeneradorDocumentos/Opciones";

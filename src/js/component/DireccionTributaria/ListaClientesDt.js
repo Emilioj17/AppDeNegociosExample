@@ -94,7 +94,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
 
     const Items = ({ currentItems }) => {
         return (
-            <table className="table hover" id="tblData">
+            <table className="table hover tablaClientes" id="tblData">
                 <thead>
                     <tr>
                         <th className="id" scope="col">Id</th>
@@ -104,7 +104,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
                         <th className="telefono" scope="col">Teléfono</th>
                         <th className="representante" scope="col">Rep Legal</th>
                         <th className="rut" scope="col">Rut Rep</th>
-                        <th scope="col">Fecha</th>
+                        <th className="fecha" scope="col">Fecha</th>
                         <th scope="col">Vigente</th>
                         <th scope="col">Erpyme</th>
                         <th className="saldo" scope="col">Saldo</th>

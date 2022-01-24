@@ -1,0 +1,12 @@
+.ImagenCedula {
+	text-align: center;
+	margin: 0 auto;
+	padding-bottom: 10px;
+}
+
+.Sube-Cedula {
+	background-color: rgb(240, 229, 229);
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+}

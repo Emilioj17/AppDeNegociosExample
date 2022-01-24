@@ -8,16 +8,17 @@ import DireccionTributaria from "./js/views/DireccionTributaria";
 import Contabilidad from "./js/views/Contabilidad";
 import Navbar from "./js/component/Navbar";
 import 'foundation-sites/dist/css/foundation.min.css';
+import './styles/App.css';
 
 const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
 		<div className="off-canvas-wrapper">
-			<div className="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+			<div className="off-canvas-wrapper-inner Principal" data-off-canvas-wrapper>
 				<BrowserRouter basename={basename}>
 					<Navbar/>
-					<div className="off-canvas-content" data-off-canvas-content>
+					<div className="off-canvas-content SwitchPrincipal" data-off-canvas-content>
 						<Switch className="Switch">
 							<Route exact path="/">
 								<Login />

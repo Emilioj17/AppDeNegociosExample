@@ -4,15 +4,17 @@
 	height: 100%;
 } */
 
-.ImagenCedula {
-	text-align: center;
-	margin: 0 auto;
-	padding-bottom: 10px;
+.Principal {
+	display: grid;
+	grid-template-columns: 20% 80%;
+	grid-template-rows: 100%;
 }
 
-.Sube-Cedula {
-	background-color: rgb(240, 229, 229);
-	margin-top: 10px;
-	margin-bottom: 10px;
-	padding: 10px;
+.NavbarPrincipal {
+	grid-column: 1/2;
+}
+
+.SwitchPrincipal {
+	background-color: tomato;
+	grid-column: 1/3;
 }

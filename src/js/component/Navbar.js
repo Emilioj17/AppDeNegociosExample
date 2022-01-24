@@ -7,7 +7,7 @@ import { GiDinosaurRex } from "react-icons/gi";
 const Navbar = () => {
     return (
         <Fragment>
-            <div className="off-canvas position-left reveal-for-medium no-print" data-off-canvas data-position="left">
+            <div className="off-canvas position-left reveal-for-medium no-print NavbarPrincipal" data-off-canvas data-position="left">
                 <div className="numbero row column">
                     <br className='no-print'/>
                     <h5>DeNegocios.cl</h5>

@@ -5,8 +5,8 @@ const Head = ({ contenido }) => {
     return (
         <div className="callout primary no-print">
             <div className="row column inline">
-                <h1>{titulo}</h1>
-                <p className="lead">{subtitulo}</p>
+                <h4>{titulo}</h4>
+                <p>{subtitulo}</p>
             </div>
         </div>
     );
