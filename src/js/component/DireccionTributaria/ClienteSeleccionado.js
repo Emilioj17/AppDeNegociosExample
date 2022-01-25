@@ -50,7 +50,7 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado, witch
     }
 
     const HandlerImpresion = (event) => {
-        witch ? setWitch(false) : setWitch(true);
+        setWitch(true);
         window.print();
     }
 
