@@ -15,11 +15,11 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div className="">
-			<div className="Principal">
+		<div className={witch ? ("off-canvas-wrapper"): ("")}>
+			<div className={witch ? ("off-canvas-wrapper"):("Principal")} data-off-canvas-wrapper>
 				<BrowserRouter basename={basename}>
 					<Navbar witch={witch} setWitch={setWitch}/>
-					<div className={witch ? ("SwitchPrincipal"): ("SwitchSecundario")}>
+					<div className={witch ? ("off-canvas-content"): ("SwitchSecundario")} data-off-canvas-content>
 						<Switch className="Switch">
 							<Route exact path="/">
 								<Login />

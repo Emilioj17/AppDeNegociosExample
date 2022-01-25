@@ -12,13 +12,11 @@ const Navbar = ({ witch, setWitch }) => {
 
     const NavbarDesplegado = () => {
         return (
-            <div className="callout no-print NavbarPrincipal" data-closable>
-                <button className="close-button no-print" aria-label="Dismiss alert" type="button" onClick={(e)=>HandlerWitch(e)} data-close>
-                    <span aria-hidden="true"><GiSubmarine /></span>
-                </button>
+            <div className="off-canvas position-left reveal-for-medium no-print" data-off-canvas data-position="left">
                 <div className="row column">
+                    
                     <br className='no-print'/>
-                    <h5>DeNegocios.cl</h5>
+                    <h5 style={{ display: "inline", paddingRight:"30px" }}>DeNegocios.cl   </h5><span className='Submarino' onClick={(e) => HandlerWitch(e)}><GiSubmarine /></span>
                     <br className='no-print'/>
                     <ul className="vertical menu no-print" style={{maxWidth: '250px'}}>
                         <li className='no-print'><Link to="/">Inicio</Link></li>
