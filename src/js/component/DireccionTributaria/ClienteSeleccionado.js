@@ -9,7 +9,7 @@ import { AiFillPrinter } from "react-icons/ai";
 
 //Este es el Panel Principal tras haber Seleccionado a un Cliente desde ListaClientes.
 
-const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => {
+const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado, witch, setWitch }) => {
     const { store, actions } = useContext(Context);
     const [detectorCambios, setDSetectorCambios] = useState(false);
     const [modificarCliente, setModificarCliente] = useState(false);
@@ -22,6 +22,7 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
         actions.getPago2020(clienteDtCliqueado.id);
         actions.getPago2021(clienteDtCliqueado.id);
         actions.getPago2022(clienteDtCliqueado.id);
+        window.scrollTo(0, 0);
     }, []);
 
     useEffect(() => {
@@ -48,6 +49,11 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
         setClickPagos(true);
     }
 
+    const HandlerImpresion = (event) => {
+        witch ? setWitch(false) : setWitch(true);
+        window.print();
+    }
+
     return (
         <div className='row yes-print'>
             {(modificarCliente) ? (<ModificarClienteDt setModificarCliente={setModificarCliente} clienteDtCliqueado={clienteDtCliqueado} setDSetectorCambios={setDSetectorCambios} />) : null}
@@ -62,7 +68,7 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
                                     <div className='cell small-6 button-group align-right'>
                                         <button className="submit warning button" onClick={(e)=>HandlerModificarCliente(e)}>Modificar Cliente</button>
                                         <button className="submit button warning" onClick={(e)=>HandlerEditarPagos(e)}>Editar Pagos</button>
-                                        <button className="submit secondary button" onClick={(e)=> window.print()}>Sacar Informe <AiFillPrinter /></button>
+                                        <button className="submit secondary button" onClick={(e)=> HandlerImpresion(e)}>Sacar Informe <AiFillPrinter /></button>
                                     </div>
                                 </div>
                                 <div className="grid-x">

@@ -28,7 +28,7 @@ const Layout = () => {
 								<GeneradorDocumentos />
 							</Route>
 							<Route exact path="/DireccionTributaria">
-								<DireccionTributaria />
+								<DireccionTributaria witch={witch} setWitch={setWitch}/>
 							</Route>
 							<Route exact path="/Contabilidad">
 								<Contabilidad />
