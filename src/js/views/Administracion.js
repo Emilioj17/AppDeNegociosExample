@@ -1,12 +1,14 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import Head from "../component/Head";
 import { Context } from "../../js/store/AppContext";
+import { useHistory } from "react-router-dom";
 import '../../styles/App.css';
 import Formulario from "../component/Administracion/Formulario";
 import Usuarios from "../component/Administracion/Usuarios";
 
 const Administracion = () => {
 	const { store, actions } = useContext(Context);
+	const history = useHistory();
 	const [usuarios, setUsuarios] = useState([""]);
 	const [ crear, setCrear ] = useState(false);
 	let listaUsuariosX = [];
@@ -19,6 +21,12 @@ const Administracion = () => {
 	useEffect(() => {
 		actions.getUsuarios();
 	}, []);
+
+	useEffect(() => {
+        if (store.usuarioActual == null) {
+			history.push("/");
+        }
+	})
 
 	useEffect(() => {
 		setUsuarios(store.usuarios)  //Revisar aquí. Se puede hacer mejor esto.

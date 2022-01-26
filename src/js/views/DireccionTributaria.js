@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
 import Head from "../component/Head";
 import { Context } from "../../js/store/AppContext";
+import { useHistory } from "react-router-dom";
 import Buscador from "../component/DireccionTributaria/Buscador";
 import ListaClientesDt from "../component/DireccionTributaria/ListaClientesDt";
 import FormularioClienteDt from "../component/DireccionTributaria/FormularioClienteDt";
@@ -17,6 +18,7 @@ import '../../styles/PagosDt.css';
 
 const DireccionTributaria = ({witch, setWitch}) => {
     const { store, actions } = useContext(Context);
+    const history = useHistory();
     const [nuevoCliente, setNuevoCliente] = useState(false);
     const [clienteSeleccionado, setClienteSeleccionado] = useState(false);
     const [clienteDtBuscado, setClienteDtBuscado] = useState(null);
@@ -33,6 +35,12 @@ const DireccionTributaria = ({witch, setWitch}) => {
     useEffect(() => {
         actions.getClientesDt();
     }, []);
+
+    useEffect(() => {
+        if (store.usuarioActual == null) {
+			history.push("/");
+        }
+	})
 
     //Las siguientes funciones son las que permiten algunas acciones básicas en la página.
     

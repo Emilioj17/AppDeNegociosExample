@@ -6,6 +6,7 @@ import Administracion from "./js/views/Administracion";
 import GeneradorDocumentos from "./js/views/GeneradorDocumentos";
 import DireccionTributaria from "./js/views/DireccionTributaria";
 import Contabilidad from "./js/views/Contabilidad";
+import PaginaNoEncontrada from "./js/views/PaginaNoEncontrada";
 import Navbar from "./js/component/Navbar";
 import 'foundation-sites/dist/css/foundation.min.css';
 import './styles/App.css';
@@ -36,8 +37,9 @@ const Layout = () => {
 							<Route exact path="/Administracion">
 								<Administracion />
 							</Route>
-							<Route>
-								<h1>Not found!</h1>
+							{/* 404 */}
+							<Route exact path="*">
+								<PaginaNoEncontrada/>
 							</Route>
 						</Switch>
 					</div>

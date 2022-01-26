@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
-import { useState } from 'react';
+import React, { Fragment, useState, useContext, useEffect } from 'react';
+import { Context } from "../../js/store/AppContext";
+import { useHistory } from "react-router-dom";
 import '../../styles/GeneradorDocumentos.css';
 import cedula from "../../img/cedula.jpg";
 import Head from "../component/Head";
@@ -13,6 +14,8 @@ import { Contrato30dias } from "../Helper/GeneradorDocumentos/Contrato30dias";
 import { ContratoContabilidad } from "../Helper/GeneradorDocumentos/ContratoContabilidad";
 
 const GeneradorDocumentos = () => {
+    const { store, actions } = useContext(Context);
+    const history = useHistory();
     const [img, setImg] = useState(cedula);
     const [datos, setDatos] = useState({
       nombre: "",
@@ -24,6 +27,14 @@ const GeneradorDocumentos = () => {
     });
     const [opcion, setOpcion] = useState("Poder SII");
     const [alert, setAlert] = useState(false);
+    
+  useEffect(() => {
+      
+      
+        if (store.usuarioActual == null) {
+      history.push("/");
+        }
+    })
   
     const HandlerClick = () => {
       if (datos.nombre.trim() === "" || datos.rut.trim() === "" || datos.razon.trim() === "" || datos.rutEmpresa.trim() === ""

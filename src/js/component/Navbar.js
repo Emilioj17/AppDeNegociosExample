@@ -1,13 +1,23 @@
-import React, { Fragment } from 'react';
-import { Link } from "react-router-dom";
+import React, { Fragment, useContext, } from 'react';
+import { Context } from "../store/AppContext";
+import { Link, useHistory } from "react-router-dom";
 import "../../styles/App.css";
 import { GiTRexSkull, GiHamburgerMenu, GiSubmarine } from "react-icons/gi";
 
-
-
 const Navbar = ({ witch, setWitch }) => {
-    const HandlerWitch = () => {
+    const { store, actions } = useContext(Context);
+    const history = useHistory();
+
+    const HandlerWitch = (event) => {
         witch ? setWitch(false) : setWitch(true);
+    }
+
+    const HandlerCerrarSesion = (event) => {
+        sessionStorage.removeItem("token");
+		sessionStorage.removeItem("usuarioActual");
+		store.token = null;
+		store.usuarioActual = null;
+		window.location.reload();
     }
 
     const NavbarDesplegado = () => {
@@ -23,7 +33,8 @@ const Navbar = ({ witch, setWitch }) => {
                         <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
                         <li><Link to="/DireccionTributaria">Direccion Tributaria</Link></li>
                         <li><Link to="#">Contabilidad</Link></li>
-                        <li><Link to="/Administracion"><GiTRexSkull/>Administración</Link></li>
+                        <li><Link to="/Administracion"><GiTRexSkull />Administración</Link></li>
+                        <li><Link onClick={(e)=>HandlerCerrarSesion(e)}>Cerrar Sesion</Link></li>
                     </ul>
                 </div>
             </div>

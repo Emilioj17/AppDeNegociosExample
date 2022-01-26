@@ -23,16 +23,41 @@ const getState = ({ getStore, getActions, setStore }) => {
             pago2020: null,  //Pagos especificos al id del ClienteDt seleccionado
             pago2021: null,  //Pagos especificos al id del ClienteDt seleccionado
             pago2022: null,  //Pagos especificos al id del ClienteDt seleccionado
+            usuarioActual: null,
+            token: null
 		},
         actions: {
             //Usuarios
+            getUsuario: async (correo, clave) => {
+                const actions = getActions();
+                fetch("http://localhost:5000/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ "correo": correo, "clave": clave })
+                }).then(res => {
+
+                    if (res.status === 200) return res.json();
+                    else if (res.status === 401) {
+                        alert("Usuario o clave Incorrecto");
+                    }
+                }).then(data => {
+                    sessionStorage.setItem("usuarioActual", JSON.stringify(data[0]))
+                    sessionStorage.setItem("token", data[1])
+                    setStore({ usuarioActual: data[0], token: data[1] });
+                    // setStore({ ingreso: ["Correcto"] });
+                }
+                ).catch(error => { console.error("Hay un problemilla", error) })
+            },
+
 			getUsuarios:  async () => {
                 const store = getStore();
                 fetch("http://127.0.0.1:5000/api/usuario", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
+                        "Authorization": "Bearer " + store.token
                     }
                 }).then((response) => response.json())
                     .then((data) => {
@@ -52,7 +77,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 fetch("http://127.0.0.1:5000/api/usuario", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token //revisar
                     },
                     body: JSON.stringify({
                         "nombre": nombre,
@@ -80,7 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
+                        "Authorization": "Bearer " + store.token
                     },
                     body: JSON.stringify({
                         "nombre": nombre,
@@ -103,13 +129,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			
 			borrarUsuario: async (id) => {
-                //const store = getStore();
+                const store = getStore();
                 fetch("http://127.0.0.1:5000/api/usuario/" + id, {
-                    method: "DELETE" //,
-                    //headers: {
-                    //    "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
-                    //}
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
                 }).then((response) => response.json())
                     .then((data) => {
                         setStore({
@@ -131,7 +157,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
+                        "Authorization": "Bearer " + store.token
                     }
                 }).then((response) => response.json())
                     .then((data) => {
@@ -152,7 +178,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
+                        "Authorization": "Bearer " + store.token
                     }
                 }).then((response) => response.json())
                     .then((data) => {
@@ -172,7 +198,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 fetch("http://127.0.0.1:5000/api/clienteDt", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
                     },
                     body: JSON.stringify({
                         "razon": razon,
@@ -206,7 +233,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
+                        "Authorization": "Bearer " + store.token
                     },
                     body: JSON.stringify({
                         "razon": razon,
@@ -236,12 +263,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             
             //Notas Clientes Dt
             getNota:  async (clienteDtid) => {
-                //const store = getStore();
+                const store = getStore();
                 fetch("http://127.0.0.1:5000/api/nota/" + clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
+                        "Authorization": "Bearer " + store.token
                     }
                 }).then((response) => response.json())
                     .then((data) => {
@@ -261,7 +288,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 fetch("http://127.0.0.1:5000/api/nota", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
                     },
                     body: JSON.stringify({
                         "comentario": comentario,
@@ -283,12 +311,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             //Pagos Clientes Dt
 
             getPago2019:  async (clienteDtid) => {
-                //const store = getStore();
+                const store = getStore();
                 fetch("http://127.0.0.1:5000/api/dt2019/" + clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
+                        "Authorization": "Bearer " + store.token
                     }
                 }).then((response) => response.json())
                     .then((data) => {
@@ -305,12 +333,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             getPago2020:  async (clienteDtid) => {
-                //const store = getStore();
+                const store = getStore();
                 fetch("http://127.0.0.1:5000/api/dt2020/" + clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
+                        "Authorization": "Bearer " + store.token
                     }
                 }).then((response) => response.json())
                     .then((data) => {
@@ -327,12 +355,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             getPago2021:  async (clienteDtid) => {
-                //const store = getStore();
+                const store = getStore();
                 fetch("http://127.0.0.1:5000/api/dt2021/" + clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
+                        "Authorization": "Bearer " + store.token
                     }
                 }).then((response) => response.json())
                     .then((data) => {
@@ -349,12 +377,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             getPago2022:  async (clienteDtid) => {
-                //const store = getStore();
+                const store = getStore();
                 fetch("http://127.0.0.1:5000/api/dt2022/" + clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
+                        "Authorization": "Bearer " + store.token
                     }
                 }).then((response) => response.json())
                     .then((data) => {
@@ -375,7 +403,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 fetch("http://127.0.0.1:5000/api/dt" + year, {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
                     },
                     body: JSON.stringify({
                         "mes": mes,
@@ -404,7 +433,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
+                        "Authorization": "Bearer " + store.token
                     },
                     body: JSON.stringify({
                         "mes": mes,
@@ -427,13 +456,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 
             borrarPago: async (year, clienteDtid) => {
-                //const store = getStore();
+                const store = getStore();
                 fetch("http://127.0.0.1:5000/api/dt" + year + "/" + clienteDtid, {
-                    method: "DELETE" //,
-                    //headers: {
-                    //    "Content-Type": "application/json",
-                        //"Authorization": "Bearer " + store.token
-                    //}
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
                 }).then((response) => response.json())
                     .then((data) => {
                         setStore({
