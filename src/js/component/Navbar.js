@@ -20,11 +20,25 @@ const Navbar = ({ witch, setWitch }) => {
 		window.location.reload();
     }
 
+    const NavbarInicio = () => {
+        return (
+            <div className="off-canvas position-left reveal-for-medium no-print" data-off-canvas data-position="left">
+                <div className="row column">
+                    <br className='no-print'/>
+                    <h5 style={{ display: "inline", paddingRight:"30px" }}>DeNegocios.cl   </h5>
+                    <br className='no-print'/>
+                    <ul className="vertical menu no-print" style={{maxWidth: '250px'}}>
+                        <li className='no-print'><Link to="/">Inicio</Link></li>
+                    </ul>
+                </div>
+            </div>
+        )
+    }
+
     const NavbarDesplegado = () => {
         return (
             <div className="off-canvas position-left reveal-for-medium no-print" data-off-canvas data-position="left">
                 <div className="row column">
-                    
                     <br className='no-print'/>
                     <h5 style={{ display: "inline", paddingRight:"30px" }}>DeNegocios.cl   </h5><span className='Submarino' onClick={(e) => HandlerWitch(e)}><GiSubmarine /></span>
                     <br className='no-print'/>
@@ -33,7 +47,7 @@ const Navbar = ({ witch, setWitch }) => {
                         <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
                         <li><Link to="/DireccionTributaria">Direccion Tributaria</Link></li>
                         <li><Link to="#">Contabilidad</Link></li>
-                        <li><Link to="/Administracion"><GiTRexSkull />Administración</Link></li>
+                        {store.usuarioActual.tipo == "Administrador" ? (<li><Link to="/Administracion"><GiTRexSkull />Administración</Link></li>): null}
                         <li><Link onClick={(e)=>HandlerCerrarSesion(e)}>Cerrar Sesion</Link></li>
                     </ul>
                 </div>
@@ -54,7 +68,7 @@ const Navbar = ({ witch, setWitch }) => {
 
     return (
         <Fragment>
-            {witch ? (<NavbarDesplegado/>):(<NavbarCortito/>)}
+            {store.token == null && store.usuarioActual == null ? <NavbarInicio /> : (witch ? (<NavbarDesplegado/>):(<NavbarCortito/>))}
         </Fragment>
     );
 }

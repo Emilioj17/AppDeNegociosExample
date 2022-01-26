@@ -37,9 +37,11 @@ const DireccionTributaria = ({witch, setWitch}) => {
     }, []);
 
     useEffect(() => {
-        if (store.usuarioActual == null) {
-			history.push("/");
-        }
+        setTimeout(() => {
+            if (store.usuarioActual == null && store.token == null) {
+                history.push("/");
+            }
+        }, 500);
 	})
 
     //Las siguientes funciones son las que permiten algunas acciones básicas en la página.
@@ -65,7 +67,6 @@ const DireccionTributaria = ({witch, setWitch}) => {
     }
 
     const HandlerClientesPorPagina = (event) => {
-        console.log(event.target.id);
         setClientesPorPagina(parseInt(event.target.id))
     }
 

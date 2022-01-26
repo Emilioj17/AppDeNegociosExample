@@ -28,12 +28,12 @@ const GeneradorDocumentos = () => {
     const [opcion, setOpcion] = useState("Poder SII");
     const [alert, setAlert] = useState(false);
     
-  useEffect(() => {
-      
-      
-        if (store.usuarioActual == null) {
-      history.push("/");
-        }
+    useEffect(() => {
+      setTimeout(() => {
+          if (store.usuarioActual == null && store.token == null) {
+              history.push("/");
+          }
+      }, 500);
     })
   
     const HandlerClick = () => {
