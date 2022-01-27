@@ -41,7 +41,7 @@ const DireccionTributaria = ({witch, setWitch}) => {
             if (store.usuarioActual == null && store.token == null) {
                 history.push("/");
             }
-        }, 500);
+        }, 200);
 	})
 
     //Las siguientes funciones son las que permiten algunas acciones básicas en la página.

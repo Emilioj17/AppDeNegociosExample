@@ -27,7 +27,7 @@ const Administracion = () => {
             if (store.usuarioActual == null && store.token == null) {
                 history.push("/");
             }
-        }, 500);
+        }, 200);
 	})
 
 	useEffect(() => {
