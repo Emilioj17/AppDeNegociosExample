@@ -28,6 +28,7 @@ const Recuperar = () => {
                 <div class="grid-x">
                     <div class="cell small-6">
                         <h5>Informaciones Varias</h5>
+                        <br />
                         <div className="grid-x">
                             <h6 className="cell small-12">Busca tu Liquidacion de Sueldo</h6>
                             <label class="cell small-8">
@@ -44,11 +45,12 @@ const Recuperar = () => {
                         <br />
                         <br />
                         <h6>Obten Copia Digital de tu Contrato</h6>
-                        <p>Clic aquí para contrato</p>
+                        <a className="isDisabled">Clic aquí para contrato</a>
+                        <br />
                         <br />
                         <br />
                     </div>
-                    <div class="cell small-6">Holi</div>
+                    <div class="cell small-6"></div>
                 </div>
 			</div>
 		</Fragment>

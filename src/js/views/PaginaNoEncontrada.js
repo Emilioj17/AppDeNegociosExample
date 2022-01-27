@@ -17,7 +17,7 @@ const PaginaNoEncontrada = () => {
             <h2>Error 404, <strong>Pagina no Encontrada</strong></h2>
             <br />
             <br />
-            <a class="button success large" onClick={(e)=>HandlerClickInicio(e)}>Volver al Inicio</a>
+            <a class="button success large" onClick={(e) => HandlerClickInicio(e)}>Volver al Inicio</a>
         </div>
     );
 };
