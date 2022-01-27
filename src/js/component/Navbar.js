@@ -47,7 +47,7 @@ const Navbar = ({ witch, setWitch }) => {
                         <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
                         <li><Link to="/DireccionTributaria">Direccion Tributaria</Link></li>
                         <li><a className='isDisabled'>Contabilidad</a></li>
-                        <li><a className='isDisabled'>RRHH</a></li>
+                        {store.usuarioActual.tipo == "Administrador" ? (<li><a className='isDisabled'>RRHH</a></li>) : null}
                         {store.usuarioActual.tipo == "Administrador" ? (<li><Link to="/Administracion">Admin Usuarios <GiTRexSkull /></Link></li>): null}
                         <li><Link onClick={(e)=>HandlerCerrarSesion(e)}>Cerrar Sesion</Link></li>
                     </ul>

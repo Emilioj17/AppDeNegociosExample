@@ -39,3 +39,47 @@
 	opacity: 0.5;
 	text-decoration: none;
 }
+
+.react-calendar {
+	padding: 10px !important;
+	padding-top: 30px !important;
+	padding-bottom: 50px !important;
+	width: 700px !important;
+	background: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: medium !important;
+	line-height: 1.125em !important;
+	cursor: default !important;
+}
+
+.react-calendar * {
+	cursor: default !important;
+}
+
+.react-calendar *:hover {
+	background-color: white !important;
+}
+
+.saturday2 {
+	height: 30px;
+	width: 30px !important;
+	background: #96f04d !important;
+	border-radius: 50% !important;
+	cursor: pointer !important;
+}
+
+.saturday2:hover {
+	background-color: blue !important;
+}
+
+.saturday2 abbr:hover {
+	background-color: blue !important;
+}
+
+.react-calendar__tile--now {
+	background-color: white !important;
+}
+
+.react-calendar__navigation__label__labelText {
+	font-weight: bolder;
+}
