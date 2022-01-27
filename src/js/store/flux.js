@@ -11,23 +11,24 @@ const getState = ({ getStore, getActions, setStore }) => {
       }
 
 	return {
-		store: {
-			usuarios: "null",
+        store: {
+            witch: true,
+			usuarios: null,
 			usuario: null,
             response: null,
-            clientesDt: null,
-            infoClienteDt: null,
+            clientesDt: null, //Lista de Clientes de Dt
+            infoClienteDt: null, //ClienteDt Seleccionado
             nota: null,  //Notas especificas al id del ClienteDt seleccionado
             pago2019: null,  //Pagos especificos al id del ClienteDt seleccionado
             pago2020: null,  //Pagos especificos al id del ClienteDt seleccionado
             pago2021: null,  //Pagos especificos al id del ClienteDt seleccionado
             pago2022: null,  //Pagos especificos al id del ClienteDt seleccionado
-            usuarioActual: null,
-            token: null
+            usuarioActual: null,  //Usuario Actual que está Conectado
+            token: null  //Token del Usuario Actual Conectado
 		},
         actions: {
             //Usuarios
-            getUsuario: async (correo, clave) => {
+            loginUsuario: async (correo, clave) => {
                 const actions = getActions();
                 fetch("http://localhost:5000/login", {
                     method: "POST",
@@ -49,6 +50,27 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
                 ).catch(error => { console.error("Hay un problemilla", error) })
             },
+
+            getUsuario:  async (usuarioid) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/api/usuario/" + usuarioid, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            usuario: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: "usuario seleccionado " + error.message
+                        })
+                    });
+			},
 
 			getUsuarios:  async () => {
                 const store = getStore();

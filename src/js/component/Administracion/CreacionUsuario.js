@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Context } from "../../store/AppContext";
-import { useHistory } from 'react-router';
 
 // Este formulario es de Administracion
 
-const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
+const CreacionUsuario = ({ setCrear }) => {
     const { store, actions } = useContext(Context);
     const [datos, setDatos] = useState({
         nombre: null,
@@ -13,7 +12,6 @@ const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
         clave: null,
         tipo: null
     });
-    let history = useHistory();
 
     const HandlerCancelar = (event) => {
         setCrear(false)
@@ -21,9 +19,7 @@ const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
 
     const HandlerCrear = (event) => {
         actions.crearUsuario(datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
-        //history.push("/Administracion");
         setTimeout(() => {window.location.reload()}, 1000);
-        //setCrear(false)
     };
 
     const HandlerModificacionDatos = (event) => {
@@ -31,9 +27,8 @@ const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
     };
 
     const HandlerModificar = (event) => {
-        actions.editarUsuario(usuarioActivo, datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
-        //history.push("/");
-        setTimeout(() => {window.location.reload()}, 1000);
+/*         actions.editarUsuario(usuarioActivo, datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
+        setTimeout(() => {window.location.reload()}, 1000); */
     };
 
     let nombre = "";
@@ -42,7 +37,7 @@ const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
     let clave = "";
     let tipo = "";
 
-    if (accion === "modificar") {
+    /* if (accion === "modificar") {
         for (let x = 0; x < usuarios.length; x++) {
             if (usuarios[x].id == usuarioActivo) {
                 nombre = usuarios[x].nombre;
@@ -53,35 +48,31 @@ const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
             }
         }
         console.log(tipo);
-    }
+    } */
 
     return (
         <div className="row">
             <div className="columns">
                 <form className="log-in-form">
-                    <h4 className="text-left">Ingresa los Datos solicitados para {(accion==="crear")?"crear":"modificar"} un Usuario</h4>
+                    <h4 className="text-left">Ingresa los Datos solicitados para crear un Usuario</h4>
                     <label>
                         Nombre
                         <input type="text"
-                            placeholder={(accion==="modificar")?(nombre):"Solo primer Nombre"}
                             value={datos.nombre} name="nombre" onChange={(e) => HandlerModificacionDatos(e)} />
                     </label>
                     <label>
                         Apellido
                         <input type="text"
-                            placeholder={(accion==="modificar")?(apellido):"Solo primer Apellido"}
                             value={datos.apellido} name="apellido" onChange={(e) => HandlerModificacionDatos(e)} />
                     </label>
                     <label>
                         Email
                         <input type="email"
-                            placeholder={(accion==="modificar")?(correo):"correo@denegocios.cl"}
                             value={datos.correo} name="correo" onChange={(e) => HandlerModificacionDatos(e)} />
                     </label>
                     <label>
                         Clave
                         <input type="password"
-                            placeholder={(accion==="modificar")?(clave):"Clave"}
                             value={datos.clave} name="clave" onChange={(e) => HandlerModificacionDatos(e)} />
                     </label>
                     <div className="">
@@ -92,15 +83,10 @@ const Formulario = ({ setCrear, accion, usuarioActivo, usuarios }) => {
                             <option selected={(tipo === "Cobranza") ? "selected" : ""}>Cobranza</option>
                         </select>
                     </div>
-                    <p>
-                        {(accion==="crear")?(<input type="btn" className="button expanded" Value="Crear Usuario" onClick={(e)=>HandlerCrear(e)}/>):null}
-                        {(accion==="modificar")?(<input type="btn" className="button expanded" Value="Modificar Usuario" onClick={(e)=>HandlerModificar(e)}/>):null}
-                        <input type="btn" className="button expanded alert" Value="Cancelar" onClick={(e)=>HandlerCancelar(e)}/>
-                    </p>
                 </form>
             </div>
         </div>
     );
 }
  
-export default Formulario;
+export default CreacionUsuario;

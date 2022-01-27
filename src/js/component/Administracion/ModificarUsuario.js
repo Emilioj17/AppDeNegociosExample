@@ -1,15 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { Context } from "../../store/AppContext";
 
-export const Usuarios = ({ listaUsuarios, setCrear, usuarioActivo, setUsuarioActivo, setAccion }) => {
+export const ModificarUsuario = ({setModificar}) => {
     const { store, actions } = useContext(Context);
 
-    const DivUsuarios = () => {
+/*     const DivUsuarios = () => {
         const HandlerActivo = (event) => {
             setUsuarioActivo(event.target.id)
         };
 
-        const Activos = listaUsuarios.map((usuario, index) => {
+        const Activos = store.usuarios.map((usuario, index) => {
             return (
                 <div className="form-check" key={index}>
                     <input className="form-check-input" type="radio" name="flexRadioDefault" id={usuario[2]} onClick={(e)=>HandlerActivo(e)}/>
@@ -40,26 +40,29 @@ export const Usuarios = ({ listaUsuarios, setCrear, usuarioActivo, setUsuarioAct
                 </div>
             </div>
         )
-    }
+    } */
 
     const HandlerBorrar = (event) => {
-        actions.borrarUsuario(usuarioActivo)
-        setTimeout(() => {window.location.reload()}, 1000);
+        console.log(store.usuarios);
+/*         actions.borrarUsuario(usuarioActivo)
+        setTimeout(() => {window.location.reload()}, 1000); */
     };
 
     const HandlerCrear = (event) => {
-        setAccion("crear");
-        setCrear(true);
+        actions.getUsuario(1)
+/*         setAccion("crear");
+        setCrear(true); */
     };
 
     const HandlerModificar = (event) => {
-        setAccion("modificar");
-        setCrear(true);
+        console.log(store.usuario);
+/*         setAccion("modificar");
+        setCrear(true); */
     };
 
     return (
         <div className="row text-center">
-            <DivUsuarios />
+           {/*  <DivUsuarios /> */}
             <div className="row small-up-2 medium-up-3 large-up-4">
                 <div className="column">
                     <a className="button primary" name="Modificar" onClick={(e) => HandlerModificar(e)}>Modificar</a>
@@ -75,4 +78,4 @@ export const Usuarios = ({ listaUsuarios, setCrear, usuarioActivo, setUsuarioAct
     );
 }
 
-export default Usuarios;
+export default ModificarUsuario;

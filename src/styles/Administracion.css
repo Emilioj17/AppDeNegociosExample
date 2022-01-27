@@ -1,0 +1,9 @@
+.tablaUsuarios td {
+	border: 1px dotted silver;
+	word-break: break-all;
+	font-size: 12px;
+}
+
+.tablaUsuarios th {
+	font-size: 14px;
+}

@@ -2,51 +2,54 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import Head from "../component/Head";
 import { Context } from "../../js/store/AppContext";
 import { useHistory } from "react-router-dom";
-import '../../styles/App.css';
-import Formulario from "../component/Administracion/Formulario";
-import Usuarios from "../component/Administracion/Usuarios";
+import '../../styles/Administracion.css';
+import CreacionUsuario from "../component/Administracion/CreacionUsuario";
+import ListaUsuarios from "../component/Administracion/ListaUsuarios";
+import ModificarUsuario from "../component/Administracion/ModificarUsuario";
 
 const Administracion = () => {
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
-	const [usuarios, setUsuarios] = useState([""]);
-	const [ crear, setCrear ] = useState(false);
-	let listaUsuariosX = [];
-	const [listaUsuarios, setListaUsuarios] = useState([""]);	
-	const [usuarioActivo, setUsuarioActivo] = useState(null);
-	const [accion, setAccion] = useState(null);
+	const [crear, setCrear] = useState(false);
+	const [modificar, setModificar] = useState(false);
 	const titulosHead = ["Bienvenido a Administracion DeNegocios.cl", "Aquí puedes Crear, Borrar o Editar un Usuario."];
-	
 
 	useEffect(() => {
 		actions.getUsuarios();
 	}, []);
 
 	useEffect(() => {
-        setTimeout(() => {
-            if (store.usuarioActual == null && store.token == null) {
-                history.push("/");
-            }
-        }, 200);
-	})
-
-	useEffect(() => {
-		setUsuarios(store.usuarios)  //Revisar aquí. Se puede hacer mejor esto.
+		setTimeout(() => {
+			if (store.usuarioActual == null && store.token == null) {
+				history.push("/");
+			}
+		}, 200);
 	});
 
-	useEffect(() => {
-		for (let x = 0; usuarios.length > x; x++) {
-			listaUsuariosX.push([usuarios[x].nombre, usuarios[x].apellido, usuarios[x].id, usuarios[x].tipo, usuarios[x].correo])
-		}
-		setListaUsuarios(listaUsuariosX)
-		
-	}, [usuarios])
+    const HandlerCrear = (event) => {
+        actions.getUsuario(1)
+/*         setAccion("crear");
+        setCrear(true); */
+    };
+
+    const HandlerModificar = (event) => {
+        console.log(store.usuario);
+/*         setAccion("modificar");
+        setCrear(true); */
+    };
 
 	return (
 		<Fragment>
 			<Head contenido={titulosHead} />
-			{(crear) ? null : (<Usuarios listaUsuarios={listaUsuarios} setCrear={setCrear} usuarioActivo={usuarioActivo} setUsuarioActivo={setUsuarioActivo} setAccion={setAccion}/>)}
-			{(crear) ? (<Formulario setCrear={setCrear} accion={accion} usuarioActivo={usuarioActivo} usuarios={usuarios}/>) : null}
+			<div className='row'>
+				<div className="button-group align-right">
+					<a className="button warning" name="Modificar" onClick={(e) => HandlerModificar(e)}>Modificar</a>
+					<a className="button primary" name="Crear" onClick={(e)=>HandlerCrear(e)}>Crear Usuario</a>
+				</div>
+			</div>
+			{(!crear && !modificar) ? (<ListaUsuarios/>):null}
+			{(crear) ? (<CreacionUsuario setCrear={setCrear} />) : null}
+			{(modificar) ? (<ModificarUsuario setModificar={setModificar} />) : null}
 		</Fragment>
 	)
 };

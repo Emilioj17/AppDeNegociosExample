@@ -25,7 +25,7 @@ export const Login = () => {
 	
 	const HandlerLogin = (event) => {
 		event.preventDefault();
-        actions.getUsuario(correo, clave);
+        actions.loginUsuario(correo, clave);
 	}
 	
 	return (
