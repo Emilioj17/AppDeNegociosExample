@@ -6,53 +6,61 @@ import { Context } from "../../store/AppContext";
 const CreacionUsuario = ({ setCrear }) => {
     const { store, actions } = useContext(Context);
     const [datos, setDatos] = useState({
-        nombre: null,
-        apellido: null,
-        correo: null,
-        clave: null,
-        tipo: null
+        nombre: "",
+        apellido: "",
+        correo: "",
+        clave: "",
+        tipo: "Vendedor"
     });
+    const [alertPrincipal, setAlertPrincipal] = useState(false);
+    const [alertCorreo, setAlertCorreo] = useState(false);
 
-    const HandlerCancelar = (event) => {
+    const HandlerCerrar = (event) => {
         setCrear(false)
     };
 
     const HandlerCrear = (event) => {
-        actions.crearUsuario(datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
-        setTimeout(() => {window.location.reload()}, 1000);
+        if (datos.nombre.trim() === "" || datos.apellido.trim() === "" || datos.correo.trim() === "" || datos.clave.trim() === ""
+            || datos.tipo.trim() === "" || datos.nombre === null || datos.apellido === null || datos.correo === null || datos.clave === null
+            || datos.tipo === null) {
+            setAlertPrincipal(true);
+        } else {
+            if (alertCorreo) {
+                setAlertPrincipal(true);
+            }
+            if (!alertCorreo) {
+                actions.crearUsuario(datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
+                setTimeout(() => {window.location.reload()}, 1000);
+            }
+        }
     };
 
     const HandlerModificacionDatos = (event) => {
+        const correo = event.target.value;
+        const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+        if (event.target.name === "correo") {
+            if (correo.match(validRegex)) {
+                setDatos({ ...datos, [event.target.name]: event.target.value });
+                setAlertCorreo(false);
+                return;
+            }
+            if (!correo.match(validRegex)) {
+                setDatos({ ...datos, [event.target.name]: event.target.value });
+                setAlertCorreo(true);
+                return;
+            }
+        }
+
         setDatos({ ...datos, [event.target.name]: event.target.value })
     };
 
-    const HandlerModificar = (event) => {
-/*         actions.editarUsuario(usuarioActivo, datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
-        setTimeout(() => {window.location.reload()}, 1000); */
-    };
-
-    let nombre = "";
-    let apellido = "";
-    let correo = "";
-    let clave = "";
-    let tipo = "";
-
-    /* if (accion === "modificar") {
-        for (let x = 0; x < usuarios.length; x++) {
-            if (usuarios[x].id == usuarioActivo) {
-                nombre = usuarios[x].nombre;
-                apellido = usuarios[x].apellido;
-                correo = usuarios[x].correo;
-                clave = usuarios[x].clave;
-                tipo = usuarios[x].tipo;
-            }
-        }
-        console.log(tipo);
-    } */
-
     return (
-        <div className="row">
-            <div className="columns">
+        <div className="row" style={{filter: "drop-shadow(0px 4px 8px #000000)"}}>
+            <div className="callout" data-closable>
+                <button className="close-button" aria-label="Dismiss alert" type="button" data-close onClick={(e)=>HandlerCerrar(e)}>
+                    <span aria-hidden="true">×</span>
+                </button>
                 <form className="log-in-form">
                     <h4 className="text-left">Ingresa los Datos solicitados para crear un Usuario</h4>
                     <label>
@@ -77,13 +85,18 @@ const CreacionUsuario = ({ setCrear }) => {
                     </label>
                     <div className="">
                         <label className="form-label" htmlFor='tipo'>Elige Tipo de Usuario</label>
-                        <select className="form-select" id="tipo" placeholder={tipo} name="tipo" onChange={(e)=>HandlerModificacionDatos(e)}>
-                            <option selected={(tipo === "Administrador") ? "selected" : ""}>Administrador</option>
-                            <option selected={(tipo === "Vendedor") ? "selected" : ""}>Vendedor</option>
-                            <option selected={(tipo === "Cobranza") ? "selected" : ""}>Cobranza</option>
+                        <select className="form-select" id="tipo" name="tipo" onChange={(e)=>HandlerModificacionDatos(e)}>
+                            <option>Administrador</option>
+                            <option>Vendedor</option>
+                            <option>Cobranza</option>
                         </select>
                     </div>
                 </form>
+                {alertPrincipal ? (<div className="callout alert text-center">Por favor, todos los datos deben ser completados</div>) : null}
+                {alertCorreo?(<div className="callout alert text-center">Correo Incorrecto</div>):null}
+                <div className="button-group align-right">
+                    <a className="button primary" onClick={(e)=>HandlerCrear(e)}>Crear Usuario</a>
+                </div>
             </div>
         </div>
     );

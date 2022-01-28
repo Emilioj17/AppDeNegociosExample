@@ -12,7 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 	return {
         store: {
-            witch: true,
+            witch: true,  //Setea existencia de barra lateral izquierda
 			usuarios: null,
 			usuario: null,
             response: null,
@@ -27,6 +27,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             token: null  //Token del Usuario Actual Conectado
 		},
         actions: {
+            setWitch: () => {
+                const store = getStore();
+                store.witch ? setStore({ witch: false }) : setStore({witch:true})
+            },
+
             //Usuarios
             loginUsuario: async (correo, clave) => {
                 const actions = getActions();

@@ -7,3 +7,7 @@
 .tablaUsuarios th {
 	font-size: 14px;
 }
+
+.trCliqueable {
+	cursor: pointer;
+}

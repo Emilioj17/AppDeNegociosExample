@@ -18,10 +18,10 @@ const Layout = () => {
 
 	return (
 		<div className={store.witch ? ("off-canvas-wrapper"): ("")}>
-			<div className={witch ? ("off-canvas-wrapper"):("Principal")} data-off-canvas-wrapper>
+			<div className={store.witch ? ("off-canvas-wrapper"):("Principal")} data-off-canvas-wrapper>
 				<BrowserRouter basename={basename}>
-					<Navbar witch={witch} setWitch={setWitch}/>
-					<div className={witch ? ("off-canvas-content"): ("SwitchSecundario")} data-off-canvas-content>
+					<Navbar/>
+					<div className={store.witch ? ("off-canvas-content"): ("SwitchSecundario")} data-off-canvas-content>
 						<Switch className="Switch">
 							<Route exact path="/">
 								<Login />
@@ -30,7 +30,7 @@ const Layout = () => {
 								<GeneradorDocumentos />
 							</Route>
 							<Route exact path="/DireccionTributaria">
-								<DireccionTributaria witch={witch} setWitch={setWitch}/>
+								<DireccionTributaria />
 							</Route>
 							<Route exact path="/Contabilidad">
 								<Contabilidad />

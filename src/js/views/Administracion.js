@@ -12,6 +12,8 @@ const Administracion = () => {
 	const history = useHistory();
 	const [crear, setCrear] = useState(false);
 	const [modificar, setModificar] = useState(false);
+	const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(false);  //Boton Modificar Permite Cliquear al ser true
+    const [usuarioCliqueado, setUsuarioCliqueado] = useState(null);
 	const titulosHead = ["Bienvenido a Administracion DeNegocios.cl", "Aquí puedes Crear, Borrar o Editar un Usuario."];
 
 	useEffect(() => {
@@ -27,29 +29,28 @@ const Administracion = () => {
 	});
 
     const HandlerCrear = (event) => {
-        actions.getUsuario(1)
-/*         setAccion("crear");
-        setCrear(true); */
+		setCrear(true);
     };
 
-    const HandlerModificar = (event) => {
-        console.log(store.usuario);
-/*         setAccion("modificar");
-        setCrear(true); */
+	const HandlerModificar = (event) => {
+		usuarioSeleccionado ? setUsuarioSeleccionado(false): setUsuarioSeleccionado(true)
+		console.log(usuarioCliqueado);
+		/* actions.getUsuario(usuarioCliqueado.id); */
     };
 
 	return (
 		<Fragment>
 			<Head contenido={titulosHead} />
-			<div className='row'>
-				<div className="button-group align-right">
-					<a className="button warning" name="Modificar" onClick={(e) => HandlerModificar(e)}>Modificar</a>
-					<a className="button primary" name="Crear" onClick={(e)=>HandlerCrear(e)}>Crear Usuario</a>
-				</div>
-			</div>
-			{(!crear && !modificar) ? (<ListaUsuarios/>):null}
+			{(!crear && !modificar) ? (
+				<div className='row'>
+					<div className="button-group align-right">
+						<a className="button warning" name="Modificar" disabled={crear ? true : false} onClick={(e) => HandlerModificar(e)}>Modificar</a>
+						<a className="button primary" name="Crear" disabled={usuarioSeleccionado ? true : false} onClick={(e) => HandlerCrear(e)}>Crear Usuario</a>
+					</div>
+				</div>) : (null)}
+			{(!crear && !modificar) ? (<ListaUsuarios setModificar={setModificar} usuarioSeleccionado={usuarioSeleccionado} setUsuarioCliqueado={setUsuarioCliqueado}/>):null}
 			{(crear) ? (<CreacionUsuario setCrear={setCrear} />) : null}
-			{(modificar) ? (<ModificarUsuario setModificar={setModificar} />) : null}
+			{(modificar) ? (<ModificarUsuario setModificar={setModificar} usuarioCliqueado={usuarioCliqueado} setUsuarioCliqueado={setUsuarioCliqueado}/>) : null}
 		</Fragment>
 	)
 };

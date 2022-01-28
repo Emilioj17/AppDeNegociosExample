@@ -16,7 +16,7 @@ import '../../styles/PagosDt.css';
 //se da clic a un elemento de la ListaClientesDt.js se ejecuta ClienteSeleccionado.js. También puedes hacer clic en
 //Nuevo Cliente y se ejecutará FormularioClienteDt.js.
 
-const DireccionTributaria = ({witch, setWitch}) => {
+const DireccionTributaria = () => {
     const { store, actions } = useContext(Context);
     const history = useHistory();
     const [nuevoCliente, setNuevoCliente] = useState(false);
@@ -73,7 +73,7 @@ const DireccionTributaria = ({witch, setWitch}) => {
     return (
         <Fragment>
             <Head contenido={titulosHead} />
-            {(clienteSeleccionado) ? (<ClienteSeleccionado setClienteSeleccionado={setClienteSeleccionado} clienteDtCliqueado={clienteDtCliqueado} witch={witch} setWitch={setWitch}/>) : null}
+            {(clienteSeleccionado) ? (<ClienteSeleccionado setClienteSeleccionado={setClienteSeleccionado} clienteDtCliqueado={clienteDtCliqueado} />) : null}
             {(nuevoCliente) ? (<FormularioClienteDt setNuevoCliente={setNuevoCliente} />) : null}
             {(clienteSeleccionado || nuevoCliente) ? null : (
                 <Fragment>
@@ -114,8 +114,7 @@ const DireccionTributaria = ({witch, setWitch}) => {
                         filtroVigente={filtroVigente}
                         filtroErpyme={filtroErpyme}
                         filtroSaldo={filtroSaldo}
-                        clientesPorPagina={clientesPorPagina}
-                        witch={witch}/>
+                        clientesPorPagina={clientesPorPagina}/>
                 </Fragment>)
             }
         </Fragment>

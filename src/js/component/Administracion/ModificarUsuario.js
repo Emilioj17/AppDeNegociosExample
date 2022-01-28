@@ -1,80 +1,100 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Context } from "../../store/AppContext";
 
-export const ModificarUsuario = ({setModificar}) => {
+export const ModificarUsuario = ({setModificar, usuarioCliqueado, setUsuarioCliqueado}) => {
     const { store, actions } = useContext(Context);
+    const [datos, setDatos] = useState({
+        nombre: null,
+        apellido: null,
+        correo: null,
+        clave: null,
+        tipo: null
+    });
+    const [alertPrincipal, setAlertPrincipal] = useState(false);
+    const [alertCorreo, setAlertCorreo] = useState(false);
 
-/*     const DivUsuarios = () => {
-        const HandlerActivo = (event) => {
-            setUsuarioActivo(event.target.id)
-        };
+    /* useEffect(() => {
+        actions.getUsuario(usuarioCliqueado.id)
+    }, []); */
 
-        const Activos = store.usuarios.map((usuario, index) => {
-            return (
-                <div className="form-check" key={index}>
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id={usuario[2]} onClick={(e)=>HandlerActivo(e)}/>
-                    <label className="form-check-label" htmlFor={usuario[2]}>
-                        Nombre: {usuario[0]} {usuario[1]} | Tipo: {usuario[3]} | Correo: {usuario[4]}
-                    </label>
-                </div>
-            )
-        });
-
-        return (
-            <div className="row">
-                <div  className="col-6 col-md-3">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Usuarios</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style={{textAlign: "left"}}>
-                                    {Activos}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        )
-    } */
-
-    const HandlerBorrar = (event) => {
-        console.log(store.usuarios);
-/*         actions.borrarUsuario(usuarioActivo)
-        setTimeout(() => {window.location.reload()}, 1000); */
-    };
-
-    const HandlerCrear = (event) => {
-        actions.getUsuario(1)
-/*         setAccion("crear");
-        setCrear(true); */
-    };
+    const HandlerCerrar = () => {
+        setModificar(false);
+        setUsuarioCliqueado(null);
+    }
 
     const HandlerModificar = (event) => {
-        console.log(store.usuario);
-/*         setAccion("modificar");
-        setCrear(true); */
+        if (!alertCorreo) {
+            actions.editarUsuario(store.usuario.id, datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
+            setTimeout(() => {window.location.reload()}, 1000);
+        }
     };
 
+    const HandlerModificacionDatos = (event) => {
+        console.log("Escribiendo...");
+        setDatos({ ...datos, [event.target.name]: event.target.value })
+    };
+
+    const FormularioModificacion = () => {
+        return (
+            <form className="log-in-form">
+            <h4 className="text-left">Ingresa los Datos solicitados para crear un Usuario</h4>
+            <label>
+                Nombre
+                    <input type="text"
+                        defaultValue={usuarioCliqueado.nombre}
+                        value={datos.nombre}
+                        placeholder='Puedes cambiar el Nombre'
+                        name="nombre" onChange={(e) => HandlerModificacionDatos(e)} />
+            </label>
+            <label>
+                Apellido
+                    <input type="text"
+                        defaultValue={usuarioCliqueado.apellido}
+                        value={datos.apellido}
+                        placeholder='Puedes cambiar el Apellido'
+                        name="apellido" onChange={(e) => HandlerModificacionDatos(e)} />
+            </label>
+            <label>
+                Email
+                    <input type="email"
+                        defaultValue={usuarioCliqueado.correo}
+                        value={datos.correo}
+                        placeholder='Puedes cambiar el Correo'
+                        name="correo" onChange={(e) => HandlerModificacionDatos(e)} />
+            </label>
+            <label>
+                Clave
+                    <input type="password"
+                        value={datos.clave}
+                        placeholder='Puedes fijar una nueva clave'
+                        name="clave" onChange={(e) => HandlerModificacionDatos(e)} />
+            </label>
+            <div className="">
+                <label className="form-label" htmlFor='tipo'>Elige Tipo de Usuario</label>
+                <select className="form-select" id="tipo" defaultValue={usuarioCliqueado.tipo} name="tipo" onChange={(e)=>HandlerModificacionDatos(e)}>
+                    <option>Administrador</option>
+                    <option>Vendedor</option>
+                    <option>Cobranza</option>
+                </select>
+            </div>
+        </form>
+        )
+    }
+
     return (
-        <div className="row text-center">
-           {/*  <DivUsuarios /> */}
-            <div className="row small-up-2 medium-up-3 large-up-4">
-                <div className="column">
-                    <a className="button primary" name="Modificar" onClick={(e) => HandlerModificar(e)}>Modificar</a>
-                </div>
-                <div className="column">
-                    <a className="button alert" name="Borrar" onClick={(e)=>HandlerBorrar(e)}>Borrar</a>
-                </div>
-                <div className="column">
-                    <a className="button primary" name="Crear" onClick={(e)=>HandlerCrear(e)}>Crear Usuario</a>
-                </div>
+        <div className="row" style={{filter: "drop-shadow(0px 4px 8px #000000)"}}>
+            <div className="callout" data-closable>
+                <button className="close-button" aria-label="Dismiss alert" type="button" data-close onClick={(e)=>HandlerCerrar(e)}>
+                    <span aria-hidden="true">×</span>
+                </button>
+                <FormularioModificacion />
+                {alertPrincipal ? (<div className="callout alert text-center">Por favor, todos los datos deben ser completados</div>) : null}
+                {alertCorreo?(<div className="callout alert text-center">Correo Incorrecto</div>):null}
+                <div className="button-group align-right">
+                    <a className="button primary" onClick={(e)=>HandlerModificar(e)}>Modificar Usuario</a>
                 </div>
             </div>
+        </div>
     );
 }
 

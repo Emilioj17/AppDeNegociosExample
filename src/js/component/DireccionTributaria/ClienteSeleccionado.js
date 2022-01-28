@@ -9,7 +9,7 @@ import { AiFillPrinter } from "react-icons/ai";
 
 //Este es el Panel Principal tras haber Seleccionado a un Cliente desde ListaClientes.
 
-const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado, witch, setWitch }) => {
+const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => {
     const { store, actions } = useContext(Context);
     const [detectorCambios, setDSetectorCambios] = useState(false);
     const [modificarCliente, setModificarCliente] = useState(false);
@@ -50,7 +50,7 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado, witch
     }
 
     const HandlerImpresion = (event) => {
-        setWitch(true);
+        store.witch ? console.log("Hola") : actions.setWitch()
         setTimeout(() => { window.print();
         }, 200);
     }

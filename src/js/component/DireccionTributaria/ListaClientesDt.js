@@ -7,7 +7,7 @@ import "../../../styles/Paginator.css";
 //Aquí se genera el Listado de Clientes que se muestra en Dt. Desde DireconTributaria.js se ejecuta el action que llama la info de la bd. Esta lista se guarda en store.clientesDt.
 // Respecto al CSS del Paginator, se debió crear un .css adicional solo para setear los colores.
 
-const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado, filtroVigente, filtroErpyme, filtroSaldo, clientesPorPagina, witch }) => {
+const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado, filtroVigente, filtroErpyme, filtroSaldo, clientesPorPagina }) => {
     const { store, actions } = useContext(Context);
     const items = store.clientesDt;
 
@@ -94,7 +94,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
 
     const Items = ({ currentItems }) => {
         return (
-            <table className={`table hover ${witch ? ("tablaClientes"):""}`} id="tblData">
+            <table className={`table hover ${store.witch ? ("tablaClientes"):""}`} id="tblData">
                 <thead>
                     <tr>
                         <th className="id" scope="col">Id</th>
@@ -164,7 +164,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
     }
 
     return (
-        <div className={witch ? ("row"): ""}>
+        <div className={store.witch ? ("row"): ""}>
             {(store.clientesDt != null) ? (<PaginatedItems itemsPerPage={clientesPorPagina} />) : null}
         </div>
     );

@@ -1,12 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { Context } from "../../store/AppContext";
+import { AiFillEdit, AiOutlineSmallDash } from "react-icons/ai";
 
-export const ListaUsuarios = () => {
+export const ListaUsuarios = ({ setModificar, usuarioSeleccionado, setUsuarioCliqueado}) => {
     const { store, actions } = useContext(Context);
 
     const Clientes = () => {
         return (
-            <table className='table hover tablaUsuarios'>
+            <table className={`table hover ${store.witch ? ("tablaUsuarios"):""}`}>
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
@@ -14,6 +15,7 @@ export const ListaUsuarios = () => {
                         <th scope="col">Apellido</th>
                         <th scope="col">Correo</th>
                         <th scope="col">Tipo de Usuario</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,6 +27,13 @@ export const ListaUsuarios = () => {
         )
     }
 
+    const HandlerClick = (object) => {
+        if (usuarioSeleccionado) {
+            setUsuarioCliqueado(object);
+            setModificar(true);
+        }
+    }
+
     const ListaDesplegarUsuarios = (objeto, i) => {
         return (
             <tr key={i}>
@@ -33,6 +42,8 @@ export const ListaUsuarios = () => {
                 <td>{objeto.apellido}</td>
                 <td>{objeto.correo}</td>
                 <td>{objeto.tipo}</td>
+                {!usuarioSeleccionado ? (<td><a class="clear button" disabled><AiOutlineSmallDash /></a></td>) : null}
+                {usuarioSeleccionado ? (<td className={usuarioSeleccionado ? "trCliqueable" : null}><a class="clear button" onClick={()=>HandlerClick(objeto)}><AiFillEdit /></a></td>):null}
             </tr>
         )
     }

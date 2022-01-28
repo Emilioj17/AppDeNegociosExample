@@ -4,12 +4,12 @@ import { Link, useHistory } from "react-router-dom";
 import "../../styles/App.css";
 import { GiTRexSkull, GiHamburgerMenu, GiSubmarine } from "react-icons/gi";
 
-const Navbar = ({ witch, setWitch }) => {
+const Navbar = () => {
     const { store, actions } = useContext(Context);
     const history = useHistory();
 
     const HandlerWitch = (event) => {
-        witch ? setWitch(false) : setWitch(true);
+        actions.setWitch()
     }
 
     const HandlerCerrarSesion = (event) => {
@@ -69,7 +69,7 @@ const Navbar = ({ witch, setWitch }) => {
 
     return (
         <Fragment>
-            {store.token == null && store.usuarioActual == null ? <NavbarInicio /> : (witch ? (<NavbarDesplegado/>):(<NavbarCortito/>))}
+            {store.token == null && store.usuarioActual == null ? <NavbarInicio /> : (store.witch ? (<NavbarDesplegado/>):(<NavbarCortito/>))}
         </Fragment>
     );
 }
