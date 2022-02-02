@@ -64,7 +64,7 @@ const FiltroListaClientes = ({setFiltro, setFiltroVigente, setFiltroErpyme, setF
                         </select>
                     </label>
                     {defectFiltroVigente != "Selecciona Vigencia..." || defectFiltroErpyme != "Selecciona Erpyme..." || defectFiltroSaldo != "Selecciona Saldo..." ? (
-                    <div className="card-divider align-center"><FiAlertOctagon/>&nbsp; &nbsp;Hay Filtros Aplicados <a class="clear button warning align-right" onClick={(e)=>HandlerResetFiltros(e)}>reset filtros</a></div>
+                    <div className="card-divider align-center"><FiAlertOctagon/>&nbsp; &nbsp;Hay Filtros Aplicados <a className="clear button warning align-right" onClick={(e)=>HandlerResetFiltros(e)}>reset filtros</a></div>
                     ):null}
                 </div>
             </div>

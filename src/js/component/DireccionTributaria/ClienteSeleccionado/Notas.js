@@ -5,35 +5,39 @@ import { Context } from "../../../store/AppContext";
 const Notas = ({ clienteDtCliqueado, setDSetectorCambios}) => {
     const { store, actions } = useContext(Context);
     const [nota, setNota] = useState("");
+    const fechaActual = new Date();
 
     // Handler para Crear y submit Notas
     const HandlerNota = (event) => {
         setNota(event.target.value)
     };
     const HandlerAgregarNota = (event) => {
-        actions.crearNota(nota, clienteDtCliqueado.id);
+        let fechaComentario = fechaActual.toLocaleDateString();
+        actions.crearNota(nota, fechaComentario, clienteDtCliqueado.id);
         setDSetectorCambios(true);
         setNota("");
     };
 
     return (
         <div className="card" >
-                <div className="card-divider">
-                    <h4>Notas</h4>
-                </div>
-                <div className="card-section notas">
-                    <table className="table">
-                        <tbody>
-                        {(store.nota != null) ? (
-                            store.nota.map((object, i) =>
-                                <tr key={i}>
-                                    <td>{object.comentario}</td>
-                                </tr>)
-                        ) : (<p>No hay Notas...</p>)}
-                        {store.nota=="" ? (<p>No hay Notas...</p>): null}
-                        </tbody>
-                    </table>
-                </div>
+            <div className="card-divider">
+                <h4>Notas</h4>
+            </div>
+            <div className="card-section notas">
+                <table className="table">
+                    <tbody>
+                    {(store.nota != null) ? (
+                        store.nota.map((object, i) =>
+                            <tr key={i}>
+                                <td>{object.comentario}</td>
+                                <td>{object.fechaComentario}</td>
+                            </tr>)
+                    ) : (<p>No hay Notas...</p>)}
+                    {store.nota=="" ? (<p>No hay Notas...</p>): null}
+                    </tbody>
+                </table>
+            </div>
+            <div className='column'>
                 <label>
                     Quieres agregar algún comentario?
                 <textarea placeholder="Escribe aquí tu Comentario o Nota" value={nota} onChange={(e)=>HandlerNota(e)}></textarea>
@@ -42,6 +46,7 @@ const Notas = ({ clienteDtCliqueado, setDSetectorCambios}) => {
                     <button className="submit button" onClick={(e)=>HandlerAgregarNota(e)}>Agregar Nota</button>
                 </div>
             </div>
+        </div>
     );
 }
 

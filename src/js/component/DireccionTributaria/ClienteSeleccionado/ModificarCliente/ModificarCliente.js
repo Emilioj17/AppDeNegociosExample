@@ -8,8 +8,10 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
     const { store, actions } = useContext(Context);
     const [alertPrincipal, setAlertPrincipal] = useState(false);
     const [alertRut, setAlertRut] = useState(false);
+    const [opcionesAdicionales, setOpcionesAdicionales] = useState(false);
     const [alertRutRepresentante, setAlertRutRepresentante] = useState(false);
     const [alertCorreo, setAlertCorreo] = useState(false);
+    const [alertFono, setAlertFono] = useState(false);
     const [datos, setDatos] = useState({
         razon: null,
         rut: null,
@@ -18,10 +20,16 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
         correoSecundario: null,
         correoTerciario: null,
         fono: null,
+        whatsapp: null,
         representante: null,
         rutRepresentante: null,
         fechaContratacion: null,
         erpyme: null,
+        p: null,
+        sacar: null,
+        dicom: null,
+        repetido: null,
+        tipoPago: null
       });
 
 
@@ -38,7 +46,6 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
             } else {
                 setAlertRutRepresentante(true);
                 setDatos({ ...datos, [event.target.name]: event.target.value });
-                return;
             }
         }
 
@@ -50,8 +57,12 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
             } else {
                 setAlertRut(true);
                 setDatos({ ...datos, [event.target.name]: event.target.value });
-                return;
             }
+        }
+
+        if (event.target.value === "") {
+            setDatos({ ...datos, [event.target.name]: null });
+            setAlertRut(false);
         }
     }
 
@@ -63,12 +74,10 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
             if (correo.match(validRegex)) {
                 setDatos({ ...datos, [event.target.name]: event.target.value });
                 setAlertCorreo(false);
-                return;
             }
             if (!correo.match(validRegex)) {
                 setDatos({ ...datos, [event.target.name]: event.target.value });
                 setAlertCorreo(true);
-                return;
             }
         }
 
@@ -76,12 +85,10 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
             if (correo.match(validRegex) || correo==="") {
                 setDatos({ ...datos, [event.target.name]: event.target.value });
                 setAlertCorreo(false);
-                return;
             }
             if (!correo.match(validRegex)) {
                 setDatos({ ...datos, [event.target.name]: event.target.value });
                 setAlertCorreo(true);
-                return;
             }
         }
 
@@ -89,24 +96,78 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
             if (correo.match(validRegex) || correo==="") {
                 setDatos({ ...datos, [event.target.name]: event.target.value });
                 setAlertCorreo(false);
-                return;
             }
             if (!correo.match(validRegex)) {
                 setDatos({ ...datos, [event.target.name]: event.target.value });
                 setAlertCorreo(true);
-                return;
             }
+        }
+
+        if (event.target.value === "") {
+            setDatos({ ...datos, [event.target.name]: null });
+            setAlertCorreo(false);
+        }
+    }
+
+    const HandlerValidarFono = (event) => {
+        const validRegex = /[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/g;
+        if (event.target.name === "fono") {
+            const fono = event.target.value;
+            if (fono.match(validRegex)) {
+                if (fono.length === 9) {
+                    setDatos({ ...datos, [event.target.name]: event.target.value })
+                    setAlertFono(false)
+                }
+                else {
+                    setDatos({ ...datos, [event.target.name]: event.target.value })
+                    setAlertFono(true)
+                }
+            } else {
+                setAlertFono(true);
+                setDatos({ ...datos, [event.target.name]: event.target.value });
+            }
+        }
+
+        if (event.target.value === "") {
+            setDatos({ ...datos, [event.target.name]: null });
+            setAlertFono(false);
         }
     }
 
     const HandlerModificarCliente = (event) => {
-        actions.editarClienteDt(clienteDtCliqueado.id, datos.razon, datos.rut, datos.vigente, datos.correo, datos.correoSecundario, datos.correoTerciario, datos.fono, datos.representante, datos.rutRepresentante, datos.fechaContratacion, datos.erpyme);
-        setDSetectorCambios(true);
-        setTimeout(() => { setModificarCliente(false) }, 500);
+        if (alertRut || alertRutRepresentante || alertCorreo || alertFono) {
+            setAlertPrincipal(true);
+        } else {
+            if (Object.values(datos).every(x => x === null)) {
+                alert("No estas Modificando ningún Dato");
+            } else {
+                setAlertPrincipal(false);
+                setDSetectorCambios(true);
+                actions.editarClienteDt(clienteDtCliqueado.id, datos.razon, datos.rut, datos.vigente, datos.correo, datos.correoSecundario, datos.correoTerciario, datos.fono, datos.whatsapp, datos.representante, datos.rutRepresentante, datos.fechaContratacion, datos.erpyme, datos.p, datos.sacar, datos.dicom, datos.repetido, datos.tipoPago);
+                setTimeout(() => {setModificarCliente(false)}, 500);
+            }
+        }
     };
 
     const HandlerCompletarDatos = (event) => {
-        setDatos({ ...datos, [event.target.name]: event.target.value })
+        if (event.target.name === "razon" || event.target.name === "representante") {
+            var separateWord = event.target.value.toLowerCase().split(' ');
+            for (var i = 0; i < separateWord.length; i++) {
+                separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
+                    separateWord[i].substring(1);
+            }
+            setDatos({ ...datos, [event.target.name]: separateWord.join(' ') })
+        } else {
+            if (event.target.value === "Selecciona una opción...") {
+                setDatos({ ...datos, [event.target.name]: null })
+            } else {
+                setDatos({ ...datos, [event.target.name]: event.target.value })
+            }
+        }
+
+        if (event.target.value === "") {
+            setDatos({ ...datos, [event.target.name]: null })
+        }
     };
 
     return (
@@ -118,96 +179,158 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
                 <div className="row">
                     <div className="columns">
                         <form className="log-in-form">
-                            <h4 className="text-left">Vas a Modificar Informacion de <strong>{clienteDtCliqueado.razon}</strong></h4>
+                            <h4 className="text-left">Vas a Modificar Informacion de <strong>{store.infoClienteDt.razon}</strong></h4>
                             <label>
-                                Razon Social
+                                Razon Social: <strong>{store.infoClienteDt.razon}</strong>
                                 <input type="text"
-                                    defaultValue={clienteDtCliqueado.razon}
                                     value={datos.razon}
                                     placeholder='Puedes cambiar la razon Social'
                                     name="razon" onChange={(e) => HandlerCompletarDatos(e)} />
                             </label>
-                            <label>
-                                Rut
-                                <input type="text"
-                                    defaultValue={clienteDtCliqueado.rut}
-                                    value={datos.rut}
-                                    placeholder='Puedes cambiar el Rut de esta empresa'
-                                    name="rut" onChange={(e) => HandlerValidarRut(e)} />
-                            </label>
-                            <label>
-                                Correo o email
-                                <input type="text"
-                                    defaultValue={clienteDtCliqueado.correo}
-                                    name="correo" value={datos.correo}
-                                    placeholder='Puedes agregar un correo principal'
-                                    onChange={(e) => HandlerValidarCorreo(e)} />
-                            </label>
-                            <label>
-                                Correo Secundario
-                                <input type="text"
-                                    defaultValue={clienteDtCliqueado.correoSecundario}
-                                    name="correoSecundario" value={datos.correoSecundario}
-                                    placeholder='Puedes agregar un correo secundario'
-                                    onChange={(e) => HandlerValidarCorreo(e)} />
-                            </label>
-                            <label>
-                                Correo Terciario
-                                <input type="text"
-                                    defaultValue={clienteDtCliqueado.correoTerciario}
-                                    name="correoTerciario" value={datos.correoTerciario}
-                                    placeholder='Puedes agregar un correo terciario'
-                                    onChange={(e) => HandlerValidarCorreo(e)} />
-                            </label>
-                            <label>
-                                Telefono
-                                <input type="text"
-                                    defaultValue={clienteDtCliqueado.fono}
-                                    name="fono" value={datos.fono}
-                                    placeholder='Puedes agregar un número de teléfono'
-                                    onChange={(e) => HandlerCompletarDatos(e)} />
-                            </label>
-                            <label>
-                                Representante Legal
-                                <input type="text"
-                                    defaultValue={clienteDtCliqueado.representante}
-                                    name="representante" value={datos.representante}
-                                    placeholder='Puedes ingresar el Nombre del Representante Legal'
-                                    onChange={(e) => HandlerCompletarDatos(e)} />
-                            </label>
-                            <label>
-                                Rut Representante Legal
-                                <input type="text"
-                                    defaultValue={clienteDtCliqueado.rutRepresentante}
-                                    name="rutRepresentante" value={datos.rutRepresentante}
-                                    placeholder='Puedes agregar el Rut de un representante legal'
-                                    onChange={(e) => HandlerValidarRut(e)} />
-                            </label>
-                            <div>
-                                <label htmlFor="start">Fecha de Contratacion</label>
-                                <input type="date" id="start" min="2018-01-01" max="2025-12-31" defaultValue={clienteDtCliqueado.fechaContratacion} name="fechaContratacion" onChange={(e) => HandlerCompletarDatos(e)}/>
+                            <div className='grid-x grid-margin-x'>
+                                <label className='cell small-6'>
+                                    Rut: <strong>{store.infoClienteDt.rut}</strong>
+                                    <input type="text"
+                                        value={datos.rut}
+                                        placeholder='Puedes cambiar el Rut de esta empresa'
+                                        name="rut" onChange={(e) => HandlerValidarRut(e)} />
+                                </label>
+                                <label className='cell small-6'>
+                                    Correo o email: <strong>{store.infoClienteDt.correo}</strong>
+                                    <input type="text"
+                                        name="correo" value={datos.correo}
+                                        placeholder='Puedes agregar un correo principal'
+                                        onChange={(e) => HandlerValidarCorreo(e)} />
+                                </label>
+                            </div>
+                            <div className='grid-x grid-margin-x'>
+                                <label className='cell small-6'>
+                                    Correo Secundario: <strong>{store.infoClienteDt.correoSecundario != "" ? store.infoClienteDt.correoSecundario : "No hay correo"}</strong>
+                                    <input type="text"
+                                        name="correoSecundario" value={datos.correoSecundario}
+                                        placeholder='Puedes agregar un correo secundario'
+                                        onChange={(e) => HandlerValidarCorreo(e)} />
+                                </label>
+                                <label className='cell small-6'>
+                                    Correo Terciario: <strong>{store.infoClienteDt.correoTerciario != "" ? store.infoClienteDt.correoTerciario : "No hay correo"}</strong>
+                                    <input type="text"
+                                        name="correoTerciario" value={datos.correoTerciario}
+                                        placeholder='Puedes agregar un correo terciario'
+                                        onChange={(e) => HandlerValidarCorreo(e)} />
+                                </label>
+                            </div>
+                            <div className='grid-x grid-margin-x'>
+                                <label className='cell small-3'>
+                                    Telefono: <strong>{store.infoClienteDt.fono != "" ? store.infoClienteDt.fono : "No hay numero"}</strong>
+                                    <input type="text"
+                                        name="fono" value={datos.fono}
+                                        placeholder='Puedes agregar un número de teléfono'
+                                        onChange={(e) => HandlerValidarFono(e)} />
+                                </label>
+                                <label className='cell small-6'>
+                                    Representante Legal: <strong>{store.infoClienteDt.representante}</strong>
+                                    <input type="text"
+                                        name="representante" value={datos.representante}
+                                        placeholder='Puedes ingresar el Nombre del Representante Legal'
+                                        onChange={(e) => HandlerCompletarDatos(e)} />
+                                </label>
+                                <label className='cell small-3'>
+                                    Rut Rep Legal: <strong>{store.infoClienteDt.rutRepresentante}</strong>
+                                    <input type="text"
+                                        name="rutRepresentante" value={datos.rutRepresentante}
+                                        placeholder='Puedes agregar el Rut de un representante legal'
+                                        onChange={(e) => HandlerValidarRut(e)} />
+                                </label>
                             </div>
                             <div>
-                                <label className="form-label" htmlFor='vigente'>Está Vigente este Cliente?</label>
-                                <select className="form-select" id="vigente" name="vigente" defaultValue={clienteDtCliqueado.vigente} onChange={(e) => HandlerCompletarDatos(e)}>
-                                    <option value="true">Vigente</option>
-                                    <option value="false">No Vigente</option>
-                                </select>
+                                <label htmlFor="start">Fecha de Contratacion: <strong>{store.infoClienteDt.fechaContratacion}</strong></label>
+                                <input type="date" id="start" min="2018-01-01" max="2025-12-31" name="fechaContratacion" onChange={(e) => HandlerCompletarDatos(e)}/>
+                            </div>
+                            <div className='grid-x grid-margin-x'>
+                                <div className='cell small-3'>
+                                    <label className="form-label" htmlFor='vigente'>Está Vigente este Cliente? <strong>{store.infoClienteDt.vigente}</strong></label>
+                                    <select className="form-select" id="vigente" name="vigente" onChange={(e) => HandlerCompletarDatos(e)}>
+                                        <option selected>Selecciona una opción...</option>
+                                        <option value="Si">Vigente</option>
+                                        <option value="No">No Vigente</option>
+                                    </select>
+                                </div>
+                                <div className='cell small-3'>
+                                    <label className="form-label" htmlFor='erpyme'>Ingresado en Erpyme? <strong>{store.infoClienteDt.erpyme}</strong></label>
+                                    <select className="form-select" id="erpyme" name="erpyme" onChange={(e) => HandlerCompletarDatos(e)}>
+                                        <option selected>Selecciona una opción...</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div className='cell small-3'>
+                                    <label className="form-label" htmlFor='whatsapp'>Ingresado en Whatsapp? <strong>{store.infoClienteDt.whatsapp}</strong></label>
+                                    <select className="form-select" id="whatsapp" name="whatsapp" onChange={(e) => HandlerCompletarDatos(e)}>
+                                        <option selected>Selecciona una opción...</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div className='cell small-3'>
+                                    <label className="form-label" htmlFor='tipoPago'>Tipo de pago? <strong>{store.infoClienteDt.tipoPago}</strong></label>
+                                    <select className="form-select" id="tipoPago" name="tipoPago" onChange={(e) => HandlerCompletarDatos(e)}>
+                                        <option selected>Selecciona una opción...</option>
+                                        <option value="Anual">Anual</option>
+                                        <option value="Mensual">Mensual</option>
+                                    </select>
+                                </div>
                             </div>
                             <div>
-                                <label className="form-label" htmlFor='erpyme'>Ya está Ingresado en Erpyme?</label>
-                                <select className="form-select" id="erpyme" name="erpyme" defaultValue={clienteDtCliqueado.erpyme} onChange={(e) => HandlerCompletarDatos(e)}>
-                                    <option value="true">Si</option>
-                                    <option value="false">No</option>
-                                </select>
+                                <label>Deseas ver Otras Opciones?</label>
+                                <input type="radio" id="html" name="fav_language" value="No" onClick={()=>setOpcionesAdicionales(false)}/>
+                                <label htmlFor="html">No</label>
+                                <input type="radio" id="html" name="fav_language" value="Si" onClick={()=>setOpcionesAdicionales(true)}/>
+                                <label htmlFor="html">Si</label>
                             </div>
+                            {opcionesAdicionales ? (
+                                <div className='card-divider grid-x grid-margin-x'>
+                                    <div className='cell small-3'>
+                                        <label className="form-label" htmlFor='p'>P? <strong>{store.infoClienteDt.p}</strong></label>
+                                        <select className="form-select" id="p" name="p" onChange={(e) => HandlerCompletarDatos(e)}>
+                                            <option selected>Selecciona una opción...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                    <div className='cell small-3'>
+                                        <label className="form-label" htmlFor='sacar'>Sacar? <strong>{store.infoClienteDt.sacar}</strong></label>
+                                        <select className="form-select" id="sacar" name="sacar" onChange={(e) => HandlerCompletarDatos(e)}>
+                                            <option selected>Selecciona una opción...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                    <div className='cell small-3'>
+                                        <label className="form-label" htmlFor='dicom'>Dicom? <strong>{store.infoClienteDt.dicom}</strong></label>
+                                        <select className="form-select" id="dicom" name="dicom" onChange={(e) => HandlerCompletarDatos(e)}>
+                                            <option selected>Selecciona una opción...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                    <div className='cell small-3'>
+                                        <label className="form-label" htmlFor='repetido'>Repetido? <strong>{store.infoClienteDt.repetido}</strong></label>
+                                        <select className="form-select" id="repetido" name="repetido" onChange={(e) => HandlerCompletarDatos(e)}>
+                                            <option selected>Selecciona una opción...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            ) : null}
                         </form>
                     </div>
                 </div>
                 {alertPrincipal ? (<div className="callout alert text-center">Por favor, todos los datos deben ser completados</div>) : null}
                 {alertRut ? (<div className="callout alert text-center">Rut Sociedad Incorrecto</div>) : null}
                 {alertCorreo?(<div className="callout alert text-center">Correo Incorrecto</div>):null}
-                {alertRutRepresentante?(<div className="callout alert text-center">Rut Representante Incorrecto</div>):null}
+                {alertRutRepresentante ? (<div className="callout alert text-center">Rut Representante Incorrecto</div>) : null}
+                {alertFono?(<div className="callout alert text-center">Telefono debe tener 9 digitos (numeros)</div>):null}
                 <div className='button-group align-right'>
                     <button className="submit success button" onClick={(e)=> HandlerModificarCliente(e)}>Modificar Cliente</button>
                     <button className="submit button" onClick={(e)=>HandlerCerrar(e)}>Cerrar Ventana</button>

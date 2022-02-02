@@ -99,7 +99,7 @@ const FiltroPagos = ({ setFiltroYear, setFiltroMesInicio, setFiltroMesTermino, s
                 </label>
             </div>
             {((defectFiltroYear != "todos" || defectFiltroMesInicio != "Desde este mes..." || defectFiltroMesTermino != "Hasta este mes..." || defectFiltroSaldo != "todos")&& !disabled) ? (
-                <div className="card-divider align-center"><FiAlertOctagon/>&nbsp; &nbsp;Hay Filtros Aplicados <a class="clear button warning align-right" onClick={(e)=>HandlerResetFiltros(e)}>reset filtros</a></div>
+                <div className="card-divider align-center"><FiAlertOctagon/>&nbsp; &nbsp;Hay Filtros Aplicados <a className="clear button warning align-right" onClick={(e)=>HandlerResetFiltros(e)}>reset filtros</a></div>
             ):null}
         </div>
     );

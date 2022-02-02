@@ -29,6 +29,7 @@ export const ListaUsuarios = ({ setModificar, usuarioSeleccionado, setUsuarioCli
 
     const HandlerClick = (object) => {
         if (usuarioSeleccionado) {
+            actions.getUsuario(object.id);
             setUsuarioCliqueado(object);
             setModificar(true);
         }
@@ -42,14 +43,14 @@ export const ListaUsuarios = ({ setModificar, usuarioSeleccionado, setUsuarioCli
                 <td>{objeto.apellido}</td>
                 <td>{objeto.correo}</td>
                 <td>{objeto.tipo}</td>
-                {!usuarioSeleccionado ? (<td><a class="clear button" disabled><AiOutlineSmallDash /></a></td>) : null}
-                {usuarioSeleccionado ? (<td className={usuarioSeleccionado ? "trCliqueable" : null}><a class="clear button" onClick={()=>HandlerClick(objeto)}><AiFillEdit /></a></td>):null}
+                {!usuarioSeleccionado ? (<td><a className="clear button" disabled><AiOutlineSmallDash /></a></td>) : null}
+                {usuarioSeleccionado ? (<td className={usuarioSeleccionado ? "trCliqueable" : null}><a className="clear button" onClick={()=>HandlerClick(objeto)}><AiFillEdit /></a></td>):null}
             </tr>
         )
     }
 
     return (
-        <div className="row">
+        <div className="">
            {(store.usuarios != null) ? (<Clientes />) : null}
             </div>
     );

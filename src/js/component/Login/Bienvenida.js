@@ -120,18 +120,18 @@ const Bienvenida = () => {
     }
 
 	return (
-		<Fragment>
-            <div className="row">
+        <div className="row">
+            <div className="column">
                 <h2>Hola {store.usuarioActual.nombre}, Bienvenido.</h2>
                 <hr />
                 <br />
-                <div class="grid-x">
-                    <div class="cell small-6">
+                <div className="grid-x">
+                    <div className="cell small-6">
                         <h5>Informaciones Varias</h5>
                         <br />
                         <div className="grid-x">
                             <h6 className="cell small-12">Busca tu Liquidacion de Sueldo</h6>
-                            <label class="cell small-8">
+                            <label className="cell small-8">
                                 Selecciona Periodo
                                 <select disabled>
                                     <option value="husker">Noviembre 2021</option>
@@ -150,7 +150,7 @@ const Bienvenida = () => {
                         <br />
                         <br />
                     </div>
-                    <div class="cell small-6">
+                    <div className="cell small-6">
                         <h5>Links de Interés</h5>
                         <br />
                         <ul>
@@ -162,8 +162,8 @@ const Bienvenida = () => {
                     </div>
                 </div>
                 <hr />
-                <div class="container-fluid grid-x">
-                    <div class="cell small-7">
+                <div className="container-fluid grid-x">
+                    <div className="cell small-7">
                         <h5>Calendario</h5>
                         <br />
                         <Calendar
@@ -192,7 +192,7 @@ const Bienvenida = () => {
                         <br />
                         <br />
                     </div>
-                    <div class="cell small-3" style={{marginLeft: "20px"}}>
+                    <div className="cell small-3" style={{marginLeft: "20px"}}>
                         <h5>Fechas Importantes</h5>
                         <br />
                         <ul>
@@ -213,8 +213,8 @@ const Bienvenida = () => {
                         </ul>
                     </div>
                 </div>
-			</div>
-		</Fragment>
+            </div>
+        </div>
 	)
 };
 

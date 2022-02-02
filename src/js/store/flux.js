@@ -23,6 +23,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             pago2020: null,  //Pagos especificos al id del ClienteDt seleccionado
             pago2021: null,  //Pagos especificos al id del ClienteDt seleccionado
             pago2022: null,  //Pagos especificos al id del ClienteDt seleccionado
+            pago2023: null,  //Pagos especificos al id del ClienteDt seleccionado
+            pago2024: null,  //Pagos especificos al id del ClienteDt seleccionado
             usuarioActual: null,  //Usuario Actual que está Conectado
             token: null  //Token del Usuario Actual Conectado
 		},
@@ -58,7 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             getUsuario:  async (usuarioid) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/usuario/" + usuarioid, {
+                fetch("http://127.0.0.1:5000/usuario/" + usuarioid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -79,7 +81,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getUsuarios:  async () => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/usuario", {
+                fetch("http://127.0.0.1:5000/usuario", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -100,7 +102,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			crearUsuario: async (nombre, apellido, correo, clave, tipo) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/usuario", {
+                fetch("http://127.0.0.1:5000/usuario", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -128,7 +130,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			editarUsuario: async (id, nombre, apellido, correo, clave, tipo) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/usuario/" + id, {
+                fetch("http://127.0.0.1:5000/usuario/" + id, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -156,7 +158,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			borrarUsuario: async (id) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/usuario/" + id, {
+                fetch("http://127.0.0.1:5000/usuario/" + id, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
@@ -179,7 +181,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             
             getClientesDt:  async () => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/clienteDt", {
+                fetch("http://127.0.0.1:5000/clienteDt", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -200,7 +202,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             getClienteDt:  async (clienteDtid) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/clienteDt/"+ clienteDtid, {
+                fetch("http://127.0.0.1:5000/clienteDt/"+ clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -219,9 +221,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
             },
             
-            crearClienteDt: async (razon, rut, vigente, correo, correoSecundario, correoTerciario, fono, representante, rutRepresentante, fechaContratacion, erpyme) => {
+            crearClienteDt: async (razon, rut, vigente, correo, correoSecundario, correoTerciario, fono, whatsapp, representante, rutRepresentante, fechaContratacion, erpyme, p, sacar, dicom, repetido, tipoPago) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/clienteDt", {
+                fetch("http://127.0.0.1:5000/clienteDt", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -235,10 +237,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "correoSecundario": correoSecundario,
                         "correoTerciario": correoTerciario,
                         "fono": fono,
+                        "whatsapp": whatsapp,
                         "representante": representante, 
                         "rutRepresentante": rutRepresentante,
                         "fechaContratacion": fechaContratacion,
-                        "erpyme": erpyme
+                        "erpyme": erpyme,
+                        "p": p,
+                        "sacar": sacar,
+                        "dicom": dicom,
+                        "repetido": repetido,
+                        "tipoPago":tipoPago
                     })
                 }).then((response) => response.json())
                     .then((data) => {
@@ -253,9 +261,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
             },
 
-            editarClienteDt: async (id, razon, rut, vigente, correo, correoSecundario, correoTerciario, fono, representante, rutRepresentante, fechaContratacion, erpyme) => {
+            editarClienteDt: async (id, razon, rut, vigente, correo, correoSecundario, correoTerciario, fono, whatsapp, representante, rutRepresentante, fechaContratacion, erpyme, p, sacar, dicom, repetido, tipoPago) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/clienteDt/" + id, {
+                fetch("http://127.0.0.1:5000/clienteDt/" + id, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -269,10 +277,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "correoSecundario": correoSecundario,
                         "correoTerciario": correoTerciario,
                         "fono": fono,
+                        "whatsapp": whatsapp,
                         "representante": representante,
                         "rutRepresentante": rutRepresentante,
                         "fechaContratacion": fechaContratacion,
-                        "erpyme": erpyme
+                        "erpyme": erpyme,
+                        "p": p,
+                        "sacar": sacar,
+                        "dicom": dicom,
+                        "repetido": repetido,
+                        "tipoPago":tipoPago
                     })
                 }).then((response) => response.json())
                     .then((data) => {
@@ -290,7 +304,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             //Notas Clientes Dt
             getNota:  async (clienteDtid) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/nota/" + clienteDtid, {
+                fetch("http://127.0.0.1:5000/nota/" + clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -309,9 +323,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
             },
 
-            crearNota: async (comentario, clienteDtid) => {
+            crearNota: async (comentario, fechaComentario, clienteDtid) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/nota", {
+                fetch("http://127.0.0.1:5000/nota", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -319,6 +333,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     },
                     body: JSON.stringify({
                         "comentario": comentario,
+                        "fechaComentario": fechaComentario,
                         "clienteDtid": clienteDtid,
                     })
                 }).then((response) => response.json())
@@ -338,7 +353,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             getPago2019:  async (clienteDtid) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/dt2019/" + clienteDtid, {
+                fetch("http://127.0.0.1:5000/dt2019/" + clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -360,7 +375,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             getPago2020:  async (clienteDtid) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/dt2020/" + clienteDtid, {
+                fetch("http://127.0.0.1:5000/dt2020/" + clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -382,7 +397,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             getPago2021:  async (clienteDtid) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/dt2021/" + clienteDtid, {
+                fetch("http://127.0.0.1:5000/dt2021/" + clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -404,7 +419,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             getPago2022:  async (clienteDtid) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/dt2022/" + clienteDtid, {
+                fetch("http://127.0.0.1:5000/dt2022/" + clienteDtid, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -424,9 +439,53 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
             },
 
-            crearPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, clienteDtid) => {
+            getPago2023:  async (clienteDtid) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/dt" + year, {
+                fetch("http://127.0.0.1:5000/dt2023/" + clienteDtid, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }).then((response) => response.json())
+                    .then((data) => {
+                        sortByMonth(data);
+                        setStore({
+                            pago2023: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: "clientesDT " + error.message
+                        })
+                    });
+            },
+
+            getPago2024:  async (clienteDtid) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/dt2024/" + clienteDtid, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    }
+                }).then((response) => response.json())
+                    .then((data) => {
+                        sortByMonth(data);
+                        setStore({
+                            pago2024: data
+                        })
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: "clientesDT " + error.message
+                        })
+                    });
+            },
+
+            crearPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, comentario, clienteDtid) => {
+                const store = getStore();
+                fetch("http://127.0.0.1:5000/dt" + year, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -438,6 +497,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "montoPagado": montoPagado,
                         "montoCobrado": montoCobrado,
                         "facturaNumero": facturaNumero,
+                        "comentario": comentario,
                         "clienteDtid": clienteDtid,
                     })
                 }).then((response) => response.json())
@@ -453,9 +513,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
             },
 
-            editarPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, clienteDtid) => {
+            editarPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, comentario, clienteDtid) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/dt" + year + "/" + clienteDtid, {
+                fetch("http://127.0.0.1:5000/dt" + year + "/" + clienteDtid, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -466,7 +526,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "numeroTransferencia": numeroTransferencia,
                         "montoPagado": montoPagado,
                         "montoCobrado": montoCobrado,
-                        "facturaNumero": facturaNumero
+                        "facturaNumero": facturaNumero,
+                        "comentario": comentario
                     })
                 }).then((response) => response.json())
                     .then((data) => {
@@ -483,7 +544,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             borrarPago: async (year, clienteDtid) => {
                 const store = getStore();
-                fetch("http://127.0.0.1:5000/api/dt" + year + "/" + clienteDtid, {
+                fetch("http://127.0.0.1:5000/dt" + year + "/" + clienteDtid, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
@@ -501,8 +562,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                         })
                     });
             },
-			
-
 		}
 	};
 };

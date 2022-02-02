@@ -56,7 +56,7 @@ const CreacionUsuario = ({ setCrear }) => {
     };
 
     return (
-        <div className="row" style={{filter: "drop-shadow(0px 4px 8px #000000)"}}>
+        <div className="" style={{filter: "drop-shadow(0px 4px 8px #000000)"}}>
             <div className="callout" data-closable>
                 <button className="close-button" aria-label="Dismiss alert" type="button" data-close onClick={(e)=>HandlerCerrar(e)}>
                     <span aria-hidden="true">×</span>

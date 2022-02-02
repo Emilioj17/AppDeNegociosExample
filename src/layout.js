@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "./js/store/AppContext";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import injectContext from "./js/store/AppContext";
@@ -13,7 +13,7 @@ import 'foundation-sites/dist/css/foundation.min.css';
 import './styles/App.css';
 
 const Layout = () => {
-	const { store, actions } = useContext(Context);
+	const { store } = useContext(Context);
 	const basename = process.env.BASENAME || "";
 
 	return (

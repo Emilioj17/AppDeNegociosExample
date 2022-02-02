@@ -37,9 +37,9 @@ const ModificarClienteDt = ({setClickPagos, setDSetectorCambios}) => {
                 <td>{object.numeroTransferencia}</td>
                 <td>{object.facturaNumero}</td>
                 <td>01/07/{year}</td>
-                {(!borrarPagos && !editarPagos) || disabled ? (<td><a class="clear button" disabled><AiOutlineSmallDash /></a></td>) : null}
-                {borrarPagos && !disabled ? (<td><a class="clear button" onClick={()=>HandlerPagoSeleccionado(object, year)}><BsFillTrashFill/></a></td>) : null}
-                {editarPagos && !disabled ? (<td><a class="clear button" onClick={()=>HandlerPagoSeleccionado(object, year)}><AiFillEdit /></a></td>):null}
+                {(!borrarPagos && !editarPagos) || disabled ? (<td><a className="clear button" disabled><AiOutlineSmallDash /></a></td>) : null}
+                {borrarPagos && !disabled ? (<td><a className="clear button" onClick={()=>HandlerPagoSeleccionado(object, year)}><BsFillTrashFill/></a></td>) : null}
+                {editarPagos && !disabled ? (<td><a className="clear button" onClick={()=>HandlerPagoSeleccionado(object, year)}><AiFillEdit /></a></td>):null}
             </tr>
         )
     }
@@ -110,7 +110,7 @@ const ModificarClienteDt = ({setClickPagos, setDSetectorCambios}) => {
         <div className='DivPrincipal'>
             <h2 className='DivTitulo'>Detalle para {(store.infoClienteDt != null) ? (store.infoClienteDt.razon.slice(0,35)) : null}</h2>
             <div className='DivFiltro text-right'>
-                <a class="clear button secondary" disabled={disabled ? "true": false} onClick={(e) => HandlerBotonFiltrar(e)}>Filtrar</a>
+                <a className="clear button secondary" disabled={disabled ? "true": false} onClick={(e) => HandlerBotonFiltrar(e)}>Filtrar</a>
             </div>
             <div className='DivSecundario'>
                 <div className="card-section">

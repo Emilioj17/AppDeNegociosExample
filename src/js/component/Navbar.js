@@ -46,10 +46,10 @@ const Navbar = () => {
                         <li className='no-print'><Link to="/">Inicio</Link></li>
                         <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
                         <li><Link to="/DireccionTributaria">Direccion Tributaria</Link></li>
-                        <li><a className='isDisabled'>Contabilidad</a></li>
-                        {store.usuarioActual.tipo == "Administrador" ? (<li><a className='isDisabled'>RRHH</a></li>) : null}
+                        <li><a className='isDisabled' to="#">Contabilidad</a></li>
+                        {store.usuarioActual.tipo == "Administrador" ? (<li><a className='isDisabled'  to="#">RRHH</a></li>) : null}
                         {store.usuarioActual.tipo == "Administrador" ? (<li><Link to="/Administracion">Admin Usuarios <GiTRexSkull /></Link></li>): null}
-                        <li><Link onClick={(e)=>HandlerCerrarSesion(e)}>Cerrar Sesion</Link></li>
+                        <li><Link  to="#" onClick={(e)=>HandlerCerrarSesion(e)}>Cerrar Sesion</Link></li>
                     </ul>
                 </div>
             </div>

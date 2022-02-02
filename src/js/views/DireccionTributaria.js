@@ -73,50 +73,54 @@ const DireccionTributaria = () => {
     return (
         <Fragment>
             <Head contenido={titulosHead} />
-            {(clienteSeleccionado) ? (<ClienteSeleccionado setClienteSeleccionado={setClienteSeleccionado} clienteDtCliqueado={clienteDtCliqueado} />) : null}
-            {(nuevoCliente) ? (<FormularioClienteDt setNuevoCliente={setNuevoCliente} />) : null}
-            {(clienteSeleccionado || nuevoCliente) ? null : (
-                <Fragment>
-                    <div className='row'>
-                        <div className='button-group align-right'>
-                            <button className="submit success button" onClick={(e)=>HandlerNuevoCliente(e)}>Nuevo Cliente</button>
-                            <button className="submit button" onClick={(e)=>HandlerExportarTabla(e)}>Exportar Seleccion</button>
-                        </div>
-                    </div>
-                    <div className='row'>
-                        <div className='grid-x grid-margin-x'>
-                            <Buscador setClienteDtBuscado={setClienteDtBuscado} setClientesPorPagina={setClientesPorPagina}/>
-                            <div className='cell small-4 text-right' style={{ margin:"auto"}}>
-                                <a class="clear button secondary" onClick={(e) => HandlerFiltro(e)}>Filtrar</a>
-                                <a class="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp />Recargar</a>
-                                <a class="clear button secondary" onClick={(e) => HandlerBotonClientesPorPagina(e)}><IoEllipsisVerticalSharp /></a>
-                                {botonClientesPorPagina ? (
-                                    <div style={{display:"inline"}}>
-                                        <a className="button tiny" id="5" onClick={(e) => HandlerClientesPorPagina(e)} style={(clientesPorPagina == "5" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>5</a>
-                                        <a className="button tiny" id="50" onClick={(e)=> HandlerClientesPorPagina(e)} style={(clientesPorPagina == "50" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>50</a>
-                                        <a className="button tiny" id="100" onClick={(e) => HandlerClientesPorPagina(e)} style={(clientesPorPagina == "100" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>100</a>
-                                        <a className="button tiny"id="100000" onClick={(e)=> HandlerClientesPorPagina(e)} style={(clientesPorPagina == "100000" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>Todos</a>
-                                    </div>
-                                ) : (null)}
+            <div className='row'>
+                <div className='column'>
+                    {(clienteSeleccionado) ? (<ClienteSeleccionado setClienteSeleccionado={setClienteSeleccionado} clienteDtCliqueado={clienteDtCliqueado} />) : null}
+                    {(nuevoCliente) ? (<FormularioClienteDt setNuevoCliente={setNuevoCliente} />) : null}
+                    {(clienteSeleccionado || nuevoCliente) ? null : (
+                        <Fragment>
+                            <div className=''>
+                                <div className='button-group align-right'>
+                                    <button className="submit success button" onClick={(e)=>HandlerNuevoCliente(e)}>Nuevo Cliente</button>
+                                    <button className="submit button" onClick={(e)=>HandlerExportarTabla(e)}>Exportar Seleccion</button>
+                                </div>
                             </div>
-                        </div> 
-                    </div>
-                    {filtro ? (<FiltroListaClientes
-                        setFiltro={setFiltro}
-                        setFiltroVigente={setFiltroVigente}
-                        setFiltroErpyme={setFiltroErpyme}
-                        setFiltroSaldo={setFiltroSaldo}
-                        setClientesPorPagina={setClientesPorPagina}/>) : null}
-                    <ListaClientesDt
-                        clienteDtBuscado={clienteDtBuscado}
-                        setClienteSeleccionado={setClienteSeleccionado}
-                        setClienteDtCliqueado={setClienteDtCliqueado}
-                        filtroVigente={filtroVigente}
-                        filtroErpyme={filtroErpyme}
-                        filtroSaldo={filtroSaldo}
-                        clientesPorPagina={clientesPorPagina}/>
-                </Fragment>)
-            }
+                            <div className=''>
+                                <div className='grid-x grid-margin-x'>
+                                    <Buscador setClienteDtBuscado={setClienteDtBuscado} setClientesPorPagina={setClientesPorPagina}/>
+                                    <div className='cell small-4 text-right' style={{ margin:"auto"}}>
+                                        <a className="clear button secondary" onClick={(e) => HandlerFiltro(e)}>Filtrar</a>
+                                        <a className="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp />Recargar</a>
+                                        <a className="clear button secondary" onClick={(e) => HandlerBotonClientesPorPagina(e)}><IoEllipsisVerticalSharp /></a>
+                                        {botonClientesPorPagina ? (
+                                            <div style={{display:"inline"}}>
+                                                <a className="button tiny" id="5" onClick={(e) => HandlerClientesPorPagina(e)} style={(clientesPorPagina == "5" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>5</a>
+                                                <a className="button tiny" id="50" onClick={(e)=> HandlerClientesPorPagina(e)} style={(clientesPorPagina == "50" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>50</a>
+                                                <a className="button tiny" id="100" onClick={(e) => HandlerClientesPorPagina(e)} style={(clientesPorPagina == "100" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>100</a>
+                                                <a className="button tiny"id="100000" onClick={(e)=> HandlerClientesPorPagina(e)} style={(clientesPorPagina == "100000" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>Todos</a>
+                                            </div>
+                                        ) : (null)}
+                                    </div>
+                                </div> 
+                            </div>
+                            {filtro ? (<FiltroListaClientes
+                                setFiltro={setFiltro}
+                                setFiltroVigente={setFiltroVigente}
+                                setFiltroErpyme={setFiltroErpyme}
+                                setFiltroSaldo={setFiltroSaldo}
+                                setClientesPorPagina={setClientesPorPagina}/>) : null}
+                            <ListaClientesDt
+                                clienteDtBuscado={clienteDtBuscado}
+                                setClienteSeleccionado={setClienteSeleccionado}
+                                setClienteDtCliqueado={setClienteDtCliqueado}
+                                filtroVigente={filtroVigente}
+                                filtroErpyme={filtroErpyme}
+                                filtroSaldo={filtroSaldo}
+                                clientesPorPagina={clientesPorPagina}/>
+                        </Fragment>)
+                    }
+                </div>
+            </div>
         </Fragment>
     );
 }

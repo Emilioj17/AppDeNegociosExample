@@ -53,7 +53,7 @@ export const Login = () => {
 									<a className="button expanded" onClick={(e)=>HandlerLogin(e)}>Ingresar</a>
 								</div>
 								<p className="text-center">
-								<a class="clear button secondary" onClick={(e)=>HandlerRecuperarClave(e)}>Olvidaste tu Clave?</a>
+								<a className="clear button secondary" onClick={(e)=>HandlerRecuperarClave(e)}>Olvidaste tu Clave?</a>
 								</p>
 							</form>	
 						</div>

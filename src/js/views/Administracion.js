@@ -34,23 +34,25 @@ const Administracion = () => {
 
 	const HandlerModificar = (event) => {
 		usuarioSeleccionado ? setUsuarioSeleccionado(false): setUsuarioSeleccionado(true)
-		console.log(usuarioCliqueado);
-		/* actions.getUsuario(usuarioCliqueado.id); */
     };
 
 	return (
 		<Fragment>
 			<Head contenido={titulosHead} />
-			{(!crear && !modificar) ? (
-				<div className='row'>
-					<div className="button-group align-right">
-						<a className="button warning" name="Modificar" disabled={crear ? true : false} onClick={(e) => HandlerModificar(e)}>Modificar</a>
-						<a className="button primary" name="Crear" disabled={usuarioSeleccionado ? true : false} onClick={(e) => HandlerCrear(e)}>Crear Usuario</a>
-					</div>
-				</div>) : (null)}
-			{(!crear && !modificar) ? (<ListaUsuarios setModificar={setModificar} usuarioSeleccionado={usuarioSeleccionado} setUsuarioCliqueado={setUsuarioCliqueado}/>):null}
-			{(crear) ? (<CreacionUsuario setCrear={setCrear} />) : null}
-			{(modificar) ? (<ModificarUsuario setModificar={setModificar} usuarioCliqueado={usuarioCliqueado} setUsuarioCliqueado={setUsuarioCliqueado}/>) : null}
+			<div className="row">
+				<div className="column">
+					{(!crear && !modificar) ? (
+					<div className=''>
+						<div className="button-group align-right">
+							<a className="button warning" name="Modificar" disabled={crear ? true : false} onClick={(e) => HandlerModificar(e)}>Modificar</a>
+							<a className="button primary" name="Crear" disabled={usuarioSeleccionado ? true : false} onClick={(e) => HandlerCrear(e)}>Crear Usuario</a>
+						</div>
+					</div>) : (null)}
+				{(!crear && !modificar) ? (<ListaUsuarios setModificar={setModificar} usuarioSeleccionado={usuarioSeleccionado} setUsuarioCliqueado={setUsuarioCliqueado}/>):null}
+				{(crear) ? (<CreacionUsuario setCrear={setCrear} />) : null}
+				{(modificar) ? (<ModificarUsuario setModificar={setModificar} usuarioCliqueado={usuarioCliqueado} setUsuarioCliqueado={setUsuarioCliqueado}/>) : null}
+				</div>
+			</div>
 		</Fragment>
 	)
 };
