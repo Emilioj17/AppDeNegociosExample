@@ -14,7 +14,7 @@ const ListaPagos = ({filtroYear, filtroMesInicio, filtroMesTermino, filtroSaldo}
                 <td>${object.montoCobrado - object.montoPagado}</td>
                 <td>{object.numeroTransferencia}</td>
                 <td>{object.facturaNumero}</td>
-                <td>01/07/{year}</td>
+                <td>{object.fechaIngresoPago}</td>
             </tr>
         )
     }
@@ -80,6 +80,18 @@ const ListaPagos = ({filtroYear, filtroMesInicio, filtroMesTermino, filtroSaldo}
                         {(store.pago2022 != null) ? (
                             (filtroYear == "todos" || filtroYear == "2022") ? (
                                 store.pago2022.filter(objeto => meses.includes(objeto.mes)).filter(objeto => Saldo(objeto)).map((object, i) => ListaDesplegarPagos(object, i, 2022))
+                            ) : null
+                        ) : null
+                        }
+                        {(store.pago2023 != null) ? (
+                            (filtroYear == "todos" || filtroYear == "2023") ? (
+                                store.pago2023.filter(objeto => meses.includes(objeto.mes)).filter(objeto => Saldo(objeto)).map((object, i) => ListaDesplegarPagos(object, i, 2023))
+                            ) : null
+                        ) : null
+                        }
+                        {(store.pago2024 != null) ? (
+                            (filtroYear == "todos" || filtroYear == "2024") ? (
+                                store.pago2024.filter(objeto => meses.includes(objeto.mes)).filter(objeto => Saldo(objeto)).map((object, i) => ListaDesplegarPagos(object, i, 2024))
                             ) : null
                         ) : null
                         }

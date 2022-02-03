@@ -22,6 +22,8 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
         actions.getPago2020(clienteDtCliqueado.id);
         actions.getPago2021(clienteDtCliqueado.id);
         actions.getPago2022(clienteDtCliqueado.id);
+        actions.getPago2023(clienteDtCliqueado.id);
+        actions.getPago2024(clienteDtCliqueado.id);
         window.scrollTo(0, 0);
     }, []);
 
@@ -32,6 +34,8 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
         actions.getPago2020(clienteDtCliqueado.id);
         actions.getPago2021(clienteDtCliqueado.id);
         actions.getPago2022(clienteDtCliqueado.id);
+        actions.getPago2023(clienteDtCliqueado.id);
+        actions.getPago2024(clienteDtCliqueado.id);
         actions.getClientesDt();
         setDSetectorCambios(false);
     }, [detectorCambios]);

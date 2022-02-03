@@ -32,8 +32,11 @@ const Notas = ({ clienteDtCliqueado, setDSetectorCambios}) => {
                                 <td>{object.comentario}</td>
                                 <td>{object.fechaComentario}</td>
                             </tr>)
-                    ) : (<p>No hay Notas...</p>)}
-                    {store.nota=="" ? (<p>No hay Notas...</p>): null}
+                    ) : (null)}
+                        {store.nota == "" ? (
+                            <tr>
+                                <td>No hay notas</td>
+                            </tr>): null}
                     </tbody>
                 </table>
             </div>

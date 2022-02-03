@@ -483,7 +483,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
             },
 
-            crearPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, comentario, clienteDtid) => {
+            crearPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, comentario, fechaIngresoPago, clienteDtid) => {
                 const store = getStore();
                 fetch("http://127.0.0.1:5000/dt" + year, {
                     method: "POST",
@@ -498,6 +498,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "montoCobrado": montoCobrado,
                         "facturaNumero": facturaNumero,
                         "comentario": comentario,
+                        "fechaIngresoPago": fechaIngresoPago,
                         "clienteDtid": clienteDtid,
                     })
                 }).then((response) => response.json())

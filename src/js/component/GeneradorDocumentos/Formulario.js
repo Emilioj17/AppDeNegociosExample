@@ -51,9 +51,9 @@ const Formulario = ({ img, setImg, datos, setDatos }) => {
             <div>
                 <label>Fecha</label>
                 <input type="radio" id="html" name="fav_language" value="hoy" onClick={(e)=>setFechaHoy(e)}/>
-                <label for="html">HOY</label>
+                <label htmlFor="html">HOY</label>
                 <input type="radio" id="html" name="fav_language" value="fecha exacta" onClick={(e)=>setFechaExtacta(e)}/>
-                <label for="html">FECHA EXACTA</label>
+                <label htmlFor="html">FECHA EXACTA</label>
             </div>
             {(fecha)?(
                 <label>Fecha

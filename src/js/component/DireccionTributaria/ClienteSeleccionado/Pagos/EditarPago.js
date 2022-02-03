@@ -7,13 +7,12 @@ import { FiAlertOctagon } from "react-icons/fi";
 const EditarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios, setDisabled}) => {
     const { store, actions } = useContext(Context);
     const [datos, setDatos] = useState({
-        year: pagoSeleccionado.year,
         mes: null,
         montoCobrado: null,
         montoPagado: null,
         numeroTransferencia: null,
         facturaNumero: null,
-        fechaPago: null,
+        comentario: null,
       });
 
     const HandlerCerrar = (event) => {
@@ -25,18 +24,26 @@ const EditarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios,
     }
 
     const HandlerEditarPago = (event) => {
-        actions.editarPago(datos.year, datos.mes, datos.numeroTransferencia, datos.montoPagado, datos.montoCobrado, datos.facturaNumero, pagoSeleccionado.object.id)
-        setDSetectorCambios(true);
-        setTimeout(() => { setPagoSeleccionado({
-            object: null,
-            year: null
-        });
-        }, 200);
-        setDisabled(false);
+        if (Object.values(datos).every(x => x === null)) {
+            alert("No estas Modificando ningún Dato");
+        } else {
+            actions.editarPago(pagoSeleccionado.year, datos.mes, datos.numeroTransferencia, datos.montoPagado, datos.montoCobrado, datos.facturaNumero, datos.comentario, pagoSeleccionado.object.id)
+            setDSetectorCambios(true);
+            setTimeout(() => { setPagoSeleccionado({
+                object: null,
+                year: null
+            });
+            }, 200);
+            setDisabled(false);
+        }
     }
 
     const HandlerCompletarDatos = (event) => {
-        setDatos({ ...datos, [event.target.name]: event.target.value })
+        if (event.target.value === "Selecciona una opción...") {
+            setDatos({ ...datos, [event.target.name]: null })
+        } else {
+            setDatos({ ...datos, [event.target.name]: event.target.value })
+        }
     };
 
     return (
@@ -44,18 +51,18 @@ const EditarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios,
             <div className="card">
                 <h4>Vas a Editar un Pago</h4>
                 <div className="card-divider">
-                    <label className="form-label" htmlFor='year'>Seleciona Año
-                        <select className="form-select" id="year" name="year"
-                            defaultValue={pagoSeleccionado.year} onChange={(e) => HandlerCompletarDatos(e)}>
+                    <label className="form-label text-left" htmlFor='year'>Año: <strong>{pagoSeleccionado.year}</strong>
+                        <select className="form-select" id="year" name="year" disabled>
+                            <option>Selecciona una opción...</option>
                             <option value="2019">2019</option>
                             <option value="2020">2020</option>
                             <option value="2021">2021</option>
                             <option value="2022">2022</option>
                         </select>
                     </label>
-                    <label htmlFor="mes">Selecciona mes
-                        <select className="form-select" id="mes" name="mes"
-                            defaultValue={pagoSeleccionado.object.mes} onChange={(e) => HandlerCompletarDatos(e)}>
+                    <label className="form-label text-left" htmlFor="mes">Mes: <strong>{pagoSeleccionado.object.mes}</strong>
+                        <select className="form-select" id="mes" name="mes" onChange={(e) => HandlerCompletarDatos(e)}>
+                            <option>Selecciona una opción...</option>
                             <option value="Enero">Enero</option>
                             <option value="Febrero">Febrero</option>
                             <option value="Marzo">Marzo</option>
@@ -70,28 +77,28 @@ const EditarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios,
                             <option value="Diciembre">Diciembre</option>
                         </select>
                     </label>
-                    <label htmlFor="montoCobrado">Monto Cobrado
-                        <input type="number" name="montoCobrado"
-                            defaultValue={pagoSeleccionado.object.montoCobrado} onChange={(e) => HandlerCompletarDatos(e)}/>
+                    <label className="form-label text-left" htmlFor="montoCobrado">Cobrado:$<strong>{pagoSeleccionado.object.montoCobrado}</strong>
+                        <input type="number" placeholder='Puedes cambiar $' name="montoCobrado" onChange={(e) => HandlerCompletarDatos(e)}/>
                     </label>
                 </div>
                 <div className="card-divider">
-                    <label htmlFor="montoPagado">Monto Pagado
-                        <input type="number" name="montoPagado"
-                            defaultValue={pagoSeleccionado.object.montoPagado} onChange={(e) => HandlerCompletarDatos(e)}/>
+                    <label className="form-label text-left" htmlFor="montoPagado">Pagado: $<strong>{pagoSeleccionado.object.montoPagado}</strong>
+                        <input type="number" placeholder='Puedes cambiar $' name="montoPagado" onChange={(e) => HandlerCompletarDatos(e)}/>
                     </label>
-                    <label htmlFor="numeroTransferencia">Número Transferencia
+                    <label className="form-label text-left" htmlFor="numeroTransferencia">N° Transf: <strong>{pagoSeleccionado.object.numeroTransferencia ? pagoSeleccionado.object.numeroTransferencia : "No hay"}</strong>
                         <input type="text" name="numeroTransferencia"
-                            defaultValue={pagoSeleccionado.object.numeroTransferencia} onChange={(e) => HandlerCompletarDatos(e)}/>
+                            placeholder='Puedes Cambiar esto' onChange={(e) => HandlerCompletarDatos(e)}/>
                     </label>
-                    <label htmlFor="facturaNumero">Número Factura
+                    <label className="form-label text-left" htmlFor="facturaNumero">N° Factura: <strong>{pagoSeleccionado.object.facturaNumero ? pagoSeleccionado.object.facturaNumero: "No hay"}</strong>
                         <input type="text" name="facturaNumero"
-                            defaultValue={pagoSeleccionado.object.facturaNumero} onChange={(e) => HandlerCompletarDatos(e)}/>
+                            placeholder='Cambia el N°' onChange={(e) => HandlerCompletarDatos(e)}/>
                     </label>
                 </div>
-                <div className="card-divider">
-                    <label htmlFor="fechaPago">Fecha de Pago
-                        <input type="date" name="fechaPago" onChange={(e) => HandlerCompletarDatos(e)}/>
+                <div className="card-divider align-center">
+                    <label htmlFor="fechaPago">Comentario: <strong>{pagoSeleccionado.object.comentario ? pagoSeleccionado.object.comentario : "No hay"}</strong>
+                        <textarea
+                            cols="50" rows="1" maxLength="100"
+                            placeholder="Puedes modificar el comentario" name="comentario" onChange={(e) => HandlerCompletarDatos(e)}></textarea>
                     </label>
                 </div>
                 <div><h3><FiAlertOctagon/> Vas a modificar un Pago</h3></div>

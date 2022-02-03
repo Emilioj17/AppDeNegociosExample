@@ -36,7 +36,7 @@ const ModificarClienteDt = ({setClickPagos, setDSetectorCambios}) => {
                 <td>${object.montoCobrado - object.montoPagado}</td>
                 <td>{object.numeroTransferencia}</td>
                 <td>{object.facturaNumero}</td>
-                <td>01/07/{year}</td>
+                <td>{object.comentario}</td>
                 {(!borrarPagos && !editarPagos) || disabled ? (<td><a className="clear button" disabled><AiOutlineSmallDash /></a></td>) : null}
                 {borrarPagos && !disabled ? (<td><a className="clear button" onClick={()=>HandlerPagoSeleccionado(object, year)}><BsFillTrashFill/></a></td>) : null}
                 {editarPagos && !disabled ? (<td><a className="clear button" onClick={()=>HandlerPagoSeleccionado(object, year)}><AiFillEdit /></a></td>):null}
@@ -130,7 +130,7 @@ const ModificarClienteDt = ({setClickPagos, setDSetectorCambios}) => {
                                 <th scope="col">Saldo</th>
                                 <th scope="col">Número de Transferencia</th>
                                 <th scope="col">Número de Factura</th>
-                                <th scope="col">Fecha de Pago</th>
+                                <th scope="col">Comentario</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -156,6 +156,18 @@ const ModificarClienteDt = ({setClickPagos, setDSetectorCambios}) => {
                             {(store.pago2022 != null) ? (
                                 (filtroYear == "todos" || filtroYear == "2022") ? (
                                     store.pago2022.filter(objeto => meses.includes(objeto.mes)).filter(objeto => Saldo(objeto)).map((object, i) => ListaDesplegarPagos(object, i, 2022))
+                                ) : null
+                            ) : null
+                            }
+                            {(store.pago2023 != null) ? (
+                                (filtroYear == "todos" || filtroYear == "2023") ? (
+                                    store.pago2023.filter(objeto => meses.includes(objeto.mes)).filter(objeto => Saldo(objeto)).map((object, i) => ListaDesplegarPagos(object, i, 2023))
+                                ) : null
+                            ) : null
+                            }
+                            {(store.pago2024 != null) ? (
+                                (filtroYear == "todos" || filtroYear == "2024") ? (
+                                    store.pago2024.filter(objeto => meses.includes(objeto.mes)).filter(objeto => Saldo(objeto)).map((object, i) => ListaDesplegarPagos(object, i, 2024))
                                 ) : null
                             ) : null
                             }

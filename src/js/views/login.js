@@ -1,5 +1,5 @@
 import React, { useContext, Fragment, useState, useEffect } from "react";
-import { Context } from "../../js/store/AppContext";
+import { Context } from "../store/AppContext";
 import Head from "../component/Head";
 import '../../styles/App.css';
 import Recuperar from "../component/Login/Recuperar";

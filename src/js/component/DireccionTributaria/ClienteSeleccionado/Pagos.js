@@ -34,15 +34,15 @@ const Pagos = ({ clienteDtCliqueado, setClickPagos }) => {
             <div className="card-divider">
                 <h4 className='no-print'>Pagos</h4>
                 {ocultarPagos ? (
-                    <a class="clear button no-print" onClick={(e)=>HandlerOcultarPagos(e)}><AiFillCaretLeft />Mostrar</a>
+                    <a className="clear button no-print" onClick={(e)=>HandlerOcultarPagos(e)}><AiFillCaretLeft />Mostrar</a>
                 ) : (
-                    <a class="clear button no-print" onClick={(e)=>HandlerOcultarPagos(e)}><AiFillCaretDown />Ocultar</a>   
+                    <a className="clear button no-print" onClick={(e)=>HandlerOcultarPagos(e)}><AiFillCaretDown />Ocultar</a>   
                 )}
                 <h4 className='print-yes'>Pagos Servicio Direccion Tributaria</h4>
             </div>
             <div className="card-section">
                 <div className='no-print text-right'>
-                    {!ocultarPagos?(<a class="clear button secondary" onClick={(e) => HandlerBotonFiltrar(e)}>Filtrar</a>):null}
+                    {!ocultarPagos?(<a className="clear button secondary" onClick={(e) => HandlerBotonFiltrar(e)}>Filtrar</a>):null}
                 </div>
                 {filtro ? (<FiltroPagos
                     setFiltroYear={setFiltroYear}
