@@ -70,16 +70,18 @@ const DireccionTributaria = () => {
             {store.usuarioActual != null ? (
                 (store.usuarioActual.tipo === "Administrador" || store.usuarioActual.tipo === "Cobranza") ?
                     (
-                    <div className='row'>
+                    <div className=''>
                         <div className='column'>
                             {(clienteSeleccionado) ? (<ClienteSeleccionado setClienteSeleccionado={setClienteSeleccionado} clienteDtCliqueado={clienteDtCliqueado} />) : null}
                             {(nuevoCliente) ? (<FormularioClienteDt setNuevoCliente={setNuevoCliente} />) : null}
                             {(clienteSeleccionado || nuevoCliente) ? null : (
                                 <Fragment>
-                                    <div className='grid-x grid-margin-x' style={{boxShadow: "0px 4px 8px #000000", paddingTop:"20px", paddingBottom:"5px"}}>
-                                        <Buscador setClienteDtBuscado={setClienteDtBuscado} />
-                                        <div className='cell small-1 text-right'><a className="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp /></a></div>
-                                        <div className='cell small-1 text-right'><a class="clear button secondary"><IoEllipsisVerticalSharp /></a></div>
+                                    <div className='row'>
+                                        <div className='grid-x grid-margin-x' style={{boxShadow: "0px 4px 8px #000000", paddingTop:"20px", paddingBottom:"5px"}}>
+                                            <Buscador setClienteDtBuscado={setClienteDtBuscado} />
+                                            <div className='cell small-1 text-right'><a className="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp /></a></div>
+                                            <div className='cell small-1 text-right'><a class="clear button secondary"><IoEllipsisVerticalSharp /></a></div>
+                                        </div>
                                     </div>
                                     <br />
                                     <hr />

@@ -21,7 +21,7 @@ const BuscadorNormal = ({ setClienteDtBuscado }) => {
                         null
                     ) :
                         <>
-                            <input className='cell small-10' type="text" placeholder="Ingresa tu Busqueda (Rut sin puntos, razon social, correo o Nombre Representante)" name="Buscador" ref={Busqueda}/>
+                            <input className='cell small-10' type="text" placeholder="Ingresa tu Busqueda (Rut Empresa sin puntos, razon social, correo, Nombre o Rut Representante)" name="Buscador" ref={Busqueda}/>
                             <button class="cell small-2 submit success button" onClick={(e) => HandlerOnClick(e)}>Buscar</button>
                         </>
                 ): null}

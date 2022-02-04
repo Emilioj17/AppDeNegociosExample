@@ -108,18 +108,18 @@ const ModificarClienteDt = ({setClickPagos, setDSetectorCambios}) => {
 
     return (
         <div className='DivPrincipal'>
-            <h2 className='DivTitulo'>Detalle para {(store.infoClienteDt != null) ? (store.infoClienteDt.razon.slice(0,35)) : null}</h2>
+            <h4 className='DivTitulo'>Detalle para {(store.infoClienteDt != null) ? (store.infoClienteDt.razon.slice(0,35)) : null}</h4>
             <div className='DivFiltro text-right'>
                 <a className="clear button secondary" disabled={disabled ? "true": false} onClick={(e) => HandlerBotonFiltrar(e)}>Filtrar</a>
             </div>
-            <div className='DivSecundario'>
-                <div className="card-section">
-                    {filtro ? (<FiltroPagos
+            {filtro ? (<FiltroPagos
                         setFiltroYear={setFiltroYear}
                         setFiltroMesInicio={setFiltroMesInicio}
                         setFiltroMesTermino={setFiltroMesTermino}
                         setFiltroSaldo={setFiltroSaldo}
                         disabled={disabled}/>) : null}
+            <div className={filtro ? "DivSecundario2": "DivSecundario"}>
+                <div className="card-section">
                     <table className="table hover">
                         <thead>
                             <tr>
@@ -181,9 +181,9 @@ const ModificarClienteDt = ({setClickPagos, setDSetectorCambios}) => {
             {crearPagos ? (<IngresoPago setCrearPagos={setCrearPagos} setDisabled={setDisabled} setDSetectorCambios={setDSetectorCambios}/>): null}
             <div className='button-group align-right DivBotones'>
                 <button className="submit button success" onClick={(e) => HandlerCrearPagos(e)} disabled={disabled ? "true": false}>Agregar Pago</button>
-                    <button className="submit button warning" onClick={(e)=>  HandlerEditarPagos(e)} disabled={disabled ? "true": false}>Editar Pago</button>
-                    <button className="submit button alert" onClick={(e)=> HandlerBorrarPagos(e)} disabled={disabled ? "true": false}>Borrar Pago</button>
-                    <button className="submit button" onClick={(e)=> HandlerCerrar(e)} disabled={disabled ? "true": false}>Cerrar</button>
+                <button className="submit button warning" onClick={(e)=>  HandlerEditarPagos(e)} disabled={disabled ? "true": false}>Editar Pago</button>
+                <button className="submit button alert" onClick={(e)=> HandlerBorrarPagos(e)} disabled={disabled ? "true": false}>Borrar Pago</button>
+                <button className="submit button" onClick={(e)=> HandlerCerrar(e)} disabled={disabled ? "true": false}>Cerrar</button>
             </div>
         </div>
     )

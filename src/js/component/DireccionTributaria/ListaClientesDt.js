@@ -39,12 +39,12 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
     const Vigencia = (objeto) => {
         if (filtroVigente == "todo" || filtroVigente == "Selecciona Vigencia..." || filtroVigente == "todos") {
             return objeto
-        } else if (filtroVigente == "Vigente") {
-            if (objeto.vigente == "true") {
+        } else if (filtroVigente == "Si") {
+            if (objeto.vigente == "Si") {
                 return objeto
             }
-        } else if (filtroVigente == "No Vigente") {
-            if (objeto.vigente == "false") {
+        } else if (filtroVigente == "No") {
+            if (objeto.vigente == "No") {
                 return objeto
             }
         }
@@ -53,12 +53,12 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
     const Erpyme = (objeto) => {
         if (filtroErpyme == "todo" || filtroErpyme == "Selecciona Erpyme..." || filtroErpyme == "todos") {
             return objeto
-        } else if (filtroErpyme == "Está en Erpyme") {
-            if (objeto.erpyme == "true") {
+        } else if (filtroErpyme == "Si") {
+            if (objeto.erpyme == "Si") {
                 return objeto
             }
-        } else if (filtroErpyme == "No está en Erpyme") {
-            if (objeto.erpyme == "false") {
+        } else if (filtroErpyme == "No") {
+            if (objeto.erpyme == "No") {
                 return objeto
             }
         }
@@ -67,11 +67,11 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
     const Saldo = (objeto) => {
         if (filtroSaldo == "todo" || filtroSaldo == "Selecciona Saldo..." || filtroSaldo == "todos") {
             return objeto
-        } else if (filtroSaldo == "Con Saldo") {
+        } else if (filtroSaldo == "Si") {
             if (SaldoTotal.montoSaldo(objeto)>0 || SaldoTotal.montoSaldo(objeto)<0) {
                 return objeto
             }
-        } else if (filtroSaldo == "Todo Pagado") {
+        } else if (filtroSaldo == "No") {
             if (SaldoTotal.montoSaldo(objeto)==0) {
                 return objeto
             }
@@ -91,7 +91,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
     }
 
     return (
-        <div className={store.witch ? ("row"): ""}>
+        <div className={store.witch ? ("row"): "grid-x grid-margin-x"}>
             {(store.clientesDt != null) ? (
                 <table className={`table hover ${store.witch ? ("tablaClientes"):""}`} id="tblData">
                     <thead>

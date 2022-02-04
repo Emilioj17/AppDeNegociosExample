@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiAlertOctagon } from "react-icons/fi";
 
-//Este Formulario es de Direccion Tributaria (Crear un Nuevo Cliente)
+//Este es el Filtro de la Lista de Clientes de DT
 
 const FiltroListaClientes = ({setFiltro, setFiltroVigente, setFiltroErpyme, setFiltroSaldo }) => {
     const [defectFiltroVigente, setDefectFiltroVigente] = useState("Selecciona Vigencia...");
@@ -40,24 +40,24 @@ const FiltroListaClientes = ({setFiltro, setFiltroVigente, setFiltroErpyme, setF
                         <select className="form-select" id="filtroVigente" name="filtroVigente"
                         value={defectFiltroVigente} onClick={(e)=>HandlerFiltroVigente(e)}>
                             <option>Selecciona Vigencia...</option>
-                            <option value="Vigente">Vigente</option>
-                            <option value="No Vigente">No Vigente</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
                         </select>
                     </label>
                     <label htmlFor="erpyme">Selecciona ERPyme
                         <select className="form-select" id="erpyme" name="erpyme"
                         value={defectFiltroErpyme} onClick={(e)=>HandlerFiltroErpyme(e)}>
                             <option>Selecciona Erpyme...</option>
-                            <option value="Está en Erpyme">Está en Erpyme</option>
-                            <option value="No está en Erpyme">No está en Erpyme</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
                         </select>
                     </label>
                     <label htmlFor="saldo">Con Saldo?
                         <select className="form-select" id="saldo" name="saldo"
                         value={defectFiltroSaldo} onClick={(e)=>HandlerFiltroSaldo(e)}>
                             <option>Selecciona Saldo...</option>
-                            <option value="Con Saldo">Con Saldo</option>
-                            <option value="Todo Pagado">Todo Pagado</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
                         </select>
                     </label>
                     {defectFiltroVigente != "Selecciona Vigencia..." || defectFiltroErpyme != "Selecciona Erpyme..." || defectFiltroSaldo != "Selecciona Saldo..." ? (

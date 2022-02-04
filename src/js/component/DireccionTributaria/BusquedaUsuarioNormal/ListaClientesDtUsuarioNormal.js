@@ -27,55 +27,11 @@ const ListaClientesDt = ({ clienteDtBuscado, filtroVigente, filtroErpyme, filtro
         )
     }
 
-    //Las Siguientes funciones generan los filtros de Busqueda, Vigencia, Erpyme y Saldo.
-    const Vigencia = (objeto) => {
-        if (filtroVigente == "todo" || filtroVigente == "Selecciona Vigencia..." || filtroVigente == "todos") {
-            return objeto
-        } else if (filtroVigente == "Vigente") {
-            if (objeto.vigente == "true") {
-                return objeto
-            }
-        } else if (filtroVigente == "No Vigente") {
-            if (objeto.vigente == "false") {
-                return objeto
-            }
-        }
-    }
-
-    const Erpyme = (objeto) => {
-        if (filtroErpyme == "todo" || filtroErpyme == "Selecciona Erpyme..." || filtroErpyme == "todos") {
-            return objeto
-        } else if (filtroErpyme == "Está en Erpyme") {
-            if (objeto.erpyme == "true") {
-                return objeto
-            }
-        } else if (filtroErpyme == "No está en Erpyme") {
-            if (objeto.erpyme == "false") {
-                return objeto
-            }
-        }
-    }
-
-    const Saldo = (objeto) => {
-        if (filtroSaldo == "todo" || filtroSaldo == "Selecciona Saldo..." || filtroSaldo == "todos") {
-            return objeto
-        } else if (filtroSaldo == "Con Saldo") {
-            if (SaldoTotal.montoSaldo(objeto)>0 || SaldoTotal.montoSaldo(objeto)<0) {
-                return objeto
-            }
-        } else if (filtroSaldo == "Todo Pagado") {
-            if (SaldoTotal.montoSaldo(objeto)==0) {
-                return objeto
-            }
-        }
-    }
-
     const Busqueda = (objeto) => {
         if (objeto.razon.toLowerCase().includes(clienteDtBuscado.toLowerCase())
             || objeto.rut.toLowerCase().includes(clienteDtBuscado.toLowerCase())
             || objeto.correo.toLowerCase().includes(clienteDtBuscado.toLowerCase())
             || objeto.representante.toLowerCase().includes(clienteDtBuscado.toLowerCase())
-            || (objeto.id==clienteDtBuscado)
             || objeto.rutRepresentante.toLowerCase().includes(clienteDtBuscado.toLowerCase())
         ) {
             return objeto
@@ -101,8 +57,8 @@ const ListaClientesDt = ({ clienteDtBuscado, filtroVigente, filtroErpyme, filtro
                     <tbody>
                         {(store.clientesDt != null) ? 
                             ((clienteDtBuscado == "" || clienteDtBuscado == null) ? (
-                                store.clientesDt.filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => ListaDesplegarClientes(objeto, i))
-                            ):(store.clientesDt.filter(objeto => Busqueda(objeto)).filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => 
+                                null
+                            ):(store.clientesDt.filter(objeto => Busqueda(objeto)).map((objeto, i) => 
                                     ListaDesplegarClientes(objeto, i)))): 
                             (<td colSpan="9" style={{height:"100px", padding:"20px"}}><h2 className="text-center"> - no hay datos -</h2></td>)
                         }
