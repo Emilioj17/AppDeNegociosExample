@@ -6,12 +6,8 @@ import "../../../../styles/Paginator.css";
 //Aquí se genera el Listado de Clientes que se muestra en Dt. Desde DireconTributaria.js se ejecuta el action que llama la info de la bd. Esta lista se guarda en store.clientesDt.
 // Respecto al CSS del Paginator, se debió crear un .css adicional solo para setear los colores.
 
-const ListaClientesDt = ({ clienteDtBuscado, filtroVigente, filtroErpyme, filtroSaldo }) => {
+const ListaClientesDt = ({ clienteDtBuscado }) => {
     const { store, actions } = useContext(Context);
-
-    const HanderClick = (event) => {
-        console.log(store.clientesDt.filter(objeto => Busqueda(objeto)).length);
-    }
 
     //La siguiente funcion despliega la lista de Clientes con sus respectivas Columnas.
     const ListaDesplegarClientes = (objeto, i) => {
@@ -55,7 +51,7 @@ const ListaClientesDt = ({ clienteDtBuscado, filtroVigente, filtroErpyme, filtro
                             <th className="telefono" scope="col">Teléfono</th>
                             <th className="fecha" scope="col">Fecha</th>
                             <th scope="col">Vigente</th>
-                            <th className="saldo" scope="col" onClick={(e)=>HanderClick(e)}>Saldo</th>
+                            <th className="saldo" scope="col">Saldo</th>
                         </tr>
                     </thead>
                     <tbody>
