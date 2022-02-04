@@ -7,8 +7,10 @@ import ListaClientesDt from "../component/DireccionTributaria/ListaClientesDt";
 import FormularioClienteDt from "../component/DireccionTributaria/FormularioClienteDt";
 import ClienteSeleccionado from "../component/DireccionTributaria/ClienteSeleccionado";
 import FiltroListaClientes from '../component/DireccionTributaria/FiltroListaClientes';
+import ResultadoBusqueda from '../component/DireccionTributaria/ResultadoBusqueda';
 import { IoRefreshSharp, IoEllipsisVerticalSharp } from "react-icons/io5";
 import { ExportTableToExcel } from "../Helper/ExportTableToExcel";
+import Loader from '../Helper/Loader';
 import '../../styles/PagosDt.css';
 
 
@@ -27,8 +29,6 @@ const DireccionTributaria = () => {
     const [filtroVigente, setFiltroVigente] = useState("todos");
     const [filtroErpyme, setFiltroErpyme] = useState("todos");
     const [filtroSaldo, setFiltroSaldo] = useState("todos");
-    const [botonClientesPorPagina, setBotonClientesPorPagina] = useState(false);
-    const [clientesPorPagina, setClientesPorPagina] = useState(20);
     const titulosHead = ["Bienvenido al Servicio de Direccion Tributaria", "Consulta información respecto a Clientes con este servicio contratado."];
 
     //Este useEffect inicia getClientes, y llama a todo el listado de clientes. Con esto, cuando se abre ListaClientesDt.js que llama al store.clientesDt ya tiene una lista por descargar-
@@ -62,65 +62,48 @@ const DireccionTributaria = () => {
         ExportTableToExcel('xlsx')
     }
 
-    const HandlerBotonClientesPorPagina = (event) => {
-        botonClientesPorPagina ? setBotonClientesPorPagina(false): setBotonClientesPorPagina(true)
-    }
-
-    const HandlerClientesPorPagina = (event) => {
-        setClientesPorPagina(parseInt(event.target.id))
-    }
-
     return (
         <Fragment>
             <Head contenido={titulosHead} />
-            <div className='row'>
-                <div className='column'>
-                    {(clienteSeleccionado) ? (<ClienteSeleccionado setClienteSeleccionado={setClienteSeleccionado} clienteDtCliqueado={clienteDtCliqueado} />) : null}
-                    {(nuevoCliente) ? (<FormularioClienteDt setNuevoCliente={setNuevoCliente} />) : null}
-                    {(clienteSeleccionado || nuevoCliente) ? null : (
-                        <Fragment>
-                            <div className=''>
-                                <div className='button-group align-right'>
-                                    <button className="submit success button" onClick={(e)=>HandlerNuevoCliente(e)}>Nuevo Cliente</button>
-                                    <button className="submit button" onClick={(e)=>HandlerExportarTabla(e)}>Exportar Seleccion</button>
+            {clienteDtBuscado != null ? <ResultadoBusqueda clienteDtBuscado={clienteDtBuscado} setClienteDtBuscado={setClienteDtBuscado} /> : null}
+            {clienteDtBuscado === null ?
+                <div className='row'>
+                    <div className='column'>
+                        {(clienteSeleccionado) ? (<ClienteSeleccionado setClienteSeleccionado={setClienteSeleccionado} clienteDtCliqueado={clienteDtCliqueado} />) : null}
+                        {(nuevoCliente) ? (<FormularioClienteDt setNuevoCliente={setNuevoCliente} />) : null}
+                        {(clienteSeleccionado || nuevoCliente) ? null : (
+                            <Fragment>
+                                <div className='grid-x grid-margin-x' style={{boxShadow: "0px 4px 8px #000000", paddingTop:"20px", paddingBottom:"5px"}}>
+                                    <Buscador setClienteDtBuscado={setClienteDtBuscado} />
+                                    <div className='cell small-1 text-right'><a className="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp /></a></div>
+                                    <div className='cell small-1 text-right'><a class="clear button secondary"><IoEllipsisVerticalSharp /></a></div>
                                 </div>
-                            </div>
-                            <div className=''>
-                                <div className='grid-x grid-margin-x'>
-                                    <Buscador setClienteDtBuscado={setClienteDtBuscado} setClientesPorPagina={setClientesPorPagina}/>
-                                    <div className='cell small-4 text-right' style={{ margin:"auto"}}>
-                                        <a className="clear button secondary" onClick={(e) => HandlerFiltro(e)}>Filtrar</a>
-                                        <a className="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp />Recargar</a>
-                                        <a className="clear button secondary" onClick={(e) => HandlerBotonClientesPorPagina(e)}><IoEllipsisVerticalSharp /></a>
-                                        {botonClientesPorPagina ? (
-                                            <div style={{display:"inline"}}>
-                                                <a className="button tiny" id="5" onClick={(e) => HandlerClientesPorPagina(e)} style={(clientesPorPagina == "5" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>5</a>
-                                                <a className="button tiny" id="50" onClick={(e)=> HandlerClientesPorPagina(e)} style={(clientesPorPagina == "50" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>50</a>
-                                                <a className="button tiny" id="100" onClick={(e) => HandlerClientesPorPagina(e)} style={(clientesPorPagina == "100" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>100</a>
-                                                <a className="button tiny"id="100000" onClick={(e)=> HandlerClientesPorPagina(e)} style={(clientesPorPagina == "100000" ? {backgroundColor:"rgba(6,70,112,255)"}: null)}>Todos</a>
-                                            </div>
-                                        ) : (null)}
-                                    </div>
-                                </div> 
-                            </div>
-                            {filtro ? (<FiltroListaClientes
-                                setFiltro={setFiltro}
-                                setFiltroVigente={setFiltroVigente}
-                                setFiltroErpyme={setFiltroErpyme}
-                                setFiltroSaldo={setFiltroSaldo}
-                                setClientesPorPagina={setClientesPorPagina}/>) : null}
-                            <ListaClientesDt
-                                clienteDtBuscado={clienteDtBuscado}
-                                setClienteSeleccionado={setClienteSeleccionado}
-                                setClienteDtCliqueado={setClienteDtCliqueado}
-                                filtroVigente={filtroVigente}
-                                filtroErpyme={filtroErpyme}
-                                filtroSaldo={filtroSaldo}
-                                clientesPorPagina={clientesPorPagina}/>
-                        </Fragment>)
-                    }
+                                <br />
+                                <hr />
+                                <div className='button-group align-right'>
+                                    <button className="submit success button" onClick={(e) => HandlerNuevoCliente(e)}>Nuevo Cliente</button>
+                                    <button className="submit button" onClick={(e) => HandlerExportarTabla(e)}>Exportar Seleccion</button>
+                                    <button className="submit button secondary" onClick={(e) => HandlerFiltro(e)}>Filtrar</button>
+                                </div>
+                                <br />
+                                {filtro ? (<FiltroListaClientes
+                                    setFiltro={setFiltro}
+                                    setFiltroVigente={setFiltroVigente}
+                                    setFiltroErpyme={setFiltroErpyme}
+                                    setFiltroSaldo={setFiltroSaldo} />) : null}
+                                <ListaClientesDt
+                                    clienteDtBuscado={clienteDtBuscado}
+                                    setClienteSeleccionado={setClienteSeleccionado}
+                                    setClienteDtCliqueado={setClienteDtCliqueado}
+                                    filtroVigente={filtroVigente}
+                                    filtroErpyme={filtroErpyme}
+                                    filtroSaldo={filtroSaldo}/>
+                            </Fragment>)
+                        }
+                    </div>
                 </div>
-            </div>
+                : null
+            }
         </Fragment>
     );
 }

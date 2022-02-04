@@ -1,18 +1,21 @@
-import React from 'react';
+import React, {useRef} from 'react';
 
 //Esta funcion es la que genera el buscador de clientes. Es bien sencilla, el unico handler que tiene
 // est para asignar lo que se escriba con un onChange.
 
-const Buscador = ({setClienteDtBuscado, setClientesPorPagina}) => {
+const Buscador = ({ setClienteDtBuscado }) => {
+    const Busqueda = useRef(null);
+    
     const HandlerOnChange = (event) => {
-        setClienteDtBuscado(event.target.value);
-        setClientesPorPagina(100000);
+        setClienteDtBuscado(Busqueda.current.value);
     };
 
     return (
-        <div className='cell small-8'>
-            <label htmlFor="Buscador">Buscador</label>
-            <input type="text" placeholder="Ingresa tu Busqueda" name="Buscador" onChange={(e)=>HandlerOnChange(e)}/>
+        <div className='cell small-10'>
+            <div className='grid-x grid-margin-x'>
+                <input className='cell small-10' type="text" placeholder="Ingresa tu Busqueda" name="Buscador" ref={Busqueda}/>
+                <button class="cell small-2 submit success button" onClick={(e) => HandlerOnChange(e)}>Buscar</button>
+            </div>
         </div>
     );
 }

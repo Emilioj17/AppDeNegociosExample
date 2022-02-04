@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-import ReactPaginate from 'react-paginate';
 import { Context } from "../../store/AppContext"
 import { SaldoTotal } from "../../Helper/SaldoTotal";
 import "../../../styles/Paginator.css";
@@ -7,9 +6,8 @@ import "../../../styles/Paginator.css";
 //Aquí se genera el Listado de Clientes que se muestra en Dt. Desde DireconTributaria.js se ejecuta el action que llama la info de la bd. Esta lista se guarda en store.clientesDt.
 // Respecto al CSS del Paginator, se debió crear un .css adicional solo para setear los colores.
 
-const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado, filtroVigente, filtroErpyme, filtroSaldo, clientesPorPagina }) => {
+const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteDtCliqueado, filtroVigente, filtroErpyme, filtroSaldo }) => {
     const { store, actions } = useContext(Context);
-    const items = store.clientesDt;
 
     const HandlerClick = (object) => {
         setClienteDtCliqueado(object);
@@ -92,80 +90,36 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
         }
     }
 
-    const Items = ({ currentItems }) => {
-        return (
-            <table className={`table hover ${store.witch ? ("tablaClientes"):""}`} id="tblData">
-                <thead>
-                    <tr>
-                        <th className="id" scope="col">Id</th>
-                        <th scope="col">Razon Social</th>
-                        <th className="rut" scope="col">Rut</th>
-                        <th scope="col">Correo</th>
-                        <th className="telefono" scope="col">Teléfono</th>
-                        <th className="representante" scope="col">Rep Legal</th>
-                        <th className="rut" scope="col">Rut Rep</th>
-                        <th className="fecha" scope="col">Fecha</th>
-                        <th scope="col">Vigente</th>
-                        <th scope="col">Erpyme</th>
-                        <th className="saldo" scope="col">Saldo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {(currentItems != null) ? 
-                        ((clienteDtBuscado == "" || clienteDtBuscado == null) ? (
-                            currentItems.filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => ListaDesplegarClientes(objeto, i))
-                        ):(currentItems.filter(objeto => Busqueda(objeto)).filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => 
-                                ListaDesplegarClientes(objeto, i)))): 
-                        (<td colSpan="9" style={{height:"100px", padding:"20px"}}><h2 className="text-center"> - no hay datos -</h2></td>)
-                    }
-                </tbody>
-            </table>
-          );
-    }
-
-    const PaginatedItems = ({ itemsPerPage }) => {
-        // We start with an empty list of items.
-        const [currentItems, setCurrentItems] = useState(null);
-        const [pageCount, setPageCount] = useState(0);
-        // Here we use item offsets; we could also use page offsets
-        // following the API or data you're working with.
-        const [itemOffset, setItemOffset] = useState(0);
-
-        useEffect(() => {
-            // Fetch items from another resources.
-            const endOffset = itemOffset + itemsPerPage;
-            setCurrentItems(items.slice(itemOffset, endOffset));
-            setPageCount(Math.ceil(items.length / itemsPerPage));
-        }, [itemOffset, itemsPerPage]);
-
-        // Invoke when user click to request another page.
-        const handlePageClick = (event) => {
-            const newOffset = (event.selected * itemsPerPage) % items.length;
-            setItemOffset(newOffset);
-        };
-
-        return (
-            <>
-                <Items currentItems={currentItems} />
-                <div className='divPaginator'>
-                    <ReactPaginate
-                    breakLabel="..."
-                    nextLabel="Next>"
-                    onPageChange={handlePageClick}
-                    pageRangeDisplayed={5}
-                    pageCount={pageCount}
-                    previousLabel="<Atras"
-                    renderOnZeroPageCount={null}
-                    />
-                </div>
-            
-            </>
-        );
-    }
-
     return (
         <div className={store.witch ? ("row"): ""}>
-            {(store.clientesDt != null) ? (<PaginatedItems itemsPerPage={clientesPorPagina} />) : null}
+            {(store.clientesDt != null) ? (
+                <table className={`table hover ${store.witch ? ("tablaClientes"):""}`} id="tblData">
+                    <thead>
+                        <tr>
+                            <th className="id" scope="col">Id</th>
+                            <th scope="col">Razon Social</th>
+                            <th className="rut" scope="col">Rut</th>
+                            <th scope="col">Correo</th>
+                            <th className="telefono" scope="col">Teléfono</th>
+                            <th className="representante" scope="col">Rep Legal</th>
+                            <th className="rut" scope="col">Rut Rep</th>
+                            <th className="fecha" scope="col">Fecha</th>
+                            <th scope="col">Vigente</th>
+                            <th scope="col">Erpyme</th>
+                            <th className="saldo" scope="col">Saldo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {(store.clientesDt != null) ? 
+                            ((clienteDtBuscado == "" || clienteDtBuscado == null) ? (
+                                store.clientesDt.filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => ListaDesplegarClientes(objeto, i))
+                            ):(store.clientesDt.filter(objeto => Busqueda(objeto)).filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => 
+                                    ListaDesplegarClientes(objeto, i)))): 
+                            (<td colSpan="9" style={{height:"100px", padding:"20px"}}><h2 className="text-center"> - no hay datos -</h2></td>)
+                        }
+                    </tbody>
+                </table>
+            ) : null}
         </div>
     );
 }
