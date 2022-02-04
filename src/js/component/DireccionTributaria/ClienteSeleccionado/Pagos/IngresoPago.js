@@ -25,11 +25,12 @@ const IngresoPago = ({ setCrearPagos, setDisabled, setDSetectorCambios }) => {
     }
 
     const HandlerCrearPago = (event) => {
+        console.log(datos);
         if (datos.montoPagado === null || datos.numeroTransferencia === null) {
             setAlert(true)
         } else {
-            setAlert(false);
             actions.crearPago(datos.year, datos.mes, datos.numeroTransferencia, datos.montoPagado, datos.montoCobrado, datos.facturaNumero, datos.comentario, datos.fechaIngresoPago, store.infoClienteDt.id)
+            setAlert(false);
             setDSetectorCambios(true);
             setTimeout(() => { setCrearPagos(false) }, 200);
             setDisabled(false);
