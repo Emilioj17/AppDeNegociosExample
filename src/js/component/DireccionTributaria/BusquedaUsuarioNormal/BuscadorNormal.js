@@ -3,7 +3,7 @@ import { Context } from '../../../store/AppContext';
 
 
 //Esta funcion es la que genera el buscador de clientes. Es bien sencilla, el unico handler que tiene
-// est para asignar lo que se escriba con un onChange.
+// est para asignar lo que se escriba con un onChange. 
 
 const BuscadorNormal = ({ setClienteDtBuscado }) => {
     const { store, actions } = useContext(Context);

@@ -9,6 +9,10 @@ import "../../../../styles/Paginator.css";
 const ListaClientesDt = ({ clienteDtBuscado, filtroVigente, filtroErpyme, filtroSaldo }) => {
     const { store, actions } = useContext(Context);
 
+    const HanderClick = (event) => {
+        console.log(store.clientesDt.filter(objeto => Busqueda(objeto)).length);
+    }
+
     //La siguiente funcion despliega la lista de Clientes con sus respectivas Columnas.
     const ListaDesplegarClientes = (objeto, i) => {
         return (
@@ -51,17 +55,20 @@ const ListaClientesDt = ({ clienteDtBuscado, filtroVigente, filtroErpyme, filtro
                             <th className="telefono" scope="col">Teléfono</th>
                             <th className="fecha" scope="col">Fecha</th>
                             <th scope="col">Vigente</th>
-                            <th className="saldo" scope="col">Saldo</th>
+                            <th className="saldo" scope="col" onClick={(e)=>HanderClick(e)}>Saldo</th>
                         </tr>
                     </thead>
                     <tbody>
                         {(store.clientesDt != null) ? 
-                            ((clienteDtBuscado == "" || clienteDtBuscado == null) ? (
+                            ((clienteDtBuscado == "" || clienteDtBuscado == null) ?
+                                (
                                 null
-                            ):(store.clientesDt.filter(objeto => Busqueda(objeto)).map((objeto, i) => 
-                                    ListaDesplegarClientes(objeto, i)))): 
-                            (<td colSpan="9" style={{height:"100px", padding:"20px"}}><h2 className="text-center"> - no hay datos -</h2></td>)
-                        }
+                                ) : (store.clientesDt.filter(objeto => Busqueda(objeto)).length === 0 ?
+                                    (
+                                    <td colSpan="9"><h3 className="text-center"> - Tu Busqueda no Arrojó Resultados -</h3></td>
+                                    ) : (store.clientesDt.filter(objeto => Busqueda(objeto)).map((objeto, i) => 
+                                    ListaDesplegarClientes(objeto, i)))
+                                )) : (<td colSpan="9"><h3 className="text-center"> - No hay Datos -</h3></td>)}
                     </tbody>
                 </table>
             ) : null}
