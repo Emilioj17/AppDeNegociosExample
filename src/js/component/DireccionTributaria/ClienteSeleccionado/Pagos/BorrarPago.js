@@ -30,9 +30,6 @@ const BorrarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios,
 
     return (
         <div className='DivTerciario text-center' style={{background:"red"}}>
-            <br />
-            <br />
-            <br />
             <div>
                 <h4>¿Estás Seguro que deseas borrar este Pago?</h4>
                 <p>Vas a borrar un pago del mes de <strong>{pagoSeleccionado.object.mes} {pagoSeleccionado.year}</strong>, por un monto pagado de <strong>${pagoSeleccionado.object.montoPagado}</strong>.</p>

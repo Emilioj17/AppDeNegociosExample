@@ -79,9 +79,18 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
     }
 
     const Busqueda = (objeto) => {
+        for (let index = 0; index < Object.values(objeto.notas).length; index++) {
+            if (Object.values(objeto.notas)[index].comentario.toLowerCase().includes(clienteDtBuscado.toLowerCase())) {
+                return objeto
+            }
+        }
+
         if (objeto.razon.toLowerCase().includes(clienteDtBuscado.toLowerCase())
             || objeto.rut.toLowerCase().includes(clienteDtBuscado.toLowerCase())
             || objeto.correo.toLowerCase().includes(clienteDtBuscado.toLowerCase())
+            || objeto.correoSecundario.toLowerCase().includes(clienteDtBuscado.toLowerCase())
+            || objeto.correoTerciario.toLowerCase().includes(clienteDtBuscado.toLowerCase())
+            || objeto.fono.toLowerCase().includes(clienteDtBuscado.toLowerCase())
             || objeto.representante.toLowerCase().includes(clienteDtBuscado.toLowerCase())
             || (objeto.id==clienteDtBuscado)
             || objeto.rutRepresentante.toLowerCase().includes(clienteDtBuscado.toLowerCase())

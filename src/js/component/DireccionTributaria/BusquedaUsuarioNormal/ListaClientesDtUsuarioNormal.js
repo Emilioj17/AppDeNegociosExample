@@ -31,6 +31,9 @@ const ListaClientesDt = ({ clienteDtBuscado }) => {
         if (objeto.razon.toLowerCase().includes(clienteDtBuscado.toLowerCase())
             || objeto.rut.toLowerCase().includes(clienteDtBuscado.toLowerCase())
             || objeto.correo.toLowerCase().includes(clienteDtBuscado.toLowerCase())
+            || objeto.correoSecundario.toLowerCase().includes(clienteDtBuscado.toLowerCase())
+            || objeto.correoTerciario.toLowerCase().includes(clienteDtBuscado.toLowerCase())
+            || objeto.fono.toLowerCase().includes(clienteDtBuscado.toLowerCase())
             || objeto.representante.toLowerCase().includes(clienteDtBuscado.toLowerCase())
             || objeto.rutRepresentante.toLowerCase().includes(clienteDtBuscado.toLowerCase())
         ) {
