@@ -87,8 +87,9 @@ const CreacionUsuario = ({ setCrear }) => {
                         <label className="form-label" htmlFor='tipo'>Elige Tipo de Usuario</label>
                         <select className="form-select" id="tipo" name="tipo" onChange={(e)=>HandlerModificacionDatos(e)}>
                             <option>Administrador</option>
-                            <option>Vendedor</option>
+                            <option selected>Vendedor</option>
                             <option>Cobranza</option>
+                            <option>Soporte</option>
                         </select>
                     </div>
                 </form>

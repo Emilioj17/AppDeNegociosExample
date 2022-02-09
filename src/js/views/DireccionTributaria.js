@@ -68,7 +68,7 @@ const DireccionTributaria = () => {
         <Fragment>
             <Head contenido={titulosHead} />
             {store.usuarioActual != null ? (
-                (store.usuarioActual.tipo === "Administrador" || store.usuarioActual.tipo === "Cobranza") ?
+                (store.usuarioActual.tipo === "Administrador" || store.usuarioActual.tipo === "Cobranza" || store.usuarioActual.tipo === "Super Administrador") ?
                     (
                     <div className=''>
                         <div className='column'>
@@ -85,7 +85,7 @@ const DireccionTributaria = () => {
                                     </div>
                                     <br />
                                     <hr />
-                                    <div className='button-group align-right'>
+                                    <div className='row button-group align-right'>
                                         <button className="submit success button" onClick={(e) => HandlerNuevoCliente(e)}>Nuevo Cliente</button>
                                         <button className="submit button" onClick={(e) => HandlerExportarTabla(e)}>Exportar Seleccion</button>
                                         <button className="submit button secondary" onClick={(e) => HandlerFiltro(e)}>Filtrar</button>

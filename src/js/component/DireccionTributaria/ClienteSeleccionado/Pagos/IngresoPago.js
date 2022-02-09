@@ -15,7 +15,7 @@ const IngresoPago = ({ setCrearPagos, setDisabled, setDSetectorCambios }) => {
         numeroTransferencia: null,
         facturaNumero: null,
         comentario: null,
-        fechaIngresoPago: year.toDateString()
+        fechaIngresoPago: year.toLocaleDateString()
     });
     const [alert, setAlert] = useState(false);
 

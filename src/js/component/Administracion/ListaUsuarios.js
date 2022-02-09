@@ -28,7 +28,9 @@ export const ListaUsuarios = ({ setModificar, usuarioSeleccionado, setUsuarioCli
     }
 
     const HandlerClick = (object) => {
-        if (usuarioSeleccionado) {
+        if (object.tipo == "Super Administrador") {
+            alert("No puedes modificar un Super Administrador")
+        } else if (usuarioSeleccionado) {
             actions.getUsuario(object.id);
             setUsuarioCliqueado(object);
             setModificar(true);
@@ -38,7 +40,7 @@ export const ListaUsuarios = ({ setModificar, usuarioSeleccionado, setUsuarioCli
     const ListaDesplegarUsuarios = (objeto, i) => {
         return (
             <tr key={i}>
-                <td>{objeto.id}</td>
+                <td>{i+1}</td>
                 <td>{objeto.nombre}</td>
                 <td>{objeto.apellido}</td>
                 <td>{objeto.correo}</td>

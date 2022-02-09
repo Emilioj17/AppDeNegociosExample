@@ -115,6 +115,7 @@ export const ModificarUsuario = ({setModificar, usuarioCliqueado, setUsuarioCliq
                             <option>Administrador</option>
                             <option>Vendedor</option>
                             <option>Cobranza</option>
+                            <option>Soporte</option>
                         </select>
                     </div>
                 </form>

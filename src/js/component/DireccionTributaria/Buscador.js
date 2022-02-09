@@ -16,7 +16,7 @@ const Buscador = ({ setClienteDtBuscado }) => {
         <div className='cell small-10'>
             <div className='grid-x grid-margin-x'>
                 {(store.usuarioActual != null) ? (
-                    (store.usuarioActual.tipo === "Administrador" || store.usuarioActual.tipo === "Cobranza") ? (
+                    (store.usuarioActual.tipo === "Administrador" || store.usuarioActual.tipo === "Cobranza" || store.usuarioActual.tipo === "Super Administrador") ? (
                         <>
                             <label class="cell small-2" htmlFor="Buscador">Buscador</label>
                             <input className='cell small-10' type="text" placeholder="Ingresa tu Busqueda" name="Buscador" onChange={(e) => HandlerOnChange(e)} />

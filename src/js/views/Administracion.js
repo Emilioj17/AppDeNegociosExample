@@ -28,6 +28,12 @@ const Administracion = () => {
 		}, 200);
 	});
 
+	useEffect(() => {
+		if (store.usuarioActual != null && (store.usuarioActual.tipo == "Cobranza" || store.usuarioActual.tipo == "Vendedor" || store.usuarioActual.tipo == "Soporte")) {
+			history.push("/");
+		}
+	});
+
     const HandlerCrear = (event) => {
 		setCrear(true);
     };

@@ -47,8 +47,8 @@ const Navbar = () => {
                         <li><Link to="/GeneradorDocumentos">Generador de Documentos</Link></li>
                         <li><Link to="/DireccionTributaria">Direccion Tributaria</Link></li>
                         <li><a className='isDisabled' to="#">Contabilidad</a></li>
-                        {store.usuarioActual.tipo == "Administrador" ? (<li><a className='isDisabled'  to="#">RRHH</a></li>) : null}
-                        {store.usuarioActual.tipo == "Administrador" ? (<li><Link to="/Administracion">Admin Usuarios <GiTRexSkull /></Link></li>): null}
+                        {store.usuarioActual.tipo == "Administrador" || store.usuarioActual.tipo == "Super Administrador" ? (<li><a className='isDisabled'  to="#">RRHH</a></li>) : null}
+                        {store.usuarioActual.tipo == "Administrador" || store.usuarioActual.tipo == "Super Administrador" ? (<li><Link to="/Administracion">Admin Usuarios <GiTRexSkull /></Link></li>): null}
                         <li><Link  to="#" onClick={(e)=>HandlerCerrarSesion(e)}>Cerrar Sesion</Link></li>
                     </ul>
                 </div>

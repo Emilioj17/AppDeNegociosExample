@@ -100,7 +100,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
     }
 
     return (
-        <div className={store.witch ? ("row"): "grid-x grid-margin-x"}>
+        <div className={store.witch ? (""): "grid-x grid-margin-x"}>
             {(store.clientesDt != null) ? (
                 <table className={`table hover ${store.witch ? ("tablaClientes"):""}`} id="tblData">
                     <thead>
