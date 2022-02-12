@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from "../../store/AppContext"
 import { SaldoTotal } from "../../Helper/SaldoTotal";
-import "../../../styles/Paginator.css";
+import "../../../styles/TablaClientes.css";
 
 //Aquí se genera el Listado de Clientes que se muestra en Dt. Desde DireconTributaria.js se ejecuta el action que llama la info de la bd. Esta lista se guarda en store.clientesDt.
 // Respecto al CSS del Paginator, se debió crear un .css adicional solo para setear los colores.

@@ -10,6 +10,33 @@
 	z-index: 0;
 }
 
+/* Spinner Begin */
+
+.Spinner {
+	display: grid;
+	grid-template-columns: repeat(8, auto);
+	grid-template-rows: repeat(8, auto);
+}
+
+.SpinnerBase {
+	grid-column: 1/9;
+	grid-row: 1/9;
+	z-index: 0;
+}
+
+.SpinnerCharge {
+	background-color: #cfdac67c;
+	height: 100vh;
+	grid-column: 1/9;
+	grid-row: 1/9;
+	z-index: 99;
+	display: grid;
+	justify-content: center;
+	align-content: center;
+}
+
+/* End Spinner */
+
 .NavbarCortito {
 	grid-column: 1/2;
 	grid-row: 1/2;

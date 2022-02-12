@@ -70,7 +70,8 @@
 }
 
 .sell {
-	background-color: red !important;
+	background-color: rgba(23, 121, 186, 255) !important;
+	color: white !important;
 }
 
 @media print {

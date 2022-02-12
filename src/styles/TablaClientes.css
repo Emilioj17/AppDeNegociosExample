@@ -1,0 +1,33 @@
+.tablaClientes td {
+	border: 1px dotted silver;
+	word-break: break-all;
+	font-size: 12px;
+}
+
+.tablaClientes th {
+	font-size: 14px;
+}
+
+.representante {
+	width: 120px;
+}
+
+.telefono {
+	width: 80px;
+}
+
+.id {
+	width: 60px;
+}
+
+.rut {
+	width: 90px;
+}
+
+.saldo {
+	width: 80px;
+}
+
+.fecha {
+	width: 85px;
+}

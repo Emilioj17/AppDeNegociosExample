@@ -29,7 +29,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             pago2023: null,  //Pagos especificos al id del ClienteDt seleccionado
             pago2024: null,  //Pagos especificos al id del ClienteDt seleccionado
             usuarioActual: null,  //Usuario Actual que está Conectado
-            token: null  //Token del Usuario Actual Conectado
+            token: null,  //Token del Usuario Actual Conectado
+            spinner: false
 		},
         actions: {
             setWitch: () => {
@@ -184,6 +185,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             
             getClientesDt:  async (page_num) => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/xDt/" + page_num, {
                     method: "GET",
                     headers: {
@@ -197,6 +199,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             paginasClientesDt: data[1],
                             paginaActualClientesDt: data[2]
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({

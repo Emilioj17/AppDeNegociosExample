@@ -9,6 +9,7 @@ import DireccionTributaria from "./js/views/DireccionTributaria";
 import Contabilidad from "./js/views/Contabilidad";
 import PaginaNoEncontrada from "./js/views/PaginaNoEncontrada";
 import Navbar from "./js/component/Navbar";
+import Spinner from "./js/Helper/Spinner";
 import 'foundation-sites/dist/css/foundation.min.css';
 import './styles/App.css';
 
@@ -17,8 +18,8 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div className={store.witch ? ("off-canvas-wrapper"): ("")}>
-			<div className={store.witch ? ("off-canvas-wrapper"):("Principal")} data-off-canvas-wrapper>
+		<div className={store.witch ? ("off-canvas-wrapper Spinner"): ("Spinner")}>
+			<div className={store.witch ? ("off-canvas-wrapper SpinnerBase"):("SpinnerBase Principal")} data-off-canvas-wrapper>
 				<BrowserRouter basename={basename}>
 					<Navbar/>
 					<div className={store.witch ? ("off-canvas-content"): ("SwitchSecundario")} data-off-canvas-content>
@@ -46,6 +47,13 @@ const Layout = () => {
 					</div>
 				</BrowserRouter>
 			</div>
+			{store.spinner ? (
+				<div className="SpinnerCharge">
+					<div>
+						<Spinner />
+					</div>
+				</div>
+			): null}
 		</div>
 	);
 };

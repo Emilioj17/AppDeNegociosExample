@@ -9,7 +9,7 @@ const Paginador = () => {
 
     const Lista = (objeto, i, actual) => {
         return (
-            <a key={i} className={(objeto+1) == actual ? "sell disabled" : ""} onClick={()=>HandlerClick(objeto)}>{objeto+1}</a>
+            <li><a key={i} className={(objeto+1) == actual ? "sell disabled" : ""} onClick={()=>HandlerClick(objeto)}>{objeto+1}</a></li>
         )
     }
 
@@ -18,11 +18,13 @@ const Paginador = () => {
     }
 
     return (
-        <div className="pagination">
-            <a>&laquo;</a>
+        <nav aria-label="Pagination">
+            <ul className="pagination">
+            <li className="pagination-previous"><a></a></li>
             {rango.map((objeto, i) => Lista(objeto, i, actual))}
-            <a>&raquo;</a>
-        </div>
+            <li className="pagination-next"><a></a></li>
+            </ul>
+        </nav>
     );
 }
 
