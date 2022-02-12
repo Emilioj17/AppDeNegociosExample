@@ -25,11 +25,8 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
                     : (<span>, {objeto.correoSecundario}</span>)}{objeto.correoTerciario === "" ? null
                         : (<span>, {objeto.correoTerciario}</span>)}</td>
                 <td>{objeto.fono}</td>
-                <td>{objeto.representante}</td>
-                <td>{objeto.rutRepresentante}</td>
                 <td>{objeto.fechaContratacion}</td>
                 <td>{objeto.vigente}</td>
-                <td>{objeto.erpyme}</td>
                 <td>${SaldoTotal.montoSaldo(objeto)}</td>
             </tr>
         )
@@ -110,11 +107,8 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
                             <th className="rut" scope="col">Rut</th>
                             <th scope="col">Correo</th>
                             <th className="telefono" scope="col">Teléfono</th>
-                            <th className="representante" scope="col">Rep Legal</th>
-                            <th className="rut" scope="col">Rut Rep</th>
                             <th className="fecha" scope="col">Fecha</th>
                             <th scope="col">Vigente</th>
-                            <th scope="col">Erpyme</th>
                             <th className="saldo" scope="col">Saldo</th>
                         </tr>
                     </thead>

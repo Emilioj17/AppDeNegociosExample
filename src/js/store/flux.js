@@ -1,3 +1,4 @@
+// http://127.0.0.1:x5000 --> https://denegocios.herokuapp.com
 const getState = ({ getStore, getActions, setStore }) => {
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
@@ -17,6 +18,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			usuario: null,
             response: null,
             clientesDt: null, //Lista de Clientes de Dt
+            paginasClientesDt: null, //Total de Paginas para los Clientes Dt
+            paginaActualClientesDt: null, //Total Clientes en Dt
             infoClienteDt: null, //ClienteDt Seleccionado
             nota: null,  //Notas especificas al id del ClienteDt seleccionado
             pago2019: null,  //Pagos especificos al id del ClienteDt seleccionado
@@ -179,9 +182,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             //Clientes Dt
             
-            getClientesDt:  async () => {
+            getClientesDt:  async (page_num) => {
                 const store = getStore();
-                fetch("https://denegocios.herokuapp.com/clienteDt", {
+                fetch("https://denegocios.herokuapp.com/xDt/" + page_num, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -190,7 +193,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }).then((response) => response.json())
                     .then((data) => {
                         setStore({
-                            clientesDt: data
+                            clientesDt: data[0],
+                            paginasClientesDt: data[1],
+                            paginaActualClientesDt: data[2]
                         })
                     })
                     .catch((error) => {

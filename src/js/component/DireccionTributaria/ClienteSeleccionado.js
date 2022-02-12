@@ -15,6 +15,8 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
     const [modificarCliente, setModificarCliente] = useState(false);
     const [clickPagos, setClickPagos] = useState(false);
 
+    //Modificar esto, evitar tantas llamadas al bd.
+
     useEffect(() => {
         actions.getNota(clienteDtCliqueado.id);
         actions.getClienteDt(clienteDtCliqueado.id);

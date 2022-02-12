@@ -19,8 +19,8 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			state.actions.getUsuarios();
-			state.actions.getClientesDt();
+			/* state.actions.getUsuarios(); */
+			/* state.actions.getClientesDt(); */
 			state.store.usuarioActual = JSON.parse(sessionStorage.getItem("usuarioActual"));
             state.store.token = sessionStorage.getItem("token");
 		}, []);

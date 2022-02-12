@@ -9,6 +9,7 @@ import ListaClientesDt from "../component/DireccionTributaria/ListaClientesDt";
 import FormularioClienteDt from "../component/DireccionTributaria/FormularioClienteDt";
 import ClienteSeleccionado from "../component/DireccionTributaria/ClienteSeleccionado";
 import FiltroListaClientes from '../component/DireccionTributaria/FiltroListaClientes';
+import Paginador from '../component/DireccionTributaria/Paginator';
 import { IoRefreshSharp, IoEllipsisVerticalSharp } from "react-icons/io5";
 import { ExportTableToExcel } from "../Helper/ExportTableToExcel";
 import '../../styles/PagosDt.css';
@@ -33,7 +34,7 @@ const DireccionTributaria = () => {
 
     //Este useEffect inicia getClientes, y llama a todo el listado de clientes. Con esto, cuando se abre ListaClientesDt.js que llama al store.clientesDt ya tiene una lista por descargar-
     useEffect(() => {
-        actions.getClientesDt();
+        actions.getClientesDt(1);
     }, []);
 
     useEffect(() => {
@@ -88,7 +89,11 @@ const DireccionTributaria = () => {
                                     <div className='row button-group align-right'>
                                         <button className="submit success button" onClick={(e) => HandlerNuevoCliente(e)}>Nuevo Cliente</button>
                                         <button className="submit button" onClick={(e) => HandlerExportarTabla(e)}>Exportar Seleccion</button>
-                                        <button className="submit button secondary" onClick={(e) => HandlerFiltro(e)}>Filtrar</button>
+                                        <button className="submit button secondary disabled" onClick={(e) => HandlerFiltro(e)}>Filtrar</button>
+                                    </div>
+                                        <div className='' style={{ textAlign: "center" }}>
+                                            <br />
+                                        <Paginador />
                                     </div>
                                     <br />
                                     {filtro ? (<FiltroListaClientes
@@ -111,8 +116,18 @@ const DireccionTributaria = () => {
                     (
                     <div className='row'>
                             <div className='column'>
-                                <br />
-                                <br />
+                                <div>
+                                    <h5>Consulta si un cliente tiene el servicio contratado</h5>
+                                    <p>Puedes hacer busqueda según los siguientes criterios</p>
+                                    <ul>
+                                        <li>Razon Social</li>
+                                        <li>Rut de la sociedad. ex: 76717904-9</li>
+                                        <li>Nombre Socio</li>
+                                        <li>Rut Representante. ex:17011079-K</li>
+                                        <li>correo registrado</li>
+                                        <li>fono registrado</li>
+                                    </ul>
+                                </div>
                                 <BuscadorNormal setClienteDtBuscado={setClienteDtBuscado} />
                                 {clienteDtBuscado!= null ? <ResultadoBusqueda clienteDtBuscado={clienteDtBuscado}
                                         setClienteSeleccionado={setClienteSeleccionado}
