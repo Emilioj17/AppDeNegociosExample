@@ -25,14 +25,27 @@
 }
 
 .SpinnerCharge {
-	background-color: #cfdac67c;
-	height: 100vh;
+	background-color: #979fc58e;
+	height: 100%;
+	width: 100%;
 	grid-column: 1/9;
 	grid-row: 1/9;
 	z-index: 99;
 	display: grid;
 	justify-content: center;
-	align-content: center;
+}
+
+.SpinnerChargeSub {
+	height: 100vh !important;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	justify-content: center !important;
+}
+
+.SpinnerChargeSub div {
+	position: fixed;
 }
 
 /* End Spinner */

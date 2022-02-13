@@ -41,6 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             //Usuarios
             loginUsuario: async (correo, clave) => {
                 const actions = getActions();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/login", {
                     method: "POST",
                     headers: {
@@ -53,17 +54,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                         alert("Usuario o clave Incorrecto");
                     }
                 }).then(data => {
-                    console.log(data);
                     sessionStorage.setItem("usuarioActual", JSON.stringify(data[0]))
                     sessionStorage.setItem("token", data[1])
                     setStore({ usuarioActual: data[0], token: data[1] });
-                    // setStore({ ingreso: ["Correcto"] });
+                    setStore({ spinner: false });
                 }
                 ).catch(error => { console.error("Hay un problemilla", error) })
             },
 
             getUsuario:  async (usuarioid) => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/usuario/" + usuarioid, {
                     method: "GET",
                     headers: {
@@ -75,6 +76,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({
                             usuario: data
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({
@@ -85,6 +87,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getUsuarios:  async () => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/usuario", {
                     method: "GET",
                     headers: {
@@ -96,6 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({
                             usuarios: data
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({
@@ -106,6 +110,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			crearUsuario: async (nombre, apellido, correo, clave, tipo) => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/usuario", {
                     method: "POST",
                     headers: {
@@ -124,6 +129,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({
                             response: data
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({
@@ -134,6 +140,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			editarUsuario: async (id, nombre, apellido, correo, clave, tipo) => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/usuario/" + id, {
                     method: "PUT",
                     headers: {
@@ -152,6 +159,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({
                             response: data
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({
@@ -162,6 +170,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			borrarUsuario: async (id) => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/usuario/" + id, {
                     method: "DELETE",
                     headers: {
@@ -173,6 +182,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({
                             response: data
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({
@@ -210,6 +220,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             getClienteDt:  async (clienteDtid) => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/clienteDt/"+ clienteDtid, {
                     method: "GET",
                     headers: {
@@ -221,6 +232,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({
                             infoClienteDt: data
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({
@@ -231,6 +243,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             
             crearClienteDt: async (razon, rut, vigente, correo, correoSecundario, correoTerciario, fono, whatsapp, representante, rutRepresentante, fechaContratacion, erpyme, p, sacar, dicom, repetido, tipoPago) => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/clienteDt", {
                     method: "POST",
                     headers: {
@@ -261,6 +274,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({
                             response: data
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({
@@ -271,6 +285,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             editarClienteDt: async (id, razon, rut, vigente, correo, correoSecundario, correoTerciario, fono, whatsapp, representante, rutRepresentante, fechaContratacion, erpyme, p, sacar, dicom, repetido, tipoPago) => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/clienteDt/" + id, {
                     method: "PUT",
                     headers: {
@@ -301,6 +316,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({
                             response: data
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({
@@ -333,6 +349,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             crearNota: async (comentario, fechaComentario, clienteDtid) => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/nota", {
                     method: "POST",
                     headers: {
@@ -349,6 +366,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({
                             response: data
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({
@@ -493,6 +511,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             crearPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, comentario, fechaIngresoPago, clienteDtid) => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/dt" + year, {
                     method: "POST",
                     headers: {
@@ -514,6 +533,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({
                             response: data
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({
@@ -524,6 +544,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             editarPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, comentario, clienteDtid) => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/dt" + year + "/" + clienteDtid, {
                     method: "PUT",
                     headers: {
@@ -543,6 +564,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({
                             response: data
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({
@@ -553,6 +575,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
             borrarPago: async (year, clienteDtid) => {
                 const store = getStore();
+                setStore({spinner: true})
                 fetch("https://denegocios.herokuapp.com/dt" + year + "/" + clienteDtid, {
                     method: "DELETE",
                     headers: {
@@ -564,6 +587,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         setStore({
                             response: data
                         })
+                        setStore({spinner: false})
                     })
                     .catch((error) => {
                         setStore({

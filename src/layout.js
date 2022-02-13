@@ -49,7 +49,7 @@ const Layout = () => {
 			</div>
 			{store.spinner ? (
 				<div className="SpinnerCharge">
-					<div>
+					<div className="SpinnerChargeSub">
 						<Spinner />
 					</div>
 				</div>
