@@ -63,6 +63,10 @@ const DireccionTributaria = () => {
         ExportTableToExcel('xlsx')
     }
 
+    const HandlerBuscar = (event) => {
+        actions.getBusquedaDt(clienteDtBuscado);
+    }
+
     //Lo que se renderizará según tipo de Usuario
 
     return (
@@ -80,8 +84,8 @@ const DireccionTributaria = () => {
                                     <div className='row'>
                                         <div className='grid-x grid-margin-x' style={{boxShadow: "0px 4px 8px #000000", paddingTop:"20px", paddingBottom:"5px"}}>
                                             <Buscador setClienteDtBuscado={setClienteDtBuscado} />
+                                            <div className='cell small-1 text-right'><a class="clear button secondary" onClick={(e)=>HandlerBuscar(e)}>Buscar</a></div>
                                             <div className='cell small-1 text-right'><a className="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp /></a></div>
-                                            <div className='cell small-1 text-right'><a class="clear button secondary"><IoEllipsisVerticalSharp /></a></div>
                                         </div>
                                     </div>
                                     <br />
@@ -115,26 +119,27 @@ const DireccionTributaria = () => {
                     ) :
                     (
                     <div className='row'>
-                            <div className='column'>
-                                <div>
-                                    <h5>Consulta si un cliente tiene el servicio contratado</h5>
-                                    <p>Puedes hacer busqueda según los siguientes criterios</p>
-                                    <ul>
-                                        <li>Razon Social</li>
-                                        <li>Rut de la sociedad. ex: 76717904-9</li>
-                                        <li>Nombre Socio</li>
-                                        <li>Rut Representante. ex:17011079-K</li>
-                                        <li>correo registrado</li>
-                                        <li>fono registrado</li>
-                                    </ul>
-                                </div>
+                        <div className='column'>
+                            <div>
+                                <h5>Consulta si un cliente tiene el servicio contratado</h5>
+                                <p>Puedes hacer busqueda según los siguientes criterios</p>
+                                <ul>
+                                    <li>Razon Social o Nombre de Representante</li>
+                                    <li>Rut de la sociedad o Rut Representante. ex: 76717904-9</li>
+                                    <li>Correo registrado</li>
+                                    <li>Fono registrado</li>
+                                </ul>
+                            </div>
+                            <div className='grid-x grid-margin-x'>
                                 <BuscadorNormal setClienteDtBuscado={setClienteDtBuscado} />
-                                {clienteDtBuscado!= null ? <ResultadoBusqueda clienteDtBuscado={clienteDtBuscado}
-                                        setClienteSeleccionado={setClienteSeleccionado}
-                                        setClienteDtCliqueado={setClienteDtCliqueado}
-                                        filtroVigente={filtroVigente}
-                                        filtroErpyme={filtroErpyme}
-                                        filtroSaldo={filtroSaldo}/> : null}
+                                <button class="cell small-2 submit success button" onClick={(e) => HandlerBuscar(e)}>Buscar</button>
+                            </div>
+                            {clienteDtBuscado!= null ? <ResultadoBusqueda clienteDtBuscado={clienteDtBuscado}
+                                    setClienteSeleccionado={setClienteSeleccionado}
+                                    setClienteDtCliqueado={setClienteDtCliqueado}
+                                    filtroVigente={filtroVigente}
+                                    filtroErpyme={filtroErpyme}
+                                    filtroSaldo={filtroSaldo}/> : null}
                         </div>
                     </div>
                     )

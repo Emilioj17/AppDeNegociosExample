@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Context } from "../../../store/AppContext";
 
 
-const Notas = ({ clienteDtCliqueado, setDSetectorCambios}) => {
+const Notas = ({ clienteDtCliqueado, setDSetectorCambiosNotas}) => {
     const { store, actions } = useContext(Context);
     const [nota, setNota] = useState("");
     const fechaActual = new Date();
@@ -14,7 +14,7 @@ const Notas = ({ clienteDtCliqueado, setDSetectorCambios}) => {
     const HandlerAgregarNota = (event) => {
         let fechaComentario = fechaActual.toLocaleDateString();
         actions.crearNota(nota, fechaComentario, clienteDtCliqueado.id);
-        setDSetectorCambios(true);
+        setDSetectorCambiosNotas(true);
         setNota("");
     };
 

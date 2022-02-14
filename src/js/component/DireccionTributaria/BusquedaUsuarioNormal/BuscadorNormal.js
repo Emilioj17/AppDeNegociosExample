@@ -9,7 +9,7 @@ const BuscadorNormal = ({ setClienteDtBuscado }) => {
     const { store, actions } = useContext(Context);
     const Busqueda = useRef(null);
     
-    const HandlerOnClick = (event) => {
+    const HandlerOnChange = (event) => {
         setClienteDtBuscado(Busqueda.current.value);
     };
 
@@ -21,8 +21,9 @@ const BuscadorNormal = ({ setClienteDtBuscado }) => {
                         null
                     ) :
                         <>
-                            <input className='cell small-10' type="text" placeholder="Ingresa tu Busqueda (Rut Empresa sin puntos, razon social, correo, Nombre o Rut Representante)" name="Buscador" ref={Busqueda}/>
-                            <button class="cell small-2 submit success button" onClick={(e) => HandlerOnClick(e)}>Buscar</button>
+                            <input className='cell small-12' type="text"
+                                onChange={(e)=>HandlerOnChange(e)}
+                                placeholder="Ingresa tu Busqueda (Rut Empresa sin puntos, razon social, correo, Nombre o Rut Representante)" name="Buscador" ref={Busqueda} />
                         </>
                 ): null}
             </div>

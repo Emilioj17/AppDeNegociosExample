@@ -12,15 +12,17 @@ import { AiFillPrinter } from "react-icons/ai";
 const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => {
     const { store, actions } = useContext(Context);
     const [detectorCambios, setDSetectorCambios] = useState(false);
+    const [detectorCambiosNotas, setDSetectorCambiosNotas] = useState(false);
+    const [detectorCambiosInfo, setDSetectorCambiosInfo] = useState(false);
     const [modificarCliente, setModificarCliente] = useState(false);
     const [clickPagos, setClickPagos] = useState(false);
 
     //Modificar esto, evitar tantas llamadas al bd.
 
     useEffect(() => {
-        actions.getNota(clienteDtCliqueado.id);
         actions.getClienteDt(clienteDtCliqueado.id);
-        actions.getPago2019(clienteDtCliqueado.id);
+        actions.getNota(clienteDtCliqueado.id);
+        actions.getPago2019(clienteDtCliqueado.id); // Estas son innecesarias ?
         actions.getPago2020(clienteDtCliqueado.id);
         actions.getPago2021(clienteDtCliqueado.id);
         actions.getPago2022(clienteDtCliqueado.id);
@@ -30,17 +32,23 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
     }, []);
 
     useEffect(() => {
-        actions.getNota(clienteDtCliqueado.id);
-        actions.getClienteDt(clienteDtCliqueado.id);
-        actions.getPago2019(clienteDtCliqueado.id);
-        actions.getPago2020(clienteDtCliqueado.id);
-        actions.getPago2021(clienteDtCliqueado.id);
-        actions.getPago2022(clienteDtCliqueado.id);
-        actions.getPago2023(clienteDtCliqueado.id);
-        actions.getPago2024(clienteDtCliqueado.id);
-        actions.getClientesDt();
-        setDSetectorCambios(false);
-    }, [detectorCambios]);
+        if (detectorCambios) {
+            actions.getPago2019(clienteDtCliqueado.id);
+            actions.getPago2020(clienteDtCliqueado.id);
+            actions.getPago2021(clienteDtCliqueado.id);
+            actions.getPago2022(clienteDtCliqueado.id);
+            actions.getPago2023(clienteDtCliqueado.id);
+            actions.getPago2024(clienteDtCliqueado.id);
+            /* actions.getClientesDt(); */  //Revisar aquí, debería pasarle el numero de página.
+            setDSetectorCambios(false);
+        }
+        if (detectorCambiosNotas) {
+            actions.getNota(clienteDtCliqueado.id);
+        }
+        if (detectorCambiosInfo){
+            actions.getClienteDt(clienteDtCliqueado.id);
+        }
+    }, [detectorCambios, detectorCambiosNotas, detectorCambiosInfo]);  //Aquí el detector de cambios se llama a si mismo
 
 
     const HandlerCerrar = (event) => {
@@ -63,7 +71,7 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
 
     return (
         <div className='row yes-print'>
-            {(modificarCliente) ? (<ModificarClienteDt setModificarCliente={setModificarCliente} clienteDtCliqueado={clienteDtCliqueado} setDSetectorCambios={setDSetectorCambios} />) : null}
+            {(modificarCliente) ? (<ModificarClienteDt setModificarCliente={setModificarCliente} clienteDtCliqueado={clienteDtCliqueado} setDSetectorCambiosInfo={setDSetectorCambiosInfo} />) : null}
             {(modificarCliente || clickPagos) ? null : (
                             <div className="callout" data-closable>
                                 <button className="close-button no-print" aria-label="Dismiss alert" type="button" data-close onClick={(e)=>HandlerCerrar(e)}>
@@ -81,10 +89,10 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
                                 <div className="grid-x">
                                     <div className='cell small-12 print-yes text-center'>{(store.infoClienteDt != null) ? (<h3>{store.infoClienteDt.razon}</h3>):null}</div>
                                     <div className="cell small-6 no-print">
-                                        <InformacionCliente clienteDtCliqueado={clienteDtCliqueado} />
+                                        <InformacionCliente />
                                     </div>
                                     <div className="cell small-8 print-yes">
-                                        <InformacionCliente clienteDtCliqueado={clienteDtCliqueado} />
+                                        <InformacionCliente />
                                     </div>
                                     <div className="cell small-4 print-yes">
                                         <p>Por favor, realizar transferencias/pagos a:</p>
@@ -102,7 +110,7 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
                                         </p>
                                     </div>
                                     <div className="cell small-6 no-print">
-                                        <Notas clienteDtCliqueado={clienteDtCliqueado} setDSetectorCambios={setDSetectorCambios}/>
+                                        <Notas clienteDtCliqueado={clienteDtCliqueado} setDSetectorCambiosNotas={setDSetectorCambiosNotas}/>
                                     </div>
                                     <div className="cell">
                                         <Pagos clienteDtCliqueado={clienteDtCliqueado} setClickPagos={setClickPagos} setDSetectorCambios={setDSetectorCambios}/>

@@ -22,7 +22,6 @@ const ListaClientesDt = ({ clienteDtBuscado }) => {
                 <td>{objeto.fono}</td>
                 <td>{objeto.fechaContratacion}</td>
                 <td>{objeto.vigente}</td>
-                <td>${SaldoTotal.montoSaldo(objeto)}</td>
             </tr>
         )
     }
@@ -54,20 +53,11 @@ const ListaClientesDt = ({ clienteDtBuscado }) => {
                             <th className="telefono" scope="col">Teléfono</th>
                             <th className="fecha" scope="col">Fecha</th>
                             <th scope="col">Vigente</th>
-                            <th className="saldo" scope="col">Saldo</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {(store.clientesDt != null) ? 
-                            ((clienteDtBuscado == "" || clienteDtBuscado == null) ?
-                                (
-                                null
-                                ) : (store.clientesDt.filter(objeto => Busqueda(objeto)).length === 0 ?
-                                    (
-                                    <td colSpan="9"><h3 className="text-center"> - Tu Busqueda no Arrojó Resultados -</h3></td>
-                                    ) : (store.clientesDt.filter(objeto => Busqueda(objeto)).map((objeto, i) => 
-                                    ListaDesplegarClientes(objeto, i)))
-                                )) : (<td colSpan="9"><h3 className="text-center"> - No hay Datos -</h3></td>)}
+                        {(store.clientesDt != null) ? store.clientesDt.map((objeto, i) => ListaDesplegarClientes(objeto, i))
+                                : (<td colSpan="9"><h3 className="text-center"> - Tu Busqueda no Arrojó Resultados -</h3></td>)}
                     </tbody>
                 </table>
             ) : null}

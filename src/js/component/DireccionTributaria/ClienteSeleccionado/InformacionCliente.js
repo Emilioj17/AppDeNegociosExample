@@ -3,8 +3,16 @@ import { Context } from "../../../store/AppContext";
 import { SaldoTotal } from "../../../Helper/SaldoTotal";
 
 
-const InformacionCliente = ({ clienteDtCliqueado }) => {
+const InformacionCliente = () => {
     const { store, actions } = useContext(Context);
+
+    const SaldoTotal2 = () => {
+        const fecha = new Date(store.infoClienteDt.fechaContratacion);
+        const fechaHoy = new Date();
+        const diferenciaMeses = fechaHoy.getMonth() - fecha.getMonth() + (12 * (fechaHoy.getFullYear() - fecha.getFullYear()))
+        return (<>{(diferenciaMeses * 9900).toString()}</>)
+    }
+
     return (
         <div className="cell small-6">
             <div className="card" style={{width: '99%'}}>
@@ -24,7 +32,9 @@ const InformacionCliente = ({ clienteDtCliqueado }) => {
                                     <li className='no-print'>Vigente: {store.infoClienteDt.vigente}</li>
                                     <li>Correo: {store.infoClienteDt.correo}</li>
                                     <li>Fono: {store.infoClienteDt.fono}</li>
-                                    <li>Saldo Pendiente: ${SaldoTotal.montoSaldo(store.infoClienteDt)}</li>
+                                    <li>Saldo Pendiente: $</li>
+                                    {/* <li>Saldo Pendiente: ${SaldoTotal.montoSaldo(store.infoClienteDt)}</li> */}
+                                    <li className='no-print'>Monto a haber Pagado: $<SaldoTotal2 /></li>
                                 </ul>
                             ) : (null)}
                 </div>

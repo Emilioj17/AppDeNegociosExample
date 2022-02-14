@@ -1,6 +1,5 @@
 // http://127.0.0.1:5000 --> https://denegocios.herokuapp.cxom
 const getState = ({ getStore, getActions, setStore }) => {
-    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
     function sortByMonth(arr) {
         //Esta funcion permite ordenar los meses de los pagos. Ver cada getPago2019
@@ -31,8 +30,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             usuarioActual: null,  //Usuario Actual que está Conectado
             token: null,  //Token del Usuario Actual Conectado
             spinner: false
-		},
+        },
+
         actions: {
+            //setWitch cambia la barra lateral izquierda.
             setWitch: () => {
                 const store = getStore();
                 store.witch ? setStore({ witch: false }) : setStore({witch:true})
@@ -52,6 +53,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     if (res.status === 200) return res.json();
                     else if (res.status === 401) {
                         alert("Usuario o clave Incorrecto");
+                        setStore({ spinner: false });
                     }
                 }).then(data => {
                     sessionStorage.setItem("usuarioActual", JSON.stringify(data[0]))
@@ -218,6 +220,34 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
             },
 
+            getBusquedaDt:  async (busqueda) => {
+                const store = getStore();
+                setStore({spinner: true})
+                fetch("http://127.0.0.1:5000/busquedaDt", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    },
+                    body: JSON.stringify({
+                        "busqueda": busqueda
+                    })
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            clientesDt: data[0],
+                            paginasClientesDt: data[1],
+                            paginaActualClientesDt: data[2]
+                        })
+                        setStore({spinner: false})
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: "clientesDT " + error.message
+                        })
+                    });
+            },
+
             getClienteDt:  async (clienteDtid) => {
                 const store = getStore();
                 setStore({spinner: true})
@@ -229,6 +259,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }).then((response) => response.json())
                     .then((data) => {
+                        console.log(data);
                         setStore({
                             infoClienteDt: data
                         })

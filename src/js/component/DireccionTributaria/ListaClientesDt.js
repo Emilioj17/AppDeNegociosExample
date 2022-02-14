@@ -27,7 +27,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
                 <td>{objeto.fono}</td>
                 <td>{objeto.fechaContratacion}</td>
                 <td>{objeto.vigente}</td>
-                <td>${SaldoTotal.montoSaldo(objeto)}</td>
+                <td>$</td>
             </tr>
         )
     }
@@ -113,12 +113,8 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
                         </tr>
                     </thead>
                     <tbody>
-                        {(store.clientesDt != null) ? 
-                            ((clienteDtBuscado == "" || clienteDtBuscado == null) ? (
-                                store.clientesDt.filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => ListaDesplegarClientes(objeto, i))
-                            ):(store.clientesDt.filter(objeto => Busqueda(objeto)).filter(objeto=> Vigencia(objeto)).filter(objeto=> Erpyme(objeto)).filter(objeto=> Saldo(objeto)).map((objeto, i) => 
-                                    ListaDesplegarClientes(objeto, i)))): 
-                            (<td colSpan="9" style={{height:"100px", padding:"20px"}}><h2 className="text-center"> - no hay datos -</h2></td>)
+                        {(store.clientesDt != null) ? (store.clientesDt.map((objeto, i) => ListaDesplegarClientes(objeto, i))
+                            ):(<td colSpan="9" style={{height:"100px", padding:"20px"}}><h2 className="text-center"> - no hay datos -</h2></td>)
                         }
                     </tbody>
                 </table>

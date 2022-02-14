@@ -4,7 +4,7 @@ import { ValidarRut } from "../../../../Helper/ValidarRut";
 
 //Este Formulario es de Direccion Tributaria (Modificar Cliente Existente)
 
-const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetectorCambios }) => {
+const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetectorCambiosInfo }) => {
     const { store, actions } = useContext(Context);
     const [alertPrincipal, setAlertPrincipal] = useState(false);
     const [alertRut, setAlertRut] = useState(false);
@@ -142,7 +142,7 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
                 alert("No estas Modificando ningún Dato");
             } else {
                 setAlertPrincipal(false);
-                setDSetectorCambios(true);
+                setDSetectorCambiosInfo(true);
                 actions.editarClienteDt(clienteDtCliqueado.id, datos.razon, datos.rut, datos.vigente, datos.correo, datos.correoSecundario, datos.correoTerciario, datos.fono, datos.whatsapp, datos.representante, datos.rutRepresentante, datos.fechaContratacion, datos.erpyme, datos.p, datos.sacar, datos.dicom, datos.repetido, datos.tipoPago);
                 setTimeout(() => {setModificarCliente(false)}, 500);
             }

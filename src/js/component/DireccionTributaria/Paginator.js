@@ -23,7 +23,7 @@ const Paginador = () => {
         
         if (rango.length <= 10) {
             return (
-                <li><a key={i} className={(objeto+1) == actual ? "sell disabled" : ""} onClick={()=>HandlerClick(objeto)}>{objeto+1}</a></li>
+                <li key={i}><a key={i} className={(objeto+1) == actual ? "sell disabled" : ""} onClick={()=>HandlerClick(objeto)}>{objeto+1}</a></li>
             )
         }
 
@@ -31,23 +31,23 @@ const Paginador = () => {
             if (objeto == 0 || objeto == 1 || objeto == 2 || objeto == rango.at(-1) || objeto == rango.at(-2) || objeto == rango.at(-3)) {
                 if (objeto + 1 == actual - 2 || objeto + 1 == actual + 2) {
                     return (
-                        <li><a key={i}>....</a></li>
+                        <li key={i}><a key={i}>....</a></li>
                     )
                 }
                 return (
-                    <li><a key={i} className={(objeto+1) == actual ? "sell disabled" : ""} onClick={()=>HandlerClick(objeto)}>{objeto+1}</a></li>
+                    <li key={i}><a key={i} className={(objeto+1) == actual ? "sell disabled" : ""} onClick={()=>HandlerClick(objeto)}>{objeto+1}</a></li>
                 )
             }
             else {
                 if (objeto + 1 == actual - 1 || objeto + 1 == actual || objeto + 1 == actual + 1) {
                     return (
-                        <li><a key={i} className={(objeto+1) == actual ? "sell disabled" : ""} onClick={()=>HandlerClick(objeto)}>{objeto+1}</a></li>
+                        <li key={i}><a key={i} className={(objeto+1) == actual ? "sell disabled" : ""} onClick={()=>HandlerClick(objeto)}>{objeto+1}</a></li>
                     )
                 }
             }
             if (objeto + 1 == actual - 2 || objeto + 1 == actual + 2) {
                 return (
-                    <li><a key={i}>....</a></li>
+                    <li key={i}><a key={i}>....</a></li>
                 )
             }
 
