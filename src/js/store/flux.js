@@ -150,11 +150,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     },
                     body: JSON.stringify({
-                        "nombre": nombre,
-                        "apellido": apellido,
-                        "correo": correo,
-                        "clave": clave,
-                        "tipo": tipo
+                        "nombre": nombre === "" ? null : nombre,
+                        "apellido": apellido === "" ? null : apellido,
+                        "correo": correo === "" ? null : correo,
+                        "clave": clave === "" ? null : clave,
+                        "tipo": tipo === "" ? null : tipo
                     })
                 }).then((response) => response.json())
                     .then((data) => {
@@ -259,7 +259,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                 }).then((response) => response.json())
                     .then((data) => {
-                        console.log(data);
                         setStore({
                             infoClienteDt: data
                         })
@@ -272,7 +271,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
             },
             
-            crearClienteDt: async (razon, rut, vigente, correo, correoSecundario, correoTerciario, fono, whatsapp, representante, rutRepresentante, fechaContratacion, erpyme, p, sacar, dicom, repetido, tipoPago) => {
+            crearClienteDt: async (razon, rut, vigente, correo, correoSecundario, correoTerciario, fono, whatsapp, representante, rutRepresentante, fechaContratacion, erpyme, p, sacar, dicom, repetido, libre, mesesPagados, tipoPago) => {
                 const store = getStore();
                 setStore({spinner: true})
                 fetch("http://127.0.0.1:5000/clienteDt", {
@@ -298,6 +297,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "sacar": sacar,
                         "dicom": dicom,
                         "repetido": repetido,
+                        "libre": libre,
+                        "mesesPagados": mesesPagados,
                         "tipoPago":tipoPago
                     })
                 }).then((response) => response.json())
@@ -314,7 +315,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
             },
 
-            editarClienteDt: async (id, razon, rut, vigente, correo, correoSecundario, correoTerciario, fono, whatsapp, representante, rutRepresentante, fechaContratacion, erpyme, p, sacar, dicom, repetido, tipoPago) => {
+            editarClienteDt: async (id, razon, rut, vigente, correo, correoSecundario, correoTerciario, fono, whatsapp, representante, rutRepresentante, fechaContratacion, erpyme, p, sacar, dicom, repetido, libre, mesesPagados, tipoPago) => {
                 const store = getStore();
                 setStore({spinner: true})
                 fetch("http://127.0.0.1:5000/clienteDt/" + id, {
@@ -324,23 +325,69 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     },
                     body: JSON.stringify({
-                        "razon": razon,
-                        "rut": rut,
-                        "vigente": vigente,
-                        "correo": correo,
-                        "correoSecundario": correoSecundario,
-                        "correoTerciario": correoTerciario,
-                        "fono": fono,
-                        "whatsapp": whatsapp,
-                        "representante": representante,
-                        "rutRepresentante": rutRepresentante,
-                        "fechaContratacion": fechaContratacion,
-                        "erpyme": erpyme,
-                        "p": p,
-                        "sacar": sacar,
-                        "dicom": dicom,
-                        "repetido": repetido,
-                        "tipoPago":tipoPago
+                        "razon": razon === "" ? null : razon,
+                        "rut": rut === "" ? null : rut,
+                        "vigente": vigente === "" ? null : vigente,
+                        "correo": correo === "" ? null : correo,
+                        "correoSecundario": correoSecundario === "" ? null : correoSecundario,
+                        "correoTerciario": correoTerciario === "" ? null : correoTerciario,
+                        "fono": fono === "" ? null : fono,
+                        "whatsapp": whatsapp === "" ? null : whatsapp,
+                        "representante": representante === "" ? null : representante,
+                        "rutRepresentante": rutRepresentante === "" ? null : rutRepresentante,
+                        "fechaContratacion": fechaContratacion === "" ? null : fechaContratacion,
+                        "erpyme": erpyme === "" ? null : erpyme,
+                        "p": p === "" ? null : p,
+                        "sacar": sacar === "" ? null : sacar,
+                        "dicom": dicom === "" ? null :dicom,
+                        "repetido": repetido === "" ? null : repetido,
+                        "libre": libre === "" ? null : libre,
+                        "mesesPagados": mesesPagados === "" ? null :mesesPagados,
+                        "tipoPago": tipoPago === "" ? null : tipoPago
+                    })
+                }).then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            response: data
+                        })
+                        setStore({spinner: false})
+                    })
+                    .catch((error) => {
+                        setStore({
+                            error: error.message
+                        })
+                    });
+            },
+
+            editarMesesPagadosClienteDt: async (id, mesesPagados) => {
+                const store = getStore();
+                setStore({spinner: true})
+                fetch("http://127.0.0.1:5000/clienteDt/" + id, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + store.token
+                    },
+                    body: JSON.stringify({
+                        "razon": null,
+                        "rut": null,
+                        "vigente": null,
+                        "correo": null,
+                        "correoSecundario": null,
+                        "correoTerciario": null,
+                        "fono": null,
+                        "whatsapp": null,
+                        "representante": null,
+                        "rutRepresentante": null,
+                        "fechaContratacion": null,
+                        "erpyme": null,
+                        "p": null,
+                        "sacar": null,
+                        "dicom": null,
+                        "repetido": null,
+                        "libre": null,
+                        "mesesPagados":mesesPagados,
+                        "tipoPago":null
                     })
                 }).then((response) => response.json())
                     .then((data) => {
@@ -540,7 +587,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
             },
 
-            crearPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, comentario, fechaIngresoPago, clienteDtid) => {
+            crearPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, mesesPagados, facturaNumero, comentario, fechaIngresoPago, clienteDtid) => {
                 const store = getStore();
                 setStore({spinner: true})
                 fetch("http://127.0.0.1:5000/dt" + year, {
@@ -554,6 +601,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "numeroTransferencia": numeroTransferencia,
                         "montoPagado": montoPagado,
                         "montoCobrado": montoCobrado,
+                        "mesesPagados": mesesPagados,
                         "facturaNumero": facturaNumero,
                         "comentario": comentario,
                         "fechaIngresoPago": fechaIngresoPago,
@@ -573,7 +621,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     });
             },
 
-            editarPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, facturaNumero, comentario, clienteDtid) => {
+            editarPago: async (year, mes, numeroTransferencia, montoPagado, montoCobrado, mesesPagados, facturaNumero, comentario, clienteDtid) => {
                 const store = getStore();
                 setStore({spinner: true})
                 fetch("http://127.0.0.1:5000/dt" + year + "/" + clienteDtid, {
@@ -583,12 +631,13 @@ const getState = ({ getStore, getActions, setStore }) => {
                         "Authorization": "Bearer " + store.token
                     },
                     body: JSON.stringify({
-                        "mes": mes,
-                        "numeroTransferencia": numeroTransferencia,
-                        "montoPagado": montoPagado,
-                        "montoCobrado": montoCobrado,
-                        "facturaNumero": facturaNumero,
-                        "comentario": comentario
+                        "mes": mes === "" ? null : mes,
+                        "numeroTransferencia": numeroTransferencia === "" ? null : numeroTransferencia,
+                        "montoPagado": montoPagado === "" ? null : montoPagado,
+                        "montoCobrado": montoCobrado === "" ? null : montoCobrado,
+                        "mesesPagados": mesesPagados === "" ? null : mesesPagados,
+                        "facturaNumero": facturaNumero === "" ? null : facturaNumero,
+                        "comentario": comentario === "" ? null : comentario
                     })
                 }).then((response) => response.json())
                     .then((data) => {

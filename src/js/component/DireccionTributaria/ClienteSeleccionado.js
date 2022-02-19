@@ -22,7 +22,7 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
     useEffect(() => {
         actions.getClienteDt(clienteDtCliqueado.id);
         actions.getNota(clienteDtCliqueado.id);
-        actions.getPago2019(clienteDtCliqueado.id); // Estas son innecesarias ?
+        actions.getPago2019(clienteDtCliqueado.id);
         actions.getPago2020(clienteDtCliqueado.id);
         actions.getPago2021(clienteDtCliqueado.id);
         actions.getPago2022(clienteDtCliqueado.id);

@@ -110,7 +110,7 @@ const ModificarClienteDt = ({setClickPagos, setDSetectorCambios}) => {
         <div className='DivPrincipal'>
             <h4 className='DivTitulo'>Detalle para {(store.infoClienteDt != null) ? (store.infoClienteDt.razon.slice(0,35)) : null}</h4>
             <div className='DivFiltro text-right'>
-                <a className="clear button secondary" disabled={disabled ? "true": false} onClick={(e) => HandlerBotonFiltrar(e)}>Filtrar</a>
+                <a className="clear button secondary" disabled={disabled ? true: false} onClick={(e) => HandlerBotonFiltrar(e)}>Filtrar</a>
             </div>
             {filtro ? (<FiltroPagos
                         setFiltroYear={setFiltroYear}
@@ -180,10 +180,10 @@ const ModificarClienteDt = ({setClickPagos, setDSetectorCambios}) => {
             {editarPagos && pagoSeleccionado.object != null ? (<EditarPago pagoSeleccionado={pagoSeleccionado} setPagoSeleccionado={setPagoSeleccionado} setDSetectorCambios={setDSetectorCambios} setDisabled={setDisabled}/>) : null}
             {crearPagos ? (<IngresoPago setCrearPagos={setCrearPagos} setDisabled={setDisabled} setDSetectorCambios={setDSetectorCambios}/>): null}
             <div className='button-group align-right DivBotones'>
-                <button className="submit button success" onClick={(e) => HandlerCrearPagos(e)} disabled={disabled ? "true": false}>Agregar Pago</button>
-                <button className="submit button warning" onClick={(e)=>  HandlerEditarPagos(e)} disabled={disabled ? "true": false}>Editar Pago</button>
-                <button className="submit button alert" onClick={(e)=> HandlerBorrarPagos(e)} disabled={disabled ? "true": false}>Borrar Pago</button>
-                <button className="submit button" onClick={(e)=> HandlerCerrar(e)} disabled={disabled ? "true": false}>Cerrar</button>
+                <button className="submit button success" onClick={(e) => HandlerCrearPagos(e)} disabled={disabled ? true: false}>Agregar Pago</button>
+                <button className="submit button warning" onClick={(e)=>  HandlerEditarPagos(e)} disabled={disabled ? true: false}>Editar Pago</button>
+                <button className="submit button alert" onClick={(e)=> HandlerBorrarPagos(e)} disabled={disabled ? true: false}>Borrar Pago</button>
+                <button className="submit button" onClick={(e)=> HandlerCerrar(e)} disabled={disabled ? true: false}>Cerrar</button>
             </div>
         </div>
     )

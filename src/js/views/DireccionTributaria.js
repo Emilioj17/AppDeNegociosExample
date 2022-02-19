@@ -84,7 +84,7 @@ const DireccionTributaria = () => {
                                     <div className='row'>
                                         <div className='grid-x grid-margin-x' style={{boxShadow: "0px 4px 8px #000000", paddingTop:"20px", paddingBottom:"5px"}}>
                                             <Buscador setClienteDtBuscado={setClienteDtBuscado} />
-                                            <div className='cell small-1 text-right'><a class="clear button secondary" onClick={(e)=>HandlerBuscar(e)}>Buscar</a></div>
+                                            <div className='cell small-1 text-right'><a className="clear button secondary" onClick={(e)=>HandlerBuscar(e)}>Buscar</a></div>
                                             <div className='cell small-1 text-right'><a className="clear button secondary" onClick={(e) => HandlerRecargarPagina(e)}><IoRefreshSharp /></a></div>
                                         </div>
                                     </div>
@@ -132,7 +132,7 @@ const DireccionTributaria = () => {
                             </div>
                             <div className='grid-x grid-margin-x'>
                                 <BuscadorNormal setClienteDtBuscado={setClienteDtBuscado} />
-                                <button class="cell small-2 submit success button" onClick={(e) => HandlerBuscar(e)}>Buscar</button>
+                                <button className="cell small-2 submit success button" onClick={(e) => HandlerBuscar(e)}>Buscar</button>
                             </div>
                             {clienteDtBuscado!= null ? <ResultadoBusqueda clienteDtBuscado={clienteDtBuscado}
                                     setClienteSeleccionado={setClienteSeleccionado}

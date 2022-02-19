@@ -30,6 +30,8 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
         sacar: "No",
         dicom: "No",
         repetido: "No",
+        libre: "",
+        mesesPagados:"0",
         tipoPago: "Mensual"
 
       });
@@ -139,7 +141,7 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
                 setAlertPrincipal(true);
             } else {
                 setAlertPrincipal(false);
-                actions.crearClienteDt(datos.razon, datos.rut, datos.vigente, datos.correo, datos.correoSecundario, datos.correoTerciario, datos.fono, datos.whatsapp, datos.representante, datos.rutRepresentante, datos.fechaContratacion, datos.erpyme, datos.p, datos.sacar, datos.dicom, datos.repetido, datos.tipoPago);
+                actions.crearClienteDt(datos.razon, datos.rut, datos.vigente, datos.correo, datos.correoSecundario, datos.correoTerciario, datos.fono, datos.whatsapp, datos.representante, datos.rutRepresentante, datos.fechaContratacion, datos.erpyme, datos.p, datos.sacar, datos.dicom, datos.repetido, datos.libre, datos.mesesPagados, datos.tipoPago);
                 setTimeout(() => {window.location.reload()}, 1000);
             }
         }
@@ -234,24 +236,30 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
                                 <div className='cell small-4'>
                                     <label className="form-label" htmlFor='erpyme'>Ya está Ingresado en Erpyme?</label>
                                     <select className="form-select" id="erpyme" name="erpyme" onChange={(e) => HandlerCompletarDatos(e)}>
-                                        <option value="true">Si</option>
-                                        <option value="false" selected>No</option>
+                                        <option value="No">No</option>
+                                        <option value="Si">Si</option>
                                     </select>
                                 </div>
                                 <div className='cell small-4'>
                                     <label className="form-label" htmlFor='whatsapp'>Ya está Ingresado en Whatsapp?</label>
                                     <select className="form-select" id="whatsapp" name="whatsapp" onChange={(e) => HandlerCompletarDatos(e)}>
-                                        <option value="true">Si</option>
-                                        <option value="false" selected>No</option>
+                                        <option value="No">No</option>
+                                        <option value="Si">Si</option>
                                     </select>
                                 </div>
                                 <div className='cell small-4'>
                                     <label className="form-label" htmlFor='tipoPago'>Que tipo de pago tendrá?</label>
                                     <select className="form-select" id="tipoPago" name="tipoPago" onChange={(e) => HandlerCompletarDatos(e)}>
+                                        <option value="Mensual">Mensual</option>
                                         <option value="Anual">Anual</option>
-                                        <option value="Mensual" selected>Mensual</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div>
+                                <label>
+                                    Quieres agregar algún campo de busqueda Libre?
+                                <textarea placeholder="Ingresa Cualquier cosa" name="libre" maxLength={99} onChange={(e)=>HandlerCompletarDatos(e)}></textarea>
+                                </label>
                             </div>
                             <div>
                                 <label>Deseas ver Otras Opciones?</label>
@@ -265,29 +273,29 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
                                     <div className='cell small-3'>
                                         <label className="form-label" htmlFor='p'>P?</label>
                                         <select className="form-select" id="p" name="p" onChange={(e) => HandlerCompletarDatos(e)}>
+                                            <option value="No">No</option>
                                             <option value="Si">Si</option>
-                                            <option value="No" selected>No</option>
                                         </select>
                                     </div>
                                     <div className='cell small-3'>
                                         <label className="form-label" htmlFor='sacar'>Sacar?</label>
                                         <select className="form-select" id="sacar" name="sacar" onChange={(e) => HandlerCompletarDatos(e)}>
+                                            <option value="No">No</option>
                                             <option value="Si">Si</option>
-                                            <option value="No" selected>No</option>
                                         </select>
                                     </div>
                                     <div className='cell small-3'>
                                         <label className="form-label" htmlFor='dicom'>Dicom?</label>
                                         <select className="form-select" id="dicom" name="dicom" onChange={(e) => HandlerCompletarDatos(e)}>
+                                            <option value="No">No</option>
                                             <option value="Si">Si</option>
-                                            <option value="No" selected>No</option>
                                         </select>
                                     </div>
                                     <div className='cell small-3'>
                                         <label className="form-label" htmlFor='repetido'>Repetido?</label>
                                         <select className="form-select" id="repetido" name="repetido" onChange={(e) => HandlerCompletarDatos(e)}>
+                                            <option value="No">No</option>
                                             <option value="Si">Si</option>
-                                            <option value="No" selected>No</option>
                                         </select>
                                     </div>
                                 </div>

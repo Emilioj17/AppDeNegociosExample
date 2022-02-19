@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from "../../store/AppContext"
-import { SaldoTotal } from "../../Helper/SaldoTotal";
+/* import { SaldoTotal } from "../../Helper/SaldoTotal"; */
 import "../../../styles/TablaClientes.css";
 
 //Aquí se genera el Listado de Clientes que se muestra en Dt. Desde DireconTributaria.js se ejecuta el action que llama la info de la bd. Esta lista se guarda en store.clientesDt.
@@ -27,7 +27,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
                 <td>{objeto.fono}</td>
                 <td>{objeto.fechaContratacion}</td>
                 <td>{objeto.vigente}</td>
-                <td>$</td>
+                <td>${(parseInt(SaldoDeberia(objeto, false)) - parseInt(SaldoTotal(objeto, false)))* 9900}</td>
             </tr>
         )
     }
@@ -61,7 +61,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
         }
     }
 
-    const Saldo = (objeto) => {
+/*     const Saldo = (objeto) => {
         if (filtroSaldo == "todo" || filtroSaldo == "Selecciona Saldo..." || filtroSaldo == "todos") {
             return objeto
         } else if (filtroSaldo == "Si") {
@@ -73,7 +73,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
                 return objeto
             }
         }
-    }
+    } */
 
     const Busqueda = (objeto) => {
         for (let index = 0; index < Object.values(objeto.notas).length; index++) {
@@ -95,6 +95,51 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
             return objeto
         }
     }
+
+    //Funciones para el Saldo
+
+    const SaldoDeberia = (objeto, meses = false) => {
+        //Este saca la cantidad de meses y su valor, desde la fecha de Contratación. Es el DEBERIA
+        if (objeto.vigente === "Si") {
+            const fecha = new Date(objeto.fechaContratacion);
+            const fechaHoy = new Date();
+            let diferenciaMeses = fechaHoy.getMonth() - fecha.getMonth() + (12 * (fechaHoy.getFullYear() - fecha.getFullYear()))
+            if (fechaHoy.getDate() < fecha.getDate()) {
+                diferenciaMeses=diferenciaMeses-1;
+            }
+/*             if (objeto.p === "Si") {
+                diferenciaMeses = diferenciaMeses - 11;
+                if (diferenciaMeses > 0) {
+                    return ((diferenciaMeses).toString())
+                } else {
+                    console.log(diferenciaMeses);
+                    return 0
+                }
+            } */
+            return ((diferenciaMeses).toString())
+        } else if (objeto.vigente === "No") {
+            return 0;
+        }
+
+    }
+
+    const SaldoTotal = (objeto, meses) => {
+        if (objeto.vigente === "Si") {
+/*             if (objeto.p === "Si") {
+                return 0;
+            } */
+            if (meses == false) {
+                if (objeto.mesesPagados!= null) {
+                    let mesesPagados = parseInt(objeto.mesesPagados)
+                    return (mesesPagados)
+                }
+            }
+        } else if (objeto.vigente === "No") {
+            return 0;
+        }
+
+    }
+
 
     return (
         <div className={store.witch ? (""): "grid-x grid-margin-x"}>

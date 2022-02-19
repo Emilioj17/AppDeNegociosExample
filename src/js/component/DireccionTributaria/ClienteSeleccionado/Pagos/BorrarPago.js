@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Context } from "../../../../store/AppContext";
 import { AiOutlineWarning } from "react-icons/ai";
 
@@ -7,6 +7,10 @@ import { AiOutlineWarning } from "react-icons/ai";
 
 const BorrarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios, setDisabled}) => {
     const { store, actions } = useContext(Context);
+
+    useEffect(() => {
+        actions.getClienteDt(store.infoClienteDt.id);
+    }, []);
 
     const HandlerCerrar = (event) => {
         setDisabled(false);
@@ -17,6 +21,10 @@ const BorrarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios,
     }
 
     const HandlerBorrarPago = (event) => {
+        console.log(pagoSeleccionado.object.mesesPagados);
+        console.log(store.infoClienteDt.mesesPagados);
+        console.log(store.infoClienteDt.id);
+        actions.editarMesesPagadosClienteDt(store.infoClienteDt.id, parseInt(store.infoClienteDt.mesesPagados)-parseInt(pagoSeleccionado.object.mesesPagados))
         actions.borrarPago(pagoSeleccionado.year, pagoSeleccionado.object.id);
         setTimeout(() => { setPagoSeleccionado({
             object: null,
@@ -25,7 +33,6 @@ const BorrarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios,
         }, 200);
         setDSetectorCambios(true);
         setDisabled(false);
-
     }
 
     return (

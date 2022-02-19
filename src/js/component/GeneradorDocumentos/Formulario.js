@@ -43,7 +43,7 @@ const Formulario = ({ img, setImg, datos, setDatos }) => {
             <div className="">
                 <label className="">Elige Nacionalidad</label>
                 <select className="" id="exampleFormControlSelect1" value={datos.nacionalidad} name="nacionalidad" onChange={(e)=>Handler(e)}>
-                <option selected>Elige una opción...</option>
+                <option>Elige una opción...</option>
                 <option value="Chilena">Chilena</option>
                 <option value="Extranjera">Extranjera</option>
                 </select>

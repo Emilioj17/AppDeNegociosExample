@@ -43,8 +43,8 @@ const FiltroPagos = ({ setFiltroYear, setFiltroMesInicio, setFiltroMesTermino, s
             <div className="card-divider grid-x grid-margin-x">
                 <label className='cell small-3' htmlFor="filtroYear">Selecciona Año
                     <select className="form-select" id="filtroYear" name="filtroYear"
-                        disabled={disabled ? "true": false}
-                        value={defectFiltroYear} onClick={(e) => HandlerSeleccionYear(e)}>
+                        disabled={disabled ? true: false}
+                        defaultValue={defectFiltroYear} onClick={(e) => HandlerSeleccionYear(e)}>
                         <option value="todos">Desde el inicio de los tiempos...</option>
                         <option value="2019">2019</option>
                         <option value="2020">2020</option>
@@ -56,9 +56,9 @@ const FiltroPagos = ({ setFiltroYear, setFiltroMesInicio, setFiltroMesTermino, s
                 </label>
                 <label className='cell small-3' htmlFor="filtroMesInicio">Selecciona un Rango
                     <select className="form-select" id="filtroMesInicio" name="filtroMesInicio"
-                        disabled={disabled ? "true": false}
-                        value={defectFiltroMesInicio} onClick={(e) => HandlerSeleccionMesInicio(e)}>
-                        <option selected>Desde este mes...</option>
+                        disabled={disabled ? true: false}
+                        defaultValue={defectFiltroMesInicio} onClick={(e) => HandlerSeleccionMesInicio(e)}>
+                        <option>Desde este mes...</option>
                         <option value="Enero">Enero</option>
                         <option value="Febrero">Febrero</option>
                         <option value="Marzo">Marzo</option>
@@ -73,9 +73,9 @@ const FiltroPagos = ({ setFiltroYear, setFiltroMesInicio, setFiltroMesTermino, s
                         <option value="Diciembre">Diciembre</option>
                     </select>
                     <select className="form-select" id="filtroMesTermino" name="filtroMesTermino"
-                        disabled={disabled ? "true": false}
-                        value={defectFiltroMesTermino} onClick={(e) => HandlerSeleccionMesTermino(e)}>
-                        <option selected>Hasta este mes...</option>
+                        disabled={disabled ? true: false}
+                        defaultValue={defectFiltroMesTermino} onClick={(e) => HandlerSeleccionMesTermino(e)}>
+                        <option>Hasta este mes...</option>
                         <option value="Enero">Enero</option>
                         <option value="Febrero">Febrero</option>
                         <option value="Marzo">Marzo</option>
@@ -92,9 +92,9 @@ const FiltroPagos = ({ setFiltroYear, setFiltroMesInicio, setFiltroMesTermino, s
                 </label>
                 <label className='cell small-3' htmlFor="filtroSaldo">Selecciona Saldo
                     <select className="form-select" id="filtroSaldo" name="filtroSaldo"
-                        disabled={disabled ? "true": false}
-                        value={defectFiltroSaldo} onClick={(e) => HandlerSeleccionSaldo(e)}>
-                        <option value="todos" selected>Con y Sin Saldos</option>
+                        disabled={disabled ? true: false}
+                        defaultValue={defectFiltroSaldo} onClick={(e) => HandlerSeleccionSaldo(e)}>
+                        <option value="todos">Con y Sin Saldos</option>
                         <option value="conSaldo">Con Saldo</option>
                         <option value="sinSaldo">Sin Saldo</option>
                     </select>

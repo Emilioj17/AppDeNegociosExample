@@ -13,23 +13,25 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
     const [alertCorreo, setAlertCorreo] = useState(false);
     const [alertFono, setAlertFono] = useState(false);
     const [datos, setDatos] = useState({
-        razon: null,
-        rut: null,
-        vigente: null,
-        correo: null,
-        correoSecundario: null,
-        correoTerciario: null,
-        fono: null,
-        whatsapp: null,
-        representante: null,
-        rutRepresentante: null,
-        fechaContratacion: null,
-        erpyme: null,
-        p: null,
-        sacar: null,
-        dicom: null,
-        repetido: null,
-        tipoPago: null
+        razon: "",
+        rut: "",
+        vigente: "",
+        correo: "",
+        correoSecundario: "",
+        correoTerciario: "",
+        fono: "",
+        whatsapp: "",
+        representante: "",
+        rutRepresentante: "",
+        fechaContratacion: "",
+        erpyme: "",
+        p: "",
+        sacar: "",
+        dicom: "",
+        repetido: "",
+        libre: "",
+        mesesPagados: "",
+        tipoPago: ""
       });
 
 
@@ -143,7 +145,7 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
             } else {
                 setAlertPrincipal(false);
                 setDSetectorCambiosInfo(true);
-                actions.editarClienteDt(clienteDtCliqueado.id, datos.razon, datos.rut, datos.vigente, datos.correo, datos.correoSecundario, datos.correoTerciario, datos.fono, datos.whatsapp, datos.representante, datos.rutRepresentante, datos.fechaContratacion, datos.erpyme, datos.p, datos.sacar, datos.dicom, datos.repetido, datos.tipoPago);
+                actions.editarClienteDt(clienteDtCliqueado.id, datos.razon, datos.rut, datos.vigente, datos.correo, datos.correoSecundario, datos.correoTerciario, datos.fono, datos.whatsapp, datos.representante, datos.rutRepresentante, datos.fechaContratacion, datos.erpyme, datos.p, datos.sacar, datos.dicom, datos.repetido, datos.libre, datos.mesesPagados, datos.tipoPago);
                 setTimeout(() => {setModificarCliente(false)}, 500);
             }
         }
@@ -250,7 +252,7 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
                                 <div className='cell small-3'>
                                     <label className="form-label" htmlFor='vigente'>Está Vigente este Cliente? <strong>{store.infoClienteDt.vigente}</strong></label>
                                     <select className="form-select" id="vigente" name="vigente" onChange={(e) => HandlerCompletarDatos(e)}>
-                                        <option selected>Selecciona una opción...</option>
+                                        <option>Selecciona una opción...</option>
                                         <option value="Si">Vigente</option>
                                         <option value="No">No Vigente</option>
                                     </select>
@@ -258,7 +260,7 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
                                 <div className='cell small-3'>
                                     <label className="form-label" htmlFor='erpyme'>Ingresado en Erpyme? <strong>{store.infoClienteDt.erpyme}</strong></label>
                                     <select className="form-select" id="erpyme" name="erpyme" onChange={(e) => HandlerCompletarDatos(e)}>
-                                        <option selected>Selecciona una opción...</option>
+                                        <option>Selecciona una opción...</option>
                                         <option value="Si">Si</option>
                                         <option value="No">No</option>
                                     </select>
@@ -266,7 +268,7 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
                                 <div className='cell small-3'>
                                     <label className="form-label" htmlFor='whatsapp'>Ingresado en Whatsapp? <strong>{store.infoClienteDt.whatsapp}</strong></label>
                                     <select className="form-select" id="whatsapp" name="whatsapp" onChange={(e) => HandlerCompletarDatos(e)}>
-                                        <option selected>Selecciona una opción...</option>
+                                        <option>Selecciona una opción...</option>
                                         <option value="Si">Si</option>
                                         <option value="No">No</option>
                                     </select>
@@ -274,11 +276,19 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
                                 <div className='cell small-3'>
                                     <label className="form-label" htmlFor='tipoPago'>Tipo de pago? <strong>{store.infoClienteDt.tipoPago}</strong></label>
                                     <select className="form-select" id="tipoPago" name="tipoPago" onChange={(e) => HandlerCompletarDatos(e)}>
-                                        <option selected>Selecciona una opción...</option>
+                                        <option>Selecciona una opción...</option>
                                         <option value="Anual">Anual</option>
                                         <option value="Mensual">Mensual</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div>
+                                <label>
+                                    Quieres agregar algún campo de busqueda Libre? <strong>{store.infoClienteDt.libre != "" ? store.infoClienteDt.libre : "No hay nada registrado"}</strong>
+                                    <textarea placeholder="Ingresa Cualquier cosa" name="libre"
+                                        defaultValue={store.infoClienteDt.libre}
+                                        maxLength={99} onChange={(e) => HandlerCompletarDatos(e)}></textarea>
+                                </label>
                             </div>
                             <div>
                                 <label>Deseas ver Otras Opciones?</label>
@@ -292,7 +302,7 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
                                     <div className='cell small-3'>
                                         <label className="form-label" htmlFor='p'>P? <strong>{store.infoClienteDt.p}</strong></label>
                                         <select className="form-select" id="p" name="p" onChange={(e) => HandlerCompletarDatos(e)}>
-                                            <option selected>Selecciona una opción...</option>
+                                            <option>Selecciona una opción...</option>
                                             <option value="Si">Si</option>
                                             <option value="No">No</option>
                                         </select>
@@ -300,7 +310,7 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
                                     <div className='cell small-3'>
                                         <label className="form-label" htmlFor='sacar'>Sacar? <strong>{store.infoClienteDt.sacar}</strong></label>
                                         <select className="form-select" id="sacar" name="sacar" onChange={(e) => HandlerCompletarDatos(e)}>
-                                            <option selected>Selecciona una opción...</option>
+                                            <option>Selecciona una opción...</option>
                                             <option value="Si">Si</option>
                                             <option value="No">No</option>
                                         </select>
@@ -308,7 +318,7 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
                                     <div className='cell small-3'>
                                         <label className="form-label" htmlFor='dicom'>Dicom? <strong>{store.infoClienteDt.dicom}</strong></label>
                                         <select className="form-select" id="dicom" name="dicom" onChange={(e) => HandlerCompletarDatos(e)}>
-                                            <option selected>Selecciona una opción...</option>
+                                            <option>Selecciona una opción...</option>
                                             <option value="Si">Si</option>
                                             <option value="No">No</option>
                                         </select>
@@ -316,7 +326,7 @@ const ModificarClienteDt = ({ setModificarCliente, clienteDtCliqueado, setDSetec
                                     <div className='cell small-3'>
                                         <label className="form-label" htmlFor='repetido'>Repetido? <strong>{store.infoClienteDt.repetido}</strong></label>
                                         <select className="form-select" id="repetido" name="repetido" onChange={(e) => HandlerCompletarDatos(e)}>
-                                            <option selected>Selecciona una opción...</option>
+                                            <option>Selecciona una opción...</option>
                                             <option value="Si">Si</option>
                                             <option value="No">No</option>
                                         </select>

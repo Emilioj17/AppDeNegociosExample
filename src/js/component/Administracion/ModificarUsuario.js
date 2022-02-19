@@ -4,11 +4,11 @@ import { Context } from "../../store/AppContext";
 export const ModificarUsuario = ({setModificar, usuarioCliqueado, setUsuarioCliqueado}) => {
     const { store, actions } = useContext(Context);
     const [datos, setDatos] = useState({
-        nombre: null,
-        apellido: null,
-        correo: null,
-        clave: null,
-        tipo: null
+        nombre: "",
+        apellido: "",
+        correo: "",
+        clave: "",
+        tipo: ""
     });
     const [alertCorreo, setAlertCorreo] = useState(false);
 
@@ -111,7 +111,7 @@ export const ModificarUsuario = ({setModificar, usuarioCliqueado, setUsuarioCliq
                     <div className="">
                         <label className="form-label" htmlFor='tipo'>Tipo de Usuario: <strong>{usuarioCliqueado.tipo}</strong> </label>
                         <select className="form-select" id="tipo" name="tipo" onChange={(e)=>HandlerModificacionDatos(e)}>
-                            <option selected>Selecciona una opción...</option>
+                            <option>Selecciona una opción...</option>
                             <option>Administrador</option>
                             <option>Vendedor</option>
                             <option>Cobranza</option>

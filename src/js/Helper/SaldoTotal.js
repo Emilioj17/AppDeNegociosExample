@@ -1,5 +1,5 @@
 export const SaldoTotal = {
-    montoSaldo: function (lista) {
+    montoSaldo: function (lista, meses=false) {
         let m2019 = lista.dt2019ID.reduce((currentSum, number)=> {
             return currentSum += (parseInt(number.montoCobrado) - parseInt(number.montoPagado))
         }, 0)
@@ -13,6 +13,14 @@ export const SaldoTotal = {
         }, 0)
 
         let m2022 = lista.dt2022ID.reduce((currentSum, number)=> {
+            return currentSum += (parseInt(number.montoCobrado) - parseInt(number.montoPagado))
+        }, 0)
+
+        let m2023 = lista.dt2023ID.reduce((currentSum, number)=> {
+            return currentSum += (parseInt(number.montoCobrado) - parseInt(number.montoPagado))
+        }, 0)
+
+        let m2024 = lista.dt2024ID.reduce((currentSum, number)=> {
             return currentSum += (parseInt(number.montoCobrado) - parseInt(number.montoPagado))
         }, 0)
 
