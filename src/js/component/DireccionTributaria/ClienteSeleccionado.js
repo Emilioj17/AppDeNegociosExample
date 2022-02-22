@@ -11,11 +11,11 @@ import { AiFillPrinter } from "react-icons/ai";
 
 const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => {
     const { store, actions } = useContext(Context);
-    const [detectorCambios, setDSetectorCambios] = useState(false);
-    const [detectorCambiosNotas, setDSetectorCambiosNotas] = useState(false);
-    const [detectorCambiosInfo, setDSetectorCambiosInfo] = useState(false);
-    const [modificarCliente, setModificarCliente] = useState(false);
-    const [clickPagos, setClickPagos] = useState(false);
+    const [detectorCambios, setDSetectorCambios] = useState(false);  //Llama a los Pagos
+    const [detectorCambiosNotas, setDSetectorCambiosNotas] = useState(false);  //Llama a las Notas
+    const [detectorCambiosInfo, setDetectorCambiosInfo] = useState(false); //Llama a la Info Básica
+    const [modificarCliente, setModificarCliente] = useState(false);  //Abre la ventana para Modificar los Datos del Cliente
+    const [clickPagos, setClickPagos] = useState(false);  //Abre los detalles de Pagos
 
     //Modificar esto, evitar tantas llamadas al bd.
 
@@ -44,12 +44,14 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
         }
         if (detectorCambiosNotas) {
             actions.getNota(clienteDtCliqueado.id);
+            setDSetectorCambiosNotas(false);
         }
-        if (detectorCambiosInfo){
-            actions.getClienteDt(clienteDtCliqueado.id);
-        }
-    }, [detectorCambios, detectorCambiosNotas, detectorCambiosInfo]);  //Aquí el detector de cambios se llama a si mismo
+    }, [detectorCambios, detectorCambiosNotas]);  //Aquí el detector de cambios se llama a si mismo
 
+    useEffect(() => {
+        actions.getClienteDt(clienteDtCliqueado.id);
+        setDetectorCambiosInfo(false);
+    }, [detectorCambiosInfo])
 
     const HandlerCerrar = (event) => {
         setClienteSeleccionado(false)
@@ -71,7 +73,7 @@ const ClienteSeleccionado = ({ setClienteSeleccionado, clienteDtCliqueado }) => 
 
     return (
         <div className='row yes-print'>
-            {(modificarCliente) ? (<ModificarClienteDt setModificarCliente={setModificarCliente} clienteDtCliqueado={clienteDtCliqueado} setDSetectorCambiosInfo={setDSetectorCambiosInfo} />) : null}
+            {(modificarCliente) ? (<ModificarClienteDt setModificarCliente={setModificarCliente} clienteDtCliqueado={clienteDtCliqueado} setDetectorCambiosInfo={setDetectorCambiosInfo} />) : null}
             {(modificarCliente || clickPagos) ? null : (
                             <div className="callout" data-closable>
                                 <button className="close-button no-print" aria-label="Dismiss alert" type="button" data-close onClick={(e)=>HandlerCerrar(e)}>

@@ -70,19 +70,8 @@ const EditarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios,
     return (
         <div className='DivTerciario text-center'>
             <div className="card">
-                <h4>Vas a Editar un Pago</h4>
+                <h4>Vas a Editar un Pago del <strong>{pagoSeleccionado.year}</strong></h4>
                 <div className="card-divider">
-                    <label className="form-label text-left" htmlFor='year'>Año: <strong>{pagoSeleccionado.year}</strong>
-                        <select className="form-select" id="year" name="year" disabled>
-                            <option>Selecciona una opción...</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                            <option value="2022">2022</option>
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                        </select>
-                    </label>
                     <label className="form-label text-left" htmlFor="mes">Mes: <strong>{pagoSeleccionado.object.mes}</strong>
                         <select className="form-select" id="mes" name="mes" onChange={(e) => HandlerCompletarDatos(e)}>
                             <option>Selecciona una opción...</option>
@@ -104,11 +93,11 @@ const EditarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios,
                         <input type="number" min="1" name="mesesPagados" defaultValue={pagoSeleccionado.object.mesesPagados}
                         onChange={(e) => HandlerCompletarDatos(e)}/>
                     </label>
-                </div>
-                <div className="card-divider">
                     <label className="form-label text-left" htmlFor="montoCobrado">Cobrado:$<strong>{pagoSeleccionado.object.montoCobrado}</strong>
                         <input type="number" placeholder='Puedes cambiar $' name="montoCobrado" onChange={(e) => HandlerCompletarDatos(e)}/>
                     </label>
+                </div>
+                <div className="card-divider">
                     <label className="form-label text-left" htmlFor="montoPagado">Pagado: $<strong>{pagoSeleccionado.object.montoPagado}</strong>
                         <input type="number" placeholder='Puedes cambiar $' name="montoPagado" onChange={(e) => HandlerCompletarDatos(e)}/>
                     </label>
@@ -116,8 +105,6 @@ const EditarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios,
                         <input type="text" name="numeroTransferencia"
                             placeholder='Puedes Cambiar esto' onChange={(e) => HandlerCompletarDatos(e)}/>
                     </label>
-                </div>
-                <div className="card-divider">
                     <label className="form-label text-left" htmlFor="facturaNumero">N° Factura: <strong>{pagoSeleccionado.object.facturaNumero ? pagoSeleccionado.object.facturaNumero: "No hay"}</strong>
                         <input type="text" name="facturaNumero"
                             placeholder='Cambia el N°' onChange={(e) => HandlerCompletarDatos(e)}/>

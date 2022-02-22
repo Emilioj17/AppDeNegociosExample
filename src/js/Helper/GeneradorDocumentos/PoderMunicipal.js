@@ -5,9 +5,6 @@ export const PoderMunicipal = (datos, img) => {
     let { nombre, rut, razon, rutEmpresa, fecha, ...demas } = datos;
     if(fecha==="hoy"){
       fecha = Hora();
-      console.log(fecha);
-    } else {
-      console.log(fecha);
     }
     const doc = new jsPDF();
     doc.setFont("arial");

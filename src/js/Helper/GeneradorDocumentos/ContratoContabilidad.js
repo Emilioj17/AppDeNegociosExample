@@ -7,10 +7,7 @@ export const ContratoContabilidad = (datos) => {
     let { nombre, rut, razon, rutEmpresa, fecha, nacionalidad } = datos;
     if(fecha==="hoy"){
         fecha = Hora();
-        console.log(fecha);
-      } else {
-        console.log(fecha);
-    }
+      }
   const doc = new jsPDF();
     doc.addImage(logopequeno, 'PNG', 3, 3, 25, 10);
     doc.setFont("arial", "bold");

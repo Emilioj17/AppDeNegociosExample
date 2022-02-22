@@ -5,9 +5,6 @@ export const Contrato30dias = (datos, img) => {
     let { nombre, rut, razon, rutEmpresa, nacionalidad, fecha } = datos;
     if(fecha==="hoy"){
       fecha = Hora();
-      console.log(fecha);
-    } else {
-      console.log(fecha);
     }
     const doc = new jsPDF();
     doc.setFont("arial");

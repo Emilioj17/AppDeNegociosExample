@@ -21,9 +21,6 @@ const BorrarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios,
     }
 
     const HandlerBorrarPago = (event) => {
-        console.log(pagoSeleccionado.object.mesesPagados);
-        console.log(store.infoClienteDt.mesesPagados);
-        console.log(store.infoClienteDt.id);
         actions.editarMesesPagadosClienteDt(store.infoClienteDt.id, parseInt(store.infoClienteDt.mesesPagados)-parseInt(pagoSeleccionado.object.mesesPagados))
         actions.borrarPago(pagoSeleccionado.year, pagoSeleccionado.object.id);
         setTimeout(() => { setPagoSeleccionado({
@@ -41,7 +38,6 @@ const BorrarPago = ({pagoSeleccionado, setPagoSeleccionado, setDSetectorCambios,
                 <h4>¿Estás Seguro que deseas borrar este Pago?</h4>
                 <p>Vas a borrar un pago del mes de <strong>{pagoSeleccionado.object.mes} {pagoSeleccionado.year}</strong>, por un monto pagado de <strong>${pagoSeleccionado.object.montoPagado}</strong>.</p>
             </div>
-            <br />
             <div className='button-group align-center'>
                 <button className="submit button alert" onClick={(e)=>HandlerBorrarPago(e)}>Borrar Pago para Siempre</button>
                 <button className="submit button" onClick={(e)=>HandlerCerrar(e)}>Cancelar</button>
