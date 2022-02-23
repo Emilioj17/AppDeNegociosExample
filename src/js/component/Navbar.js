@@ -17,7 +17,7 @@ const Navbar = () => {
 		sessionStorage.removeItem("usuarioActual");
 		store.token = null;
 		store.usuarioActual = null;
-		window.location.reload();
+        history.push("/");
     }
 
     const NavbarInicio = () => {
