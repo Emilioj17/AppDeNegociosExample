@@ -30,7 +30,8 @@ const CreacionUsuario = ({ setCrear }) => {
             }
             if (!alertCorreo) {
                 actions.crearUsuario(datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
-                setTimeout(() => {window.location.reload()}, 1000);
+                setTimeout(() => { actions.getUsuarios() }, 1000);
+                setCrear(false);
             }
         }
     };

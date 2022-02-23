@@ -23,7 +23,8 @@ export const ModificarUsuario = ({setModificar, usuarioCliqueado, setUsuarioCliq
                 alert("No estas Modificando ningún Dato");
             } else {
                 actions.editarUsuario(store.usuario.id, datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
-                setTimeout(() => {window.location.reload()}, 500);
+                setTimeout(() => { actions.getUsuarios() }, 1000);
+                setModificar(false);
             }
         } else {
             alert("Debe haber algun dato mal ingresado...");

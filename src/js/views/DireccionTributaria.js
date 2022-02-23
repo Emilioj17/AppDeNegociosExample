@@ -56,7 +56,7 @@ const DireccionTributaria = () => {
     }
 
     const HandlerRecargarPagina = (event) => {
-        window.location.reload();
+        actions.getClientesDt(1);
     }
 
     const HandlerExportarTabla = (event) => {
