@@ -263,9 +263,9 @@ const FormularioClienteDt = ({ setNuevoCliente }) => {
                             </div>
                             <div>
                                 <label>Deseas ver Otras Opciones?</label>
-                                <input type="radio" id="html" name="fav_language" value="No" onClick={()=>setOpcionesAdicionales(false)}/>
+                                <input type="radio" id="html2" name="fav_language2" value="No" onClick={()=>setOpcionesAdicionales(false)}/>
                                 <label htmlFor="html">No</label>
-                                <input type="radio" id="html" name="fav_language" value="Si" onClick={()=>setOpcionesAdicionales(true)}/>
+                                <input type="radio" id="html2" name="fav_language2" value="Si" onClick={()=>setOpcionesAdicionales(true)}/>
                                 <label htmlFor="html">Si</label>
                             </div>
                             {opcionesAdicionales ? (

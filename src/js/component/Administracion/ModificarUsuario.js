@@ -19,7 +19,7 @@ export const ModificarUsuario = ({setModificar, usuarioCliqueado, setUsuarioCliq
 
     const HandlerModificar = (event) => {
         if (!alertCorreo) {
-            if (Object.values(datos).every(x => x === null)) {
+            if (Object.values(datos).every(x => x.trim() === "")) {
                 alert("No estas Modificando ningún Dato");
             } else {
                 actions.editarUsuario(store.usuario.id, datos.nombre, datos.apellido, datos.correo, datos.clave, datos.tipo);
@@ -41,14 +41,14 @@ export const ModificarUsuario = ({setModificar, usuarioCliqueado, setUsuarioCliq
             setDatos({ ...datos, [event.target.name]: separateWord.join(' ') })
         } else {
             if (event.target.value === "Selecciona una opción...") {
-                setDatos({ ...datos, [event.target.name]: null })
+                setDatos({ ...datos, [event.target.name]: "" })
             } else {
                 setDatos({ ...datos, [event.target.name]: event.target.value })
             }
         }
 
         if (event.target.value === "") {
-            setDatos({ ...datos, [event.target.name]: null })
+            setDatos({ ...datos, [event.target.name]: "" })
         }
     };
 

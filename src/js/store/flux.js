@@ -55,6 +55,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                         alert("Usuario o clave Incorrecto");
                         setStore({ spinner: false });
                     }
+                    else if (res.status === 500) {  //BD debería mandar un mensaje que indique que usuario no está, más que 500 response.
+                        alert("Hay un problema, revisa tus credenciales");
+                        setStore({ spinner: false });
+                    }
                 }).then(data => {
                     sessionStorage.setItem("usuarioActual", JSON.stringify(data[0]))
                     sessionStorage.setItem("token", data[1])

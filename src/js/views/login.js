@@ -25,7 +25,25 @@ export const Login = () => {
 	
 	const HandlerLogin = (event) => {
 		event.preventDefault();
-        actions.loginUsuario(correo, clave);
+		if (correo === "" || correo === null) {
+			if(clave === "" || clave === null) {
+				alert("Por favor, completa los Datos");
+				return;
+			}
+			alert("Revisa tu Correo")
+		}
+		if (clave === "" || clave === null) {
+			alert("Revisa tu clave");
+			return;
+		}
+		if (correo && clave) {
+			if (clave.trim() === "" || correo.trim() === "") {
+				alert("Revisa tu correo y clave, por favor.");
+				return;
+			} else {
+				actions.loginUsuario(correo, clave);
+			}
+		}
 	}
 	
 	return (

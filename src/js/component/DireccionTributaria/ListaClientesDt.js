@@ -27,7 +27,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
                 <td>{objeto.fono}</td>
                 <td>{objeto.fechaContratacion}</td>
                 <td>{objeto.vigente}</td>
-                <td>${(parseInt(SaldoDeberia(objeto, false)) - parseInt(SaldoTotal(objeto, false)))* 9900}</td>
+                <td>${CalculoSaldo(objeto, false)}</td>
             </tr>
         )
     }
@@ -98,7 +98,43 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
 
     //Funciones para el Saldo
 
-    const SaldoDeberia = (objeto, meses = false) => {
+    const CalculoSaldo = (objeto, meses) => {
+        const SaldoDeberia = (objeto, meses = false) => {
+            //Este saca la cantidad de meses y su valor, desde la fecha de Contratación. Es el DEBERIA
+            if (objeto.vigente === "Si") {
+                const fecha = new Date(objeto.fechaContratacion);
+                const fechaHoy = new Date();
+                let diferenciaMeses = fechaHoy.getMonth() - fecha.getMonth() + (12 * (fechaHoy.getFullYear() - fecha.getFullYear()))
+                if (fechaHoy.getDate() < fecha.getDate()) {
+                    diferenciaMeses=diferenciaMeses-1;
+                }
+                return ((diferenciaMeses).toString())
+            } else if (objeto.vigente === "No") {
+                return 0;
+            }
+        }
+
+        const SaldoTotal = (objeto, meses) => {
+            if (objeto.vigente === "Si") {
+                if (meses == false) {
+                    if (objeto.mesesPagados!= null) {
+                        let mesesPagados = parseInt(objeto.mesesPagados)
+                        return (mesesPagados)
+                    }
+                }
+            } else if (objeto.vigente === "No") {
+                return 0;
+            }
+        }
+
+        if (parseInt(SaldoDeberia(objeto, false)) - parseInt(SaldoTotal(objeto, false)) < 0) {
+            return ("Pagado")
+        } else {
+            return ((parseInt(SaldoDeberia(objeto, false)) - parseInt(SaldoTotal(objeto, false)))* 9900)
+        }
+    }
+
+/*     const SaldoDeberia = (objeto, meses = false) => {
         //Este saca la cantidad de meses y su valor, desde la fecha de Contratación. Es el DEBERIA
         if (objeto.vigente === "Si") {
             const fecha = new Date(objeto.fechaContratacion);
@@ -107,27 +143,14 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
             if (fechaHoy.getDate() < fecha.getDate()) {
                 diferenciaMeses=diferenciaMeses-1;
             }
-/*             if (objeto.p === "Si") {
-                diferenciaMeses = diferenciaMeses - 11;
-                if (diferenciaMeses > 0) {
-                    return ((diferenciaMeses).toString())
-                } else {
-                    console.log(diferenciaMeses);
-                    return 0
-                }
-            } */
             return ((diferenciaMeses).toString())
         } else if (objeto.vigente === "No") {
             return 0;
         }
-
     }
 
     const SaldoTotal = (objeto, meses) => {
         if (objeto.vigente === "Si") {
-/*             if (objeto.p === "Si") {
-                return 0;
-            } */
             if (meses == false) {
                 if (objeto.mesesPagados!= null) {
                     let mesesPagados = parseInt(objeto.mesesPagados)
@@ -138,7 +161,7 @@ const ListaClientesDt = ({ clienteDtBuscado, setClienteSeleccionado, setClienteD
             return 0;
         }
 
-    }
+    } */
 
 
     return (

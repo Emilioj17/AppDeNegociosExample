@@ -24,6 +24,7 @@ const DireccionTributaria = () => {
     const history = useHistory();
     const [nuevoCliente, setNuevoCliente] = useState(false);
     const [clienteSeleccionado, setClienteSeleccionado] = useState(false);
+    const [buscando, setBuscando] = useState(false);  //Detecta si hemos apretado el botón Buscar o hemos dato Enter
     const [clienteDtBuscado, setClienteDtBuscado] = useState(null);
     const [clienteDtCliqueado, setClienteDtCliqueado] = useState(null);
     const [filtro, setFiltro] = useState(false);
@@ -65,6 +66,7 @@ const DireccionTributaria = () => {
 
     const HandlerBuscar = (event) => {
         actions.getBusquedaDt(clienteDtBuscado);
+        buscando ? setBuscando(true):setBuscando(true)
     }
 
     //Lo que se renderizará según tipo de Usuario
@@ -95,7 +97,7 @@ const DireccionTributaria = () => {
                                         <button className="submit button" onClick={(e) => HandlerExportarTabla(e)}>Exportar Seleccion</button>
                                         <button className="submit button secondary disabled" onClick={(e) => HandlerFiltro(e)}>Filtrar</button>
                                     </div>
-                                        <div className='' style={{ textAlign: "center" }}>
+                                    <div className='' style={{ textAlign: "center" }}>
                                             <br />
                                         <Paginador />
                                     </div>
@@ -112,6 +114,10 @@ const DireccionTributaria = () => {
                                         filtroVigente={filtroVigente}
                                         filtroErpyme={filtroErpyme}
                                         filtroSaldo={filtroSaldo}/>
+                                    <div className='' style={{ textAlign: "center" }}>
+                                        <br />
+                                        <Paginador />
+                                    </div>
                                 </Fragment>)
                             }
                         </div>
@@ -131,10 +137,10 @@ const DireccionTributaria = () => {
                                 </ul>
                             </div>
                             <div className='grid-x grid-margin-x'>
-                                <BuscadorNormal setClienteDtBuscado={setClienteDtBuscado} />
+                                    <BuscadorNormal setClienteDtBuscado={setClienteDtBuscado} buscando={buscando} setBuscando={setBuscando}/>
                                 <button className="cell small-2 submit success button" onClick={(e) => HandlerBuscar(e)}>Buscar</button>
                             </div>
-                            {clienteDtBuscado!= null ? <ResultadoBusqueda clienteDtBuscado={clienteDtBuscado}
+                            {(clienteDtBuscado!= null && buscando) ? <ResultadoBusqueda clienteDtBuscado={clienteDtBuscado}
                                     setClienteSeleccionado={setClienteSeleccionado}
                                     setClienteDtCliqueado={setClienteDtCliqueado}
                                     filtroVigente={filtroVigente}

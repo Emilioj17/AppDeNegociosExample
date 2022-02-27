@@ -42,7 +42,7 @@ const ListaClientesDt = ({ clienteDtBuscado }) => {
 
     return (
         <div className={store.witch ? ("row"): ""}>
-            {(store.clientesDt != null) ? (
+            {(store.clientesDt.length != 0) ? (
                 <table className={`table hover ${store.witch ? ("tablaClientes"):""}`} id="tblData">
                     <thead>
                         <tr>
@@ -60,7 +60,7 @@ const ListaClientesDt = ({ clienteDtBuscado }) => {
                                 : (<td colSpan="9"><h3 className="text-center"> - Tu Busqueda no Arrojó Resultados -</h3></td>)}
                     </tbody>
                 </table>
-            ) : null}
+            ) : (<div colSpan="9"><br /><h3 className="text-center"> - Tu Busqueda no Arrojó Resultados -</h3></div>)}
         </div>
     );
 }

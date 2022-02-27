@@ -16,8 +16,9 @@ const Navbar = () => {
         sessionStorage.removeItem("token");
 		sessionStorage.removeItem("usuarioActual");
 		store.token = null;
-		store.usuarioActual = null;
-        history.push("/");
+        store.usuarioActual = null;
+        window.location.href = 'https://denegocios.cl/'; 
+        return null;
     }
 
     const NavbarInicio = () => {

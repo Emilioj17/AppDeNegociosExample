@@ -12,10 +12,10 @@ import { AiFillEdit, AiOutlineSmallDash } from "react-icons/ai";
 
 const ModificarClienteDt = ({setClickPagos, setDSetectorCambios}) => {
     const { store, actions } = useContext(Context);
-    const [borrarPagos, setBorrarPagos] = useState(false);
-    const [editarPagos, setEditarPagos] = useState(false);
-    const [crearPagos, setCrearPagos] = useState(false);
-    const [disabled, setDisabled] = useState(false);
+    const [borrarPagos, setBorrarPagos] = useState(false);  //Permite Borrar Pagos
+    const [editarPagos, setEditarPagos] = useState(false);  //Permite editar Pagos
+    const [crearPagos, setCrearPagos] = useState(false);  // Crear Pagos
+    const [disabled, setDisabled] = useState(false);  // Bloquea las otras opciones de Crear, Filtrar, Editar o Borrar, si es que una ha sido seleccionada.
     const [pagoSeleccionado, setPagoSeleccionado] = useState({
         object: null,
         year: null
