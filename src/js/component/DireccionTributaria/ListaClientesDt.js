@@ -17,19 +17,21 @@ const ListaClientesDt = ({
 }) => {
 	const { store, actions } = useContext(Context);
 
-	const HandlerClick = (object) => {
-		setClienteDtCliqueado(object);
-		setClienteSeleccionado(true);
+	const HandlerClick = (object, event) => {
+		if (event.target.className != "telefono") {
+			setClienteDtCliqueado(object);
+			setClienteSeleccionado(true);
+		}
 	};
 
 	//La siguiente funcion despliega la lista de Clientes con sus respectivas Columnas.
 	const ListaDesplegarClientes = (objeto, i) => {
 		return (
 			<tr
+				className='trVistaAmpliada'
 				key={i}
-				onClick={() => HandlerClick(objeto)}
+				onClick={(e) => HandlerClick(objeto, e)}
 				style={colores ? { backgroundColor: Colores(objeto) } : null}
-				/* style={{ backgroundColor: Colores(objeto) }} */
 			>
 				<td>{objeto.id}</td>
 				<td>{objeto.razon}</td>
@@ -43,7 +45,9 @@ const ListaClientesDt = ({
 						<span>, {objeto.correoTerciario}</span>
 					)}
 				</td>
-				<td>{objeto.fono}</td>
+				<td className='telefono' style={{ cursor: "copy" }}>
+					{objeto.fono}
+				</td>
 				<td>{objeto.fechaContratacion}</td>
 				<td>{objeto.vigente}</td>
 				<td>${CalculoSaldo(objeto, false)}</td>

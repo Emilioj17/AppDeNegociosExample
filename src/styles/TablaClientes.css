@@ -31,3 +31,7 @@
 .fecha {
 	width: 85px;
 }
+
+.trVistaAmpliada {
+	cursor: pointer;
+}
