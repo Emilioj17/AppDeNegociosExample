@@ -174,7 +174,7 @@ const DireccionTributaria = () => {
 											Exportar Seleccion
 										</button>
 										<button
-											className='submit button secondary disabled'
+											className='submit button secondary'
 											onClick={(e) => HandlerFiltro(e)}
 										>
 											Filtrar

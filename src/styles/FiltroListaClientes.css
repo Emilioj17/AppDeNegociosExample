@@ -1,0 +1,6 @@
+.filtroGrid {
+	display: grid;
+	grid-template-columns: repeat(8, auto);
+	column-gap: 5px;
+	grid-template-rows: auto;
+}
