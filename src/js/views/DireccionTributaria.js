@@ -27,9 +27,6 @@ const DireccionTributaria = () => {
 	const [clienteDtBuscado, setClienteDtBuscado] = useState(null);
 	const [clienteDtCliqueado, setClienteDtCliqueado] = useState(null);
 	const [filtro, setFiltro] = useState(false);
-	const [filtroVigente, setFiltroVigente] = useState("todos");
-	const [filtroErpyme, setFiltroErpyme] = useState("todos");
-	const [filtroSaldo, setFiltroSaldo] = useState("todos");
 	const [colores, setColores] = useState(false); //Controla la Aplicación de Colores en las tablas.
 	const titulosHead = [
 		"Bienvenido al Servicio de Direccion Tributaria",
@@ -182,24 +179,15 @@ const DireccionTributaria = () => {
 									</div>
 									<div className='' style={{ textAlign: "center" }}>
 										<br />
+										{filtro ? <FiltroListaClientes /> : null}
+										<br />
 										<Paginador />
 									</div>
 									<br />
-									{filtro ? (
-										<FiltroListaClientes
-											setFiltro={setFiltro}
-											setFiltroVigente={setFiltroVigente}
-											setFiltroErpyme={setFiltroErpyme}
-											setFiltroSaldo={setFiltroSaldo}
-										/>
-									) : null}
 									<ListaClientesDt
 										clienteDtBuscado={clienteDtBuscado}
 										setClienteSeleccionado={setClienteSeleccionado}
 										setClienteDtCliqueado={setClienteDtCliqueado}
-										filtroVigente={filtroVigente}
-										filtroErpyme={filtroErpyme}
-										filtroSaldo={filtroSaldo}
 										colores={colores}
 									/>
 									<div className='' style={{ textAlign: "center" }}>
@@ -239,14 +227,7 @@ const DireccionTributaria = () => {
 								</button>
 							</div>
 							{clienteDtBuscado != null && buscando ? (
-								<ResultadoBusqueda
-									clienteDtBuscado={clienteDtBuscado}
-									setClienteSeleccionado={setClienteSeleccionado}
-									setClienteDtCliqueado={setClienteDtCliqueado}
-									filtroVigente={filtroVigente}
-									filtroErpyme={filtroErpyme}
-									filtroSaldo={filtroSaldo}
-								/>
+								<ResultadoBusqueda clienteDtBuscado={clienteDtBuscado} />
 							) : null}
 						</div>
 					</div>

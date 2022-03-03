@@ -4,45 +4,22 @@ import "../../../styles/FiltroListaClientes.css";
 
 //Este es el Filtro de la Lista de Clientes de DT
 
-const FiltroListaClientes = ({
-	setFiltro,
-	setFiltroVigente,
-	setFiltroErpyme,
-	setFiltroSaldo,
-}) => {
-	const [defectFiltroVigente, setDefectFiltroVigente] = useState(
-		"Selecciona Vigencia..."
-	);
-	const [defectFiltroErpyme, setDefectFiltroErpyme] = useState(
-		"Selecciona Erpyme..."
-	);
-	const [defectFiltroSaldo, setDefectFiltroSaldo] = useState(
-		"Selecciona Saldo..."
-	);
+const FiltroListaClientes = () => {
+	const [filtroVigente, setFiltroVigente] = useState("Selecciona...");
+	const [filtroWhatsapp, setFiltroWhatsapp] = useState("Selecciona...");
+	const [filtroErpyme, setFiltroErpyme] = useState("Selecciona...");
+	const [filtroP, setFiltroP] = useState("Selecciona...");
+	const [filtroSacar, setFiltroSacar] = useState("Selecciona...");
+	const [filtroDicom, setFiltroDicom] = useState("Selecciona...");
+	const [filtroRepetido, setFiltroRepetido] = useState("Selecciona...");
+	const [filtroTipoPago, setFiltroTipoPago] = useState("Selecciona...");
+	const [filtroSaldo, setFiltroSaldo] = useState("Selecciona...");
 
-	const HandlerFiltroVigente = (event) => {
-		setFiltroVigente(event.target.value);
-		setDefectFiltroVigente(event.target.value);
+	const HandlerFiltros = (event) => {
+		console.log(event.target.name);
 	};
 
-	const HandlerFiltroErpyme = (event) => {
-		setFiltroErpyme(event.target.value);
-		setDefectFiltroErpyme(event.target.value);
-	};
-
-	const HandlerFiltroSaldo = (event) => {
-		setFiltroSaldo(event.target.value);
-		setDefectFiltroSaldo(event.target.value);
-	};
-
-	const HandlerResetFiltros = (event) => {
-		setDefectFiltroVigente("Selecciona Vigencia...");
-		setDefectFiltroErpyme("Selecciona Erpyme...");
-		setDefectFiltroSaldo("Selecciona Saldo...");
-		setFiltroVigente("todo");
-		setFiltroErpyme("todo");
-		setFiltroSaldo("todo");
-	};
+	const HandlerResetFiltros = (event) => {};
 
 	return (
 		<div className='row'>
@@ -54,116 +31,122 @@ const FiltroListaClientes = ({
 							className='form-select'
 							id='filtroVigente'
 							name='filtroVigente'
-							value={defectFiltroVigente}
-							onClick={(e) => HandlerFiltroVigente(e)}
+							defaultValue={filtroVigente}
+							onChange={(e) => HandlerFiltros(e)}
 						>
-							<option>Selecciona Vigencia...</option>
+							<option>Selecciona...</option>
 							<option value='Si'>Si</option>
 							<option value='No'>No</option>
 						</select>
 					</label>
-					<label htmlFor='erpyme'>
+					<label htmlFor='filtroWhatsapp'>
 						WhatSapp
 						<select
 							className='form-select'
-							id='erpyme'
-							name='erpyme'
-							value={defectFiltroErpyme}
-							onClick={(e) => HandlerFiltroErpyme(e)}
+							id='filtroWhatsapp'
+							name='filtroWhatsapp'
+							defaultValue={filtroWhatsapp}
+							onChange={(e) => HandlerFiltros(e)}
 						>
-							<option>Selecciona Erpyme...</option>
+							<option>Selecciona...</option>
 							<option value='Si'>Si</option>
 							<option value='No'>No</option>
 						</select>
 					</label>
-					<label htmlFor='saldo'>
+					<label htmlFor='filtroErpyme'>
 						Erpyme
 						<select
 							className='form-select'
-							id='saldo'
-							name='saldo'
-							value={defectFiltroSaldo}
-							onClick={(e) => HandlerFiltroSaldo(e)}
+							id='filtroErpyme'
+							name='filtroErpyme'
+							defaultValue={filtroErpyme}
+							onChange={(e) => HandlerFiltros(e)}
 						>
-							<option>Selecciona Saldo...</option>
+							<option>Selecciona...</option>
 							<option value='Si'>Si</option>
 							<option value='No'>No</option>
 						</select>
 					</label>
-					<label htmlFor='saldo'>
+					<label htmlFor='filtroP'>
 						P
 						<select
 							className='form-select'
-							id='saldo'
-							name='saldo'
-							value={defectFiltroSaldo}
-							onClick={(e) => HandlerFiltroSaldo(e)}
+							id='filtroP'
+							name='filtroP'
+							defaultValue={filtroP}
+							onChange={(e) => HandlerFiltros(e)}
 						>
-							<option>Selecciona Saldo...</option>
+							<option>Selecciona...</option>
 							<option value='Si'>Si</option>
 							<option value='No'>No</option>
 						</select>
 					</label>
-					<label htmlFor='saldo'>
+					<label htmlFor='filtroSacar'>
 						Sacar
 						<select
 							className='form-select'
-							id='saldo'
-							name='saldo'
-							value={defectFiltroSaldo}
-							onClick={(e) => HandlerFiltroSaldo(e)}
+							id='filtroSacar'
+							name='filtroSacar'
+							defaultValue={filtroSacar}
+							onChange={(e) => HandlerFiltros(e)}
 						>
-							<option>Selecciona Saldo...</option>
+							<option>Selecciona...</option>
 							<option value='Si'>Si</option>
 							<option value='No'>No</option>
 						</select>
 					</label>
-					<label htmlFor='saldo'>
+					<label htmlFor='filtroDicom'>
 						Dicom
 						<select
 							className='form-select'
-							id='saldo'
-							name='saldo'
-							value={defectFiltroSaldo}
-							onClick={(e) => HandlerFiltroSaldo(e)}
+							id='filtroDicom'
+							name='filtroDicom'
+							defaultValue={filtroDicom}
+							onChange={(e) => HandlerFiltros(e)}
 						>
-							<option>Selecciona Saldo...</option>
+							<option>Selecciona...</option>
 							<option value='Si'>Si</option>
 							<option value='No'>No</option>
 						</select>
 					</label>
-					<label htmlFor='saldo'>
+					<label htmlFor='filtroRepetido'>
 						Repetido
 						<select
 							className='form-select'
-							id='saldo'
-							name='saldo'
-							value={defectFiltroSaldo}
-							onClick={(e) => HandlerFiltroSaldo(e)}
+							id='filtroRepetido'
+							name='filtroRepetido'
+							defaultValue={filtroRepetido}
+							onChange={(e) => HandlerFiltros(e)}
 						>
-							<option>Selecciona Saldo...</option>
+							<option>Selecciona...</option>
 							<option value='Si'>Si</option>
 							<option value='No'>No</option>
 						</select>
 					</label>
-					<label htmlFor='saldo'>
+					<label htmlFor='filtroTipoPago'>
 						tipoPago
 						<select
 							className='form-select'
-							id='saldo'
-							name='saldo'
-							value={defectFiltroSaldo}
-							onClick={(e) => HandlerFiltroSaldo(e)}
+							id='filtroTipoPago'
+							name='filtroTipoPago'
+							defaultValue={filtroTipoPago}
+							onChange={(e) => HandlerFiltros(e)}
 						>
-							<option>Selecciona Saldo...</option>
+							<option>Selecciona...</option>
 							<option value='Si'>Si</option>
 							<option value='No'>No</option>
 						</select>
 					</label>
-					{defectFiltroVigente != "Selecciona Vigencia..." ||
-					defectFiltroErpyme != "Selecciona Erpyme..." ||
-					defectFiltroSaldo != "Selecciona Saldo..." ? (
-						<div className='card-divider align-center'>
+					{filtroVigente != "Selecciona..." ||
+					filtroWhatsapp != "Selecciona..." ||
+					filtroErpyme != "Selecciona..." ||
+					filtroP != "Selecciona..." ||
+					filtroSacar != "Selecciona..." ||
+					filtroDicom != "Selecciona..." ||
+					filtroRepetido != "Selecciona..." ||
+					filtroTipoPago != "Selecciona..." ||
+					filtroSaldo != "Selecciona..." ? (
+						<div className='alertFiltro'>
 							<FiAlertOctagon />
 							&nbsp; &nbsp;Hay Filtros Aplicados{" "}
 							<a

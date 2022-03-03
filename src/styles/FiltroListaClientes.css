@@ -1,6 +1,11 @@
 .filtroGrid {
 	display: grid;
-	grid-template-columns: repeat(8, auto);
+	grid-template-columns: repeat(4, auto);
 	column-gap: 5px;
 	grid-template-rows: auto;
+}
+
+.alertFiltro {
+	grid-column: 1/5;
+	margin: 0 auto;
 }

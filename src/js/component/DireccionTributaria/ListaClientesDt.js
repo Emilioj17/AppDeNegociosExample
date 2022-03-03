@@ -10,9 +10,6 @@ const ListaClientesDt = ({
 	clienteDtBuscado,
 	setClienteSeleccionado,
 	setClienteDtCliqueado,
-	filtroVigente,
-	filtroErpyme,
-	filtroSaldo,
 	colores,
 }) => {
 	const { store, actions } = useContext(Context);
@@ -53,91 +50,6 @@ const ListaClientesDt = ({
 				<td>${CalculoSaldo(objeto, false)}</td>
 			</tr>
 		);
-	};
-
-	//Las Siguientes funciones generan los filtros de Busqueda, Vigencia, Erpyme y Saldo.
-	const Vigencia = (objeto) => {
-		if (
-			filtroVigente == "todo" ||
-			filtroVigente == "Selecciona Vigencia..." ||
-			filtroVigente == "todos"
-		) {
-			return objeto;
-		} else if (filtroVigente == "Si") {
-			if (objeto.vigente == "Si") {
-				return objeto;
-			}
-		} else if (filtroVigente == "No") {
-			if (objeto.vigente == "No") {
-				return objeto;
-			}
-		}
-	};
-
-	const Erpyme = (objeto) => {
-		if (
-			filtroErpyme == "todo" ||
-			filtroErpyme == "Selecciona Erpyme..." ||
-			filtroErpyme == "todos"
-		) {
-			return objeto;
-		} else if (filtroErpyme == "Si") {
-			if (objeto.erpyme == "Si") {
-				return objeto;
-			}
-		} else if (filtroErpyme == "No") {
-			if (objeto.erpyme == "No") {
-				return objeto;
-			}
-		}
-	};
-
-	/*     const Saldo = (objeto) => {
-        if (filtroSaldo == "todo" || filtroSaldo == "Selecciona Saldo..." || filtroSaldo == "todos") {
-            return objeto
-        } else if (filtroSaldo == "Si") {
-            if (SaldoTotal.montoSaldo(objeto)>0 || SaldoTotal.montoSaldo(objeto)<0) {
-                return objeto
-            }
-        } else if (filtroSaldo == "No") {
-            if (SaldoTotal.montoSaldo(objeto)==0) {
-                return objeto
-            }
-        }
-    } */
-
-	const Busqueda = (objeto) => {
-		for (let index = 0; index < Object.values(objeto.notas).length; index++) {
-			if (
-				Object.values(objeto.notas)
-					[index].comentario.toLowerCase()
-					.includes(clienteDtBuscado.toLowerCase())
-			) {
-				return objeto;
-			}
-		}
-
-		if (
-			objeto.razon.toLowerCase().includes(clienteDtBuscado.toLowerCase()) ||
-			objeto.rut.toLowerCase().includes(clienteDtBuscado.toLowerCase()) ||
-			objeto.correo.toLowerCase().includes(clienteDtBuscado.toLowerCase()) ||
-			objeto.correoSecundario
-				.toLowerCase()
-				.includes(clienteDtBuscado.toLowerCase()) ||
-			objeto.correoTerciario
-				.toLowerCase()
-				.includes(clienteDtBuscado.toLowerCase()) ||
-			objeto.fono.toLowerCase().includes(clienteDtBuscado.toLowerCase()) ||
-			objeto.representante
-				.toLowerCase()
-				.includes(clienteDtBuscado.toLowerCase()) ||
-			objeto.id == clienteDtBuscado ||
-			objeto.rutRepresentante
-				.toLowerCase()
-				.includes(clienteDtBuscado.toLowerCase())
-		) {
-			return objeto;
-		}
 	};
 
 	//Funciones para el Saldo
@@ -188,35 +100,6 @@ const ListaClientesDt = ({
 			);
 		}
 	};
-
-	/*     const SaldoDeberia = (objeto, meses = false) => {
-        //Este saca la cantidad de meses y su valor, desde la fecha de Contratación. Es el DEBERIA
-        if (objeto.vigente === "Si") {
-            const fecha = new Date(objeto.fechaContratacion);
-            const fechaHoy = new Date();
-            let diferenciaMeses = fechaHoy.getMonth() - fecha.getMonth() + (12 * (fechaHoy.getFullYear() - fecha.getFullYear()))
-            if (fechaHoy.getDate() < fecha.getDate()) {
-                diferenciaMeses=diferenciaMeses-1;
-            }
-            return ((diferenciaMeses).toString())
-        } else if (objeto.vigente === "No") {
-            return 0;
-        }
-    }
-
-    const SaldoTotal = (objeto, meses) => {
-        if (objeto.vigente === "Si") {
-            if (meses == false) {
-                if (objeto.mesesPagados!= null) {
-                    let mesesPagados = parseInt(objeto.mesesPagados)
-                    return (mesesPagados)
-                }
-            }
-        } else if (objeto.vigente === "No") {
-            return 0;
-        }
-
-    } */
 
 	// Funciones para los Colores
 	const Colores = (objeto) => {
