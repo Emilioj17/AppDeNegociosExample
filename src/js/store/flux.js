@@ -293,14 +293,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: "Bearer " + store.token,
 					},
 					body: JSON.stringify({
-						vigente: vigente === "" ? null : vigente,
-						whatsapp: whatsapp === "" ? null : whatsapp,
-						erpyme: erpyme === "" ? null : erpyme,
-						p: p === "" ? null : p,
-						sacar: sacar === "" ? null : sacar,
-						dicom: dicom === "" ? null : dicom,
-						repetido: repetido === "" ? null : repetido,
-						tipoPago: tipoPago === "" ? null : tipoPago,
+						vigente: vigente === "Selecciona..." ? null : vigente,
+						whatsapp: whatsapp === "Selecciona..." ? null : whatsapp,
+						erpyme: erpyme === "Selecciona..." ? null : erpyme,
+						p: p === "Selecciona..." ? null : p,
+						sacar: sacar === "Selecciona..." ? null : sacar,
+						dicom: dicom === "Selecciona..." ? null : dicom,
+						repetido: repetido === "Selecciona..." ? null : repetido,
+						tipoPago: tipoPago === "Selecciona..." ? null : tipoPago,
 					}),
 				})
 					.then((response) => response.json())

@@ -32,6 +32,17 @@ const DireccionTributaria = () => {
 		"Bienvenido al Servicio de Direccion Tributaria",
 		"Consulta información respecto a Clientes con este servicio contratado.",
 	];
+	const [filtros, setFiltros] = useState({
+		vigente: "Selecciona...",
+		whatsapp: "Selecciona...",
+		erpyme: "Selecciona...",
+		p: "Selecciona...",
+		sacar: "Selecciona...",
+		dicom: "Selecciona...",
+		repetido: "Selecciona...",
+		tipoPago: "Selecciona...",
+		saldo: "Selecciona...",
+	});
 
 	//Este useEffect inicia getClientes, y llama a todo el listado de clientes. Con esto, cuando se abre ListaClientesDt.js que llama al store.clientesDt ya tiene una lista por descargar-
 	useEffect(() => {
@@ -53,7 +64,23 @@ const DireccionTributaria = () => {
 	};
 
 	const HandlerFiltro = (event) => {
-		filtro ? setFiltro(false) : setFiltro(true);
+		if (filtro === false) {
+			setFiltro(true);
+		} else if (filtro === true) {
+			setFiltro(false);
+			setFiltros({
+				vigente: "Selecciona...",
+				whatsapp: "Selecciona...",
+				erpyme: "Selecciona...",
+				p: "Selecciona...",
+				sacar: "Selecciona...",
+				dicom: "Selecciona...",
+				repetido: "Selecciona...",
+				tipoPago: "Selecciona...",
+				saldo: "Selecciona...",
+			});
+			actions.getClientesDt(1);
+		}
 	};
 
 	const HandlerRecargarPagina = (event) => {
@@ -179,7 +206,12 @@ const DireccionTributaria = () => {
 									</div>
 									<div className='' style={{ textAlign: "center" }}>
 										<br />
-										{filtro ? <FiltroListaClientes /> : null}
+										{filtro ? (
+											<FiltroListaClientes
+												filtros={filtros}
+												setFiltros={setFiltros}
+											/>
+										) : null}
 										<br />
 										<Paginador />
 									</div>
