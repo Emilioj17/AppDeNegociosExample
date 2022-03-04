@@ -308,6 +308,21 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 							<option value='Anual'>Anual</option>
 						</select>
 					</label>
+					<label htmlFor='filtroTipoPago'>
+						Saldo
+						<select
+							className='form-select'
+							id='filtroTipoPago'
+							name='tipoPago'
+							value={filtros["saldo"]}
+							disabled
+						>
+							<option>Selecciona...</option>
+							<option value='Mensual'>Mensual</option>
+							<option value='Anual'>Anual</option>
+						</select>
+					</label>
+
 					{filtros.vigente != "Selecciona..." ||
 					filtros.whatsapp != "Selecciona..." ||
 					filtros.erpyme != "Selecciona..." ||
