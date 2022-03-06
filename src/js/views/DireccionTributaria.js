@@ -41,8 +41,8 @@ const DireccionTributaria = () => {
 		dicom: "Selecciona...",
 		repetido: "Selecciona...",
 		tipoPago: "Selecciona...",
-		saldo: "Selecciona...",
 	});
+	const [saldo, setSaldo] = useState("Selecciona...");
 
 	//Este useEffect inicia getClientes, y llama a todo el listado de clientes. Con esto, cuando se abre ListaClientesDt.js que llama al store.clientesDt ya tiene una lista por descargar-
 	useEffect(() => {
@@ -77,8 +77,8 @@ const DireccionTributaria = () => {
 				dicom: "Selecciona...",
 				repetido: "Selecciona...",
 				tipoPago: "Selecciona...",
-				saldo: "Selecciona...",
 			});
+			setSaldo("Selecciona...");
 			actions.getClientesDt(1);
 		}
 	};
@@ -210,6 +210,8 @@ const DireccionTributaria = () => {
 											<FiltroListaClientes
 												filtros={filtros}
 												setFiltros={setFiltros}
+												saldo={saldo}
+												setSaldo={setSaldo}
 											/>
 										) : null}
 										<br />
@@ -221,6 +223,7 @@ const DireccionTributaria = () => {
 										setClienteSeleccionado={setClienteSeleccionado}
 										setClienteDtCliqueado={setClienteDtCliqueado}
 										colores={colores}
+										saldo={saldo}
 									/>
 									<div className='' style={{ textAlign: "center" }}>
 										<br />

@@ -11,6 +11,7 @@ const ListaClientesDt = ({
 	setClienteSeleccionado,
 	setClienteDtCliqueado,
 	colores,
+	saldo,
 }) => {
 	const { store, actions } = useContext(Context);
 
@@ -55,9 +56,21 @@ const ListaClientesDt = ({
 	//Funciones para el Saldo
 
 	const CalculoSaldo = (objeto, meses) => {
+		//Hay que rehacer esta función, tiene varios elementos que ya NO se utilizan y están malos
 		const SaldoDeberia = (objeto, meses = false) => {
 			//Este saca la cantidad de meses y su valor, desde la fecha de Contratación. Es el DEBERIA
-			if (objeto.vigente === "Si") {
+			const fecha = new Date(objeto.fechaContratacion);
+			const fechaHoy = new Date();
+			let diferenciaMeses =
+				fechaHoy.getMonth() -
+				fecha.getMonth() +
+				12 * (fechaHoy.getFullYear() - fecha.getFullYear());
+			if (fechaHoy.getDate() < fecha.getDate()) {
+				diferenciaMeses = diferenciaMeses - 1;
+			}
+			return diferenciaMeses.toString();
+
+			/* 			if (objeto.vigente === "Si") {
 				const fecha = new Date(objeto.fechaContratacion);
 				const fechaHoy = new Date();
 				let diferenciaMeses =
@@ -70,11 +83,17 @@ const ListaClientesDt = ({
 				return diferenciaMeses.toString();
 			} else if (objeto.vigente === "No") {
 				return 0;
-			}
+			} */
 		};
 
 		const SaldoTotal = (objeto, meses) => {
-			if (objeto.vigente === "Si") {
+			if (meses == false) {
+				if (objeto.mesesPagados != null) {
+					let mesesPagados = parseInt(objeto.mesesPagados);
+					return mesesPagados;
+				}
+			}
+			/* 			if (objeto.vigente === "Si") {
 				if (meses == false) {
 					if (objeto.mesesPagados != null) {
 						let mesesPagados = parseInt(objeto.mesesPagados);
@@ -83,7 +102,7 @@ const ListaClientesDt = ({
 				}
 			} else if (objeto.vigente === "No") {
 				return 0;
-			}
+			} */
 		};
 
 		if (
@@ -98,6 +117,21 @@ const ListaClientesDt = ({
 					parseInt(SaldoTotal(objeto, false))) *
 				9900
 			);
+		}
+	};
+
+	const Saldo = (objeto) => {
+		// Esta función permite Filtrar el Listado de Clientes, por si tienen Saldo o No.
+		if (saldo == "Selecciona...") {
+			return objeto;
+		} else if (saldo == "Con Saldo") {
+			if (CalculoSaldo(objeto, false) > 0 || CalculoSaldo(objeto, false) < 0) {
+				return objeto;
+			}
+		} else if (saldo == "Sin Saldo") {
+			if (CalculoSaldo(objeto, false) === 0) {
+				return objeto;
+			}
 		}
 	};
 
@@ -147,9 +181,9 @@ const ListaClientesDt = ({
 					</thead>
 					<tbody>
 						{store.clientesDt != null ? (
-							store.clientesDt.map((objeto, i) =>
-								ListaDesplegarClientes(objeto, i)
-							)
+							store.clientesDt
+								.filter((objeto) => Saldo(objeto))
+								.map((objeto, i) => ListaDesplegarClientes(objeto, i))
 						) : (
 							<td colSpan='9' style={{ height: "100px", padding: "20px" }}>
 								<h2 className='text-center'> - no hay datos -</h2>

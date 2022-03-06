@@ -5,7 +5,7 @@ import "../../../styles/FiltroListaClientes.css";
 
 //Este es el Filtro de la Lista de Clientes de DT
 
-const FiltroListaClientes = ({ filtros, setFiltros }) => {
+const FiltroListaClientes = ({ filtros, setFiltros, saldo, setSaldo }) => {
 	const { store, actions } = useContext(Context);
 
 	useEffect(() => {
@@ -37,7 +37,6 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 				dicom: "Selecciona...",
 				repetido: "Selecciona...",
 				tipoPago: "Selecciona...",
-				saldo: "Selecciona...",
 			}
 		) {
 			console.log("Hola");
@@ -54,7 +53,6 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 				dicom: "Selecciona...",
 				repetido: "Selecciona...",
 				tipoPago: "Selecciona...",
-				saldo: "Selecciona...",
 			}
 		) {
 			if (event.target.name === "vigente") {
@@ -67,8 +65,8 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 					dicom: "Selecciona...",
 					repetido: "Selecciona...",
 					tipoPago: "Selecciona...",
-					saldo: "Selecciona...",
 				});
+				setSaldo("Selecciona...");
 			}
 			if (event.target.name === "whatsapp") {
 				setFiltros({
@@ -80,8 +78,8 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 					dicom: "Selecciona...",
 					repetido: "Selecciona...",
 					tipoPago: "Selecciona...",
-					saldo: "Selecciona...",
 				});
+				setSaldo("Selecciona...");
 			}
 			if (event.target.name === "erpyme") {
 				setFiltros({
@@ -93,8 +91,8 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 					dicom: "Selecciona...",
 					repetido: "Selecciona...",
 					tipoPago: "Selecciona...",
-					saldo: "Selecciona...",
 				});
+				setSaldo("Selecciona...");
 			}
 			if (event.target.name === "p") {
 				setFiltros({
@@ -106,8 +104,8 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 					dicom: "Selecciona...",
 					repetido: "Selecciona...",
 					tipoPago: "Selecciona...",
-					saldo: "Selecciona...",
 				});
+				setSaldo("Selecciona...");
 			}
 			if (event.target.name === "sacar") {
 				setFiltros({
@@ -119,8 +117,8 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 					dicom: "Selecciona...",
 					repetido: "Selecciona...",
 					tipoPago: "Selecciona...",
-					saldo: "Selecciona...",
 				});
+				setSaldo("Selecciona...");
 			}
 			if (event.target.name === "dicom") {
 				setFiltros({
@@ -132,8 +130,8 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 					dicom: event.target.value,
 					repetido: "Selecciona...",
 					tipoPago: "Selecciona...",
-					saldo: "Selecciona...",
 				});
+				setSaldo("Selecciona...");
 			}
 			if (event.target.name === "repetido") {
 				setFiltros({
@@ -145,8 +143,8 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 					dicom: "Selecciona...",
 					repetido: event.target.value,
 					tipoPago: "Selecciona...",
-					saldo: "Selecciona...",
 				});
+				setSaldo("Selecciona...");
 			}
 			if (event.target.name === "tipoPago") {
 				setFiltros({
@@ -158,8 +156,8 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 					dicom: "Selecciona...",
 					repetido: "Selecciona...",
 					tipoPago: event.target.value,
-					saldo: "Selecciona...",
 				});
+				setSaldo("Selecciona...");
 			}
 			if (event.target.name === "saldo") {
 				setFiltros({
@@ -171,10 +169,24 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 					dicom: "Selecciona...",
 					repetido: "Selecciona...",
 					tipoPago: "Selecciona...",
-					saldo: event.target.value,
 				});
+				setSaldo("Selecciona...");
 			}
 		}
+	};
+
+	const HandlerObtenerSaldo = (event) => {
+		setSaldo(event.target.value);
+		/* 		setFiltros({
+			vigente: "Selecciona...",
+			whatsapp: "Selecciona...",
+			erpyme: "Selecciona...",
+			p: "Selecciona...",
+			sacar: "Selecciona...",
+			dicom: "Selecciona...",
+			repetido: "Selecciona...",
+			tipoPago: "Selecciona...",
+		}); */
 	};
 
 	const HandlerResetFiltros = (event) => {
@@ -187,8 +199,8 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 			dicom: "Selecciona...",
 			repetido: "Selecciona...",
 			tipoPago: "Selecciona...",
-			saldo: "Selecciona...",
 		});
+		setSaldo("Selecciona...");
 		actions.getClientesDt(1);
 	};
 
@@ -309,17 +321,17 @@ const FiltroListaClientes = ({ filtros, setFiltros }) => {
 						</select>
 					</label>
 					<label htmlFor='filtroTipoPago'>
-						Saldo
+						Saldo <span style={{ color: "red" }}>*Segundo Filtro*</span>
 						<select
 							className='form-select'
 							id='filtroTipoPago'
 							name='tipoPago'
-							value={filtros["saldo"]}
-							disabled
+							value={saldo}
+							onChange={(e) => HandlerObtenerSaldo(e)}
 						>
 							<option>Selecciona...</option>
-							<option value='Mensual'>Mensual</option>
-							<option value='Anual'>Anual</option>
+							<option value='Con Saldo'>Con Saldo</option>
+							<option value='Sin Saldo'>Sin Saldo</option>
 						</select>
 					</label>
 
