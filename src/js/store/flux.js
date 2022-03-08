@@ -833,6 +833,429 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			/* CONTABILIDAD */
+
+			getClientesContabilidad: async (page_num) => {
+				const store = getStore();
+				setStore({ spinner: true });
+				fetch("http://127.0.0.1:5000/xContabilidad/" + page_num, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token,
+					},
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						setStore({
+							clientesContabilidad: data[0],
+							paginasClientesContabilidad: data[1],
+							paginaActualClientesContabilidad: data[2],
+						});
+						setStore({ spinner: false });
+					})
+					.catch((error) => {
+						setStore({
+							error: "clientesContabilidad " + error.message,
+						});
+					});
+			},
+
+			getBusquedaContabilidad: async (busqueda) => {
+				const store = getStore();
+				setStore({ spinner: true });
+				fetch("http://127.0.0.1:5000/busquedaContabilidad", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token,
+					},
+					body: JSON.stringify({
+						busqueda: busqueda,
+					}),
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						setStore({
+							clientesContabilidad: data[0],
+							paginasClientesContabilidad: data[1],
+							paginaActualClientesContabilidad: data[2],
+						});
+						setStore({ spinner: false });
+					})
+					.catch((error) => {
+						setStore({
+							error: "clientesContabilidad " + error.message,
+						});
+					});
+			},
+
+			getBusquedaFiltroContabilidad: async (
+				vigente,
+				whatsapp,
+				erpyme,
+				dicom,
+				repetido
+			) => {
+				const store = getStore();
+				setStore({ spinner: true });
+				fetch("http://127.0.0.1:5000/filtroContabilidad", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token,
+					},
+					body: JSON.stringify({
+						vigente: vigente === "Selecciona..." ? null : vigente,
+						whatsapp: whatsapp === "Selecciona..." ? null : whatsapp,
+						erpyme: erpyme === "Selecciona..." ? null : erpyme,
+						dicom: dicom === "Selecciona..." ? null : dicom,
+						repetido: repetido === "Selecciona..." ? null : repetido,
+					}),
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						setStore({
+							clientesContabilidad: data[0],
+							paginasClientesContabilidad: data[1],
+							paginaActualClientesContabilidad: data[2],
+						});
+						setStore({ spinner: false });
+					})
+					.catch((error) => {
+						setStore({
+							error: "clientesContabilidad " + error.message,
+						});
+					});
+			},
+
+			getClienteContabilidad: async (clienteContabilidadid) => {
+				const store = getStore();
+				setStore({ spinner: true });
+				fetch(
+					"http://127.0.0.1:5000/clienteContabilidad/" + clienteContabilidadid,
+					{
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: "Bearer " + store.token,
+						},
+					}
+				)
+					.then((response) => response.json())
+					.then((data) => {
+						setStore({
+							infoClienteContabilidad: data,
+						});
+						setStore({ spinner: false });
+					})
+					.catch((error) => {
+						setStore({
+							error: "clientesContabilidad " + error.message,
+						});
+					});
+			},
+
+			crearClienteContabilidad: async (
+				razon,
+				rut,
+				vigente,
+				correo,
+				correoSecundario,
+				correoTerciario,
+				fono,
+				whatsapp,
+				erpyme,
+				dicom,
+				repetido,
+				libre
+			) => {
+				const store = getStore();
+				setStore({ spinner: true });
+				fetch("http://127.0.0.1:5000/clienteDt", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token,
+					},
+					body: JSON.stringify({
+						razon: razon,
+						rut: rut,
+						vigente: vigente,
+						correo: correo,
+						correoSecundario: correoSecundario,
+						correoTerciario: correoTerciario,
+						fono: fono,
+						whatsapp: whatsapp,
+						erpyme: erpyme,
+						dicom: dicom,
+						repetido: repetido,
+						libre: libre,
+					}),
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						setStore({
+							response: data,
+						});
+						setStore({ spinner: false });
+					})
+					.catch((error) => {
+						setStore({
+							error: error.message,
+						});
+					});
+			},
+
+			editarClienteContabilidad: async (
+				id,
+				razon,
+				rut,
+				vigente,
+				correo,
+				correoSecundario,
+				correoTerciario,
+				fono,
+				whatsapp,
+				erpyme,
+				dicom,
+				repetido,
+				libre
+			) => {
+				const store = getStore();
+				setStore({ spinner: true });
+				fetch("http://127.0.0.1:5000/clienteContabilidad/" + id, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token,
+					},
+					body: JSON.stringify({
+						razon: razon === "" ? null : razon,
+						rut: rut === "" ? null : rut,
+						vigente: vigente === "" ? null : vigente,
+						correo: correo === "" ? null : correo,
+						correoSecundario: correoSecundario === "" ? null : correoSecundario,
+						correoTerciario: correoTerciario === "" ? null : correoTerciario,
+						fono: fono === "" ? null : fono,
+						erpyme: erpyme === "" ? null : erpyme,
+						dicom: dicom === "" ? null : dicom,
+						repetido: repetido === "" ? null : repetido,
+						libre: libre === "" ? null : libre,
+					}),
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						setStore({
+							response: data,
+						});
+						setStore({ spinner: false });
+					})
+					.catch((error) => {
+						setStore({
+							error: error.message,
+						});
+					});
+			},
+
+			// /* Notas Contabilidad*/
+			getNotaContabilidad: async (clienteContabilidadid) => {
+				const store = getStore();
+				fetch(
+					"http://127.0.0.1:5000/notaContabilidad/" + clienteContabilidadid,
+					{
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: "Bearer " + store.token,
+						},
+					}
+				)
+					.then((response) => response.json())
+					.then((data) => {
+						setStore({
+							nota: data,
+						});
+					})
+					.catch((error) => {
+						setStore({
+							error: "clientesContabilidad " + error.message,
+						});
+					});
+			},
+
+			crearNota: async (comentario, fechaComentario, clienteContabilidadid) => {
+				const store = getStore();
+				setStore({ spinner: true });
+				fetch("http://127.0.0.1:5000/notaContabilidad", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token,
+					},
+					body: JSON.stringify({
+						comentario: comentario,
+						fechaComentario: fechaComentario,
+						clienteContabilidadid: clienteContabilidadid,
+					}),
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						setStore({
+							response: data,
+						});
+						setStore({ spinner: false });
+					})
+					.catch((error) => {
+						setStore({
+							error: error.message,
+						});
+					});
+			},
+
+			//  /* Pagos Contabilidad */
+
+			getPagoContabilidad: async (clienteContabilidadid) => {
+				////Aquí hay que ordenar adicionalmente por Year
+				const store = getStore();
+				fetch(
+					"http://127.0.0.1:5000/pagosContabilidad/" + clienteContabilidadid,
+					{
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: "Bearer " + store.token,
+						},
+					}
+				)
+					.then((response) => response.json())
+					.then((data) => {
+						sortByMonth(data);
+						setStore({
+							pagoContabilidad: data,
+						});
+					})
+					.catch((error) => {
+						setStore({
+							error: "clientesContabilidad" + error.message,
+						});
+					});
+			},
+
+			crearPagoContabilidad: async (
+				year,
+				mes,
+				numeroTransferencia,
+				montoPagado,
+				montoCobrado,
+				facturaNumero,
+				comentario,
+				clienteContabilidadid
+			) => {
+				const store = getStore();
+				setStore({ spinner: true });
+				fetch("http://127.0.0.1:5000/pagosContabilidad", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token,
+					},
+					body: JSON.stringify({
+						year: year,
+						mes: mes,
+						numeroTransferencia: numeroTransferencia,
+						montoPagado: montoPagado,
+						montoCobrado: montoCobrado,
+						facturaNumero: facturaNumero,
+						comentario: comentario,
+						clienteContabilidadid: clienteContabilidadid,
+					}),
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						setStore({
+							response: data,
+						});
+						setStore({ spinner: false });
+					})
+					.catch((error) => {
+						setStore({
+							error: error.message,
+						});
+					});
+			},
+
+			editarPagoContabilidad: async (
+				year,
+				mes,
+				numeroTransferencia,
+				montoPagado,
+				montoCobrado,
+				facturaNumero,
+				comentario,
+				clienteContabilidadid
+			) => {
+				const store = getStore();
+				setStore({ spinner: true });
+				fetch(
+					"http://127.0.0.1:5000/pagosContabilidad/" + clienteContabilidadid,
+					{
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: "Bearer " + store.token,
+						},
+						body: JSON.stringify({
+							year: year === "" ? null : year,
+							mes: mes === "" ? null : mes,
+							numeroTransferencia:
+								numeroTransferencia === "" ? null : numeroTransferencia,
+							montoPagado: montoPagado === "" ? null : montoPagado,
+							montoCobrado: montoCobrado === "" ? null : montoCobrado,
+							facturaNumero: facturaNumero === "" ? null : facturaNumero,
+							comentario: comentario === "" ? null : comentario,
+						}),
+					}
+				)
+					.then((response) => response.json())
+					.then((data) => {
+						setStore({
+							response: data,
+						});
+						setStore({ spinner: false });
+					})
+					.catch((error) => {
+						setStore({
+							error: error.message,
+						});
+					});
+			},
+
+			borrarPagoContabilidad: async (clienteContabilidadid) => {
+				const store = getStore();
+				setStore({ spinner: true });
+				fetch(
+					"http://127.0.0.1:5000/pagosContabilidad/" + clienteContabilidadid,
+					{
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: "Bearer " + store.token,
+						},
+					}
+				)
+					.then((response) => response.json())
+					.then((data) => {
+						setStore({
+							response: data,
+						});
+						setStore({ spinner: false });
+					})
+					.catch((error) => {
+						setStore({
+							error: error.message,
+						});
+					});
+			},
 		},
 	};
 };
