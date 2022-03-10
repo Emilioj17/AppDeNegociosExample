@@ -2,14 +2,14 @@ import React, { Fragment, useContext, useState, useEffect } from "react";
 import Head from "../component/Head";
 import { Context } from "../../js/store/AppContext";
 import { useHistory } from "react-router-dom";
-import Buscador from "../component/DireccionTributaria/Buscador";
+import BuscadorContabilidad from "../component/Contabilidad/BuscadorContabilidad";
 import BuscadorNormal from "../component/DireccionTributaria/BusquedaUsuarioNormal/BuscadorNormal";
 import ResultadoBusqueda from "../component/DireccionTributaria/BusquedaUsuarioNormal/ResultadoBusqueda";
 import ListaClientesContabilidad from "../component/Contabilidad/ListaClientesContabilidad";
 import NuevoClienteContabilidad from "../component/Contabilidad/NuevoClienteContabilidad";
 import ClienteSeleccionado from "../component/Contabilidad/ClienteSeleccionado";
 import FiltroListaClientes from "../component/DireccionTributaria/FiltroListaClientes";
-import Paginador from "../component/DireccionTributaria/Paginator";
+import PaginadorContabilidad from "../component/Contabilidad/PaginadorContabilidad";
 import { IoRefreshSharp } from "react-icons/io5";
 import { ExportTableToExcel } from "../Helper/ExportTableToExcel";
 import "../../styles/PagosDt.css";
@@ -136,7 +136,7 @@ const Contabilidad = () => {
 												paddingBottom: "5px",
 											}}
 										>
-											<Buscador
+											<BuscadorContabilidad
 												setClienteContabilidadBuscado={
 													setClienteContabilidadBuscado
 												}
@@ -218,7 +218,7 @@ const Contabilidad = () => {
 											/>
 										) : null} */}
 										<br />
-										<Paginador />
+										<PaginadorContabilidad />
 									</div>
 									<br />
 									<ListaClientesContabilidad
@@ -232,7 +232,7 @@ const Contabilidad = () => {
 									/>
 									<div className='' style={{ textAlign: "center" }}>
 										<br />
-										<Paginador />
+										<PaginadorContabilidad />
 									</div>
 								</Fragment>
 							)}

@@ -1037,6 +1037,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						correoSecundario: correoSecundario === "" ? null : correoSecundario,
 						correoTerciario: correoTerciario === "" ? null : correoTerciario,
 						fono: fono === "" ? null : fono,
+						whatsapp: whatsapp === "" ? null : whatsapp,
 						erpyme: erpyme === "" ? null : erpyme,
 						dicom: dicom === "" ? null : dicom,
 						repetido: repetido === "" ? null : repetido,

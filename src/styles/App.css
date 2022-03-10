@@ -48,7 +48,11 @@
 	position: fixed;
 }
 
-/* End Spinner */
+/* NAVBAR */
+
+.PaginaActual {
+	background-color: rgb(146, 203, 236) !important;
+}
 
 .NavbarCortito {
 	grid-column: 1/2;
@@ -79,6 +83,8 @@
 	opacity: 0.5;
 	text-decoration: none;
 }
+
+/* CALENDARIO */
 
 .react-calendar {
 	padding: 10px !important;

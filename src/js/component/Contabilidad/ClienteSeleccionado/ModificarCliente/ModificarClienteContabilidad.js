@@ -13,7 +13,6 @@ const ModificarClienteContabilidad = ({
 	const [alertPrincipal, setAlertPrincipal] = useState(false);
 	const [alertRut, setAlertRut] = useState(false);
 	const [opcionesAdicionales, setOpcionesAdicionales] = useState(false);
-	const [alertRutRepresentante, setAlertRutRepresentante] = useState(false);
 	const [alertCorreo, setAlertCorreo] = useState(false);
 	const [alertFono, setAlertFono] = useState(false);
 	const [datos, setDatos] = useState({
@@ -36,17 +35,6 @@ const ModificarClienteContabilidad = ({
 	};
 
 	const HandlerValidarRut = (event) => {
-		if (event.target.name === "rutRepresentante") {
-			const rut = event.target.value;
-			if (ValidarRut.validaRut(rut)) {
-				setDatos({ ...datos, [event.target.name]: event.target.value });
-				setAlertRutRepresentante(false);
-			} else {
-				setAlertRutRepresentante(true);
-				setDatos({ ...datos, [event.target.name]: event.target.value });
-			}
-		}
-
 		if (event.target.name === "rut") {
 			const rut = event.target.value;
 			if (ValidarRut.validaRut(rut)) {
@@ -133,14 +121,14 @@ const ModificarClienteContabilidad = ({
 	};
 
 	const HandlerModificarCliente = (event) => {
-		if (alertRut || alertRutRepresentante || alertCorreo || alertFono) {
+		if (alertRut || alertCorreo || alertFono) {
 			setAlertPrincipal(true);
 		} else {
 			if (Object.values(datos).every((x) => x === null)) {
 				alert("No estas Modificando ningún Dato");
 			} else {
 				setAlertPrincipal(false);
-				actions.editarClienteDt(
+				actions.editarClienteContabilidad(
 					clienteContabilidadCliqueado.id,
 					datos.razon,
 					datos.rut,

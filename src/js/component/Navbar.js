@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Context } from "../store/AppContext";
 import { Link, useHistory } from "react-router-dom";
 import "../../styles/App.css";
@@ -6,6 +6,7 @@ import { GiTRexSkull, GiHamburgerMenu, GiSubmarine } from "react-icons/gi";
 
 const Navbar = () => {
 	const { store, actions } = useContext(Context);
+	const [paginaActual, setDPaginaActual] = useState(null); //Marca la página actual en la navbar
 	const history = useHistory();
 
 	const HandlerWitch = (event) => {
@@ -13,12 +14,17 @@ const Navbar = () => {
 	};
 
 	const HandlerCerrarSesion = (event) => {
+		// Hace el cierre de sesión.
 		sessionStorage.removeItem("token");
 		sessionStorage.removeItem("usuarioActual");
 		store.token = null;
 		store.usuarioActual = null;
 		window.location.href = "https://denegocios.cl/";
 		return null;
+	};
+
+	const HandlerIdentificarPaginaActual = (event) => {
+		setDPaginaActual(event.target.pathname);
 	};
 
 	const NavbarInicio = () => {
@@ -61,16 +67,34 @@ const Navbar = () => {
 					</span>
 					<br className='no-print' />
 					<ul className='vertical menu no-print' style={{ maxWidth: "250px" }}>
-						<li className='no-print'>
+						<li
+							className={paginaActual === "/" ? "PaginaActual" : null}
+							onClick={(e) => HandlerIdentificarPaginaActual(e)}
+						>
 							<Link to='/'>Inicio</Link>
 						</li>
-						<li>
+						<li
+							className={
+								paginaActual === "/GeneradorDocumentos" ? "PaginaActual" : null
+							}
+							onClick={(e) => HandlerIdentificarPaginaActual(e)}
+						>
 							<Link to='/GeneradorDocumentos'>Generador de Documentos</Link>
 						</li>
-						<li>
+						<li
+							className={
+								paginaActual === "/DireccionTributaria" ? "PaginaActual" : null
+							}
+							onClick={(e) => HandlerIdentificarPaginaActual(e)}
+						>
 							<Link to='/DireccionTributaria'>Direccion Tributaria</Link>
 						</li>
-						<li>
+						<li
+							className={
+								paginaActual === "/Contabilidad" ? "PaginaActual" : null
+							}
+							onClick={(e) => HandlerIdentificarPaginaActual(e)}
+						>
 							<Link to='/Contabilidad'>Contabilidad</Link>
 						</li>
 						{store.usuarioActual.tipo == "Administrador" ||
@@ -83,7 +107,12 @@ const Navbar = () => {
 						) : null}
 						{store.usuarioActual.tipo == "Administrador" ||
 						store.usuarioActual.tipo == "Super Administrador" ? (
-							<li>
+							<li
+								className={
+									paginaActual === "/Administracion" ? "PaginaActual" : null
+								}
+								onClick={(e) => HandlerIdentificarPaginaActual(e)}
+							>
 								<Link to='/Administracion'>
 									Admin Usuarios <GiTRexSkull />
 								</Link>
