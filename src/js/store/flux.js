@@ -832,7 +832,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			/* CONTABILIDAD */
+			/* CLIENTES DE CONTABILIDAD */
 
 			getClientesContabilidad: async (page_num) => {
 				const store = getStore();
@@ -971,7 +971,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("http://127.0.0.1:5000/clienteDt", {
+				fetch("http://127.0.0.1:5000/clienteContabilidad", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -1073,7 +1073,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then((response) => response.json())
 					.then((data) => {
 						setStore({
-							nota: data,
+							notaContabilidad: data,
 						});
 					})
 					.catch((error) => {

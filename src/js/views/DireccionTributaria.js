@@ -10,7 +10,7 @@ import FormularioClienteDt from "../component/DireccionTributaria/FormularioClie
 import ClienteSeleccionado from "../component/DireccionTributaria/ClienteSeleccionado";
 import FiltroListaClientes from "../component/DireccionTributaria/FiltroListaClientes";
 import Paginador from "../component/DireccionTributaria/Paginator";
-import { IoRefreshSharp, IoEllipsisVerticalSharp } from "react-icons/io5";
+import { IoRefreshSharp } from "react-icons/io5";
 import { ExportTableToExcel } from "../Helper/ExportTableToExcel";
 import "../../styles/PagosDt.css";
 
