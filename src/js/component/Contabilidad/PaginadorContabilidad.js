@@ -3,7 +3,6 @@ import { Context } from "../../store/AppContext";
 
 const PaginadorContabilidad = () => {
 	const { store, actions } = useContext(Context);
-	/* let rango = [0,1,2,3,4,5,6,7,8,9,10] */
 	let rango = [...Array(store.paginasClientesContabilidad).keys()];
 	let actual = store.paginaActualClientesContabilidad;
 

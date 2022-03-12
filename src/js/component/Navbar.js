@@ -6,7 +6,7 @@ import { GiTRexSkull, GiHamburgerMenu, GiSubmarine } from "react-icons/gi";
 
 const Navbar = () => {
 	const { store, actions } = useContext(Context);
-	const [paginaActual, setDPaginaActual] = useState(null); //Marca la página actual en la navbar
+	const [paginaActual, setDPaginaActual] = useState("/"); //Marca la página actual en la navbar
 	const history = useHistory();
 
 	const HandlerWitch = (event) => {

@@ -4,7 +4,7 @@ import InformacionCliente from "./ClienteSeleccionado/InformacionCliente";
 import Notas from "./ClienteSeleccionado/Notas";
 import Pagos from "./ClienteSeleccionado/Pagos";
 import ModificarClienteContabilidad from "./ClienteSeleccionado/ModificarCliente/ModificarClienteContabilidad";
-import DetallePagos from "./ClienteSeleccionado/Pagos/DetallePagos";
+import DetallePagosContabilidad from "./ClienteSeleccionado/Pagos/DetallePagosContabilidad";
 import { AiFillPrinter } from "react-icons/ai";
 import { IoRefreshSharp } from "react-icons/io5";
 
@@ -31,15 +31,14 @@ const ClienteSeleccionado = ({
 	}, []);
 
 	useEffect(() => {
-		if (detectorCambios) {
-			actions.getPagoContabilidad(clienteContabilidadCliqueado.id);
-			setDSetectorCambios(false);
-		}
-		if (detectorCambiosNotas) {
-			actions.getNotaContabilidad(clienteContabilidadCliqueado.id);
-			setDSetectorCambiosNotas(false);
-		}
-	}, [detectorCambios, detectorCambiosNotas]);
+		actions.getPagoContabilidad(clienteContabilidadCliqueado.id);
+		setDSetectorCambios(false);
+	}, [detectorCambios]);
+
+	useEffect(() => {
+		actions.getNotaContabilidad(clienteContabilidadCliqueado.id);
+		setDSetectorCambiosNotas(false);
+	}, [detectorCambiosNotas]);
 
 	useEffect(() => {
 		actions.getClienteContabilidad(clienteContabilidadCliqueado.id);
@@ -163,7 +162,6 @@ const ClienteSeleccionado = ({
 						</div>
 						<div className='cell'>
 							<Pagos
-								clienteContabilidadCliqueado={clienteContabilidadCliqueado}
 								setClickPagos={setClickPagos}
 								setDSetectorCambios={setDSetectorCambios}
 							/>
@@ -172,7 +170,7 @@ const ClienteSeleccionado = ({
 				</div>
 			)}
 			{clickPagos ? (
-				<DetallePagos
+				<DetallePagosContabilidad
 					setClickPagos={setClickPagos}
 					setDSetectorCambios={setDSetectorCambios}
 				/>

@@ -274,8 +274,6 @@ const ModificarClienteContabilidad = ({
 										onChange={(e) => HandlerValidarFono(e)}
 									/>
 								</label>
-							</div>
-							<div className='grid-x grid-margin-x'>
 								<div className='cell small-3'>
 									<label className='form-label' htmlFor='vigente'>
 										Está Vigente este Cliente?{" "}
@@ -342,61 +340,40 @@ const ModificarClienteContabilidad = ({
 									></textarea>
 								</label>
 							</div>
-							<div>
-								<label>Deseas ver Otras Opciones?</label>
-								<input
-									type='radio'
-									id='html'
-									name='fav_language'
-									value='No'
-									onClick={() => setOpcionesAdicionales(false)}
-								/>
-								<label htmlFor='html'>No</label>
-								<input
-									type='radio'
-									id='html'
-									name='fav_language'
-									value='Si'
-									onClick={() => setOpcionesAdicionales(true)}
-								/>
-								<label htmlFor='html'>Si</label>
-							</div>
-							{opcionesAdicionales ? (
-								<div className='card-divider grid-x grid-margin-x'>
-									<div className='cell small-3'>
-										<label className='form-label' htmlFor='dicom'>
-											Dicom?{" "}
-											<strong>{store.infoClienteContabilidad.dicom}</strong>
-										</label>
-										<select
-											className='form-select'
-											id='dicom'
-											name='dicom'
-											onChange={(e) => HandlerCompletarDatos(e)}
-										>
-											<option>Selecciona una opción...</option>
-											<option value='Si'>Si</option>
-											<option value='No'>No</option>
-										</select>
-									</div>
-									<div className='cell small-3'>
-										<label className='form-label' htmlFor='repetido'>
-											Repetido?{" "}
-											<strong>{store.infoClienteContabilidad.repetido}</strong>
-										</label>
-										<select
-											className='form-select'
-											id='repetido'
-											name='repetido'
-											onChange={(e) => HandlerCompletarDatos(e)}
-										>
-											<option>Selecciona una opción...</option>
-											<option value='Si'>Si</option>
-											<option value='No'>No</option>
-										</select>
-									</div>
+							<div className='grid-x grid-margin-x'>
+								<div className='cell small-3'>
+									<label className='form-label' htmlFor='dicom'>
+										Dicom?{" "}
+										<strong>{store.infoClienteContabilidad.dicom}</strong>
+									</label>
+									<select
+										className='form-select'
+										id='dicom'
+										name='dicom'
+										onChange={(e) => HandlerCompletarDatos(e)}
+									>
+										<option>Selecciona una opción...</option>
+										<option value='Si'>Si</option>
+										<option value='No'>No</option>
+									</select>
 								</div>
-							) : null}
+								<div className='cell small-3'>
+									<label className='form-label' htmlFor='repetido'>
+										Repetido?{" "}
+										<strong>{store.infoClienteContabilidad.repetido}</strong>
+									</label>
+									<select
+										className='form-select'
+										id='repetido'
+										name='repetido'
+										onChange={(e) => HandlerCompletarDatos(e)}
+									>
+										<option>Selecciona una opción...</option>
+										<option value='Si'>Si</option>
+										<option value='No'>No</option>
+									</select>
+								</div>
+							</div>
 						</form>
 					</div>
 				</div>

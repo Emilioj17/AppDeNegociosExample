@@ -1,13 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../../store/AppContext";
-/* import { SaldoTotal } from "../../Helper/SaldoTotal"; */
 import "../../../styles/TablaClientes.css";
 
-//Aquí se genera el Listado de Clientes que se muestra en Dt. Desde DireconTributaria.js se ejecuta el action que llama la info de la bd. Esta lista se guarda en store.clientesDt.
+//Aquí se genera el Listado de Clientes que se muestra en Contabilidad. Desde Contabilidad.js se ejecuta el action que llama la info de la bd. Esta lista se guarda en store.clientesContabilidad.
 // Respecto al CSS del Paginator, se debió crear un .css adicional solo para setear los colores.
 
 const ListaClientesContabilidad = ({
-	clienteContabilidadBuscado,
 	setClienteSeleccionado,
 	setClienteContabilidadCliqueado,
 	colores,
@@ -16,6 +14,7 @@ const ListaClientesContabilidad = ({
 	const { store, actions } = useContext(Context);
 
 	const HandlerClick = (object, event) => {
+		//Esto permite filtrar por saldo (filtro)
 		if (event.target.className != "telefono") {
 			setClienteContabilidadCliqueado(object);
 			setClienteSeleccionado(true);
@@ -46,57 +45,27 @@ const ListaClientesContabilidad = ({
 				<td className='telefono' style={{ cursor: "copy" }}>
 					{objeto.fono}
 				</td>
-				<td>{objeto.fechaContratacion}</td>
 				<td>{objeto.vigente}</td>
 				<td>${CalculoSaldo(objeto, false)}</td>
 			</tr>
 		);
 	};
 
-	//Funciones para el Saldo
-
+	//Funcion para el Saldo
 	const CalculoSaldo = (objeto, meses) => {
-		//Hay que rehacer esta función, tiene varios elementos que ya NO se utilizan y están malos
-		const SaldoDeberia = (objeto, meses = false) => {
-			//Este saca la cantidad de meses y su valor, desde la fecha de Contratación. Es el DEBERIA
-			const fecha = new Date(objeto.fechaContratacion);
-			const fechaHoy = new Date();
-			let diferenciaMeses =
-				fechaHoy.getMonth() -
-				fecha.getMonth() +
-				12 * (fechaHoy.getFullYear() - fecha.getFullYear());
-			if (fechaHoy.getDate() < fecha.getDate()) {
-				diferenciaMeses = diferenciaMeses - 1;
-			}
-			return diferenciaMeses.toString();
-		};
-
-		const SaldoTotal = (objeto, meses) => {
-			if (meses == false) {
-				if (objeto.mesesPagados != null) {
-					let mesesPagados = parseInt(objeto.mesesPagados);
-					return mesesPagados;
-				}
-			}
-		};
-
-		if (
-			parseInt(SaldoDeberia(objeto, false)) -
-				parseInt(SaldoTotal(objeto, false)) <
-			0
-		) {
-			return "Pagado";
-		} else {
-			return (
-				(parseInt(SaldoDeberia(objeto, false)) -
-					parseInt(SaldoTotal(objeto, false))) *
-				9900
-			);
+		let montoPagado = 0;
+		let montoCobrado = 0;
+		for (let index = 0; index < objeto.pagosContabilidadID.length; index++) {
+			montoPagado =
+				montoPagado + parseInt(objeto.pagosContabilidadID[index].montoPagado);
+			montoCobrado =
+				montoCobrado + parseInt(objeto.pagosContabilidadID[index].montoCobrado);
 		}
+		return montoCobrado - montoPagado;
 	};
 
+	// Esta función permite Filtrar el Listado de Clientes, por si tienen Saldo o No.
 	const Saldo = (objeto) => {
-		// Esta función permite Filtrar el Listado de Clientes, por si tienen Saldo o No.
 		if (saldo == "Selecciona...") {
 			return objeto;
 		} else if (saldo == "Con Saldo") {
@@ -113,9 +82,6 @@ const ListaClientesContabilidad = ({
 	// Funciones para los Colores
 	const Colores = (objeto) => {
 		if (colores === true) {
-			if (objeto.p === "Si") {
-				return "aqua";
-			}
 			if (objeto.vigente === "No") {
 				return "red";
 			}
@@ -144,9 +110,6 @@ const ListaClientesContabilidad = ({
 							<th scope='col'>Correo</th>
 							<th className='telefono' scope='col'>
 								Teléfono
-							</th>
-							<th className='fecha' scope='col'>
-								Fecha
 							</th>
 							<th scope='col'>Vigente</th>
 							<th className='saldo' scope='col'>

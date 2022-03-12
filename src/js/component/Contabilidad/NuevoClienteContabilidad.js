@@ -7,7 +7,6 @@ import { ValidarRut } from "../../Helper/ValidarRut";
 const FormularioNuevoClienteContabilidad = ({ setNuevoCliente }) => {
 	const { store, actions } = useContext(Context);
 	const [correoAdicional, setCorreoAdicional] = useState(false);
-	const [opcionesAdicionales, setOpcionesAdicionales] = useState(false);
 	const [alertPrincipal, setAlertPrincipal] = useState(false);
 	const [alertRut, setAlertRut] = useState(false);
 	const [alertCorreo, setAlertCorreo] = useState(false);
@@ -262,8 +261,6 @@ const FormularioNuevoClienteContabilidad = ({ setNuevoCliente }) => {
 										onChange={(e) => HandlerValidarFono(e)}
 									/>
 								</label>
-							</div>
-							<div className='grid-x grid-margin-x'>
 								<div className='cell small-4'>
 									<label className='form-label' htmlFor='erpyme'>
 										Ya está Ingresado en Erpyme?
@@ -304,57 +301,36 @@ const FormularioNuevoClienteContabilidad = ({ setNuevoCliente }) => {
 									></textarea>
 								</label>
 							</div>
-							<div>
-								<label>Deseas ver Otras Opciones?</label>
-								<input
-									type='radio'
-									id='html2'
-									name='fav_language2'
-									value='No'
-									onClick={() => setOpcionesAdicionales(false)}
-								/>
-								<label htmlFor='html'>No</label>
-								<input
-									type='radio'
-									id='html2'
-									name='fav_language2'
-									value='Si'
-									onClick={() => setOpcionesAdicionales(true)}
-								/>
-								<label htmlFor='html'>Si</label>
-							</div>
-							{opcionesAdicionales ? (
-								<div className='card-divider grid-x grid-margin-x'>
-									<div className='cell small-3'>
-										<label className='form-label' htmlFor='dicom'>
-											Dicom?
-										</label>
-										<select
-											className='form-select'
-											id='dicom'
-											name='dicom'
-											onChange={(e) => HandlerCompletarDatos(e)}
-										>
-											<option value='No'>No</option>
-											<option value='Si'>Si</option>
-										</select>
-									</div>
-									<div className='cell small-3'>
-										<label className='form-label' htmlFor='repetido'>
-											Repetido?
-										</label>
-										<select
-											className='form-select'
-											id='repetido'
-											name='repetido'
-											onChange={(e) => HandlerCompletarDatos(e)}
-										>
-											<option value='No'>No</option>
-											<option value='Si'>Si</option>
-										</select>
-									</div>
+							<div className='grid-x grid-margin-x'>
+								<div className='cell small-3'>
+									<label className='form-label' htmlFor='dicom'>
+										Dicom?
+									</label>
+									<select
+										className='form-select'
+										id='dicom'
+										name='dicom'
+										onChange={(e) => HandlerCompletarDatos(e)}
+									>
+										<option value='No'>No</option>
+										<option value='Si'>Si</option>
+									</select>
 								</div>
-							) : null}
+								<div className='cell small-3'>
+									<label className='form-label' htmlFor='repetido'>
+										Repetido?
+									</label>
+									<select
+										className='form-select'
+										id='repetido'
+										name='repetido'
+										onChange={(e) => HandlerCompletarDatos(e)}
+									>
+										<option value='No'>No</option>
+										<option value='Si'>Si</option>
+									</select>
+								</div>
+							</div>
 							<br />
 						</form>
 					</div>

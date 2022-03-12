@@ -3,12 +3,12 @@ import Head from "../component/Head";
 import { Context } from "../../js/store/AppContext";
 import { useHistory } from "react-router-dom";
 import BuscadorContabilidad from "../component/Contabilidad/BuscadorContabilidad";
-import BuscadorNormal from "../component/DireccionTributaria/BusquedaUsuarioNormal/BuscadorNormal";
-import ResultadoBusqueda from "../component/DireccionTributaria/BusquedaUsuarioNormal/ResultadoBusqueda";
+import BuscadorNormalContabilidad from "../component/Contabilidad/BusquedaUsuarioNormal/BuscadorNormalContabilidad";
+import ResultadoBusquedaContabilidad from "../component/Contabilidad/BusquedaUsuarioNormal/ResultadoBusquedaContabilidad";
 import ListaClientesContabilidad from "../component/Contabilidad/ListaClientesContabilidad";
 import NuevoClienteContabilidad from "../component/Contabilidad/NuevoClienteContabilidad";
 import ClienteSeleccionado from "../component/Contabilidad/ClienteSeleccionado";
-import FiltroListaClientes from "../component/DireccionTributaria/FiltroListaClientes";
+import FiltroListaClientesContabilidad from "../component/Contabilidad/FiltroListaClientesContabilidad";
 import PaginadorContabilidad from "../component/Contabilidad/PaginadorContabilidad";
 import { IoRefreshSharp } from "react-icons/io5";
 import { ExportTableToExcel } from "../Helper/ExportTableToExcel";
@@ -24,14 +24,14 @@ const Contabilidad = () => {
 		useState(null);
 	const [clienteContabilidadCliqueado, setClienteContabilidadCliqueado] =
 		useState(null);
-	/* 		const [filtro, setFiltro] = useState(false); */
+	const [filtro, setFiltro] = useState(false);
 	const [colores, setColores] = useState(false); //Controla la Aplicación de Colores en las tablas.
 	const titulosHead = [
 		"Bienvenido al Servicio de Contabilidad",
 		"Consulta información respecto a Clientes con este servicio contratado.",
 	];
 
-	/* 		const [filtros, setFiltros] = useState({
+	const [filtros, setFiltros] = useState({
 		vigente: "Selecciona...",
 		whatsapp: "Selecciona...",
 		erpyme: "Selecciona...",
@@ -40,7 +40,7 @@ const Contabilidad = () => {
 		dicom: "Selecciona...",
 		repetido: "Selecciona...",
 		tipoPago: "Selecciona...",
-	}); */
+	});
 	const [saldo, setSaldo] = useState("Selecciona...");
 
 	//Este useEffect inicia getClientes, y llama a todo el listado de clientes. Con esto, cuando se abre ListaClientesContabilidad.js que llama al store.clientesDt ya tiene una lista por descargar-
@@ -62,7 +62,7 @@ const Contabilidad = () => {
 		setNuevoCliente(true);
 	};
 
-	/* 	const HandlerFiltro = (event) => {
+	const HandlerFiltro = (event) => {
 		if (filtro === false) {
 			setFiltro(true);
 		} else if (filtro === true) {
@@ -80,7 +80,7 @@ const Contabilidad = () => {
 			setSaldo("Selecciona...");
 			actions.getClientesDt(1);
 		}
-	}; */
+	};
 
 	const HandlerRecargarPagina = (event) => {
 		actions.getClientesContabilidad(1);
@@ -176,7 +176,7 @@ const Contabilidad = () => {
 												<label
 													className='switch-paddle'
 													htmlFor='yes-no'
-													/* onClick={(e) => HandlerSwitchColores(e)} */
+													onClick={(e) => HandlerSwitchColores(e)}
 												>
 													<span className='show-for-sr'>Colores?</span>
 													<span className='switch-active' aria-hidden='true'>
@@ -202,21 +202,21 @@ const Contabilidad = () => {
 										</button>
 										<button
 											className='submit button secondary'
-											/* onClick={(e) => HandlerFiltro(e)} */
+											onClick={(e) => HandlerFiltro(e)}
 										>
 											Filtrar
 										</button>
 									</div>
 									<div className='' style={{ textAlign: "center" }}>
 										<br />
-										{/* 										{filtro ? (
-											<FiltroListaClientes
+										{filtro ? (
+											<FiltroListaClientesContabilidad
 												filtros={filtros}
 												setFiltros={setFiltros}
 												saldo={saldo}
 												setSaldo={setSaldo}
 											/>
-										) : null} */}
+										) : null}
 										<br />
 										<PaginadorContabilidad />
 									</div>
@@ -254,7 +254,7 @@ const Contabilidad = () => {
 								</ul>
 							</div>
 							<div className='grid-x grid-margin-x'>
-								<BuscadorNormal
+								<BuscadorNormalContabilidad
 									setClienteContabilidadBuscado={setClienteContabilidadBuscado}
 									buscando={buscando}
 									setBuscando={setBuscando}
@@ -267,7 +267,7 @@ const Contabilidad = () => {
 								</button>
 							</div>
 							{clienteContabilidadBuscado != null && buscando ? (
-								<ResultadoBusqueda
+								<ResultadoBusquedaContabilidad
 									clienteContabilidadBuscado={clienteContabilidadBuscado}
 								/>
 							) : null}

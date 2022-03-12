@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../../../../store/AppContext";
 
-const ListaPagos = ({
+const ListaPagosContabilidad = ({
 	filtroYear,
 	filtroMesInicio,
 	filtroMesTermino,
@@ -12,14 +12,13 @@ const ListaPagos = ({
 	const ListaDesplegarPagos = (object, i, year) => {
 		return (
 			<tr key={i}>
-				<td>{year}</td>
+				<td>{object.year}</td>
 				<td>{object.mes}</td>
 				<td>${object.montoCobrado}</td>
 				<td>${object.montoPagado}</td>
 				<td>${object.montoCobrado - object.montoPagado}</td>
 				<td>{object.numeroTransferencia}</td>
 				<td>{object.facturaNumero}</td>
-				<td>{object.fechaIngresoPago}</td>
 			</tr>
 		);
 	};
@@ -67,6 +66,36 @@ const ListaPagos = ({
 		}
 	};
 
+	const Year = (objeto) => {
+		if (filtroYear === "todos") {
+			return objeto;
+		} else if (filtroYear === "2019") {
+			if (objeto.year === "2019") {
+				return objeto;
+			}
+		} else if (filtroYear === "2020") {
+			if (objeto.year === "2020") {
+				return objeto;
+			}
+		} else if (filtroYear === "2021") {
+			if (objeto.year === "2021") {
+				return objeto;
+			}
+		} else if (filtroYear === "2022") {
+			if (objeto.year === "2022") {
+				return objeto;
+			}
+		} else if (filtroYear === "2023") {
+			if (objeto.year === "2023") {
+				return objeto;
+			}
+		} else if (filtroYear === "2024") {
+			if (objeto.year === "2024") {
+				return objeto;
+			}
+		}
+	};
+
 	return (
 		<>
 			<table className='table hover'>
@@ -79,17 +108,15 @@ const ListaPagos = ({
 						<th scope='col'>Saldo</th>
 						<th scope='col'>Número de Transferencia</th>
 						<th scope='col'>Número de Factura</th>
-						<th scope='col'>Fecha de Pago</th>
 					</tr>
 				</thead>
 				<tbody>
 					{store.pagoContabilidad != null
-						? filtroYear == "todos" || filtroYear == "2024"
-							? store.pagoContabilidad
-									.filter((objeto) => meses.includes(objeto.mes))
-									.filter((objeto) => Saldo(objeto))
-									.map((object, i) => ListaDesplegarPagos(object, i, 2024))
-							: null
+						? store.pagoContabilidad
+								.filter((objeto) => Year(objeto))
+								.filter((objeto) => meses.includes(objeto.mes))
+								.filter((objeto) => Saldo(objeto))
+								.map((object, i) => ListaDesplegarPagos(object, i, 2024))
 						: null}
 				</tbody>
 				{store.infoClienteContabilidad == "" ? (
@@ -102,4 +129,4 @@ const ListaPagos = ({
 	);
 };
 
-export default ListaPagos;
+export default ListaPagosContabilidad;

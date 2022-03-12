@@ -1,11 +1,9 @@
 import React, { useState, useContext } from "react";
-import { Context } from "../../../store/AppContext";
 import FiltroPagos from "./Pagos/FiltrosPagos";
-import ListaPagos from "./Pagos/ListaPagos";
+import ListaPagosContabilidad from "./Pagos/ListaPagosContabilidad";
 import { AiFillCaretDown, AiFillCaretLeft } from "react-icons/ai";
 
-const Pagos = ({ clienteContabilidadCliqueado, setClickPagos }) => {
-	const { store, actions } = useContext(Context);
+const Pagos = ({ setClickPagos }) => {
 	const [ocultarPagos, setOcultarPagos] = useState(false);
 	const [filtro, setFiltro] = useState(false);
 	const [filtroYear, setFiltroYear] = useState("todos");
@@ -72,7 +70,7 @@ const Pagos = ({ clienteContabilidadCliqueado, setClickPagos }) => {
 					/>
 				) : null}
 				{ocultarPagos ? null : (
-					<ListaPagos
+					<ListaPagosContabilidad
 						filtroYear={filtroYear}
 						filtroMesInicio={filtroMesInicio}
 						filtroMesTermino={filtroMesTermino}

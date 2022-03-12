@@ -1,16 +1,17 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../../../../store/AppContext";
-import BorrarPago from "./BorrarPago";
-import IngresoPago from "./IngresoPago";
-import EditarPago from "./EditarPago";
+import BorrarPagoContabilidad from "./BorrarPagoContabilidad";
+import IngresoPagoContabilidad from "./IngresoPagoContabilidad";
+import EditarPagoContabilidad from "./EditarPagoContabilidad";
 import FiltroPagos from "./FiltrosPagos";
-import ListaPagos from "./ListaPagos";
+import ListaPagosContabilidad from "./ListaPagosContabilidad";
 import { BsFillTrashFill } from "react-icons/bs";
 import { AiFillEdit, AiOutlineSmallDash } from "react-icons/ai";
 
 //Este Formulario es de Direccion Tributaria (Modificar Cliente Existente)
+/*  ****setPagoSeleccionado abre y cierra las ventanasde editar y borrar pago. Modificar a Futuro*/
 
-const ModificarClienteDt = ({ setClickPagos, setDSetectorCambios }) => {
+const DetallePagosContabilidad = ({ setClickPagos, setDSetectorCambios }) => {
 	const { store, actions } = useContext(Context);
 	const [borrarPagos, setBorrarPagos] = useState(false); //Permite Borrar Pagos
 	const [editarPagos, setEditarPagos] = useState(false); //Permite editar Pagos
@@ -29,7 +30,7 @@ const ModificarClienteDt = ({ setClickPagos, setDSetectorCambios }) => {
 	const ListaDesplegarPagos = (object, i, year) => {
 		return (
 			<tr key={i} id={object.id}>
-				<td>{year}</td>
+				<td>{object.year}</td>
 				<td>{object.mes}</td>
 				<td>${object.montoCobrado}</td>
 				<td>${object.montoPagado}</td>
@@ -150,12 +151,42 @@ const ModificarClienteDt = ({ setClickPagos, setDSetectorCambios }) => {
 		}
 	};
 
+	const Year = (objeto) => {
+		if (filtroYear === "todos") {
+			return objeto;
+		} else if (filtroYear === "2019") {
+			if (objeto.year === "2019") {
+				return objeto;
+			}
+		} else if (filtroYear === "2020") {
+			if (objeto.year === "2020") {
+				return objeto;
+			}
+		} else if (filtroYear === "2021") {
+			if (objeto.year === "2021") {
+				return objeto;
+			}
+		} else if (filtroYear === "2022") {
+			if (objeto.year === "2022") {
+				return objeto;
+			}
+		} else if (filtroYear === "2023") {
+			if (objeto.year === "2023") {
+				return objeto;
+			}
+		} else if (filtroYear === "2024") {
+			if (objeto.year === "2024") {
+				return objeto;
+			}
+		}
+	};
+
 	return (
 		<div className='DivPrincipal'>
 			<h4 className='DivTitulo'>
 				Detalle para{" "}
-				{store.infoClienteDt != null
-					? store.infoClienteDt.razon.slice(0, 35)
+				{store.infoClienteContabilidad != null
+					? store.infoClienteContabilidad.razon.slice(0, 35)
 					: null}
 			</h4>
 			<div className='DivFiltro text-right'>
@@ -193,56 +224,15 @@ const ModificarClienteDt = ({ setClickPagos, setDSetectorCambios }) => {
 							</tr>
 						</thead>
 						<tbody>
-							{store.pago2024 != null
-								? filtroYear == "todos" || filtroYear == "2024"
-									? store.pago2024
-											.filter((objeto) => meses.includes(objeto.mes))
-											.filter((objeto) => Saldo(objeto))
-											.map((object, i) => ListaDesplegarPagos(object, i, 2024))
-									: null
-								: null}
-							{store.pago2023 != null
-								? filtroYear == "todos" || filtroYear == "2023"
-									? store.pago2023
-											.filter((objeto) => meses.includes(objeto.mes))
-											.filter((objeto) => Saldo(objeto))
-											.map((object, i) => ListaDesplegarPagos(object, i, 2023))
-									: null
-								: null}
-							{store.pago2022 != null
-								? filtroYear == "todos" || filtroYear == "2022"
-									? store.pago2022
-											.filter((objeto) => meses.includes(objeto.mes))
-											.filter((objeto) => Saldo(objeto))
-											.map((object, i) => ListaDesplegarPagos(object, i, 2022))
-									: null
-								: null}
-							{store.pago2021 != null
-								? filtroYear == "todos" || filtroYear == "2021"
-									? store.pago2021
-											.filter((objeto) => meses.includes(objeto.mes))
-											.filter((objeto) => Saldo(objeto))
-											.map((object, i) => ListaDesplegarPagos(object, i, 2021))
-									: null
-								: null}
-							{store.pago2020 != null
-								? filtroYear == "todos" || filtroYear == "2020"
-									? store.pago2020
-											.filter((objeto) => meses.includes(objeto.mes))
-											.filter((objeto) => Saldo(objeto))
-											.map((object, i) => ListaDesplegarPagos(object, i, 2020))
-									: null
-								: null}
-							{store.pago2019 != null
-								? filtroYear == "todos" || filtroYear == "2019"
-									? store.pago2019
-											.filter((objeto) => meses.includes(objeto.mes))
-											.filter((objeto) => Saldo(objeto))
-											.map((object, i) => ListaDesplegarPagos(object, i, 2019))
-									: null
+							{store.pagoContabilidad != null
+								? store.pagoContabilidad
+										.filter((objeto) => Year(objeto))
+										.filter((objeto) => meses.includes(objeto.mes))
+										.filter((objeto) => Saldo(objeto))
+										.map((object, i) => ListaDesplegarPagos(object, i, 2024))
 								: null}
 						</tbody>
-						{store.infoClienteDt == "" ? (
+						{store.infoClienteContabilidad == "" ? (
 							<tbody>
 								<p>No hay Informacion de Pagos...</p>
 							</tbody>
@@ -251,7 +241,7 @@ const ModificarClienteDt = ({ setClickPagos, setDSetectorCambios }) => {
 				</div>
 			</div>
 			{borrarPagos && pagoSeleccionado.object != null ? (
-				<BorrarPago
+				<BorrarPagoContabilidad
 					pagoSeleccionado={pagoSeleccionado}
 					setPagoSeleccionado={setPagoSeleccionado}
 					setDSetectorCambios={setDSetectorCambios}
@@ -259,7 +249,7 @@ const ModificarClienteDt = ({ setClickPagos, setDSetectorCambios }) => {
 				/>
 			) : null}
 			{editarPagos && pagoSeleccionado.object != null ? (
-				<EditarPago
+				<EditarPagoContabilidad
 					pagoSeleccionado={pagoSeleccionado}
 					setPagoSeleccionado={setPagoSeleccionado}
 					setDSetectorCambios={setDSetectorCambios}
@@ -267,7 +257,7 @@ const ModificarClienteDt = ({ setClickPagos, setDSetectorCambios }) => {
 				/>
 			) : null}
 			{crearPagos ? (
-				<IngresoPago
+				<IngresoPagoContabilidad
 					setCrearPagos={setCrearPagos}
 					setDisabled={setDisabled}
 					setDSetectorCambios={setDSetectorCambios}
@@ -307,4 +297,4 @@ const ModificarClienteDt = ({ setClickPagos, setDSetectorCambios }) => {
 	);
 };
 
-export default ModificarClienteDt;
+export default DetallePagosContabilidad;
