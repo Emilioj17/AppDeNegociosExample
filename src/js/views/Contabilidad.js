@@ -91,7 +91,7 @@ const Contabilidad = () => {
 	};
 
 	const HandlerBuscar = (event) => {
-		actions.getBusquedaDt(clienteContabilidadBuscado);
+		actions.getBusquedaContabilidad(clienteContabilidadBuscado);
 		buscando ? setBuscando(true) : setBuscando(true);
 	};
 

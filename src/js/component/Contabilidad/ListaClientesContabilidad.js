@@ -46,7 +46,12 @@ const ListaClientesContabilidad = ({
 					{objeto.fono}
 				</td>
 				<td>{objeto.vigente}</td>
-				<td>${CalculoSaldo(objeto, false)}</td>
+				<td>
+					$
+					{objeto.pagosContabilidadID != undefined
+						? CalculoSaldo(objeto, false)
+						: null}
+				</td>
 			</tr>
 		);
 	};
