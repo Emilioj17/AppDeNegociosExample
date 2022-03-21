@@ -172,11 +172,12 @@ const Contabilidad = () => {
 													id='yes-no'
 													type='checkbox'
 													name='exampleSwitch'
+													disabled
 												/>
 												<label
 													className='switch-paddle'
 													htmlFor='yes-no'
-													onClick={(e) => HandlerSwitchColores(e)}
+													/* onClick={(e) => HandlerSwitchColores(e)} */
 												>
 													<span className='show-for-sr'>Colores?</span>
 													<span className='switch-active' aria-hidden='true'>
