@@ -60,11 +60,14 @@ const ListaClientesContabilidad = ({
 	const CalculoSaldo = (objeto, meses) => {
 		let montoPagado = 0;
 		let montoCobrado = 0;
-		for (let index = 0; index < objeto.pagosContabilidadID.length; index++) {
-			montoPagado =
-				montoPagado + parseInt(objeto.pagosContabilidadID[index].montoPagado);
-			montoCobrado =
-				montoCobrado + parseInt(objeto.pagosContabilidadID[index].montoCobrado);
+		if (objeto.pagosContabilidadID != undefined) {
+			for (let index = 0; index < objeto.pagosContabilidadID.length; index++) {
+				montoPagado =
+					montoPagado + parseInt(objeto.pagosContabilidadID[index].montoPagado);
+				montoCobrado =
+					montoCobrado +
+					parseInt(objeto.pagosContabilidadID[index].montoCobrado);
+			}
 		}
 		return montoCobrado - montoPagado;
 	};

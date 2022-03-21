@@ -4,6 +4,21 @@ import { Context } from "../../../store/AppContext";
 const InformacionCliente = () => {
 	const { store, actions } = useContext(Context);
 
+	const CalculoSaldo = (objeto, meses) => {
+		let montoPagado = 0;
+		let montoCobrado = 0;
+		if (objeto.pagosContabilidadID != undefined) {
+			for (let index = 0; index < objeto.pagosContabilidadID.length; index++) {
+				montoPagado =
+					montoPagado + parseInt(objeto.pagosContabilidadID[index].montoPagado);
+				montoCobrado =
+					montoCobrado +
+					parseInt(objeto.pagosContabilidadID[index].montoCobrado);
+			}
+		}
+		return montoCobrado - montoPagado;
+	};
+
 	return (
 		<div className='cell small-6'>
 			<div className='card' style={{ width: "99%" }}>
@@ -31,7 +46,12 @@ const InformacionCliente = () => {
 							<li>Whatsapp: {store.infoClienteContabilidad.whatsapp}</li>
 							<li>Repetido: {store.infoClienteContabilidad.repetido}</li>
 							<li>Dicom: {store.infoClienteContabilidad.dicom}</li>
-							<li>Meses Pendientes: $</li>
+							<li>
+								Meses Pendientes: $
+								{store.infoClienteContabilidad.pagosContabilidadID != undefined
+									? CalculoSaldo(store.infoClienteContabilidad, false)
+									: null}
+							</li>
 						</ul>
 					) : null}
 				</div>
