@@ -65,25 +65,10 @@ const ListaClientesDt = ({
 				fechaHoy.getMonth() -
 				fecha.getMonth() +
 				12 * (fechaHoy.getFullYear() - fecha.getFullYear());
-			if (fechaHoy.getDate() < fecha.getDate()) {
+			/* if (fechaHoy.getDate() < fecha.getDate()) {
 				diferenciaMeses = diferenciaMeses - 1;
-			}
-			return diferenciaMeses.toString();
-
-			/* 			if (objeto.vigente === "Si") {
-				const fecha = new Date(objeto.fechaContratacion);
-				const fechaHoy = new Date();
-				let diferenciaMeses =
-					fechaHoy.getMonth() -
-					fecha.getMonth() +
-					12 * (fechaHoy.getFullYear() - fecha.getFullYear());
-				if (fechaHoy.getDate() < fecha.getDate()) {
-					diferenciaMeses = diferenciaMeses - 1;
-				}
-				return diferenciaMeses.toString();
-			} else if (objeto.vigente === "No") {
-				return 0;
 			} */
+			return diferenciaMeses.toString();
 		};
 
 		const SaldoTotal = (objeto, meses) => {
@@ -93,17 +78,13 @@ const ListaClientesDt = ({
 					return mesesPagados;
 				}
 			}
-			/* 			if (objeto.vigente === "Si") {
-				if (meses == false) {
-					if (objeto.mesesPagados != null) {
-						let mesesPagados = parseInt(objeto.mesesPagados);
-						return mesesPagados;
-					}
-				}
-			} else if (objeto.vigente === "No") {
-				return 0;
-			} */
 		};
+
+		if (objeto.vigente == "No") {
+			if (objeto.sacar == "Si") {
+				return 0;
+			}
+		}
 
 		if (
 			parseInt(SaldoDeberia(objeto, false)) -

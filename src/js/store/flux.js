@@ -60,7 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loginUsuario: async (correo, clave) => {
 				const actions = getActions();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/login", {
+				fetch("http://127.0.0.1:5000/login", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -92,7 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getUsuario: async (usuarioid) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/usuario/" + usuarioid, {
+				fetch("http://127.0.0.1:5000/usuario/" + usuarioid, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -116,7 +116,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getUsuarios: async () => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/usuario", {
+				fetch("http://127.0.0.1:5000/usuario", {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -140,7 +140,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			crearUsuario: async (nombre, apellido, correo, clave, tipo) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/usuario", {
+				fetch("http://127.0.0.1:5000/usuario", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -171,7 +171,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			editarUsuario: async (id, nombre, apellido, correo, clave, tipo) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/usuario/" + id, {
+				fetch("http://127.0.0.1:5000/usuario/" + id, {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json",
@@ -202,7 +202,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			borrarUsuario: async (id) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/usuario/" + id, {
+				fetch("http://127.0.0.1:5000/usuario/" + id, {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json",
@@ -228,7 +228,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getClientesDt: async (page_num) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/xDt/" + page_num, {
+				fetch("http://127.0.0.1:5000/xDt/" + page_num, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -254,7 +254,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getBusquedaDt: async (busqueda) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/busquedaDt", {
+				fetch("http://127.0.0.1:5000/busquedaDt", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -292,7 +292,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/filtroDt", {
+				fetch("http://127.0.0.1:5000/filtroDt", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -328,7 +328,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getClienteDt: async (clienteDtid) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/clienteDt/" + clienteDtid, {
+				fetch("http://127.0.0.1:5000/clienteDt/" + clienteDtid, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -372,7 +372,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/clienteDt", {
+				fetch("http://127.0.0.1:5000/clienteDt", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -438,7 +438,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/clienteDt/" + id, {
+				fetch("http://127.0.0.1:5000/clienteDt/" + id, {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json",
@@ -484,7 +484,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			editarMesesPagadosClienteDt: async (id, mesesPagados) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/clienteDt/" + id, {
+				fetch("http://127.0.0.1:5000/clienteDt/" + id, {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json",
@@ -529,7 +529,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// /* Notas Direccion Tributaria*/
 			getNota: async (clienteDtid) => {
 				const store = getStore();
-				fetch("https://denegocios.herokuapp.com/nota/" + clienteDtid, {
+				fetch("http://127.0.0.1:5000/nota/" + clienteDtid, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -552,7 +552,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			crearNota: async (comentario, fechaComentario, clienteDtid) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/nota", {
+				fetch("http://127.0.0.1:5000/nota", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -582,7 +582,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getPago2019: async (clienteDtid) => {
 				const store = getStore();
-				fetch("https://denegocios.herokuapp.com/dt2019/" + clienteDtid, {
+				fetch("http://127.0.0.1:5000/dt2019/" + clienteDtid, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -605,7 +605,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getPago2020: async (clienteDtid) => {
 				const store = getStore();
-				fetch("https://denegocios.herokuapp.com/dt2020/" + clienteDtid, {
+				fetch("http://127.0.0.1:5000/dt2020/" + clienteDtid, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -628,7 +628,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getPago2021: async (clienteDtid) => {
 				const store = getStore();
-				fetch("https://denegocios.herokuapp.com/dt2021/" + clienteDtid, {
+				fetch("http://127.0.0.1:5000/dt2021/" + clienteDtid, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -651,7 +651,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getPago2022: async (clienteDtid) => {
 				const store = getStore();
-				fetch("https://denegocios.herokuapp.com/dt2022/" + clienteDtid, {
+				fetch("http://127.0.0.1:5000/dt2022/" + clienteDtid, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -674,7 +674,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getPago2023: async (clienteDtid) => {
 				const store = getStore();
-				fetch("https://denegocios.herokuapp.com/dt2023/" + clienteDtid, {
+				fetch("http://127.0.0.1:5000/dt2023/" + clienteDtid, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -697,7 +697,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getPago2024: async (clienteDtid) => {
 				const store = getStore();
-				fetch("https://denegocios.herokuapp.com/dt2024/" + clienteDtid, {
+				fetch("http://127.0.0.1:5000/dt2024/" + clienteDtid, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -732,7 +732,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/dt" + year, {
+				fetch("http://127.0.0.1:5000/dt" + year, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -777,26 +777,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch(
-					"https://denegocios.herokuapp.com/dt" + year + "/" + clienteDtid,
-					{
-						method: "PUT",
-						headers: {
-							"Content-Type": "application/json",
-							Authorization: "Bearer " + store.token,
-						},
-						body: JSON.stringify({
-							mes: mes === "" ? null : mes,
-							numeroTransferencia:
-								numeroTransferencia === "" ? null : numeroTransferencia,
-							montoPagado: montoPagado === "" ? null : montoPagado,
-							montoCobrado: montoCobrado === "" ? null : montoCobrado,
-							mesesPagados: mesesPagados === "" ? null : mesesPagados,
-							facturaNumero: facturaNumero === "" ? null : facturaNumero,
-							comentario: comentario === "" ? null : comentario,
-						}),
-					}
-				)
+				fetch("http://127.0.0.1:5000/dt" + year + "/" + clienteDtid, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token,
+					},
+					body: JSON.stringify({
+						mes: mes === "" ? null : mes,
+						numeroTransferencia:
+							numeroTransferencia === "" ? null : numeroTransferencia,
+						montoPagado: montoPagado === "" ? null : montoPagado,
+						montoCobrado: montoCobrado === "" ? null : montoCobrado,
+						mesesPagados: mesesPagados === "" ? null : mesesPagados,
+						facturaNumero: facturaNumero === "" ? null : facturaNumero,
+						comentario: comentario === "" ? null : comentario,
+					}),
+				})
 					.then((response) => response.json())
 					.then((data) => {
 						setStore({
@@ -814,16 +811,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			borrarPago: async (year, clienteDtid) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch(
-					"https://denegocios.herokuapp.com/dt" + year + "/" + clienteDtid,
-					{
-						method: "DELETE",
-						headers: {
-							"Content-Type": "application/json",
-							Authorization: "Bearer " + store.token,
-						},
-					}
-				)
+				fetch("http://127.0.0.1:5000/dt" + year + "/" + clienteDtid, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token,
+					},
+				})
 					.then((response) => response.json())
 					.then((data) => {
 						setStore({
@@ -843,7 +837,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getClientesContabilidad: async (page_num) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/xContabilidad/" + page_num, {
+				fetch("http://127.0.0.1:5000/xContabilidad/" + page_num, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -869,7 +863,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getBusquedaContabilidad: async (busqueda) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/busquedaContabilidad", {
+				fetch("http://127.0.0.1:5000/busquedaContabilidad", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -904,7 +898,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/filtroContabilidad", {
+				fetch("http://127.0.0.1:5000/filtroContabilidad", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -938,8 +932,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ spinner: true });
 				fetch(
-					"https://denegocios.herokuapp.com/clienteContabilidad/" +
-						clienteContabilidadid,
+					"http://127.0.0.1:5000/clienteContabilidad/" + clienteContabilidadid,
 					{
 						method: "GET",
 						headers: {
@@ -978,7 +971,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/clienteContabilidad", {
+				fetch("http://127.0.0.1:5000/clienteContabilidad", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -1030,7 +1023,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/clienteContabilidad/" + id, {
+				fetch("http://127.0.0.1:5000/clienteContabilidad/" + id, {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json",
@@ -1069,8 +1062,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getNotaContabilidad: async (clienteContabilidadid) => {
 				const store = getStore();
 				fetch(
-					"https://denegocios.herokuapp.com/notaContabilidad/" +
-						clienteContabilidadid,
+					"http://127.0.0.1:5000/notaContabilidad/" + clienteContabilidadid,
 					{
 						method: "GET",
 						headers: {
@@ -1095,7 +1087,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			crearNota: async (comentario, fechaComentario, clienteContabilidadid) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/notaContabilidad", {
+				fetch("http://127.0.0.1:5000/notaContabilidad", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -1127,8 +1119,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				////Aquí hay que ordenar adicionalmente por Year
 				const store = getStore();
 				fetch(
-					"https://denegocios.herokuapp.com/pagosContabilidad/" +
-						clienteContabilidadid,
+					"http://127.0.0.1:5000/pagosContabilidad/" + clienteContabilidadid,
 					{
 						method: "GET",
 						headers: {
@@ -1163,7 +1154,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			) => {
 				const store = getStore();
 				setStore({ spinner: true });
-				fetch("https://denegocios.herokuapp.com/pagosContabilidad", {
+				fetch("http://127.0.0.1:5000/pagosContabilidad", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -1207,8 +1198,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ spinner: true });
 				fetch(
-					"https://denegocios.herokuapp.com/pagosContabilidad/" +
-						clienteContabilidadid,
+					"http://127.0.0.1:5000/pagosContabilidad/" + clienteContabilidadid,
 					{
 						method: "PUT",
 						headers: {
@@ -1245,8 +1235,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ spinner: true });
 				fetch(
-					"https://denegocios.herokuapp.com/pagosContabilidad/" +
-						clienteContabilidadid,
+					"http://127.0.0.1:5000/pagosContabilidad/" + clienteContabilidadid,
 					{
 						method: "DELETE",
 						headers: {

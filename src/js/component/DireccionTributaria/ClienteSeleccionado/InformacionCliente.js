@@ -14,9 +14,9 @@ const InformacionCliente = () => {
 				fechaHoy.getMonth() -
 				fecha.getMonth() +
 				12 * (fechaHoy.getFullYear() - fecha.getFullYear());
-			if (fechaHoy.getDate() < fecha.getDate()) {
+			/* if (fechaHoy.getDate() < fecha.getDate()) {
 				diferenciaMeses = diferenciaMeses - 1;
-			}
+			} */
 			if (meses == true) {
 				return (diferenciaMeses * 9900).toString();
 			}
@@ -90,6 +90,12 @@ const InformacionCliente = () => {
 				}
 			}
 		};
+
+		if (store.infoClienteDt.vigente == "No") {
+			if (store.infoClienteDt.sacar == "Si") {
+				return 0;
+			}
+		}
 
 		if (parseInt(SaldoDeberia(false)) - parseInt(SaldoTotal(false)) < 0) {
 			return "Todo Pagado";
