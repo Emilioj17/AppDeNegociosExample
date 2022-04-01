@@ -12,7 +12,11 @@ const Notas = ({ clienteContabilidadCliqueado, setDSetectorCambiosNotas }) => {
 	};
 	const HandlerAgregarNota = (event) => {
 		let fechaComentario = fechaActual.toLocaleDateString();
-		actions.crearNota(nota, fechaComentario, clienteContabilidadCliqueado.id);
+		actions.crearNotaContabilidad(
+			nota,
+			fechaComentario,
+			clienteContabilidadCliqueado.id
+		);
 		setDSetectorCambiosNotas(true);
 		setNota("");
 	};
