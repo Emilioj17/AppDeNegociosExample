@@ -95,16 +95,6 @@ const Contabilidad = () => {
 		buscando ? setBuscando(true) : setBuscando(true);
 	};
 
-	//Funcion para Aplicar Colores. P = Todo Pagado, turquesa.  Sacar = red
-
-	const HandlerSwitchColores = (event) => {
-		if (colores === false) {
-			setColores(true);
-		} else if (colores === true) {
-			setColores(false);
-		}
-	};
-
 	//Lo que se renderizará según tipo de Usuario
 
 	return (
