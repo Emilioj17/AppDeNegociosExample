@@ -19,7 +19,7 @@ const Navbar = () => {
 		sessionStorage.removeItem("usuarioActual");
 		store.token = null;
 		store.usuarioActual = null;
-		window.location.href = "https://denegocios.cl/";
+		window.location.href = "https://www.google.com";
 		return null;
 	};
 
@@ -79,7 +79,9 @@ const Navbar = () => {
 							}
 							onClick={(e) => HandlerIdentificarPaginaActual(e)}
 						>
-							<Link to='/GeneradorDocumentos'>Generador de Documentos</Link>
+							<a className='isDisabled' to='#'>
+								Generador de Documentos
+							</a>
 						</li>
 						<li
 							className={
@@ -87,7 +89,9 @@ const Navbar = () => {
 							}
 							onClick={(e) => HandlerIdentificarPaginaActual(e)}
 						>
-							<Link to='/DireccionTributaria'>Direccion Tributaria</Link>
+							<a className='isDisabled' to='#'>
+								Direccion Tributaria
+							</a>
 						</li>
 						<li
 							className={
